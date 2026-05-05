@@ -14707,12 +14707,12 @@
     ],
     "generation": 6,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 85,
+      "atk": 56,
+      "def": 77,
+      "spatk": 50,
+      "spdef": 77,
+      "spd": 78
     },
     "locations": [
       "Dungeon Pixel (Trainer Center)"
