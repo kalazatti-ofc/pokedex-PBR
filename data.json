@@ -3029,7 +3029,9 @@
       "spd": 90
     },
     "locations": [
-      "TV Camera"
+      "TV Camera",
+      "Quest Shiny Stone",
+      "Blessed Boost Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/146.png"
   },
@@ -13305,7 +13307,7 @@
       "spd": 20
     },
     "locations": [
-      "puzzle no tc"
+      "Puzzle no Trainer Center"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/577.png"
   },
@@ -13325,7 +13327,7 @@
       "spd": 30
     },
     "locations": [
-      "evoluindo de solosis"
+      "Evoluindo de Solosis"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/578.png"
   },
@@ -13345,7 +13347,7 @@
       "spd": 30
     },
     "locations": [
-      "evoluindo de reuniclus"
+      "Evoluindo de Duosion"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/579.png"
   },
