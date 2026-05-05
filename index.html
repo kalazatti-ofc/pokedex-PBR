@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex PBR</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="pokedex-case">
+        <header class="pokedex-top-panel">
+            <div class="dex-lights">
+                <div class="big-blue-light"></div>
+                <div class="small-lights">
+                    <div class="light red"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green"></div>
+                </div>
+            </div>
+
+            <div class="header-main-content">
+                <div class="pokedex-logo-2d"></div>
+                <h1 class="pokedex-title">Pokedex PBR</h1>
+            </div>
+
+            <div class="search-section">
+                <div class="search-wrapper">
+                    <div class="search-pokeball-icon"></div>
+                    <input type="text" id="search-input" placeholder="Pesquisar Pokémon por nome ou número...">
+                </div>
+            </div>
+
+            <div class="controls-section">
+                <div class="filter-row">
+                    <select id="gen-filter" class="dex-select">
+                        <option value="all">Todas as Gerações</option>
+                        <option value="1">Kanto (Gen 1)</option>
+                        <option value="2">Johto (Gen 2)</option>
+                        <option value="3">Hoenn (Gen 3)</option>
+                        <option value="4">Sinnoh (Gen 4)</option>
+                        <option value="5">Unova (Gen 5)</option>
+                        <option value="6">Kalos (Gen 6)</option>
+                    </select>
+                </div>
+                <div id="type-filters" class="type-filter-bar"></div>
+            </div>
+        </header>
+
+        <main class="pokedex-screen">
+            <div id="pokedex-grid" class="pokemon-grid"></div>
+        </main>
+
+        <footer class="pokedex-footer">
+            <div class="contact-info">
+                <span>🎮 In-game: kala</span>
+                <span>👾 Discord: kalazatti</span>
+            </div>
+            <p>Caso note algum bug, falta ou erro de alguma informação, me contate via game ou discord para arrumar ou adicionar.<br>Projeto aberto a novas ideias! Fique a vontade para chamar!</p>
+        </footer>
+    </div>
+
+    <div id="pokemon-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
