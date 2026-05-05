@@ -60,7 +60,8 @@
       "spd": 80
     },
     "locations": [
-      "Vermilion (X 1047 / Y 1341 / Z 4)"
+      "Vermilion (X 1047 / Y 1341 / Z 4)",
+      "TV Camêra (Orre)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png"
   },
@@ -126,7 +127,8 @@
     "locations": [
       "Cinnabar (X 702 / Y 1368 / Z 4)",
       "Quest Ancient Stone",
-      "Vermilion (X 886 / Y 1566 / Z 4)"
+      "Vermilion (X 886 / Y 1566 / Z 4)",
+      "TV Camêra (Orre)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
   },
@@ -187,7 +189,8 @@
       "spd": 78
     },
     "locations": [
-      "Vermilion (X 1279 / Y 1272 / Z 7)"
+      "Vermilion (X 1279 / Y 1272 / Z 7)",
+      "TV Camêra (Orre)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png"
   },
@@ -10061,7 +10064,9 @@
       "spdef": 0,
       "spd": 0
     },
-    "locations": [],
+    "locations": [
+      "Quest Eternal"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"
   },
   {
@@ -10079,7 +10084,9 @@
       "spdef": 120,
       "spd": 85
     },
-    "locations": [],
+    "locations": [
+      "Dungeon One Piece (Trainer Center)"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"
   },
   {
@@ -10115,7 +10122,9 @@
       "spdef": 100,
       "spd": 100
     },
-    "locations": [],
+    "locations": [
+      "Sunyshore (X 4242 / Y 2271 / Z 4)"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/490.png"
   },
   {
@@ -14564,7 +14573,9 @@
       "spdef": 72,
       "spd": 108
     },
-    "locations": [],
+    "locations": [
+      "Canavale (X 3285 / Y 2269 / Z 4)"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/638.png"
   },
   {
@@ -14583,7 +14594,9 @@
       "spdef": 90,
       "spd": 108
     },
-    "locations": [],
+    "locations": [
+      "Veilstone (X 1244 / Y 2009 / Z 4)"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/639.png"
   },
   {
@@ -14602,7 +14615,9 @@
       "spdef": 129,
       "spd": 108
     },
-    "locations": [],
+    "locations": [
+      "Pastoria (X x / Y x / Z x)"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/640.png"
   },
   {
@@ -14640,7 +14655,9 @@
       "spdef": 100,
       "spd": 90
     },
-    "locations": [],
+    "locations": [
+      "Dungeon Pixel (Trainer Center)"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/644.png"
   },
   {
@@ -14681,6 +14698,27 @@
     "locations": [],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/649.png"
   },
+  {
+    "id": 660,
+    "name": "Diggersby",
+    "types": [
+      "Normal",
+      "Ground"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [
+      "Dungeon Pixel (Trainer Center)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/660.png"
+  }, 
   {
     "id": 665,
     "name": "Frillish",
@@ -14804,7 +14842,9 @@
       "spdef": 0,
       "spd": 0
     },
-    "locations": [],
+    "locations": [
+      "Quest Shiny Charm"
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/721.png"
   }
 ]
