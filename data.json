@@ -3107,7 +3107,7 @@
       "spd": 130
     },
     "locations": [
-      "Quest Shiny Stone"
+      "Quest Shiny Stone",
       "Quest Blessed Boost Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png"
@@ -7942,7 +7942,7 @@
       "spd": 90
     },
     "locations": [
-      "Quest Blessed Stone"
+      "Quest  Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/383.png"
   },
