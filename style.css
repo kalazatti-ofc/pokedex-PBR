@@ -30,7 +30,7 @@ body {
 }
 
 /* =========================================
-   CARCAÇA PRINCIPAL (POKÉDEX)
+   CARCAÇA PRINCIPAL (POKÉDEX ABERTA)
 ========================================= */
 .pokedex-body {
     display: flex; flex-direction: column; width: 100%; max-width: 1200px;
@@ -43,7 +43,7 @@ body {
 }
 
 /* =========================================
-   PAINEL ESQUERDO (Lentes, Controles)
+   PAINEL ESQUERDO (Lentes, Controles e Rodapé)
 ========================================= */
 .pokedex-left-panel {
     background: linear-gradient(135deg, #ff4b2b, var(--dex-red));
@@ -84,20 +84,21 @@ body {
 /* Módulo de Controles */
 .pokedex-controls { flex: 1; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; }
 
-/* Barra de Pesquisa */
+/* Barra de Pesquisa (Agora Branca!) */
 .search-module { width: 100%; margin-bottom: 20px; }
 .tech-label { font-family: monospace; font-size: 0.8rem; color: #ffcb05; font-weight: bold; text-shadow: 1px 1px 0 #000; margin-bottom: 5px; display: block; }
 .search-console {
-    background: var(--terminal-bg); border: 4px solid var(--dex-border);
+    background: #ffffff; border: 4px solid var(--dex-border);
     border-radius: 12px; padding: 12px 15px; display: flex; align-items: center;
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 4px 0 rgba(255,255,255,0.2);
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.15), 0 4px 0 rgba(255,255,255,0.3);
 }
 .search-console input {
     background: transparent; border: none; outline: none; width: 100%;
-    color: var(--radar-green); font-family: monospace; font-size: 1rem; text-transform: uppercase;
+    color: var(--dex-border); font-family: monospace; font-size: 1.1rem; 
+    text-transform: uppercase; font-weight: 800;
 }
-.search-console input::placeholder { color: #1a5c1a; }
-.cursor-blink { color: var(--radar-green); font-family: monospace; font-size: 1.2rem; animation: blink 1s step-end infinite; }
+.search-console input::placeholder { color: #999; font-weight: 600; }
+.cursor-blink { color: var(--dex-red); font-family: monospace; font-size: 1.2rem; font-weight: bold; animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* Filtros Expansíveis */
@@ -254,7 +255,6 @@ body {
 .eff-dot { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--dex-border); position: relative;}
 .eff-dot:hover::after { content: attr(title); position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--dex-border); color: #fff; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; white-space: nowrap; z-index: 10;}
 
-/* Módulo de Evoluções */
 .evo-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2);}
 .evo-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
 .evo-icons { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px;}
@@ -292,6 +292,11 @@ body {
     /* Diminui os botões do Menu */
     .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
     
+    /* Controla a altura da tela principal para não esticar ao infinito */
+    .pokedex-main-display {
+        height: 320px; /* Mostra cerca de 2-3 linhas e permite scroll interno */
+    }
+
     /* Reduz o tamanho dos Cards de Pokémon para caberem mais na tela */
     .pokemon-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 8px; }
     .pk-card { padding: 8px; border-width: 2px; }
