@@ -4234,10 +4234,33 @@
       "spd": 65
     },
     "locations": [
-      "Cianwood (X 605 / Y 116 / Z 7)"
+      "Quest TV Camera (Orre)",
+      "Pewter (X 610 / Y 919 / Z 5)",
+      "Sandgem (X 3334 / Y 2306 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/212.png"
   },  
+  {
+    "id": 213,
+    "name": "Shuckle",
+    "types": [
+      "Bug",
+      "Rock"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 20,
+      "atk": 10,
+      "def": 230,
+      "spatk": 10,
+      "spdef": 230,
+      "spd": 5
+    },
+    "locations": [
+      "Battle Point (X 1515 / Y 1042 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/213.png"
+  },    
   {
     "id": 214,
     "name": "Heracross",
