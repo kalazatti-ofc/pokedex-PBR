@@ -939,7 +939,8 @@
       "spd": 50
     },
     "locations": [
-      "Hunter Village (X 1645 / Y 1675 / Z 6)"
+      "Hunter Village (X 1645 / Y 1675 / Z 6)",
+      "Vermilion (X 1039 / Y 1415 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png"
   },
@@ -4009,49 +4010,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/193.png"
   },
   {
-    "id": 193,
-    "name": "Yanma",
-    "types": [
-      "Bug",
-      "Flying"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 65,
-      "atk": 65,
-      "def": 45,
-      "spatk": 75,
-      "spdef": 45,
-      "spd": 95
-    },
-    "locations": [
-      "Trost (X 1545 / Y 1222 / Z 7)",
-      "Cianwood (X 618 / Y 146 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/193.png"
-  },
-  {
-    "id": 194,
-    "name": "Wooper",
-    "types": [
-      "Water",
-      "Ground"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 55,
-      "atk": 45,
-      "def": 45,
-      "spatk": 25,
-      "spdef": 25,
-      "spd": 15
-    },
-    "locations": [
-      "Pastoria (X 4022 / Y 2118 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/194.png"
-  },
-  {
     "id": 194,
     "name": "Wooper",
     "types": [
@@ -4094,27 +4052,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/195.png"
   },
   {
-    "id": 195,
-    "name": "Quagsire",
-    "types": [
-      "Water",
-      "Ground"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 95,
-      "atk": 85,
-      "def": 85,
-      "spatk": 65,
-      "spdef": 65,
-      "spd": 35
-    },
-    "locations": [
-      "Pastoria (X 4039 / Y 2098 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/195.png"
-  },
-  {
     "id": 196,
     "name": "Espeon",
     "types": [
@@ -4133,47 +4070,6 @@
       "Cianwood (X 601 / Y 136 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png"
-  },
-  {
-    "id": 196,
-    "name": "Espeon",
-    "types": [
-      "Psychic"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 65,
-      "atk": 65,
-      "def": 60,
-      "spatk": 130,
-      "spdef": 95,
-      "spd": 110
-    },
-    "locations": [
-      "Cianwood (X 601 / Y 136 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png"
-  },
-  {
-    "id": 197,
-    "name": "Umbreon",
-    "types": [
-      "Dark"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 95,
-      "atk": 65,
-      "def": 110,
-      "spatk": 60,
-      "spdef": 130,
-      "spd": 65
-    },
-    "locations": [
-      "Cianwood (X 605 / Y 116 / Z 7)",
-      "Hunter Village (X 1637 / Y 1452 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png"
   },
   {
     "id": 197,
@@ -4219,28 +4115,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/198.png"
   },
   {
-    "id": 198,
-    "name": "Murkrow",
-    "types": [
-      "Dark",
-      "Flying"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 60,
-      "atk": 85,
-      "def": 42,
-      "spatk": 85,
-      "spdef": 42,
-      "spd": 91
-    },
-    "locations": [
-      "Cianwood (X 585 / Y 143 / Z 7)",
-      "Pirita (X 2593 / Y 1582 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/198.png"
-  },
-  {
     "id": 199,
     "name": "Slowking",
     "types": [
@@ -4260,47 +4134,6 @@
       "Canavale <entre no buraco> (X 3273 / Y 2040 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/199.png"
-  },
-  {
-    "id": 199,
-    "name": "Slowking",
-    "types": [
-      "Water",
-      "Psychic"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 95,
-      "atk": 75,
-      "def": 80,
-      "spatk": 100,
-      "spdef": 110,
-      "spd": 30
-    },
-    "locations": [
-      "Canavale <entre no buraco> (X 3273 / Y 2040 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/199.png"
-  },
-  {
-    "id": 200,
-    "name": "Misdreavus",
-    "types": [
-      "Ghost"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 60,
-      "atk": 60,
-      "def": 60,
-      "spatk": 85,
-      "spdef": 85,
-      "spd": 85
-    },
-    "locations": [
-      "Singer (X 1803 / Y 1308 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/200.png"
   },
   {
     "id": 200,
@@ -4343,26 +4176,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png"
   },
   {
-    "id": 201,
-    "name": "Unown",
-    "types": [
-      "Psychic"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 48,
-      "atk": 72,
-      "def": 48,
-      "spatk": 72,
-      "spdef": 48,
-      "spd": 48
-    },
-    "locations": [
-      "Fim da quest psychic stone"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png"
-  },
-  {
     "id": 202,
     "name": "Wobbuffet",
     "types": [
@@ -4382,48 +4195,6 @@
       "Singer <passe pela cachoeira> (X 1743 / Y 1026 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/202.png"
-  },
-  {
-    "id": 202,
-    "name": "Wobbuffet",
-    "types": [
-      "Psychic"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 190,
-      "atk": 33,
-      "def": 58,
-      "spatk": 33,
-      "spdef": 58,
-      "spd": 33
-    },
-    "locations": [
-      "Hunter Village (X 1985 / Y 1375 / Z 4)",
-      "Singer <passe pela cachoeira> (X 1743 / Y 1026 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/202.png"
-  },
-  {
-    "id": 203,
-    "name": "Girafarig",
-    "types": [
-      "Normal",
-      "Psychic"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 70,
-      "atk": 80,
-      "def": 65,
-      "spatk": 90,
-      "spdef": 65,
-      "spd": 85
-    },
-    "locations": [
-      "Cianwood (X 605 / Y 116 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/203.png"
   },
   {
     "id": 203,
@@ -5211,27 +4982,7 @@
       "spd": 0
     },
     "locations": [
-      "Em qualquer hunt de Johto"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/251.png"
-  },
-  {
-    "id": 251,
-    "name": "Celebi",
-    "types": [
-      "Psychic",
-      "Grass"
-    ],
-    "generation": 2,
-    "stats": {
-      "hp": 100,
-      "atk": 100,
-      "def": 100,
-      "spatk": 100,
-      "spdef": 100,
-      "spd": 100
-    },
-    "locations": [
+      "Em qualquer hunt de Johto",
       "Quest sun stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/251.png"
@@ -8007,24 +7758,6 @@
       "spdef": 0,
       "spd": 0
     },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/387.png"
-  },
-  {
-    "id": 387,
-    "name": "Turtwig",
-    "types": [
-      "Grass"
-    ],
-    "generation": 4,
-    "stats": {
-      "hp": 55,
-      "atk": 68,
-      "def": 64,
-      "spatk": 45,
-      "spdef": 55,
-      "spd": 31
-    },
     "locations": [
       "Three Island (X 2565 / Y 697 / Z 7)"
     ],
@@ -8561,25 +8294,6 @@
     "locations": [
       "Jublife (X 3514 / Y 1859 / Z 7)"
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/414.png"
-  },
-  {
-    "id": 414,
-    "name": "Mothim",
-    "types": [
-      "Bug",
-      "Flying"
-    ],
-    "generation": 4,
-    "stats": {
-      "hp": 70,
-      "atk": 94,
-      "def": 50,
-      "spatk": 94,
-      "spdef": 50,
-      "spd": 66
-    },
-    "locations": [],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/414.png"
   },
   {
@@ -9813,27 +9527,7 @@
       "spd": 0
     },
     "locations": [
-      "Evolui de Porygon2"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/475.png"
-  },
-  {
-    "id": 475,
-    "name": "Gallade",
-    "types": [
-      "Psychic",
-      "Fighting"
-    ],
-    "generation": 4,
-    "stats": {
-      "hp": 68,
-      "atk": 125,
-      "def": 65,
-      "spatk": 65,
-      "spdef": 115,
-      "spd": 80
-    },
-    "locations": [
+      "Evolui de Porygon2",
       "Quest boost stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/475.png"
@@ -10067,26 +9761,7 @@
       "spd": 0
     },
     "locations": [
-      "Quest Eternal"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"
-  },
-  {
-    "id": 488,
-    "name": "Cresselia",
-    "types": [
-      "Psychic"
-    ],
-    "generation": 4,
-    "stats": {
-      "hp": 120,
-      "atk": 70,
-      "def": 110,
-      "spatk": 75,
-      "spdef": 120,
-      "spd": 85
-    },
-    "locations": [
+      "Quest Eternal",
       "Dungeon One Piece (Trainer Center)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"
@@ -10149,25 +9824,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/494.png"
   },
   {
-    "id": 494,
-    "name": "Victini",
-    "types": [
-      "Psychic",
-      "Fire"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 100,
-      "atk": 100,
-      "def": 100,
-      "spatk": 100,
-      "spdef": 100,
-      "spd": 100
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/494.png"
-  },
-  {
     "id": 495,
     "name": "Snivy",
     "types": [
@@ -10186,46 +9842,6 @@
       "Jublife (X 3428 / Y 2156 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/495.png"
-  },
-  {
-    "id": 495,
-    "name": "Snivy",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 45,
-      "atk": 45,
-      "def": 55,
-      "spatk": 45,
-      "spdef": 55,
-      "spd": 63
-    },
-    "locations": [
-      "Jublife (X 3428 / Y 2156 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/495.png"
-  },
-  {
-    "id": 496,
-    "name": "Servine",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 60,
-      "atk": 60,
-      "def": 75,
-      "spatk": 60,
-      "spdef": 75,
-      "spd": 83
-    },
-    "locations": [
-      "Jublife (X 3428 / Y 2156 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/496.png"
   },
   {
     "id": 496,
@@ -10268,26 +9884,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/497.png"
   },
   {
-    "id": 497,
-    "name": "Serperior",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 75,
-      "def": 95,
-      "spatk": 75,
-      "spdef": 95,
-      "spd": 113
-    },
-    "locations": [
-      "Jublife (X 3428 / Y 2156 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/497.png"
-  },
-  {
     "id": 498,
     "name": "Tepig",
     "types": [
@@ -10306,47 +9902,6 @@
       "Jublife (X 3294 / Y 1970 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/498.png"
-  },
-  {
-    "id": 498,
-    "name": "Tepig",
-    "types": [
-      "Fire"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 65,
-      "atk": 63,
-      "def": 45,
-      "spatk": 45,
-      "spdef": 45,
-      "spd": 45
-    },
-    "locations": [
-      "Jublife (X 3294 / Y 1970 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/498.png"
-  },
-  {
-    "id": 499,
-    "name": "Pignite",
-    "types": [
-      "Fire",
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 90,
-      "atk": 93,
-      "def": 55,
-      "spatk": 70,
-      "spdef": 55,
-      "spd": 55
-    },
-    "locations": [
-      "Jublife (X 3338 / Y 1966 / Z 4)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/499.png"
   },
   {
     "id": 499,
@@ -10391,27 +9946,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/500.png"
   },
   {
-    "id": 500,
-    "name": "Emboar",
-    "types": [
-      "Fire",
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 110,
-      "atk": 123,
-      "def": 65,
-      "spatk": 100,
-      "spdef": 65,
-      "spd": 65
-    },
-    "locations": [
-      "Jublife (X 3338 / Y 1966 / Z 4)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/500.png"
-  },
-  {
     "id": 501,
     "name": "Oshawott",
     "types": [
@@ -10430,46 +9964,6 @@
       "Sandgem (X 3573 / Y 2256 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/501.png"
-  },
-  {
-    "id": 501,
-    "name": "Oshawott",
-    "types": [
-      "Water"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 55,
-      "atk": 55,
-      "def": 45,
-      "spatk": 63,
-      "spdef": 45,
-      "spd": 45
-    },
-    "locations": [
-      "Sandgem (X 3573 / Y 2256 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/501.png"
-  },
-  {
-    "id": 502,
-    "name": "Dewott",
-    "types": [
-      "Water"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 75,
-      "def": 60,
-      "spatk": 83,
-      "spdef": 60,
-      "spd": 60
-    },
-    "locations": [
-      "Pastoria (X 4009 / Y 2127 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/502.png"
   },
   {
     "id": 502,
@@ -10513,27 +10007,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/503.png"
   },
   {
-    "id": 503,
-    "name": "Samurott",
-    "types": [
-      "Water"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 95,
-      "atk": 100,
-      "def": 85,
-      "spatk": 108,
-      "spdef": 70,
-      "spd": 70
-    },
-    "locations": [
-      "Sandgem (X 3505 / Y 2309 / Z 6)",
-      "Pastoria (X 4009 / Y 2127 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/503.png"
-  },
-  {
     "id": 504,
     "name": "Patrat",
     "types": [
@@ -10552,46 +10025,6 @@
       "Solaceon (X 3927 / Y 2034 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/504.png"
-  },
-  {
-    "id": 504,
-    "name": "Patrat",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 45,
-      "atk": 55,
-      "def": 39,
-      "spatk": 35,
-      "spdef": 39,
-      "spd": 42
-    },
-    "locations": [
-      "Solaceon (X 3927 / Y 2034 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/504.png"
-  },
-  {
-    "id": 505,
-    "name": "Watchog",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 60,
-      "atk": 85,
-      "def": 69,
-      "spatk": 60,
-      "spdef": 69,
-      "spd": 77
-    },
-    "locations": [
-      "Solaceon (X 3927 / Y 2034 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/505.png"
   },
   {
     "id": 505,
@@ -10634,26 +10067,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/506.png"
   },
   {
-    "id": 506,
-    "name": "Lillipup",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 45,
-      "atk": 60,
-      "def": 45,
-      "spatk": 25,
-      "spdef": 45,
-      "spd": 55
-    },
-    "locations": [
-      "Pastoria (X 4020 / Y 1957 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/506.png"
-  },
-  {
     "id": 507,
     "name": "Herdier",
     "types": [
@@ -10672,46 +10085,6 @@
       "Pastoria (X 4020 / Y 1957 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/507.png"
-  },
-  {
-    "id": 507,
-    "name": "Herdier",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 65,
-      "atk": 80,
-      "def": 65,
-      "spatk": 35,
-      "spdef": 65,
-      "spd": 60
-    },
-    "locations": [
-      "Pastoria (X 4020 / Y 1957 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/507.png"
-  },
-  {
-    "id": 508,
-    "name": "Stoutland",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 85,
-      "atk": 110,
-      "def": 90,
-      "spatk": 45,
-      "spdef": 90,
-      "spd": 80
-    },
-    "locations": [
-      "Pastoria (X 4020 / Y 1957 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/508.png"
   },
   {
     "id": 508,
@@ -10754,26 +10127,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/509.png"
   },
   {
-    "id": 509,
-    "name": "Purrloin",
-    "types": [
-      "Dark"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 41,
-      "atk": 50,
-      "def": 37,
-      "spatk": 50,
-      "spdef": 37,
-      "spd": 66
-    },
-    "locations": [
-      "Hearthome (X 3835 / Y 2020 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/509.png"
-  },
-  {
     "id": 510,
     "name": "Liepard",
     "types": [
@@ -10792,46 +10145,6 @@
       "Hearthome (X 3835 / Y 2020 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/510.png"
-  },
-  {
-    "id": 510,
-    "name": "Liepard",
-    "types": [
-      "Dark"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 64,
-      "atk": 88,
-      "def": 50,
-      "spatk": 88,
-      "spdef": 50,
-      "spd": 106
-    },
-    "locations": [
-      "Hearthome (X 3835 / Y 2020 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/510.png"
-  },
-  {
-    "id": 511,
-    "name": "Pansage",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 53,
-      "def": 48,
-      "spatk": 53,
-      "spdef": 48,
-      "spd": 64
-    },
-    "locations": [
-      "Jublife (X 3428 / Y 2156 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/511.png"
   },
   {
     "id": 511,
@@ -10874,26 +10187,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/512.png"
   },
   {
-    "id": 512,
-    "name": "Simisage",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 98,
-      "def": 63,
-      "spatk": 98,
-      "spdef": 63,
-      "spd": 101
-    },
-    "locations": [
-      "Jublife (X 3428 / Y 2156 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/512.png"
-  },
-  {
     "id": 513,
     "name": "Pansear",
     "types": [
@@ -10912,46 +10205,6 @@
       "Jublife (X 3294 / Y 1970 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/513.png"
-  },
-  {
-    "id": 513,
-    "name": "Pansear",
-    "types": [
-      "Fire"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 53,
-      "def": 48,
-      "spatk": 53,
-      "spdef": 48,
-      "spd": 64
-    },
-    "locations": [
-      "Jublife (X 3294 / Y 1970 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/513.png"
-  },
-  {
-    "id": 514,
-    "name": "Simisear",
-    "types": [
-      "Fire"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 98,
-      "def": 63,
-      "spatk": 98,
-      "spdef": 63,
-      "spd": 101
-    },
-    "locations": [
-      "Jublife (X 3338 / Y 1966 / Z 4)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/514.png"
   },
   {
     "id": 514,
@@ -10994,26 +10247,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/515.png"
   },
   {
-    "id": 515,
-    "name": "Panpour",
-    "types": [
-      "Water"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 53,
-      "def": 48,
-      "spatk": 53,
-      "spdef": 48,
-      "spd": 64
-    },
-    "locations": [
-      "Sandgem (X 3582 / Y 2243 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/515.png"
-  },
-  {
     "id": 516,
     "name": "Simipour",
     "types": [
@@ -11032,46 +10265,6 @@
       "Sandgem (X 3505 / Y 2309 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/516.png"
-  },
-  {
-    "id": 516,
-    "name": "Simipour",
-    "types": [
-      "Water"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 98,
-      "def": 63,
-      "spatk": 98,
-      "spdef": 63,
-      "spd": 101
-    },
-    "locations": [
-      "Sandgem (X 3505 / Y 2309 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/516.png"
-  },
-  {
-    "id": 517,
-    "name": "Munna",
-    "types": [
-      "Psychic"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 76,
-      "atk": 25,
-      "def": 45,
-      "spatk": 67,
-      "spdef": 55,
-      "spd": 24
-    },
-    "locations": [
-      "Pastoria <clique na bancada> (X 3872 / Y 2136 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/517.png"
   },
   {
     "id": 517,
@@ -11114,26 +10307,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/518.png"
   },
   {
-    "id": 518,
-    "name": "Musharna",
-    "types": [
-      "Psychic"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 116,
-      "atk": 55,
-      "def": 85,
-      "spatk": 107,
-      "spdef": 95,
-      "spd": 29
-    },
-    "locations": [
-      "Pastoria <Clique na bancada> (X 3872 / Y 2136 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/518.png"
-  },
-  {
     "id": 519,
     "name": "Pidove",
     "types": [
@@ -11153,48 +10326,6 @@
       "Jublife (X 3554 / Y 2067 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/519.png"
-  },
-  {
-    "id": 519,
-    "name": "Pidove",
-    "types": [
-      "Normal",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 55,
-      "def": 50,
-      "spatk": 36,
-      "spdef": 30,
-      "spd": 43
-    },
-    "locations": [
-      "Jublife (X 3554 / Y 2067 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/519.png"
-  },
-  {
-    "id": 520,
-    "name": "Tranquill",
-    "types": [
-      "Normal",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 62,
-      "atk": 77,
-      "def": 62,
-      "spatk": 50,
-      "spdef": 42,
-      "spd": 65
-    },
-    "locations": [
-      "Jublife (X 3554 / Y 2067 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/520.png"
   },
   {
     "id": 520,
@@ -11240,28 +10371,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/521.png"
   },
   {
-    "id": 521,
-    "name": "Unfezant",
-    "types": [
-      "Normal",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 80,
-      "atk": 115,
-      "def": 80,
-      "spatk": 65,
-      "spdef": 55,
-      "spd": 93
-    },
-    "locations": [
-      "Jublife (X 3634 / Y 2088 / Z 5)",
-      "Jublife (X 3554 / Y 2067 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/521.png"
-  },
-  {
     "id": 522,
     "name": "Blitzle",
     "types": [
@@ -11280,46 +10389,6 @@
       "Snowpoint (X 3618 / Y 1794 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/522.png"
-  },
-  {
-    "id": 522,
-    "name": "Blitzle",
-    "types": [
-      "Electric"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 45,
-      "atk": 60,
-      "def": 32,
-      "spatk": 50,
-      "spdef": 32,
-      "spd": 76
-    },
-    "locations": [
-      "Snowpoint (X 3618 / Y 1794 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/522.png"
-  },
-  {
-    "id": 523,
-    "name": "Zebstrika",
-    "types": [
-      "Electric"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 100,
-      "def": 63,
-      "spatk": 80,
-      "spdef": 63,
-      "spd": 116
-    },
-    "locations": [
-      "Snowpoint (X 3618 / Y 1794 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/523.png"
   },
   {
     "id": 523,
@@ -11362,46 +10431,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/524.png"
   },
   {
-    "id": 524,
-    "name": "Roggenrola",
-    "types": [
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 55,
-      "atk": 75,
-      "def": 85,
-      "spatk": 25,
-      "spdef": 25,
-      "spd": 15
-    },
-    "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/524.png"
-  },
-  {
-    "id": 525,
-    "name": "Boldore",
-    "types": [
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 70,
-      "atk": 105,
-      "def": 105,
-      "spatk": 50,
-      "spdef": 40,
-      "spd": 20
-    },
-    "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/525.png"
-  },
-  {
     "id": 525,
     "name": "Boldore",
     "types": [
@@ -11440,47 +10469,6 @@
       "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/526.png"
-  },
-  {
-    "id": 526,
-    "name": "Gigalith",
-    "types": [
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 85,
-      "atk": 135,
-      "def": 130,
-      "spatk": 60,
-      "spdef": 80,
-      "spd": 25
-    },
-    "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/526.png"
-  },
-  {
-    "id": 527,
-    "name": "Woobat",
-    "types": [
-      "Psychic",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 65,
-      "atk": 45,
-      "def": 43,
-      "spatk": 55,
-      "spdef": 43,
-      "spd": 72
-    },
-    "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/527.png"
   },
   {
     "id": 527,
@@ -11525,27 +10513,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/528.png"
   },
   {
-    "id": 528,
-    "name": "Swoobat",
-    "types": [
-      "Psychic",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 67,
-      "atk": 57,
-      "def": 55,
-      "spatk": 77,
-      "spdef": 55,
-      "spd": 114
-    },
-    "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/528.png"
-  },
-  {
     "id": 529,
     "name": "Drilbur",
     "types": [
@@ -11564,47 +10531,6 @@
       "Jublife (X 3464 / Y 2006 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/529.png"
-  },
-  {
-    "id": 529,
-    "name": "Drilbur",
-    "types": [
-      "Ground"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 60,
-      "atk": 85,
-      "def": 40,
-      "spatk": 30,
-      "spdef": 45,
-      "spd": 68
-    },
-    "locations": [
-      "Jublife (X 3464 / Y 2006 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/529.png"
-  },
-  {
-    "id": 530,
-    "name": "Excadrill",
-    "types": [
-      "Ground",
-      "Steel"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 110,
-      "atk": 135,
-      "def": 60,
-      "spatk": 50,
-      "spdef": 65,
-      "spd": 88
-    },
-    "locations": [
-      "Jublife (X 3464 / Y 2006 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/530.png"
   },
   {
     "id": 530,
@@ -11648,26 +10574,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/531.png"
   },
   {
-    "id": 531,
-    "name": "Audino",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 103,
-      "atk": 60,
-      "def": 86,
-      "spatk": 60,
-      "spdef": 86,
-      "spd": 50
-    },
-    "locations": [
-      "Jublife (X 3495 / Y 1925 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/531.png"
-  },
-  {
     "id": 532,
     "name": "Timburr",
     "types": [
@@ -11686,46 +10592,6 @@
       "Pastoria (X 3852 / Y 2251 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/532.png"
-  },
-  {
-    "id": 532,
-    "name": "Timburr",
-    "types": [
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 80,
-      "def": 55,
-      "spatk": 25,
-      "spdef": 35,
-      "spd": 35
-    },
-    "locations": [
-      "Pastoria (X 3852 / Y 2251 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/532.png"
-  },
-  {
-    "id": 533,
-    "name": "Gurdurr",
-    "types": [
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 85,
-      "atk": 105,
-      "def": 85,
-      "spatk": 40,
-      "spdef": 50,
-      "spd": 40
-    },
-    "locations": [
-      "Pastoria (X 3852 / Y 2251 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/533.png"
   },
   {
     "id": 533,
@@ -11768,26 +10634,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/534.png"
   },
   {
-    "id": 534,
-    "name": "Conkeldurr",
-    "types": [
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 105,
-      "atk": 140,
-      "def": 95,
-      "spatk": 55,
-      "spdef": 65,
-      "spd": 45
-    },
-    "locations": [
-      "Pastoria (X 3852 / Y 2251 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/534.png"
-  },
-  {
     "id": 535,
     "name": "Tympole",
     "types": [
@@ -11806,47 +10652,6 @@
       "Burned"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/535.png"
-  },
-  {
-    "id": 535,
-    "name": "Tympole",
-    "types": [
-      "Water"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 50,
-      "def": 40,
-      "spatk": 50,
-      "spdef": 40,
-      "spd": 64
-    },
-    "locations": [
-      "Burned"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/535.png"
-  },
-  {
-    "id": 536,
-    "name": "Palpitoad",
-    "types": [
-      "Water",
-      "Ground"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 65,
-      "def": 55,
-      "spatk": 65,
-      "spdef": 55,
-      "spd": 69
-    },
-    "locations": [
-      "Burned"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/536.png"
   },
   {
     "id": 536,
@@ -11891,47 +10696,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/537.png"
   },
   {
-    "id": 537,
-    "name": "Seismitoad",
-    "types": [
-      "Water",
-      "Ground"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 105,
-      "atk": 95,
-      "def": 75,
-      "spatk": 85,
-      "spdef": 75,
-      "spd": 74
-    },
-    "locations": [
-      "Burned"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/537.png"
-  },
-  {
-    "id": 538,
-    "name": "Throh",
-    "types": [
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 120,
-      "atk": 100,
-      "def": 85,
-      "spatk": 30,
-      "spdef": 85,
-      "spd": 45
-    },
-    "locations": [
-      "Snowpoint (X 3779 / Y 1778 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/538.png"
-  },
-  {
     "id": 538,
     "name": "Throh",
     "types": [
@@ -11970,47 +10734,6 @@
       "Snowpoint (X 3779 / Y 1778 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/539.png"
-  },
-  {
-    "id": 539,
-    "name": "Sawk",
-    "types": [
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 125,
-      "def": 75,
-      "spatk": 30,
-      "spdef": 75,
-      "spd": 85
-    },
-    "locations": [
-      "Snowpoint (X 3779 / Y 1778 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/539.png"
-  },
-  {
-    "id": 540,
-    "name": "Sewaddle",
-    "types": [
-      "Bug",
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 45,
-      "atk": 53,
-      "def": 70,
-      "spatk": 40,
-      "spdef": 60,
-      "spd": 42
-    },
-    "locations": [
-      "Jublife (X 3713 / Y 1929 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/540.png"
   },
   {
     "id": 540,
@@ -12055,27 +10778,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/541.png"
   },
   {
-    "id": 541,
-    "name": "Swadloon",
-    "types": [
-      "Bug",
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 55,
-      "atk": 63,
-      "def": 90,
-      "spatk": 50,
-      "spdef": 80,
-      "spd": 42
-    },
-    "locations": [
-      "Jublife (X 3713 / Y 1929 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/541.png"
-  },
-  {
     "id": 542,
     "name": "Leavanny",
     "types": [
@@ -12095,48 +10797,6 @@
       "Jublife (X 3713 / Y 1929 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/542.png"
-  },
-  {
-    "id": 542,
-    "name": "Leavanny",
-    "types": [
-      "Bug",
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 103,
-      "def": 80,
-      "spatk": 70,
-      "spdef": 80,
-      "spd": 92
-    },
-    "locations": [
-      "Jublife (X 3713 / Y 1929 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/542.png"
-  },
-  {
-    "id": 543,
-    "name": "Venipede",
-    "types": [
-      "Bug",
-      "Poison"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 30,
-      "atk": 45,
-      "def": 59,
-      "spatk": 30,
-      "spdef": 39,
-      "spd": 57
-    },
-    "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/543.png"
   },
   {
     "id": 543,
@@ -12181,27 +10841,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/544.png"
   },
   {
-    "id": 544,
-    "name": "Whirlipede",
-    "types": [
-      "Bug",
-      "Poison"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 40,
-      "atk": 55,
-      "def": 99,
-      "spatk": 40,
-      "spdef": 79,
-      "spd": 47
-    },
-    "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/544.png"
-  },
-  {
     "id": 545,
     "name": "Scolipede",
     "types": [
@@ -12221,48 +10860,6 @@
       "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/545.png"
-  },
-  {
-    "id": 545,
-    "name": "Scolipede",
-    "types": [
-      "Bug",
-      "Poison"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 60,
-      "atk": 100,
-      "def": 89,
-      "spatk": 55,
-      "spdef": 69,
-      "spd": 112
-    },
-    "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/545.png"
-  },
-  {
-    "id": 546,
-    "name": "Cottonee",
-    "types": [
-      "Grass",
-      "Fairy"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 40,
-      "atk": 27,
-      "def": 60,
-      "spatk": 37,
-      "spdef": 50,
-      "spd": 66
-    },
-    "locations": [
-      "Jublife (X 3561 / Y 1919 / Z 5)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/546.png"
   },
   {
     "id": 546,
@@ -12307,27 +10904,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/547.png"
   },
   {
-    "id": 547,
-    "name": "Whimsicott",
-    "types": [
-      "Grass",
-      "Fairy"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 60,
-      "atk": 67,
-      "def": 85,
-      "spatk": 77,
-      "spdef": 75,
-      "spd": 116
-    },
-    "locations": [
-      "Jublife (X 3561 / Y 1919 / Z 5)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/547.png"
-  },
-  {
     "id": 548,
     "name": "Petilil",
     "types": [
@@ -12343,47 +10919,8 @@
       "spd": 30
     },
     "locations": [
-      "Jublife (X 3567 / Y 1845 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/548.png"
-  },
-  {
-    "id": 548,
-    "name": "Basculin",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [
+      "Jublife (X 3567 / Y 1845 / Z 7)",
       "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/548.png"
-  },
-  {
-    "id": 548,
-    "name": "Petilil",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 45,
-      "atk": 35,
-      "def": 50,
-      "spatk": 70,
-      "spdef": 50,
-      "spd": 30
-    },
-    "locations": [
-      "Jublife (X 3567 / Y 1845 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/548.png"
   },
@@ -12403,70 +10940,10 @@
       "spd": 90
     },
     "locations": [
-      "Jublife (X 3567 / Y 1845 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/549.png"
-  },
-  {
-    "id": 549,
-    "name": "Basculegion",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [
+      "Jublife (X 3567 / Y 1845 / Z 7)",
       "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/549.png"
-  },
-  {
-    "id": 549,
-    "name": "Lilligant",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 70,
-      "atk": 60,
-      "def": 75,
-      "spatk": 110,
-      "spdef": 75,
-      "spd": 90
-    },
-    "locations": [
-      "Jublife (X 3567 / Y 1845 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/549.png"
-  },
-  {
-    "id": 551,
-    "name": "Sandile",
-    "types": [
-      "Ground",
-      "Dark"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 72,
-      "def": 35,
-      "spatk": 35,
-      "spdef": 35,
-      "spd": 65
-    },
-    "locations": [
-      "Solaceon (X 3879 / Y 1910 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/551.png"
   },
   {
     "id": 551,
@@ -12511,48 +10988,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/552.png"
   },
   {
-    "id": 552,
-    "name": "Krokorok",
-    "types": [
-      "Ground",
-      "Dark"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 60,
-      "atk": 82,
-      "def": 45,
-      "spatk": 45,
-      "spdef": 45,
-      "spd": 74
-    },
-    "locations": [
-      "Solaceon (X 3879 / Y 1910 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/552.png"
-  },
-  {
-    "id": 553,
-    "name": "Krookodile",
-    "types": [
-      "Ground",
-      "Dark"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 95,
-      "atk": 117,
-      "def": 80,
-      "spatk": 65,
-      "spdef": 70,
-      "spd": 92
-    },
-    "locations": [
-      "Solaceon (X 3879 / Y 1910 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/553.png"
-  },
-  {
     "id": 553,
     "name": "Krookodile",
     "types": [
@@ -12594,46 +11029,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/554.png"
   },
   {
-    "id": 554,
-    "name": "Darmanitan",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [
-      "Burned"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/554.png"
-  },
-  {
-    "id": 554,
-    "name": "Darumaka",
-    "types": [
-      "Fire"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 70,
-      "atk": 90,
-      "def": 45,
-      "spatk": 15,
-      "spdef": 45,
-      "spd": 50
-    },
-    "locations": [
-      "Burned"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/554.png"
-  },
-  {
     "id": 556,
     "name": "Maractus",
     "types": [
@@ -12652,47 +11047,6 @@
       "Pastoria (X 3902 / Y 1846 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/556.png"
-  },
-  {
-    "id": 556,
-    "name": "Maractus",
-    "types": [
-      "Grass"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 86,
-      "def": 67,
-      "spatk": 106,
-      "spdef": 67,
-      "spd": 60
-    },
-    "locations": [
-      "Pastoria (X 3902 / Y 1846 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/556.png"
-  },
-  {
-    "id": 557,
-    "name": "Dwebble",
-    "types": [
-      "Bug",
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 65,
-      "def": 85,
-      "spatk": 35,
-      "spdef": 35,
-      "spd": 55
-    },
-    "locations": [
-      "Canavale <entre na caverna> (X 3462 / Y 1961 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/557.png"
   },
   {
     "id": 557,
@@ -12737,27 +11091,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/558.png"
   },
   {
-    "id": 558,
-    "name": "Crustle",
-    "types": [
-      "Bug",
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 70,
-      "atk": 105,
-      "def": 125,
-      "spatk": 65,
-      "spdef": 75,
-      "spd": 45
-    },
-    "locations": [
-      "Canavale <entre na caverna> (X 3462 / Y 1961 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/558.png"
-  },
-  {
     "id": 559,
     "name": "Scraggy",
     "types": [
@@ -12777,48 +11110,6 @@
       "Pastoria (X 3833 / Y 2182 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/559.png"
-  },
-  {
-    "id": 559,
-    "name": "Scraggy",
-    "types": [
-      "Dark",
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 75,
-      "def": 70,
-      "spatk": 35,
-      "spdef": 70,
-      "spd": 48
-    },
-    "locations": [
-      "Pastoria (X 3833 / Y 2182 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/559.png"
-  },
-  {
-    "id": 560,
-    "name": "Scrafty",
-    "types": [
-      "Dark",
-      "Fighting"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 65,
-      "atk": 90,
-      "def": 115,
-      "spatk": 45,
-      "spdef": 115,
-      "spd": 58
-    },
-    "locations": [
-      "Pastoria (X 3833 / Y 2182 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/560.png"
   },
   {
     "id": 560,
@@ -12863,47 +11154,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/561.png"
   },
   {
-    "id": 561,
-    "name": "Sigilyph",
-    "types": [
-      "Psychic",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 72,
-      "atk": 58,
-      "def": 80,
-      "spatk": 103,
-      "spdef": 80,
-      "spd": 97
-    },
-    "locations": [
-      "Grama alta sinnoh"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/561.png"
-  },
-  {
-    "id": 562,
-    "name": "Yamask",
-    "types": [
-      "Ghost"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 38,
-      "atk": 30,
-      "def": 85,
-      "spatk": 55,
-      "spdef": 65,
-      "spd": 30
-    },
-    "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/562.png"
-  },
-  {
     "id": 562,
     "name": "Yamask",
     "types": [
@@ -12942,47 +11192,6 @@
       "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/563.png"
-  },
-  {
-    "id": 563,
-    "name": "Cofagrigus",
-    "types": [
-      "Ghost"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 58,
-      "atk": 50,
-      "def": 145,
-      "spatk": 95,
-      "spdef": 105,
-      "spd": 30
-    },
-    "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/563.png"
-  },
-  {
-    "id": 564,
-    "name": "Tirtouga",
-    "types": [
-      "Water",
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 54,
-      "atk": 78,
-      "def": 103,
-      "spatk": 53,
-      "spdef": 45,
-      "spd": 22
-    },
-    "locations": [
-      "Pastoria <entre na montanha> (X 3904 / Y 2133 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/564.png"
   },
   {
     "id": 564,
@@ -13027,27 +11236,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/565.png"
   },
   {
-    "id": 565,
-    "name": "Carracosta",
-    "types": [
-      "Water",
-      "Rock"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 74,
-      "atk": 108,
-      "def": 133,
-      "spatk": 83,
-      "spdef": 65,
-      "spd": 32
-    },
-    "locations": [
-      "Pastoria <entre na montanha> (X 3904 / Y 2133 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/565.png"
-  },
-  {
     "id": 566,
     "name": "Archen",
     "types": [
@@ -13067,48 +11255,6 @@
       "Snowpoint (X 3938 / Y 1812 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/566.png"
-  },
-  {
-    "id": 566,
-    "name": "Archen",
-    "types": [
-      "Rock",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 55,
-      "atk": 112,
-      "def": 45,
-      "spatk": 74,
-      "spdef": 45,
-      "spd": 70
-    },
-    "locations": [
-      "Snowpoint (X 3938 / Y 1812 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/566.png"
-  },
-  {
-    "id": 567,
-    "name": "Archeops",
-    "types": [
-      "Rock",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 75,
-      "atk": 140,
-      "def": 65,
-      "spatk": 112,
-      "spdef": 65,
-      "spd": 110
-    },
-    "locations": [
-      "Snowpoint (X 3938 / Y 1812 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/567.png"
   },
   {
     "id": 567,
@@ -13152,26 +11298,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/568.png"
   },
   {
-    "id": 568,
-    "name": "Trubbish",
-    "types": [
-      "Poison"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 50,
-      "atk": 50,
-      "def": 62,
-      "spatk": 40,
-      "spdef": 62,
-      "spd": 65
-    },
-    "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/568.png"
-  },
-  {
     "id": 569,
     "name": "Garbodor",
     "types": [
@@ -13190,46 +11316,6 @@
       "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/569.png"
-  },
-  {
-    "id": 569,
-    "name": "Garbodor",
-    "types": [
-      "Poison"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 80,
-      "atk": 95,
-      "def": 82,
-      "spatk": 60,
-      "spdef": 82,
-      "spd": 75
-    },
-    "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/569.png"
-  },
-  {
-    "id": 570,
-    "name": "Zorua",
-    "types": [
-      "Dark"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 40,
-      "atk": 65,
-      "def": 40,
-      "spatk": 80,
-      "spdef": 40,
-      "spd": 65
-    },
-    "locations": [
-      "Qualquer lugar do mapa, deve ter o oculos da quest Zorua"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/570.png"
   },
   {
     "id": 570,
@@ -14265,26 +12351,7 @@
       "spd": 0
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/626.png"
-  },
-  {
-    "id": 626,
-    "name": "Bouffalant",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 95,
-      "atk": 110,
-      "def": 95,
-      "spatk": 40,
-      "spdef": 95,
-      "spd": 55
-    },
-    "locations": [
+      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
       "Solaceon (X 3964 / Y 2001 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/626.png"
@@ -14305,27 +12372,7 @@
       "spd": 0
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/627.png"
-  },
-  {
-    "id": 627,
-    "name": "Rufflet",
-    "types": [
-      "Normal",
-      "Flying"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 70,
-      "atk": 83,
-      "def": 50,
-      "spatk": 37,
-      "spdef": 50,
-      "spd": 60
-    },
-    "locations": [
+      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
       "Hearthome (X 3791 / Y 2084 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/627.png"
@@ -14429,27 +12476,7 @@
       "spd": 0
     },
     "locations": [
-      "Burned"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/632.png"
-  },
-  {
-    "id": 632,
-    "name": "Durant",
-    "types": [
-      "Bug",
-      "Steel"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 58,
-      "atk": 109,
-      "def": 112,
-      "spatk": 48,
-      "spdef": 48,
-      "spd": 109
-    },
-    "locations": [
+      "Burned",
       "Jublife (X 3669 / Y 2026 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/632.png"
@@ -14720,7 +12747,7 @@
       "Dungeon Pixel (Trainer Center)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/660.png"
-  }, 
+  },
   {
     "id": 665,
     "name": "Frillish",
