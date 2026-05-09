@@ -7744,7 +7744,7 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png"
   },
   {
-    "id": 387,
+    "id": 386,
     "name": "Deoxys",
     "types": [
       "Normal"
@@ -7761,7 +7761,7 @@
     "locations": [
       "Three Island (X 2565 / Y 697 / Z 7)"
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/387.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png"
   },
   {
     "id": 388,
@@ -8277,7 +8277,7 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/412.png"
   },
   {
-    "id": 414,
+    "id": 413,
     "name": "Wormadam",
     "types": [
       "Normal"
@@ -8294,7 +8294,7 @@
     "locations": [
       "Jublife (X 3514 / Y 1859 / Z 7)"
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/414.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/413.png"
   },
   {
     "id": 415,
@@ -9746,7 +9746,7 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/486.png"
   },
   {
-    "id": 488,
+    "id": 487,
     "name": "Giratina",
     "types": [
       "Normal"
@@ -9764,7 +9764,7 @@
       "Quest Eternal",
       "Dungeon One Piece (Trainer Center)"
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/487.png"
   },
   {
     "id": 489,
@@ -10946,6 +10946,27 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/549.png"
   },
   {
+    "id": 550,
+    "name": "Basculin",
+    "types": [
+      "Normal"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [
+      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
+      "Solaceon (X 3964 / Y 2001 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/550.png"
+  },
+  {
     "id": 551,
     "name": "Sandile",
     "types": [
@@ -11027,6 +11048,27 @@
       "Burned"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/554.png"
+  },
+  {
+    "id": 555,
+    "name": "Darmanitan",
+    "types": [
+      "Normal"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [
+      "Burned",
+      "Jublife (X 3669 / Y 2026 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/555.png"
   },
   {
     "id": 556,
@@ -11680,6 +11722,42 @@
       "Pastoria <buraco entre as arvores> (X 3966 / Y 2290 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/591.png"
+  },
+  {
+    "id": 592,
+    "name": "Frillish",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/592.png"
+  },
+  {
+    "id": 593,
+    "name": "Jellicent",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/593.png"
   },
   {
     "id": 594,
@@ -12336,48 +12414,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/625.png"
   },
   {
-    "id": 626,
-    "name": "Basculin",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
-      "Solaceon (X 3964 / Y 2001 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/626.png"
-  },
-  {
-    "id": 627,
-    "name": "Basculegion",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
-      "Hearthome (X 3791 / Y 2084 / Z 6)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/627.png"
-  },
-  {
     "id": 628,
     "name": "Braviary",
     "types": [
@@ -12459,27 +12495,6 @@
       "Canavale - > FLY (X 3348 Y 1955 Z 0 ), desce do fly no quadrado de lava, vai >> (X 3376 Y 1952 Z 7) anda pro quadrado preto, vai (X 3331 Y 1955) anda no buraco de lava"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/631.png"
-  },
-  {
-    "id": 632,
-    "name": "Darmanitan",
-    "types": [
-      "Normal"
-    ],
-    "generation": 5,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [
-      "Burned",
-      "Jublife (X 3669 / Y 2026 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/632.png"
   },
   {
     "id": 633,
@@ -12650,6 +12665,42 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/640.png"
   },
   {
+    "id": 641,
+    "name": "Tornadus",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/641.png"
+  },
+  {
+    "id": 642,
+    "name": "Thundurus",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/642.png"
+  },
+  {
     "id": 643,
     "name": "Reshiram",
     "types": [
@@ -12690,6 +12741,24 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/644.png"
   },
   {
+    "id": 645,
+    "name": "Landorus",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/645.png"
+  },
+  {
     "id": 646,
     "name": "Kyurem",
     "types": [
@@ -12707,6 +12776,44 @@
     },
     "locations": [],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/646.png"
+  },
+  {
+    "id": 647,
+    "name": "Keldeo",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/647.png"
+  },
+  {
+    "id": 648,
+    "name": "Meloetta",
+    "types": [
+      "Normal"
+    ],
+    "generation": 6,
+    "stats": {
+      "hp": 0,
+      "atk": 0,
+      "def": 0,
+      "spatk": 0,
+      "spdef": 0,
+      "spd": 0
+    },
+    "locations": [
+      "Quest Shiny Charm"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/648.png"
   },
   {
     "id": 649,
@@ -12749,12 +12856,12 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/660.png"
   },
   {
-    "id": 665,
-    "name": "Frillish",
+    "id": 902,
+    "name": "Basculegion",
     "types": [
       "Normal"
     ],
-    "generation": 6,
+    "generation": 5,
     "stats": {
       "hp": 0,
       "atk": 0,
@@ -12762,118 +12869,11 @@
       "spatk": 0,
       "spdef": 0,
       "spd": 0
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/665.png"
-  },
-  {
-    "id": 666,
-    "name": "Jellicent",
-    "types": [
-      "Normal"
-    ],
-    "generation": 6,
-    "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/666.png"
-  },
-  {
-    "id": 714,
-    "name": "Tornadus",
-    "types": [
-      "Normal"
-    ],
-    "generation": 6,
-    "stats": {
-      "hp": 79,
-      "atk": 115,
-      "def": 70,
-      "spatk": 125,
-      "spdef": 80,
-      "spd": 111
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/641.png"
-  },
-  {
-    "id": 715,
-    "name": "Thundurus",
-    "types": [
-      "Normal"
-    ],
-    "generation": 6,
-    "stats": {
-      "hp": 79,
-      "atk": 115,
-      "def": 70,
-      "spatk": 125,
-      "spdef": 80,
-      "spd": 111
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/642.png"
-  },
-  {
-    "id": 718,
-    "name": "Landorus",
-    "types": [
-      "Normal"
-    ],
-    "generation": 6,
-    "stats": {
-      "hp":89,
-      "atk": 125,
-      "def": 90,
-      "spatk": 115,
-      "spdef": 80,
-      "spd": 101
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/645.png"
-  },
-  {
-    "id": 720,
-    "name": "Keldeo",
-    "types": [
-      "Normal"
-    ],
-    "generation": 6,
-    "stats": {
-      "hp": 91,
-      "atk": 72,
-      "def": 90,
-      "spatk": 129,
-      "spdef": 90,
-      "spd": 108
-    },
-    "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/647.png"
-  },
-  {
-    "id": 648,
-    "name": "Meloetta",
-    "types": [
-      "Normal"
-    ],
-    "generation": 6,
-    "stats": {
-      "hp": 100,
-      "atk": 77,
-      "def": 77,
-      "spatk": 128,
-      "spdef": 128,
-      "spd": 90
     },
     "locations": [
-      "Quest Shiny Charm"
+      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
+      "Hearthome (X 3791 / Y 2084 / Z 6)"
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/648.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/902.png"
   }
 ]
