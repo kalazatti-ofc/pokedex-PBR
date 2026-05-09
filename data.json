@@ -12792,15 +12792,15 @@
     ],
     "generation": 6,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 79,
+      "atk": 115,
+      "def": 70,
+      "spatk": 125,
+      "spdef": 80,
+      "spd": 111
     },
     "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/714.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/641.png"
   },
   {
     "id": 715,
@@ -12810,15 +12810,15 @@
     ],
     "generation": 6,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 79,
+      "atk": 115,
+      "def": 70,
+      "spatk": 125,
+      "spdef": 80,
+      "spd": 111
     },
     "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/715.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/642.png"
   },
   {
     "id": 718,
@@ -12828,15 +12828,15 @@
     ],
     "generation": 6,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp":89,
+      "atk": 125,
+      "def": 90,
+      "spatk": 115,
+      "spdef": 80,
+      "spd": 101
     },
     "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/718.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/645.png"
   },
   {
     "id": 720,
@@ -12846,34 +12846,34 @@
     ],
     "generation": 6,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 91,
+      "atk": 72,
+      "def": 90,
+      "spatk": 129,
+      "spdef": 90,
+      "spd": 108
     },
     "locations": [],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/720.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/647.png"
   },
   {
-    "id": 721,
+    "id": 648,
     "name": "Meloetta",
     "types": [
       "Normal"
     ],
     "generation": 6,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 100,
+      "atk": 77,
+      "def": 77,
+      "spatk": 128,
+      "spdef": 128,
+      "spd": 90
     },
     "locations": [
       "Quest Shiny Charm"
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/721.png"
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/648.png"
   }
 ]
