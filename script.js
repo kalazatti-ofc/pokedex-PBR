@@ -1,47 +1,31 @@
 let pokemonData = [];
 let activeTypeFilter = 'all';
+let activeGenFilter = 'all';
 
 const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 
-// Matriz de Dano Oficial
 const typeModifiers = {
-    Normal: { Fighting: 2, Ghost: 0 },
-    Fire: { Fire: 0.5, Water: 2, Grass: 0.5, Ice: 0.5, Ground: 2, Bug: 0.5, Rock: 2, Steel: 0.5, Fairy: 0.5 },
-    Water: { Fire: 0.5, Water: 0.5, Electric: 2, Grass: 2, Ice: 0.5, Steel: 0.5 },
-    Electric: { Electric: 0.5, Ground: 2, Flying: 0.5, Steel: 0.5 },
-    Grass: { Fire: 2, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Poison: 2, Ground: 0.5, Flying: 2, Bug: 2 },
-    Ice: { Fire: 2, Ice: 0.5, Fighting: 2, Rock: 2, Steel: 2 },
-    Fighting: { Flying: 2, Psychic: 2, Bug: 0.5, Rock: 0.5, Dark: 0.5, Fairy: 2 },
-    Poison: { Grass: 0.5, Fighting: 0.5, Poison: 0.5, Ground: 2, Psychic: 2, Bug: 0.5, Fairy: 0.5 },
-    Ground: { Water: 2, Electric: 0, Grass: 2, Ice: 2, Poison: 0.5, Rock: 0.5 },
-    Flying: { Electric: 2, Grass: 0.5, Ice: 2, Fighting: 0.5, Ground: 0, Bug: 0.5 },
-    Psychic: { Fighting: 0.5, Psychic: 0.5, Bug: 2, Ghost: 2, Dark: 2 },
-    Bug: { Fire: 2, Grass: 0.5, Fighting: 0.5, Ground: 0.5, Flying: 2, Rock: 2 },
-    Rock: { Normal: 0.5, Fire: 0.5, Water: 2, Grass: 2, Fighting: 2, Poison: 0.5, Ground: 2, Flying: 0.5, Steel: 2 },
-    Ghost: { Normal: 0, Fighting: 0, Poison: 0.5, Bug: 0.5, Ghost: 2, Dark: 2 },
-    Dragon: { Fire: 0.5, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Dragon: 2, Fairy: 2 },
-    Dark: { Fighting: 2, Psychic: 0, Bug: 2, Ghost: 0.5, Dark: 0.5, Fairy: 2 },
+    Normal: { Fighting: 2, Ghost: 0 }, Fire: { Fire: 0.5, Water: 2, Grass: 0.5, Ice: 0.5, Ground: 2, Bug: 0.5, Rock: 2, Steel: 0.5, Fairy: 0.5 },
+    Water: { Fire: 0.5, Water: 0.5, Electric: 2, Grass: 2, Ice: 0.5, Steel: 0.5 }, Electric: { Electric: 0.5, Ground: 2, Flying: 0.5, Steel: 0.5 },
+    Grass: { Fire: 2, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Poison: 2, Ground: 0.5, Flying: 2, Bug: 2 }, Ice: { Fire: 2, Ice: 0.5, Fighting: 2, Rock: 2, Steel: 2 },
+    Fighting: { Flying: 2, Psychic: 2, Bug: 0.5, Rock: 0.5, Dark: 0.5, Fairy: 2 }, Poison: { Grass: 0.5, Fighting: 0.5, Poison: 0.5, Ground: 2, Psychic: 2, Bug: 0.5, Fairy: 0.5 },
+    Ground: { Water: 2, Electric: 0, Grass: 2, Ice: 2, Poison: 0.5, Rock: 0.5 }, Flying: { Electric: 2, Grass: 0.5, Ice: 2, Fighting: 0.5, Ground: 0, Bug: 0.5 },
+    Psychic: { Fighting: 0.5, Psychic: 0.5, Bug: 2, Ghost: 2, Dark: 2 }, Bug: { Fire: 2, Grass: 0.5, Fighting: 0.5, Ground: 0.5, Flying: 2, Rock: 2 },
+    Rock: { Normal: 0.5, Fire: 0.5, Water: 2, Grass: 2, Fighting: 2, Poison: 0.5, Ground: 2, Flying: 0.5, Steel: 2 }, Ghost: { Normal: 0, Fighting: 0, Poison: 0.5, Bug: 0.5, Ghost: 2, Dark: 2 },
+    Dragon: { Fire: 0.5, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Dragon: 2, Fairy: 2 }, Dark: { Fighting: 2, Psychic: 0, Bug: 2, Ghost: 0.5, Dark: 0.5, Fairy: 2 },
     Steel: { Normal: 0.5, Fire: 2, Grass: 0.5, Ice: 0.5, Fighting: 2, Poison: 0, Ground: 2, Flying: 0.5, Psychic: 0.5, Bug: 0.5, Rock: 0.5, Dragon: 0.5, Steel: 0.5, Fairy: 0.5 },
     Fairy: { Fighting: 0.5, Poison: 2, Bug: 0.5, Dragon: 0, Dark: 0.5, Steel: 2 }
 };
 
-const grid = document.getElementById('pokedex-grid');
-const searchInput = document.getElementById('search-input');
-const genFilter = document.getElementById('gen-filter');
-const typeFiltersContainer = document.getElementById('type-filters');
-const modal = document.getElementById('pokemon-modal');
-const modalBody = document.getElementById('modal-body');
-const closeModal = document.querySelector('.close-btn');
-
 document.addEventListener('DOMContentLoaded', () => {
-    renderTypeButtons();
     fetchData();
-    searchInput.addEventListener('input', applyFilters);
-    genFilter.addEventListener('change', applyFilters);
-    closeModal.addEventListener('click', () => modal.classList.add('hidden'));
-    window.addEventListener('click', (e) => { 
-        if(e.target === modal) modal.classList.add('hidden'); 
-    });
+    renderTypeButtons();
+    setupToggles();
+    
+    document.querySelector('.close-btn').onclick = () => document.getElementById('pokemon-modal').classList.add('hidden');
+    window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
+    
+    document.getElementById('search-input').addEventListener('input', applyFilters);
 });
 
 async function fetchData() {
@@ -49,192 +33,234 @@ async function fetchData() {
         const response = await fetch('data.json');
         pokemonData = await response.json();
         renderPokemon(pokemonData);
-    } catch (error) {
-        console.error("Erro no JSON:", error);
-        grid.innerHTML = '<p style="color:red; width:100%; text-align:center;">Erro ao carregar os dados.</p>';
-    }
+    } catch (e) { console.error("Erro ao carregar banco de dados:", e); }
 }
 
 function renderTypeButtons() {
-    typeFiltersContainer.innerHTML = '';
-    const btnAll = document.createElement('button');
-    btnAll.textContent = 'Todos';
-    btnAll.classList.add('type-btn', 'active');
-    btnAll.style.background = '#555';
-    btnAll.addEventListener('click', () => setTypeFilter('all', btnAll));
-    typeFiltersContainer.appendChild(btnAll);
+    const container = document.getElementById('type-filters');
+    container.innerHTML = '<button class="filter-pill active" data-type="all">TODOS</button>';
+    types.forEach(t => {
+        container.innerHTML += `<button class="filter-pill" data-type="${t}" style="--chip-color: var(--type-${t.toLowerCase()})">${t.toUpperCase()}</button>`;
+    });
 
-    types.forEach(type => {
-        const btn = document.createElement('button');
-        btn.textContent = type;
-        btn.classList.add('type-btn');
-        btn.style.background = `var(--type-${type.toLowerCase()})`;
-        btn.addEventListener('click', () => setTypeFilter(type, btn));
-        typeFiltersContainer.appendChild(btn);
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            const group = pill.closest('.pills-container').id;
+            document.getElementById(group).querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            
+            if(group === 'gen-filters') activeGenFilter = pill.dataset.gen;
+            if(group === 'type-filters') activeTypeFilter = pill.dataset.type;
+            
+            applyFilters();
+        });
     });
 }
 
-function setTypeFilter(type, clickedBtn) {
-    activeTypeFilter = type;
-    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-    clickedBtn.classList.add('active');
-    applyFilters();
+// Configura os botões de expandir/fechar
+function setupToggles() {
+    document.getElementById('toggle-gen').onclick = function() {
+        const group = document.getElementById('group-gen');
+        group.classList.toggle('hidden-filter');
+        this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTRAR POR REGIÃO' : '▲ ESCONDER REGIÕES';
+    };
+    document.getElementById('toggle-type').onclick = function() {
+        const group = document.getElementById('group-type');
+        group.classList.toggle('hidden-filter');
+        this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTRAR POR TIPO' : '▲ ESCONDER TIPOS';
+    };
 }
 
 function applyFilters() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedGen = genFilter.value;
-    const filtered = pokemonData.filter(pokemon => {
-        const matchesName = pokemon.name.toLowerCase().includes(searchTerm) || pokemon.id.toString() === searchTerm;
-        const matchesGen = selectedGen === 'all' || pokemon.generation.toString() === selectedGen;
-        const matchesType = activeTypeFilter === 'all' || pokemon.types.includes(activeTypeFilter);
-        return matchesName && matchesGen && matchesType;
+    const search = document.getElementById('search-input').value.toLowerCase();
+    const filtered = pokemonData.filter(p => {
+        const mName = p.name.toLowerCase().includes(search) || p.id.toString() === search;
+        const mGen = activeGenFilter === 'all' || p.generation.toString() === activeGenFilter;
+        const mType = activeTypeFilter === 'all' || p.types.includes(activeTypeFilter);
+        return mName && mGen && mType;
     });
     renderPokemon(filtered);
 }
 
-function renderPokemon(pokemonArray) {
-    grid.innerHTML = '';
-    if(pokemonArray.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: white;">Nenhum Pokémon encontrado.</p>';
-        return;
-    }
-    pokemonArray.forEach(pokemon => {
-        const primaryType = pokemon.types[0].toLowerCase();
-        const card = document.createElement('div');
-        card.classList.add('pokemon-card');
-        card.style.setProperty('--bg-color', `var(--type-${primaryType})`);
-        card.addEventListener('click', () => openModal(pokemon));
-        const typesHTML = pokemon.types.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
-        card.innerHTML = `<p class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</p><img src="${pokemon.image}" alt="${pokemon.name}"><h3 class="pokemon-name">${pokemon.name}</h3><div class="pokemon-types">${typesHTML}</div>`;
-        grid.appendChild(card);
-    });
-}
-
-function calculateMatchups(pokemonTypes) {
-    let multipliers = {};
-    types.forEach(t => multipliers[t] = 1);
-    pokemonTypes.forEach(pType => {
-        const mods = typeModifiers[pType] || {};
-        types.forEach(atkType => {
-            if (mods[atkType] !== undefined) multipliers[atkType] *= mods[atkType];
-        });
-    });
-    let weak = [];
-    let resist = [];
-    for (const [t, mult] of Object.entries(multipliers)) {
-        if (mult > 1) weak.push(t);
-        if (mult < 1) resist.push(t); 
-    }
-    return { weak, resist };
-}
-
-function openModal(pokemon) {
-    const primaryType = pokemon.types[0].toLowerCase();
-    const typesHTML = pokemon.types.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
-    
-    // Lista de localizações interativas (Novos Cards Minimalistas)
-    const locationsHTML = pokemon.locations.map((loc, index) => {
-        if(loc.trim() === "") return "";
-        return `
-            <li class="loc-item" data-loc="${loc}">
-                <span class="loc-text">${loc}</span>
-                <span class="loc-icon">🗺️</span>
-            </li>
-        `;
-    }).join('');
-    
-    const matchups = calculateMatchups(pokemon.types);
-    const weakHTML = matchups.weak.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
-    const resistHTML = matchups.resist.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
-
-    const stats = pokemon.stats || { hp: 0, atk: 0, def: 0, spatk: 0, spdef: 0, spd: 0 };
-    const statHTML = `<div class="stats-container">
-        <div class="stat-row"><span class="stat-name">HP</span><span class="stat-val">${stats.hp}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.hp/255)*100}%; background: #FF5959;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">ATK</span><span class="stat-val">${stats.atk}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.atk/255)*100}%; background: #F5AC78;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">DEF</span><span class="stat-val">${stats.def}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.def/255)*100}%; background: #FAE078;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">SP.ATK</span><span class="stat-val">${stats.spatk}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spatk/255)*100}%; background: #9DB7F5;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">SP.DEF</span><span class="stat-val">${stats.spdef}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spdef/255)*100}%; background: #A7DB8D;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">SPD</span><span class="stat-val">${stats.spd}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spd/255)*100}%; background: #FA92B2;"></div></div></div>
-    </div>`;
-
-    modalBody.innerHTML = `
-        <div class="modal-header-bg" style="--modal-bg-color: var(--type-${primaryType})">
-            <img src="${pokemon.image}" alt="${pokemon.name}">
+function renderPokemon(list) {
+    const grid = document.getElementById('pokedex-grid');
+    grid.innerHTML = list.map(p => `
+        <div class="pk-card" onclick="openModal(${p.id})">
+            <div class="pk-card-inner">
+                <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
+                <img src="${p.image}" loading="lazy">
+                <h3 class="pk-name">${p.name}</h3>
+                <div class="pk-types-mini">
+                    ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
+                </div>
+            </div>
         </div>
-        <div class="modal-info">
-            <p class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')} - Gen ${pokemon.generation}</p>
-            <h2>${pokemon.name}</h2>
-            <div class="pokemon-types">${typesHTML}</div>
-            
-            <div class="info-grid">
+    `).join('');
+}
+
+window.openModal = (id) => {
+    const p = pokemonData.find(x => x.id === id);
+    if(!p) return;
+    
+    const matchups = calculateMatchups(p.types);
+    
+    const locationsHTML = p.locations.map(loc => `
+        <div class="loc-button" onclick="updateRadar('${loc}', this)">
+            <span class="loc-text">${loc}</span>
+            <span class="loc-icon">🗺️</span>
+        </div>
+    `).join('');
+
+    const statsHTML = Object.entries(p.stats).map(([name, val]) => `
+        <div class="stat-row">
+            <label>${name.toUpperCase()}</label>
+            <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
+            <span class="stat-num">${val}</span>
+        </div>
+    `).join('');
+
+    document.getElementById('modal-body').innerHTML = `
+        <div class="modal-pokedex-view">
+            <div class="modal-left-wing">
+                <div class="screen-border">
+                    <div class="main-screen">
+                        <img src="${p.image}" class="poke-img-large">
+                        <div class="screen-info">
+                            <h2>${p.name}</h2>
+                            <div class="type-tags">
+                                ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="info-item highlight-location">
-                    <span class="info-label">📍 Coordenadas e Respawns</span>
-                    <ul class="location-list">
-                        ${locationsHTML || "<li class='loc-item'><span class='loc-text'>Nenhum respawn registrado</span></li>"}
-                    </ul>
+                <div class="location-module">
+                    <h4 class="label-tech">LOCALIZAÇÕES DETECTADAS</h4>
+                    <div class="loc-list-scroll">${locationsHTML || '<p style="color:#aaa; font-family:monospace;">Nenhum registro encontrado.</p>'}</div>
                 </div>
+            </div>
 
-                <div class="info-item">
-                    <div class="radar-container" id="radar-display">
-                        <div class="radar-scanner"></div>
-                        <span class="radar-text">Aguardando seleção...</span>
+            <div class="modal-right-wing">
+                <div class="radar-module">
+                    <div class="radar-display" id="radar-screen">
+                        <div class="radar-grid"></div>
+                        <div class="radar-beam"></div>
+                        <p id="radar-label">RASTREANDO...</p>
                     </div>
                 </div>
 
-                <div class="info-item">
-                    <span class="info-label">📊 Status Base</span>
-                    ${statHTML}
+                <div class="data-module">
+                    <h4 class="label-tech">STATUS BASE</h4>
+                    <div class="stats-list">${statsHTML}</div>
                 </div>
 
-                <div class="info-item">
-                    <span class="info-label">⚔️ Fraquezas <span style="font-size:0.6rem; color:#888;">(Leva 2x Dano)</span></span>
-                    <div class="pokemon-types" style="justify-content: flex-start; flex-wrap: wrap; margin-top: 5px;">
-                        ${weakHTML || '<span style="color:#aaa; font-size:0.75rem;">Nenhuma (Uau!)</span>'}
+                <div class="eff-module">
+                    <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                    <div class="eff-group">
+                        <label>FRAQUEZAS (Leva 2x Dano)</label>
+                        <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
                     </div>
-                </div>
-                <div class="info-item" style="border-bottom: none;">
-                    <span class="info-label">🛡️ Resistências <span style="font-size:0.6rem; color:#888;">(Leva 0.5x Dano)</span></span>
-                    <div class="pokemon-types" style="justify-content: flex-start; flex-wrap: wrap; margin-top: 5px;">
-                        ${resistHTML || '<span style="color:#aaa; font-size:0.75rem;">Nenhuma</span>'}
+                    <div class="eff-group">
+                        <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                        <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
                     </div>
                 </div>
 
+                <div class="evo-module">
+                    <h4 class="label-tech">CADEIA EVOLUTIVA</h4>
+                    <div class="evo-icons" id="evo-container">
+                        <span class="blink" style="color: #ffcb05;">Sincronizando com a Silph Co...</span>
+                    </div>
+                </div>
             </div>
         </div>
     `;
     
-    // --- LÓGICA DO MAPA INTERATIVO ---
-    const locItems = modalBody.querySelectorAll('.loc-item');
-    const radarDisplay = modalBody.querySelector('#radar-display');
-
-    locItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Remove a seleção dos outros
-            locItems.forEach(i => i.classList.remove('active'));
-            // Seleciona o atual
-            item.classList.add('active');
-
-            const locName = item.getAttribute('data-loc');
-            
-            // Troca o texto (ou imagem no futuro) do radar
-            if(locName) {
-                radarDisplay.innerHTML = `
-                    <div class="radar-scanner"></div>
-                    <div style="z-index:2; text-align:center;">
-                        <span style="color: #fff; font-size: 0.7rem; font-family: monospace;">Rastreando sinal em:</span><br>
-                        <span style="color: #ffd700; font-size: 0.75rem; font-family: monospace; font-weight: bold;">${locName}</span>
-                    </div>
-                    `;
-            }
-        });
-    });
-
-    // Se tiver localizações, clica automaticamente na primeira para dar o efeito legal de "Buscando..."
-    if(locItems.length > 0 && locItems[0].getAttribute('data-loc')) {
-        locItems[0].click();
-    }
+    document.getElementById('pokemon-modal').classList.remove('hidden');
     
-    modal.classList.remove('hidden');
+    setTimeout(() => {
+        const first = document.querySelector('.loc-button');
+        if(first) first.click();
+    }, 100);
+
+    loadEvolutions(p.name);
+};
+
+async function loadEvolutions(pokemonName) {
+    const container = document.getElementById('evo-container');
+    try {
+        let apiName = pokemonName.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/\s+/g, '-');
+        if(apiName === 'mrmime') apiName = 'mr-mime'; 
+
+        const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${apiName}`);
+        if(!speciesRes.ok) throw new Error();
+        const speciesData = await speciesRes.json();
+        
+        const evoRes = await fetch(speciesData.evolution_chain.url);
+        const evoData = await evoRes.json();
+        
+        let allEvos = [];
+        function extractEvo(node) {
+            const idMatch = node.species.url.match(/\/(\d+)\/$/);
+            if(idMatch) allEvos.push({ name: node.species.name, id: parseInt(idMatch[1]) });
+            node.evolves_to.forEach(child => extractEvo(child));
+        }
+        extractEvo(evoData.chain);
+        
+        container.innerHTML = allEvos.map(e => {
+            const inOurDex = pokemonData.find(p => p.id === e.id);
+            if(inOurDex) {
+                return `<img src="${inOurDex.image}" class="evo-sprite" title="${inOurDex.name}" onclick="openModal(${inOurDex.id})">`;
+            } else {
+                return `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${e.id}.png" class="evo-sprite missing" title="${e.name} (Fora do DB)">`;
+            }
+        }).join('<span class="evo-arrow">❯</span>'); 
+
+    } catch(err) {
+        container.innerHTML = '<span style="color:#ff6b6b; font-size:0.7rem; font-family: monospace;">Falha no sinal. DNA não encontrado.</span>';
+    }
 }
+
+function calculateMatchups(pTypes) {
+    let multipliers = {}; 
+    types.forEach(t => multipliers[t] = 1);
+    pTypes.forEach(pt => {
+        const mods = typeModifiers[pt] || {};
+        types.forEach(atk => { if(mods[atk] !== undefined) multipliers[atk] *= mods[atk]; });
+    });
+    let weak = [], resist = [];
+    for(const [t, m] of Object.entries(multipliers)) { 
+        if(m > 1) weak.push(t); 
+        if(m < 1) resist.push(t); 
+    }
+    return { weak, resist };
+}
+
+window.updateRadar = (name, el) => {
+    document.querySelectorAll('.loc-button').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    
+    const screen = document.getElementById('radar-screen');
+    const imagePath = `mapas/${name}.png`;
+    
+    screen.innerHTML = `
+        <img src="${imagePath}" class="map-img" onerror="this.style.display='none'; showRadarFallback('${name}')">
+        <div class="radar-grid"></div>
+        <div class="radar-beam"></div>
+        <div class="map-overlay"></div>
+    `;
+    
+    document.getElementById('radar-label').innerText = name.toUpperCase();
+};
+
+window.showRadarFallback = (name) => {
+    const screen = document.getElementById('radar-screen');
+    screen.innerHTML = `
+        <div class="radar-grid"></div>
+        <div class="radar-beam"></div>
+        <div class="radar-status">
+            <span class="blink">BUSCANDO SINAL...</span><br>
+            <strong style="color:#32cd32; font-size:0.65rem;">${name}</strong>
+        </div>
+    `;
+};
