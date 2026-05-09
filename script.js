@@ -3,7 +3,7 @@ let activeTypeFilter = 'all';
 
 const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 
-// Matriz de Dano (Para calcular Fraquezas e Resistências automaticamente)
+// Matriz de Dano Oficial (Para calcular Fraquezas e Resistências automaticamente)
 const typeModifiers = {
     Normal: { Fighting: 2, Ghost: 0 },
     Fire: { Fire: 0.5, Water: 2, Grass: 0.5, Ice: 0.5, Ground: 2, Bug: 0.5, Rock: 2, Steel: 0.5, Fairy: 0.5 },
@@ -51,11 +51,13 @@ async function fetchData() {
         renderPokemon(pokemonData);
     } catch (error) {
         console.error("Erro no JSON:", error);
+        grid.innerHTML = '<p style="color:red; width:100%; text-align:center;">Erro ao carregar os dados. Verifique se o data.json foi gerado corretamente.</p>';
     }
 }
 
 function renderTypeButtons() {
     typeFiltersContainer.innerHTML = '';
+    
     const btnAll = document.createElement('button');
     btnAll.textContent = 'Todos';
     btnAll.classList.add('type-btn', 'active');
@@ -83,29 +85,50 @@ function setTypeFilter(type, clickedBtn) {
 function applyFilters() {
     const searchTerm = searchInput.value.toLowerCase();
     const selectedGen = genFilter.value;
+    
     const filtered = pokemonData.filter(pokemon => {
         const matchesName = pokemon.name.toLowerCase().includes(searchTerm) || pokemon.id.toString() === searchTerm;
         const matchesGen = selectedGen === 'all' || pokemon.generation.toString() === selectedGen;
         const matchesType = activeTypeFilter === 'all' || pokemon.types.includes(activeTypeFilter);
+        
         return matchesName && matchesGen && matchesType;
     });
+    
     renderPokemon(filtered);
 }
 
 function renderPokemon(pokemonArray) {
     grid.innerHTML = '';
+    
+    if(pokemonArray.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: white;">Nenhum Pokémon encontrado.</p>';
+        return;
+    }
+    
     pokemonArray.forEach(pokemon => {
         const primaryType = pokemon.types[0].toLowerCase();
         const card = document.createElement('div');
         card.classList.add('pokemon-card');
         card.style.setProperty('--bg-color', `var(--type-${primaryType})`);
+        
         card.addEventListener('click', () => openModal(pokemon));
-        const typesHTML = pokemon.types.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
-        card.innerHTML = `<p class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</p><img src="${pokemon.image}" alt="${pokemon.name}"><h3 class="pokemon-name">${pokemon.name}</h3><div class="pokemon-types">${typesHTML}</div>`;
+
+        const typesHTML = pokemon.types.map(t => 
+            `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`
+        ).join('');
+        
+        card.innerHTML = `
+            <p class="pokemon-id">#${pokemon.id.toString().padStart(3, '0')}</p>
+            <img src="${pokemon.image}" alt="${pokemon.name}">
+            <h3 class="pokemon-name">${pokemon.name}</h3>
+            <div class="pokemon-types">${typesHTML}</div>
+        `;
+        
         grid.appendChild(card);
     });
 }
 
+// Cérebro Matemático: Calcula Fraquezas e Resistências
 function calculateMatchups(pokemonTypes) {
     let multipliers = {};
     types.forEach(t => multipliers[t] = 1);
@@ -124,30 +147,41 @@ function calculateMatchups(pokemonTypes) {
     
     for (const [t, mult] of Object.entries(multipliers)) {
         if (mult > 1) weak.push(t);
-        if (mult < 1) resist.push(t); // Pega 0.5x, 0.25x e 0x (imunidades)
+        if (mult < 1) resist.push(t); 
     }
     return { weak, resist };
 }
 
 function openModal(pokemon) {
     const primaryType = pokemon.types[0].toLowerCase();
-    const typesHTML = pokemon.types.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
-    const locationsHTML = pokemon.locations.map(loc => `<li>📍 ${loc}</li>`).join('');
+    
+    const typesHTML = pokemon.types.map(t => 
+        `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`
+    ).join('');
+    
+    // Lista de localizações
+    const locationsHTML = pokemon.locations.map(loc => {
+        if(loc.trim() === "") return "";
+        return `<li>📍 ${loc}</li>`;
+    }).join('');
     
     // Cálculo das Vantagens e Fraquezas
     const matchups = calculateMatchups(pokemon.types);
     const weakHTML = matchups.weak.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
     const resistHTML = matchups.resist.map(t => `<span class="type-badge" style="background-color: var(--type-${t.toLowerCase()})">${t}</span>`).join('');
 
+    // Status
     const stats = pokemon.stats || { hp: 0, atk: 0, def: 0, spatk: 0, spdef: 0, spd: 0 };
-    const statHTML = `<div class="stats-container">
-        <div class="stat-row"><span class="stat-name">HP</span><span class="stat-val">${stats.hp}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.hp/255)*100}%; background: #FF5959;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">ATK</span><span class="stat-val">${stats.atk}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.atk/255)*100}%; background: #F5AC78;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">DEF</span><span class="stat-val">${stats.def}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.def/255)*100}%; background: #FAE078;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">SP.ATK</span><span class="stat-val">${stats.spatk}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spatk/255)*100}%; background: #9DB7F5;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">SP.DEF</span><span class="stat-val">${stats.spdef}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spdef/255)*100}%; background: #A7DB8D;"></div></div></div>
-        <div class="stat-row"><span class="stat-name">SPD</span><span class="stat-val">${stats.spd}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spd/255)*100}%; background: #FA92B2;"></div></div></div>
-    </div>`;
+    const statHTML = `
+        <div class="stats-container">
+            <div class="stat-row"><span class="stat-name">HP</span><span class="stat-val">${stats.hp}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.hp/255)*100}%; background: #FF5959;"></div></div></div>
+            <div class="stat-row"><span class="stat-name">ATK</span><span class="stat-val">${stats.atk}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.atk/255)*100}%; background: #F5AC78;"></div></div></div>
+            <div class="stat-row"><span class="stat-name">DEF</span><span class="stat-val">${stats.def}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.def/255)*100}%; background: #FAE078;"></div></div></div>
+            <div class="stat-row"><span class="stat-name">SP.ATK</span><span class="stat-val">${stats.spatk}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spatk/255)*100}%; background: #9DB7F5;"></div></div></div>
+            <div class="stat-row"><span class="stat-name">SP.DEF</span><span class="stat-val">${stats.spdef}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spdef/255)*100}%; background: #A7DB8D;"></div></div></div>
+            <div class="stat-row"><span class="stat-name">SPD</span><span class="stat-val">${stats.spd}</span><div class="stat-bar"><div class="stat-fill" style="width: ${(stats.spd/255)*100}%; background: #FA92B2;"></div></div></div>
+        </div>
+    `;
 
     modalBody.innerHTML = `
         <div class="modal-header-bg" style="--modal-bg-color: var(--type-${primaryType})">
@@ -160,13 +194,18 @@ function openModal(pokemon) {
             
             <div class="info-grid">
                 
-                <div class="info-item">
-                    <span class="info-label">⚔️ Fraquezas (Leva + Dano de:)</span>
-                    <div class="pokemon-types" style="justify-content: flex-start; flex-wrap: wrap;">${weakHTML || '<span style="color:#aaa; font-size:0.8rem;">Nenhuma (Uau!)</span>'}</div>
+                <div class="info-item highlight-location">
+                    <span class="info-label" style="color: #ffd700; font-size: 0.9rem;">📍 Coordenadas e Respawns</span>
+                    <ul class="location-list big-location">
+                        ${locationsHTML || "<li>Nenhum respawn registrado</li>"}
+                    </ul>
                 </div>
+
                 <div class="info-item">
-                    <span class="info-label">🛡️ Resistências (Leva - Dano de:)</span>
-                    <div class="pokemon-types" style="justify-content: flex-start; flex-wrap: wrap;">${resistHTML || '<span style="color:#aaa; font-size:0.8rem;">Nenhuma</span>'}</div>
+                    <div class="radar-container">
+                        <div class="radar-scanner"></div>
+                        <span class="radar-text">Sinal de GPS... Procurando.</span>
+                    </div>
                 </div>
 
                 <div class="info-item">
@@ -175,18 +214,21 @@ function openModal(pokemon) {
                 </div>
 
                 <div class="info-item">
-                    <span class="info-label">🗺️ Localizações & Radar</span>
-                    <div class="radar-container">
-                        <div class="radar-scanner"></div>
-                        <span class="radar-text">Sinal de GPS... Procurando Respawns.</span>
-                        </div>
-                    <ul class="location-list">
-                        ${locationsHTML || "<li>Nenhum respawn registrado</li>"}
-                    </ul>
+                    <span class="info-label">⚔️ Fraquezas (Leva + Dano de:)</span>
+                    <div class="pokemon-types" style="justify-content: flex-start; flex-wrap: wrap; margin-top: 5px;">
+                        ${weakHTML || '<span style="color:#aaa; font-size:0.8rem;">Nenhuma (Uau!)</span>'}
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🛡️ Resistências (Leva - Dano de:)</span>
+                    <div class="pokemon-types" style="justify-content: flex-start; flex-wrap: wrap; margin-top: 5px;">
+                        ${resistHTML || '<span style="color:#aaa; font-size:0.8rem;">Nenhuma</span>'}
+                    </div>
                 </div>
 
             </div>
         </div>
     `;
+    
     modal.classList.remove('hidden');
 }
