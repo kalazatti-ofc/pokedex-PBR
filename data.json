@@ -9742,10 +9742,31 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/473.png"
   },
   {
+    "id": 474,
+    "name": "Porygon-Z",
+    "types": [
+      "Normal"
+    ],
+    "generation": 4,
+    "stats": {
+      "hp": 85,
+      "atk": 80,
+      "def": 70,
+      "spatk": 135,
+      "spdef": 75,
+      "spd": 90
+    },
+    "locations": [
+      "Evolui de Porygon2"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/474.png"
+  },
+  {
     "id": 475,
     "name": "Gallade",
     "types": [
-      "Normal"
+      "Psychic",
+      "Fighting"
     ],
     "generation": 4,
     "stats": {
