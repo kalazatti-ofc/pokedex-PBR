@@ -9552,7 +9552,8 @@
       "spd": 40
     },
     "locations": [
-      "One island (X 2453 / Y 893 / Z 7)"
+      "One island (X 2453 / Y 893 / Z 7)",
+      "Jubilife (X 3446 / Y 2018 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/464.png"
   },
