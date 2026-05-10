@@ -1517,7 +1517,7 @@
     },
     "locations": [
       "Vermilion (X 1279 / Y 1272 / Z 7)",
-      "Quest TV Camera"
+      "TV Camêra (Orre)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/73.png"
   },
@@ -2551,7 +2551,7 @@
       "spd": 105
     },
     "locations": [
-      "Quest TV Camera",
+      "TV Camêra (Orre)",
       "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Grama, após isso entre na caverna"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png"
@@ -3030,7 +3030,7 @@
       "spd": 90
     },
     "locations": [
-      "TV Camera",
+      "TV Camêra (Orre)",
       "Quest Shiny Stone",
       "Blessed Boost Stone"
     ],
@@ -3317,7 +3317,7 @@
       "spd": 78
     },
     "locations": [
-      "Quest TV Camera"
+      "TV Camêra (Orre)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/160.png"
   },
@@ -4399,7 +4399,7 @@
       "spd": 65
     },
     "locations": [
-      "Quest TV Camera (Orre)",
+      "TV Camêra (Orre)",
       "Pewter (X 610 / Y 919 / Z 5)",
       "Sandgem (X 3334 / Y 2306 / Z 7)"
     ],
@@ -5275,7 +5275,7 @@
       "spd": 120
     },
     "locations": [
-      "Quest TV Camera"
+      "TV Camêra (Orre)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/254.png"
   },
@@ -5337,7 +5337,7 @@
       "spd": 80
     },
     "locations": [
-      "Quest TV Camera",
+      "TV Camêra (Orre)",
       "Yorkshin (X 2142 / Y 1257 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/257.png"
