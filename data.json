@@ -6376,7 +6376,7 @@
       "spd": 60
     },
     "locations": [
-      "Quest boost stone",
+      "Quest Boost Stone",
       "Cianwood (X 905 / Y 177 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/307.png"
@@ -6766,7 +6766,7 @@
     },
     "locations": [
       "cianwood (X 843 / Y 68 / Z 2)",
-      "Quest boost stone"
+      "Quest Boost Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/326.png"
   },
@@ -7852,7 +7852,7 @@
       "spd": 50
     },
     "locations": [
-      "Quest boost stone"
+      "Quest Boost Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/379.png"
   },
@@ -9743,22 +9743,21 @@
   },
   {
     "id": 475,
-    "name": "PorygonZ",
+    "name": "Gallade",
     "types": [
       "Normal"
     ],
     "generation": 4,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 68,
+      "atk": 125,
+      "def": 65,
+      "spatk": 65,
+      "spdef": 115,
+      "spd": 80
     },
     "locations": [
-      "Evolui de Porygon2",
-      "Quest boost stone"
+      "Quest Boost Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/475.png"
   },
