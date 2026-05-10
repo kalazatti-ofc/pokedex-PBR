@@ -57,7 +57,6 @@ function renderTypeButtons() {
     });
 }
 
-// Configura os botões de expandir/fechar
 function setupToggles() {
     document.getElementById('toggle-gen').onclick = function() {
         const group = document.getElementById('group-gen');
@@ -241,7 +240,13 @@ window.updateRadar = (name, el) => {
     el.classList.add('active');
     
     const screen = document.getElementById('radar-screen');
-    const imagePath = `mapas/${name}.png`;
+    
+    // --- O TRUQUE PARA O WINDOWS ---
+    // Pega o nome do JSON e troca todas as barras (/) por hifens (-)
+    const nomeSeguro = name.replace(/\//g, '-');
+    
+    // Agora ele busca a imagem usando os hifens na URL
+    const imagePath = `mapas/${nomeSeguro}.png`;
     
     screen.innerHTML = `
         <img src="${imagePath}" class="map-img" onerror="this.style.display='none'; showRadarFallback('${name}')">
