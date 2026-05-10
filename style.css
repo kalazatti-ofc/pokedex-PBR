@@ -292,9 +292,11 @@ body {
     /* Diminui os botões do Menu */
     .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
     
-    /* Controla a altura da tela principal para não esticar ao infinito */
+    /* AQUI ESTÁ A CORREÇÃO DA ALTURA - Trava a tela para ter scroll */
     .pokedex-main-display {
-        height: 320px; /* Mostra cerca de 2-3 linhas e permite scroll interno */
+        flex: none; /* Remove o comportamento elástico */
+        height: 350px; /* Define uma altura fixa segura */
+        max-height: 350px;
     }
 
     /* Reduz o tamanho dos Cards de Pokémon para caberem mais na tela */
