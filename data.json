@@ -103,7 +103,7 @@
       "spd": 80
     },
     "locations": [
-      "First stone",
+      "Quest : First Stone",
       "Cinnabar (X 748 / Y 1382 / Z 5)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png"
@@ -5176,23 +5176,44 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png"
   },
   {
-    "id": 251,
-    "name": "Hooh",
+    "id": 250,
+    "name": "Ho-oh",
     "types": [
-      "Normal"
+      "Fire",
+      "Flying"
     ],
     "generation": 2,
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spatk": 0,
-      "spdef": 0,
-      "spd": 0
+      "hp": 106,
+      "atk": 130,
+      "def": 90,
+      "spatk": 110,
+      "spdef": 154,
+      "spd": 90
     },
     "locations": [
-      "Em qualquer hunt de Johto",
-      "Quest sun stone"
+      "Em qualquer hunt de Johto"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/250.png"
+  },  
+  {
+    "id": 251,
+    "name": "Celebi",
+    "types": [
+      "Psychic",
+      "Grass"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spatk": 100,
+      "spdef": 100,
+      "spd": 100
+    },
+    "locations": [
+      "Quest: Sun Stone"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/251.png"
   },
