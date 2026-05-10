@@ -60,8 +60,8 @@
       "spd": 80
     },
     "locations": [
-      "Vermilion (X 1047 / Y 1341 / Z 4)",
-      "TV Camêra (Orre)"
+      "TV Camêra (Orre)",     
+      "Vermilion (X 1047 / Y 1341 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png"
   },
@@ -125,10 +125,10 @@
       "spd": 100
     },
     "locations": [
+      "TV Camêra (Orre)",
       "Cinnabar (X 702 / Y 1368 / Z 4)",
       "Quest Ancient Stone",
-      "Vermilion (X 886 / Y 1566 / Z 4)",
-      "TV Camêra (Orre)"
+      "Vermilion (X 886 / Y 1566 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
   },
@@ -189,8 +189,8 @@
       "spd": 78
     },
     "locations": [
-      "Vermilion (X 1279 / Y 1272 / Z 7)",
-      "TV Camêra (Orre)"
+      "TV Camêra (Orre)",
+      "Vermilion (X 1279 / Y 1272 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png"
   },
@@ -1516,8 +1516,8 @@
       "spd": 100
     },
     "locations": [
-      "Vermilion (X 1279 / Y 1272 / Z 7)",
-      "TV Camêra (Orre)"
+      "TV Camêra (Orre)",
+      "Vermilion (X 1279 / Y 1272 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/73.png"
   },
