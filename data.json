@@ -4218,8 +4218,69 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/203.png"
   },
   {
+    "id": 204,
+    "name": "Pineco",
+    "types": [
+      "Bug"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 90,
+      "spatk": 35,
+      "spdef": 35,
+      "spd": 15
+    },
+    "locations": [
+      "Hunter Village (X 1718 / Y 1744 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/204.png"
+  },              
+  {
+    "id": 205,
+    "name": "Forretress",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 75,
+      "atk": 90,
+      "def": 140,
+      "spatk": 60,
+      "spdef": 60,
+      "spd": 40
+    },
+    "locations": [
+      "Hunter Village (X 1792 / Y 1419 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/205.png"
+  },            
+  {
+    "id": 206,
+    "name": "Dunsparce",
+    "types": [
+      "Normal"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 100,
+      "atk": 70,
+      "def": 70,
+      "spatk": 65,
+      "spdef": 65,
+      "spd": 45
+    },
+    "locations": [
+      "Hunter Village (X 1762 / Y 1561 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/206.png"
+  },            
+  {
     "id": 207,
-    "name": "Gligar ",
+    "name": "Gligar",
     "types": [
       "Ground",
       "Flying"
@@ -4240,7 +4301,7 @@
   },          
   {
     "id": 208,
-    "name": "Steelix ",
+    "name": "Steelix",
     "types": [
       "Steel",
       "Ground"
@@ -4262,7 +4323,7 @@
   },        
   {
     "id": 209,
-    "name": "Snubbull ",
+    "name": "Snubbull",
     "types": [
       "Fairy"
     ],
