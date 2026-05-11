@@ -144,7 +144,6 @@ window.openModal = (id) => {
                     <div class="radar-display" id="radar-screen">
                         <div class="radar-grid"></div>
                         <div class="radar-beam"></div>
-                        <p id="radar-label">RASTREANDO...</p>
                     </div>
                 </div>
 
@@ -235,37 +234,59 @@ function calculateMatchups(pTypes) {
     return { weak, resist };
 }
 
+// --- MÁGICA DO HUD DE SATÉLITE ---
 window.updateRadar = (name, el) => {
     document.querySelectorAll('.loc-button').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
     
     const screen = document.getElementById('radar-screen');
-    
-    // --- O TRUQUE PARA O WINDOWS ---
-    // Pega o nome do JSON e troca todas as barras (/) por hifens (-)
     const nomeSeguro = name.replace(/\//g, '-');
-    
-    // Agora ele busca a imagem usando os hifens na URL
     const imagePath = `mapas/${nomeSeguro}.png`;
+    
+    // Separador inteligente: Busca texto antes do parênteses e dentro do parênteses
+    let locName = name.toUpperCase();
+    let coords = "SINAL GPS ESTABELECIDO"; // Fallback se não tiver coordenadas
+    
+    const match = name.match(/^(.*?)\s*\((.*?)\)$/);
+    if(match) {
+        locName = match[1].toUpperCase(); // Ex: "OLIVINE"
+        coords = match[2].toUpperCase();  // Ex: "X 1188 / Y 57 / Z 4"
+    }
     
     screen.innerHTML = `
         <img src="${imagePath}" class="map-img" onerror="this.style.display='none'; showRadarFallback('${name}')">
         <div class="radar-grid"></div>
         <div class="radar-beam"></div>
         <div class="map-overlay"></div>
+        
+        <div class="sat-hud">
+            <div class="sat-hud-line rec">● REC</div>
+            <div class="sat-hud-line">LOC: ${locName}</div>
+            <div class="sat-hud-line" style="color:#ffd700;">${coords}</div>
+        </div>
     `;
-    
-    document.getElementById('radar-label').innerText = name.toUpperCase();
 };
 
 window.showRadarFallback = (name) => {
     const screen = document.getElementById('radar-screen');
+    
+    let locName = name.toUpperCase();
+    let coords = "BUSCANDO DADOS...";
+    const match = name.match(/^(.*?)\s*\((.*?)\)$/);
+    if(match) {
+        locName = match[1].toUpperCase();
+        coords = match[2].toUpperCase();
+    }
+
     screen.innerHTML = `
         <div class="radar-grid"></div>
         <div class="radar-beam"></div>
-        <div class="radar-status">
-            <span class="blink">BUSCANDO SINAL...</span><br>
-            <strong style="color:#32cd32; font-size:0.65rem;">${name}</strong>
+        <div class="map-overlay"></div>
+        
+        <div class="sat-hud">
+            <div class="sat-hud-line" style="color:#ff4b2b;">⚠ SEM VISUAL</div>
+            <div class="sat-hud-line">LOC: ${locName}</div>
+            <div class="sat-hud-line blink" style="color:#ffd700;">${coords}</div>
         </div>
     `;
 };
