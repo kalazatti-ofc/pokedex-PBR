@@ -16,7 +16,7 @@
       "spd": 45
     },
     "locations": [
-      "Quest First stone",
+      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
       "Vermilion (X 1047 / Y 1341 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
@@ -38,7 +38,7 @@
       "spd": 60
     },
     "locations": [
-      "Quest First stone",
+      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
       "Vermilion (X 1047 / Y 1341 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png"
@@ -81,7 +81,7 @@
       "spd": 65
     },
     "locations": [
-      "First stone",
+      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
       "Cinnabar (X 769 / Y 1396 / Z 7)",
       "Hunter Village (X 1704 / Y 1629 / Z 6)"
     ],
@@ -103,7 +103,7 @@
       "spd": 80
     },
     "locations": [
-      "Quest : First Stone",
+      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
       "Cinnabar (X 748 / Y 1382 / Z 5)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png"
@@ -148,7 +148,7 @@
       "spd": 43
     },
     "locations": [
-      "Quest first stone"
+      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
   },
@@ -168,7 +168,7 @@
       "spd": 58
     },
     "locations": [
-      "Quest first stone",
+      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
       "Vermilion (X 1279 / Y 1272 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png"
