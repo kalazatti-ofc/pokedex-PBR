@@ -2859,7 +2859,8 @@
       "spd": 35
     },
     "locations": [
-      "Battle Point <entre no buraco> (X 1451 / Y 992 / Z 7)"
+      "Fuchsia [entre no buraco] (X 1174 - Y 1316 - Z 6)",
+      "Battle Point [entre no buraco] (X 1451 / Y 992 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/138.png"
   },
