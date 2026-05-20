@@ -30,10 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchData() {
     try {
-        const response = await fetch('data.json');
+        // Previne o cache do navegador adicionando um timestamp
+        const response = await fetch('data.json?v=' + new Date().getTime());
         pokemonData = await response.json();
         renderPokemon(pokemonData);
-    } catch (e) { console.error("Erro ao carregar banco de dados:", e); }
+    } catch (e) { 
+        console.error("Erro ao carregar banco de dados:", e); 
+    }
 }
 
 function renderTypeButtons() {
@@ -275,6 +278,7 @@ function calculateMatchups(pTypes) {
     return { weak, resist };
 }
 
+// --- MÁGICA DO HUD DE SATÉLITE ---
 window.updateRadar = (name, el) => {
     // Remove o brilho verde de qualquer botão ou passo que estava ativo
     document.querySelectorAll('.loc-button, .loc-step').forEach(b => b.classList.remove('active'));
