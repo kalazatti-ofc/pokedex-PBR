@@ -7376,34 +7376,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/355.png"
   },
   {
-    "id": 356,
-    "name": "Dusclops",
-    "types": [
-      "Ghost"
-    ],
-    "generation": 3,
-    "stats": {
-      "hp": 40,
-      "atk": 70,
-      "def": 130,
-      "spatk": 60,
-      "spdef": 130,
-      "spd": 25
-    },
-    "locations": [
-  "Vermilion (X 1291 / Y 1664 / Z 4)",
-  {
-    "rota": "Passagem Secreta",
-    "passos": [
-      "1. Vermilion (X 1291 / Y 1664 / Z 4)",
-      "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
-      "3. Passagem secreta na parede (X 1263 / Y 1607 / Z 9)",
-      "4. Desça a escada (X 1290 / Y 1583 / Z 8)",
-      "5. Entre no Portal"
-    ]
-  }
-  ],
-  {
     "id": 357,
     "name": "Tropius",
     "types": [
