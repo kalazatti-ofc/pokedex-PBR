@@ -84,7 +84,7 @@ body {
 /* Módulo de Controles */
 .pokedex-controls { flex: 1; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; }
 
-/* Barra de Pesquisa */
+/* Barra de Pesquisa Branca */
 .search-module { width: 100%; margin-bottom: 20px; }
 .tech-label { font-family: monospace; font-size: 0.8rem; color: #ffcb05; font-weight: bold; text-shadow: 1px 1px 0 #000; margin-bottom: 5px; display: block; }
 .search-console {
@@ -220,14 +220,35 @@ body {
 .loc-button.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; }
 .loc-icon { opacity: 0.4; font-size: 1rem; }
 
+/* ACORDEÃO DE PASSOS (NOVO) */
+.loc-accordion {
+    display: flex; flex-direction: column; gap: 5px; margin-bottom: 5px;
+}
+.accordion-toggle {
+    background: #111; border-color: #ffcb05; 
+}
+.loc-steps-container {
+    display: flex; flex-direction: column; gap: 5px; 
+    padding-left: 15px; border-left: 2px dashed #ffcb05; 
+    margin-left: 10px; margin-bottom: 5px; transition: 0.3s;
+}
+.hidden-steps { display: none !important; }
+
+.loc-step {
+    background: #1a1a1a; border: 2px solid var(--dex-border); border-radius: 6px;
+    padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); transition: 0.1s;
+}
+.loc-step:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
+.loc-step.active { border-color: var(--radar-green); background: #0a1f10; box-shadow: 2px 2px 0 var(--radar-green); }
+.loc-step.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; color: var(--radar-green); }
+
 /* LADO DIREITO DO MODAL */
 .modal-right-wing { padding: 25px; background: var(--dex-red); display: flex; flex-direction: column; gap: 15px; overflow-y: auto;}
 
 .radar-module { background: #222; padding: 12px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: inset 0 0 10px #000; }
 
-/* ==============================================================
-   TELA DO MAPA (HUD DE SATÉLITE)
-============================================================== */
+/* TELA DO MAPA (HUD DE SATÉLITE) */
 .radar-display {
     width: 100%; height: 110px; background: #111; border: 4px solid var(--dex-border); border-radius: 8px;
     position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
@@ -274,7 +295,6 @@ body {
     text-shadow: 0 0 3px rgba(255, 75, 43, 0.8);
     animation: blinker 1.5s infinite;
 }
-/* ============================================================== */
 
 .data-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
 .data-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
