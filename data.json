@@ -7376,32 +7376,6 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/355.png"
   },
   {
-    "id": 94,
-    "name": "Gengar",
-    "generation": 1,
-    "types": ["Ghost", "Poison"],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
-    "stats": {
-      "hp": 60,
-      "atk": 65,
-      "def": 60,
-      "spatk": 130,
-      "spdef": 75,
-      "spd": 110
-    },
-    "locations": [
-      "Lavender Town (X 120 / Y 45)", 
-      {
-        "rota": "Silph Co. (Prédio)",
-        "passos": [
-          "1. Entrada Principal (X 500 - Y 200)",
-          "2. Elevador ate o 5 Andar (X 510 - Y 205)",
-          "3. Sala do Chefe - Porta Direita (X 520 - Y 210)"
-        ]
-      }
-    ]
-  }
-  {
     "id": 357,
     "name": "Tropius",
     "types": [
