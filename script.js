@@ -97,18 +97,50 @@ function renderPokemon(list) {
     `).join('');
 }
 
+// --- CONTROLE DOS PASSOS DO MAPA (SANFONA) ---
+window.toggleAccordion = (el) => {
+    const container = el.nextElementSibling;
+    container.classList.toggle('hidden-steps');
+    const icon = el.querySelector('.loc-icon');
+    icon.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
+};
+
 window.openModal = (id) => {
     const p = pokemonData.find(x => x.id === id);
     if(!p) return;
     
     const matchups = calculateMatchups(p.types);
     
-    const locationsHTML = p.locations.map(loc => `
-        <div class="loc-button" onclick="updateRadar('${loc}', this)">
-            <span class="loc-text">${loc}</span>
-            <span class="loc-icon">🗺️</span>
-        </div>
-    `).join('');
+    // Leitura inteligente das Localizações (Simples ou com Passos)
+    const locationsHTML = p.locations.map(loc => {
+        if (typeof loc === 'string') {
+            return `
+                <div class="loc-button" onclick="updateRadar('${loc}', this)">
+                    <span class="loc-text">${loc}</span>
+                    <span class="loc-icon">🗺️</span>
+                </div>
+            `;
+        } else if (typeof loc === 'object' && loc.rota) {
+            const stepsHTML = loc.passos.map(passo => `
+                <div class="loc-step" onclick="updateRadar('${passo}', this)">
+                    <span class="loc-text">${passo}</span>
+                    <span class="loc-icon">📍</span>
+                </div>
+            `).join('');
+
+            return `
+                <div class="loc-accordion">
+                    <div class="loc-button accordion-toggle" onclick="toggleAccordion(this)">
+                        <span class="loc-text" style="color: #ffcb05;">${loc.rota}</span>
+                        <span class="loc-icon">▼</span>
+                    </div>
+                    <div class="loc-steps-container hidden-steps">
+                        ${stepsHTML}
+                    </div>
+                </div>
+            `;
+        }
+    }).join('');
 
     const statsHTML = Object.entries(p.stats).map(([name, val]) => `
         <div class="stat-row">
@@ -144,6 +176,7 @@ window.openModal = (id) => {
                     <div class="radar-display" id="radar-screen">
                         <div class="radar-grid"></div>
                         <div class="radar-beam"></div>
+                        <p id="radar-label">RASTREANDO...</p>
                     </div>
                 </div>
 
@@ -176,9 +209,17 @@ window.openModal = (id) => {
     
     document.getElementById('pokemon-modal').classList.remove('hidden');
     
+    // Auto-clique inteligente (procura botão normal OU o primeiro passo de uma rota)
     setTimeout(() => {
-        const first = document.querySelector('.loc-button');
-        if(first) first.click();
+        const firstLoc = document.querySelector('.loc-button:not(.accordion-toggle), .loc-step');
+        if(firstLoc) {
+            // Se for um passo dentro de uma sanfona fechada, abre a sanfona primeiro
+            const parentAccordion = firstLoc.closest('.loc-steps-container');
+            if(parentAccordion && parentAccordion.classList.contains('hidden-steps')) {
+                parentAccordion.previousElementSibling.click();
+            }
+            firstLoc.click();
+        }
     }, 100);
 
     loadEvolutions(p.name);
@@ -234,23 +275,22 @@ function calculateMatchups(pTypes) {
     return { weak, resist };
 }
 
-// --- MÁGICA DO HUD DE SATÉLITE ---
 window.updateRadar = (name, el) => {
-    document.querySelectorAll('.loc-button').forEach(b => b.classList.remove('active'));
+    // Remove o brilho verde de qualquer botão ou passo que estava ativo
+    document.querySelectorAll('.loc-button, .loc-step').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
     
     const screen = document.getElementById('radar-screen');
     const nomeSeguro = name.replace(/\//g, '-');
     const imagePath = `mapas/${nomeSeguro}.png`;
     
-    // Separador inteligente: Busca texto antes do parênteses e dentro do parênteses
     let locName = name.toUpperCase();
-    let coords = "SINAL GPS ESTABELECIDO"; // Fallback se não tiver coordenadas
+    let coords = "SINAL GPS ESTABELECIDO";
     
     const match = name.match(/^(.*?)\s*\((.*?)\)$/);
     if(match) {
-        locName = match[1].toUpperCase(); // Ex: "OLIVINE"
-        coords = match[2].toUpperCase();  // Ex: "X 1188 / Y 57 / Z 4"
+        locName = match[1].toUpperCase();
+        coords = match[2].toUpperCase();
     }
     
     screen.innerHTML = `
