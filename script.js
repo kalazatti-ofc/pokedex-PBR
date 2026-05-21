@@ -335,3 +335,91 @@ window.showRadarFallback = (name) => {
         </div>
     `;
 };
+// ==============================================================
+// SISTEMA DO PROFESSOR OAK (POP-UP DE BOAS VINDAS)
+// ==============================================================
+
+// Textos que o professor vai falar (Páginas)
+const oakDialogues = [
+    "Olá! Bem-vindo ao mundo de POKeMON!",
+    "Esta Pokedex PBR e uma pagina criada de fa para fa. Desenvolvida por: Kalazatti.",
+    "Um agradecimento super especial a comunidade pelo apoio continuo!",
+    "Apoiadores: [Nick1], [Nick2], [Nick3]... Insira os nicks aqui!",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
+];
+
+let currentDialogIndex = 0;
+let currentCharIndex = 0;
+let isTyping = false;
+let typingSpeed = 40; // Velocidade da digitação (ms)
+let typeInterval;
+
+document.addEventListener('DOMContentLoaded', () => {
+    initOakModal();
+});
+
+function initOakModal() {
+    const oakModal = document.getElementById('oak-modal');
+    const closeBtn = document.getElementById('close-oak');
+    const dialogBox = document.getElementById('oak-dialog-box');
+    
+    // Verifica se é a primeira vez do usuário (Usando LocalStorage)
+    // Se quiser que apareça toda vez que atualizar a página para testar, comente o IF abaixo.
+    if (!localStorage.getItem('hasSeenOakIntro')) {
+        oakModal.classList.remove('hidden');
+        startTyping();
+    }
+
+    // Fechar no X
+    closeBtn.addEventListener('click', () => {
+        oakModal.classList.add('hidden');
+        localStorage.setItem('hasSeenOakIntro', 'true');
+    });
+
+    // Interação com a caixa de diálogo (Clique para acelerar ou avançar)
+    dialogBox.addEventListener('click', () => {
+        const textContainer = document.getElementById('oak-text');
+        const arrow = document.getElementById('oak-arrow');
+
+        // Se ainda está digitando, pula para o final do texto atual
+        if (isTyping) {
+            clearInterval(typeInterval);
+            textContainer.innerHTML = oakDialogues[currentDialogIndex];
+            isTyping = false;
+            arrow.style.display = 'block'; // Mostra a seta pra avançar
+        } 
+        // Se terminou de digitar, vai para a próxima página
+        else {
+            currentDialogIndex++;
+            if (currentDialogIndex < oakDialogues.length) {
+                startTyping();
+            } else {
+                // Acabaram os textos, fecha o modal
+                oakModal.classList.add('hidden');
+                localStorage.setItem('hasSeenOakIntro', 'true');
+            }
+        }
+    });
+}
+
+function startTyping() {
+    const textContainer = document.getElementById('oak-text');
+    const arrow = document.getElementById('oak-arrow');
+    
+    textContainer.innerHTML = '';
+    currentCharIndex = 0;
+    isTyping = true;
+    arrow.style.display = 'none'; // Esconde a seta enquanto digita
+
+    clearInterval(typeInterval);
+    typeInterval = setInterval(() => {
+        textContainer.innerHTML += oakDialogues[currentDialogIndex].charAt(currentCharIndex);
+        currentCharIndex++;
+
+        if (currentCharIndex >= oakDialogues[currentDialogIndex].length) {
+            clearInterval(typeInterval);
+            isTyping = false;
+            arrow.style.display = 'block'; // Mostra a seta piscando
+        }
+    }, typingSpeed);
+}
