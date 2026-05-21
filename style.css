@@ -43,7 +43,7 @@ body {
 }
 
 /* =========================================
-   PAINEL ESQUERDO (Lentes, Controlos e Rodapé)
+   PAINEL ESQUERDO (Lentes, Controles e Rodapé)
 ========================================= */
 .pokedex-left-panel {
     background: linear-gradient(135deg, #ff4b2b, var(--dex-red));
@@ -81,7 +81,7 @@ body {
 .pokedex-title:hover span { color: #fff; }
 .pokedex-title:active { transform: scale(0.95); }
 
-/* Módulo de Controlos */
+/* Módulo de Controles */
 .pokedex-controls { flex: 1; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; }
 
 /* Barra de Pesquisa Branca */
@@ -136,7 +136,7 @@ body {
 .footer-msg strong { color: #ffcb05; font-weight: 800; }
 
 /* =========================================
-   PAINEL DIREITO (Ecrã Principal)
+   PAINEL DIREITO (Tela Principal)
 ========================================= */
 .pokedex-right-panel { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 
@@ -149,7 +149,7 @@ body {
 .pokedex-main-display::-webkit-scrollbar-track { background: #d0d0d0; border-left: 3px solid var(--dex-border); border-radius: 0 10px 10px 0;}
 .pokedex-main-display::-webkit-scrollbar-thumb { background: #555; border: 3px solid var(--dex-border); border-radius: 10px; }
 
-/* Cards Pokémon Cartoon */
+/* Cards Pokémon */
 .pokemon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 12px; }
 .pk-card {
     background: #fff; border: 3px solid var(--dex-border); border-radius: 12px;
@@ -205,10 +205,19 @@ body {
 .type-tags { display: flex; gap: 5px; justify-content: flex-end;}
 .tag { padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; color: #fff; font-weight: 800; border: 2px solid var(--dex-border); box-shadow: 2px 2px 0 var(--dex-border); text-transform: uppercase;}
 
+.location-module { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .label-tech { font-family: monospace; font-size: 0.8rem; color: #ffcb05; text-shadow: 1px 1px 0 #000; margin-bottom: 8px; border-bottom: 2px dashed rgba(255,215,0,0.4); padding-bottom: 4px;}
 
-.loc-list-scroll { flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 8px; max-height: 140px;}
-.loc-list-scroll::-webkit-scrollbar { width: 8px; } .loc-list-scroll::-webkit-scrollbar-thumb { background: var(--dex-border); border-radius: 4px; }
+/* AQUI ELIMINAMOS O ESPAÇO VAZIO (?) AUMENTANDO A ÁREA DE SCROLL */
+.loc-list-scroll { 
+    flex: 1; overflow-y: auto; padding-right: 5px; 
+    display: flex; flex-direction: column; gap: 8px; 
+    min-height: 150px; max-height: 400px; /* Preenche toda a área disponível */
+}
+.loc-list-scroll::-webkit-scrollbar { width: 8px; } 
+.loc-list-scroll::-webkit-scrollbar-thumb { background: var(--dex-border); border-radius: 4px; }
+
+/* Botões Padrões de Localização */
 .loc-button {
     background: var(--terminal-bg); border: 3px solid var(--dex-border); border-radius: 8px;
     padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;
@@ -226,16 +235,35 @@ body {
 .loc-accordion {
     display: flex; flex-direction: column; gap: 5px; margin-bottom: 5px;
 }
+/* O botão principal agora parece com os outros, a diferença está na setinha amarela */
 .accordion-toggle {
-    background: #111; border-color: #ffcb05; 
+    background: var(--terminal-bg); border-color: var(--dex-border);
 }
+
+/* SETINHA AMARELA (ESTILO RADAR) */
+.expand-arrow {
+    color: #ffcb05; /* Amarelo */
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+.loc-button:hover .expand-arrow {
+    opacity: 1;
+    text-shadow: 0 0 8px #ffcb05, 0 0 15px #ffcb05; /* Efeito aceso */
+    transform: scale(1.1);
+}
+.loc-button.active .expand-arrow {
+    opacity: 1;
+}
+
 .loc-steps-container {
-    display: flex; flex-direction: column; gap: 5px; 
+    display: flex; flex-direction: column; gap: 6px; 
     padding-left: 15px; border-left: 2px dashed #ffcb05; 
     margin-left: 10px; margin-bottom: 5px; transition: 0.3s;
 }
 .hidden-steps { display: none !important; }
 
+/* Design dos passos menores recolhidos */
 .loc-step {
     background: #1a1a1a; border: 2px solid var(--dex-border); border-radius: 6px;
     padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;
@@ -247,12 +275,9 @@ body {
 
 /* LADO DIREITO DO MODAL */
 .modal-right-wing { padding: 25px; background: var(--dex-red); display: flex; flex-direction: column; gap: 15px; overflow-y: auto;}
-
 .radar-module { background: #222; padding: 12px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: inset 0 0 10px #000; }
 
-/* ==============================================================
-   TELA DO MAPA (HUD DE SATÉLITE)
-============================================================== */
+/* TELA DO MAPA (HUD DE SATÉLITE) */
 .radar-display {
     width: 100%; height: 110px; background: #111; border: 4px solid var(--dex-border); border-radius: 8px;
     position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
@@ -354,11 +379,7 @@ body {
 @media (max-width: 768px) {
     .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
     
-    .pokedex-main-display {
-        flex: none; 
-        height: 350px; 
-        max-height: 350px;
-    }
+    .pokedex-main-display { flex: none; height: 350px; max-height: 350px; }
 
     .pokemon-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 8px; }
     .pk-card { padding: 8px; border-width: 2px; }
