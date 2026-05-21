@@ -7357,10 +7357,11 @@
   {
     "id": 355,
     "name": "Duskull",
+    "generation": 3,
     "types": [
       "Ghost"
     ],
-    "generation": 3,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/355.png",
     "stats": {
       "hp": 20,
       "atk": 40,
@@ -7370,10 +7371,17 @@
       "spd": 25
     },
     "locations": [
-      "Vermilion (X 1291 / Y 1664 / Z 4) desça a escada e entao > (X 1290 / Y 1583 / Z 8) apos isso tem uma passagem secreta na parede em > (X 1263 / Y 1607 / Z 9) > entre no portal",
-      "Puzzle duskull"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/355.png"
+      "Vermilion (X 1291 / Y 1664 / Z 4)",	  
+      {
+        "rota": "Vermilion (X 1291 / Y 1664 / Z 4)",
+        "passos": [
+          "1. Vermilion (X 1291 / Y 1664 / Z 4)",
+          "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
+          "3. Passagem secreta na parede (X 1263 / Y 1607 / Z 9)",
+		  "4. Entre no Portal!"
+        ]
+      }
+    ]
   },
   {
     "id": 356,
@@ -7391,6 +7399,8 @@
       "spdef": 130,
       "spd": 25
     },
+    "locations": [
+      "Vermilion (X 1291 / Y 1664 / Z 4)",	  
       {
         "rota": "Vermilion (X 1291 / Y 1664 / Z 4)",
         "passos": [
