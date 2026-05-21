@@ -345,14 +345,14 @@ const oakDialogues = [
     "Olá! Bem-vindo ao mundo de POKeMON!",
     "Esta Pokedex PBR e uma pagina criada de fa para fa. Desenvolvida por: Kalazatti.",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: [Nick1], [Nick2], [Nick3]... Insira os nicks aqui!",
-    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
+    "Apoiadores: Paleguazv, Merllin (Ainda preciso adicionar outros :D) ",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMONs. Boa caça!"
 ];
 
 let currentDialogIndex = 0;
 let currentCharIndex = 0;
 let isTyping = false;
-let typingSpeed = 40; // Velocidade da digitação (ms)
+let typingSpeed = 55; // Velocidade da digitação (ms)
 let typeInterval;
 
 document.addEventListener('DOMContentLoaded', () => {
