@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchData() {
     try {
-        // Previne o cache do navegador adicionando um timestamp
         const response = await fetch('data.json?v=' + new Date().getTime());
         pokemonData = await response.json();
         renderPokemon(pokemonData);
@@ -100,12 +99,15 @@ function renderPokemon(list) {
     `).join('');
 }
 
-// --- CONTROLE DOS PASSOS DO MAPA (SANFONA) ---
+// Lógica ajustada: O botão abre o mapa do primeiro passo e desce a sanfona
 window.toggleAccordion = (el) => {
     const container = el.nextElementSibling;
     container.classList.toggle('hidden-steps');
-    const icon = el.querySelector('.loc-icon');
-    icon.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
+    
+    const icon = el.querySelector('.expand-arrow');
+    if(icon) {
+        icon.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
+    }
 };
 
 window.openModal = (id) => {
@@ -114,7 +116,6 @@ window.openModal = (id) => {
     
     const matchups = calculateMatchups(p.types);
     
-    // Leitura inteligente das Localizações (Simples ou com Passos)
     const locationsHTML = p.locations.map(loc => {
         if (typeof loc === 'string') {
             return `
@@ -124,18 +125,20 @@ window.openModal = (id) => {
                 </div>
             `;
         } else if (typeof loc === 'object' && loc.rota) {
+            // Se for Rota com passos
             const stepsHTML = loc.passos.map(passo => `
-                <div class="loc-step" onclick="updateRadar('${passo}', this)">
+                <div class="loc-step" onclick="updateRadar('${passo}', this, event)">
                     <span class="loc-text">${passo}</span>
                     <span class="loc-icon">📍</span>
                 </div>
             `).join('');
 
+            // Botão principal mais discreto com a setinha que acende
             return `
                 <div class="loc-accordion">
-                    <div class="loc-button accordion-toggle" onclick="toggleAccordion(this)">
-                        <span class="loc-text" style="color: #ffcb05;">${loc.rota}</span>
-                        <span class="loc-icon">▼</span>
+                    <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this); toggleAccordion(this)">
+                        <span class="loc-text">${loc.rota}</span>
+                        <span class="loc-icon expand-arrow">▼</span>
                     </div>
                     <div class="loc-steps-container hidden-steps">
                         ${stepsHTML}
@@ -212,16 +215,15 @@ window.openModal = (id) => {
     
     document.getElementById('pokemon-modal').classList.remove('hidden');
     
-    // Auto-clique inteligente (procura botão normal OU o primeiro passo de uma rota)
     setTimeout(() => {
         const firstLoc = document.querySelector('.loc-button:not(.accordion-toggle), .loc-step');
         if(firstLoc) {
-            // Se for um passo dentro de uma sanfona fechada, abre a sanfona primeiro
             const parentAccordion = firstLoc.closest('.loc-steps-container');
             if(parentAccordion && parentAccordion.classList.contains('hidden-steps')) {
                 parentAccordion.previousElementSibling.click();
+            } else {
+                firstLoc.click();
             }
-            firstLoc.click();
         }
     }, 100);
 
@@ -278,9 +280,9 @@ function calculateMatchups(pTypes) {
     return { weak, resist };
 }
 
-// --- MÁGICA DO HUD DE SATÉLITE ---
-window.updateRadar = (name, el) => {
-    // Remove o brilho verde de qualquer botão ou passo que estava ativo
+window.updateRadar = (name, el, event) => {
+    if(event) event.stopPropagation(); // Evita bugs de clique duplo na sanfona
+
     document.querySelectorAll('.loc-button, .loc-step').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
     
@@ -313,7 +315,6 @@ window.updateRadar = (name, el) => {
 
 window.showRadarFallback = (name) => {
     const screen = document.getElementById('radar-screen');
-    
     let locName = name.toUpperCase();
     let coords = "BUSCANDO DADOS...";
     const match = name.match(/^(.*?)\s*\((.*?)\)$/);
