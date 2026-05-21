@@ -7391,10 +7391,8 @@
       "spdef": 130,
       "spd": 25
     },
-    "locations": [
-      "Vermilion (X 1291 / Y 1664 / Z 4)",
       {
-        "rota": "Vermilion",
+        "rota": "Vermilion (X 1291 / Y 1664 / Z 4)",
         "passos": [
           "1. Vermilion (X 1291 / Y 1664 / Z 4)",
           "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
