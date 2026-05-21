@@ -9825,10 +9825,11 @@
   {
     "id": 477,
     "name": "Dusknoir",
+    "generation": 4,
     "types": [
       "Ghost"
     ],
-    "generation": 4,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/477.png",
     "stats": {
       "hp": 45,
       "atk": 100,
@@ -9838,9 +9839,16 @@
       "spd": 45
     },
     "locations": [
-      "Vermilion (X 1291 / Y 1664 / Z 4) desça a escada e entao > (X 1290 / Y 1583 / Z 8) apos isso tem uma passagem secreta na parede em > (X 1263 / Y 1607 / Z 9) > entre no portal"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/477.png"
+      {
+        "rota": "Vermilion (X 1291 / Y 1664 / Z 4)",
+        "passos": [
+          "1. Vermilion (X 1291 / Y 1664 / Z 4)",
+          "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
+          "3. Passagem secreta na parede (X 1263 / Y 1607 / Z 9)",
+		  "4. Entre no Portal!"
+        ]
+      }
+    ]
   },
   {
     "id": 478,
