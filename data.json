@@ -3338,7 +3338,7 @@
       "spd": 20
     },
     "locations": [
-      "pastoria (X 3849 / Y 2210 / Z 7)"
+      "Pastoria (X 3849 / Y 2210 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/161.png"
   },
@@ -6150,7 +6150,7 @@
       "spd": 25
     },
     "locations": [
-      "pastoria (X 3853 / Y 2227 / Z 7)",
+      "Pastoria (X 3853 / Y 2227 / Z 7)",
       "sina (X 1091 / Y 583 / Z 0)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/296.png"
@@ -6171,7 +6171,7 @@
       "spd": 50
     },
     "locations": [
-      "pastoria (X 3853 / Y 2227 / Z 7)",
+      "Pastoria (X 3853 / Y 2227 / Z 7)",
       "sina (X 1091 / Y 583 / Z 0)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/297.png"
