@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex PBR | Localizador de Respawns</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div id="oak-modal" class="oak-overlay hidden">
+        <div class="oak-container">
+            <button class="oak-close-btn" id="close-oak" title="Fechar">&times;</button>
+            <div class="oak-screen">
+                <div class="oak-sprite-area">
+                    <img src="https://archives.bulbagarden.net/media/upload/c/c1/Spr_RG_Oak.png" alt="Professor Oak" class="oak-sprite">
+                </div>
+                <div class="oak-dialog-box" id="oak-dialog-box">
+                    <p id="oak-text"></p>
+                    <span class="oak-arrow blink" id="oak-arrow">▼</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="pokedex-body">
         
         <aside class="pokedex-left-panel">
@@ -33,7 +49,6 @@
                 </div>
 
                 <div class="pokedex-filters">
-                    
                     <button class="filter-toggle" id="toggle-gen">▼ FILTRAR POR REGIÃO</button>
                     <div class="filter-group hidden-filter" id="group-gen">
                         <div class="pills-container" id="gen-filters">
@@ -52,17 +67,16 @@
                         <div class="pills-container" id="type-filters">
                             </div>
                     </div>
-
                 </div>
             </section>
 
             <footer class="dex-footer">
                 <div class="visitor-module">
-                    <img src="https://api.visitorbadge.io/api/visitors?path=pokedex-pbr-kalazatti&labelColor=%231a1a1a&countColor=%23ffd700&style=flat-square" alt="Treinadores">
+                    <img src="https://api.visitorbadge.io/api/visitors?path=pokedex-pbr-kalazatti&labelColor=%231a1a1a&countColor=%23ffd700&style=flat-square" alt="Visitas">
                 </div>
                 <div class="footer-msg">
-                    <p>Encontrou algum bug ou faltam locais?</p>
-                    <p>🎮 In-game: <strong>kalazatti</strong> | 👾 Discord: <strong>kalazatti</strong></p>
+                    <p>Encontrou bugs ou faltam locais?</p>
+                    <p>🎮 In-game: <strong>kala</strong> | 👾 Discord: <strong>kalazatti</strong></p>
                 </div>
             </footer>
         </aside>
