@@ -1391,7 +1391,8 @@
       "spd": 45
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)",
+	  "Cherrygrove (X 1128 / Y 511 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png"
   },
