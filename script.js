@@ -23,6 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setupToggles();
     initOakModal();
     
+    // SISTEMA DE TEMA ESCURO (DARK MODE)
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+        if (localStorage.getItem('pokedex-dark-mode') === 'true') {
+            document.body.classList.add('dark-mode');
+            themeBtn.innerText = '☀️';
+        }
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('pokedex-dark-mode', isDark);
+            themeBtn.innerText = isDark ? '☀️' : '🌙';
+        });
+    }
+    
     document.querySelector('.close-btn').onclick = () => document.getElementById('pokemon-modal').classList.add('hidden');
     window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
     
@@ -100,7 +115,7 @@ function renderPokemon(list) {
     `).join('');
 }
 
-// A SANFONA AGORA SÓ ABRE SE CLICAR NA SETINHA
+// Controle da Sanfona isolado na setinha
 window.toggleAccordion = (arrowEl, event) => {
     if(event) event.stopPropagation(); // Impede de ativar o radar sem querer
     
@@ -131,7 +146,6 @@ window.openModal = (id) => {
                 </div>
             `).join('');
 
-            // O clique no botão atualiza o mapa, o clique na setinha abre os passos
             return `
                 <div class="loc-accordion">
                     <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this, event)">
@@ -213,7 +227,6 @@ window.openModal = (id) => {
     
     document.getElementById('pokemon-modal').classList.remove('hidden');
     
-    // Agora ele apenas seleciona o mapa inicial, SEM abrir a sanfona
     setTimeout(() => {
         const firstLoc = document.querySelector('.loc-button');
         if(firstLoc) {
@@ -275,7 +288,8 @@ function calculateMatchups(pTypes) {
 }
 
 window.updateRadar = (name, el, event) => {
-    // Remove o brilho verde de todos os botões e passos ativos
+    if(event) event.stopPropagation();
+
     document.querySelectorAll('.loc-button, .loc-step').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
     
@@ -381,7 +395,6 @@ function initOakModal() {
         }
     });
 }
-
 function startTyping() {
     const textContainer = document.getElementById('oak-text');
     const arrow = document.getElementById('oak-arrow');
