@@ -5190,7 +5190,10 @@
       "spd": 110
     },
     "locations": [
-      "Pescando na quest super rod"
+      {
+        "local": "Quest Super Rod",
+        "nota": "📌 A Lugia só pode ser vista 1x por conta, lembre de dar DEX."
+      },
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png"
   },
