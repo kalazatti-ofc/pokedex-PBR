@@ -1,3 +1,4 @@
+// script.js
 let pokemonData = [];
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
