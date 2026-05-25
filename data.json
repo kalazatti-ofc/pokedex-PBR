@@ -16,7 +16,10 @@
       "spd": 45
     },
     "locations": [
-      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
+      {
+        "local": "Saffron (X 1072 / Y 1056 / Z 7)",
+        "nota": "🔑 Quest First Stone"
+      },
       "Vermilion (X 1047 / Y 1341 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
@@ -38,7 +41,10 @@
       "spd": 60
     },
     "locations": [
-      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
+      {
+        "local": "Saffron (X 1072 / Y 1056 / Z 7)",
+        "nota": "🔑 Quest First Stone"
+      },
       "Vermilion (X 1047 / Y 1341 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png"
@@ -81,7 +87,10 @@
       "spd": 65
     },
     "locations": [
-      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
+      {
+        "local": "Saffron (X 1072 / Y 1056 / Z 7)",
+        "nota": "🔑 Quest First Stone"
+      },
       "Cinnabar (X 769 / Y 1396 / Z 7)",
       "Hunter Village (X 1704 / Y 1629 / Z 6)"
     ],
@@ -103,7 +112,10 @@
       "spd": 80
     },
     "locations": [
-      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
+      {
+        "local": "Saffron (X 1072 / Y 1056 / Z 7)",
+        "nota": "🔑 Quest First Stone"
+      },
       "Cinnabar (X 748 / Y 1382 / Z 5)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png"
@@ -148,7 +160,10 @@
       "spd": 43
     },
     "locations": [
-      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)"
+      {
+        "local": "Saffron (X 1072 / Y 1056 / Z 7)",
+        "nota": "🔑 Quest First Stone"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"
   },
@@ -168,7 +183,10 @@
       "spd": 58
     },
     "locations": [
-      "Quest First Stone ( Saffron  X1072 - Y 1056 - Z 7)",
+      {
+        "local": "Saffron (X 1072 / Y 1056 / Z 7)",
+        "nota": "🔑 Quest First Stone"
+      },
       "Vermilion (X 1279 / Y 1272 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png"
@@ -1391,7 +1409,7 @@
     },
     "locations": [
       "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)",
-	  "Cherrygrove (X 1128 / Y 511 / Z 6)"
+      "Cherrygrove (X 1128 / Y 511 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png"
   },
@@ -2551,7 +2569,7 @@
     },
     "locations": [
       "TV Camêra (Orre)",
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Grama, após isso entre na caverna"
+      "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png"
   },
@@ -2673,7 +2691,7 @@
       "spd": 80
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7)"
+      "Hearthome (X 3770 / Y 2056 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/129.png"
   },
@@ -2858,7 +2876,7 @@
       "spd": 35
     },
     "locations": [
-      "Fuchsia [entre no buraco] (X 1174 - Y 1316 - Z 6)",
+      "Fuchsia [entre no buraco] (X 1174 / Y 1316 / Z 6)",
       "Battle Point [entre no buraco] (X 1451 / Y 992 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/138.png"
@@ -2880,7 +2898,7 @@
       "spd": 55
     },
     "locations": [
-      "Fuchsia [entre no buraco] (X 1174 - Y 1316 - Z 6)",
+      "Fuchsia [entre no buraco] (X 1174 / Y 1316 / Z 6)",
       "Battle Point [entre no buraco] (X 1451 / Y 992 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/139.png"
@@ -3840,7 +3858,7 @@
     },
     "locations": [
       "Sina (X 1235 / Y 591 / Z 5)",
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Grama, após isso entre na caverna"
+      "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/185.png"
   },
@@ -5587,7 +5605,7 @@
       "spd": 65
     },
     "locations": [
-      "Sina (X 1085 / Y 637/ Z 7)"
+      "Sina (X 1085 / Y 637 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/269.png"
   },
@@ -5758,9 +5776,9 @@
       "spd": 125
     },
     "locations": [
-      "Eucruteak (X 1450 / Y 167 / Z 7",
-      "Olivine (X 1157 / Y 181 / Z 7",
-	  "Violet (X 1799 / Y 372 / Z 6)"
+      "Eucruteak (X 1450 / Y 167 / Z 7)",
+      "Olivine (X 1157 / Y 181 / Z 7)",
+      "Violet (X 1799 / Y 372 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/277.png"
   },
@@ -6212,7 +6230,7 @@
       "spd": 30
     },
     "locations": [
-      "Singer <entre no teleport> (X 1665 / Y 1030 / Z 7)  >> entre na parte de grama e >>> (X 2094 / Y 1335 / Z 15)"
+      "Singer <entre no teleport> (X 1665 / Y 1030 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/299.png"
   },
@@ -6957,7 +6975,7 @@
     },
     "locations": [
       "Sandgem (X 3664 / Y 2218 / Z 7)",
-      "Mahogany (X 2212 / Y 93 / Z 7"
+      "Mahogany (X 2212 / Y 93 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/335.png"
   },
@@ -7187,7 +7205,7 @@
     },
     "locations": [
       "Sina (X 597 / Y 428 / Z 6)",
-      "Violet (X 1840 / Y 307 / Z 6) -"
+      "Violet (X 1840 / Y 307 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/346.png"
   },
@@ -7351,7 +7369,7 @@
       "spd": 65
     },
     "locations": [
-      "bannete Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem"
+      "bannete Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/354.png"
   },
@@ -7378,7 +7396,7 @@
           "1. Vermilion (X 1291 / Y 1664 / Z 4)",
           "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
           "3. Passagem secreta na parede (X 1263 / Y 1607 / Z 9)",
-		  "4. Entre no Portal!"
+          "4. Entre no Portal!"
         ]
       }
     ]
@@ -7399,14 +7417,14 @@
       "spdef": 130,
       "spd": 25
     },
-    "locations": [  
+    "locations": [
       {
         "rota": "Vermilion (X 1291 / Y 1664 / Z 4)",
         "passos": [
           "1. Vermilion (X 1291 / Y 1664 / Z 4)",
           "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
           "3. Passagem secreta na parede (X 1263 / Y 1607 / Z 9)",
-		  "4. Entre no Portal!"
+          "4. Entre no Portal!"
         ]
       }
     ]
@@ -7467,7 +7485,7 @@
     },
     "locations": [
       "Pirita (X 2387 / Y 1471 / Z 7)",
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem > entre no portal em (X 3797 / Y 2266 / Z 100"
+      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/359.png"
   },
@@ -7627,7 +7645,7 @@
       "spd": 52
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7)"
+      "Hearthome (X 3770 / Y 2056 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/367.png"
   },
@@ -7647,7 +7665,7 @@
       "spd": 52
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7)"
+      "Hearthome (X 3770 / Y 2056 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/368.png"
   },
@@ -7816,7 +7834,7 @@
       "spd": 70
     },
     "locations": [
-      "Cinnabar <descendo a escada> (X 802 / Y 1264 / Z 7)  e entao <clique nos livros> (X 791 / Y 1328 / Z 9) > por ultimo (X 750 / Y 1306 / Z 10)"
+      "Cinnabar <descendo a escada> (X 802 / Y 1264 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/376.png"
   },
@@ -8588,7 +8606,7 @@
       "spd": 40
     },
     "locations": [
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Grama, após isso entre na caverna",
+      "Singer (X 1664 / Y 1031 / Z 7)",
       "One Island (X 2573 / Y 1071 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/416.png"
@@ -8670,7 +8688,7 @@
     },
     "locations": [
       "One Island (X 2573 / Y 1071 / Z 7)",
-      "Mahogany (X 2212 / Y 93 / Z 7"
+      "Mahogany (X 2212 / Y 93 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/420.png"
   },
@@ -8691,7 +8709,7 @@
     },
     "locations": [
       "One Island (X 2573 / Y 1071 / Z 7)",
-      "Mahogany (X 2212 / Y 93 / Z 7"
+      "Mahogany (X 2212 / Y 93 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/421.png"
   },
@@ -8775,7 +8793,7 @@
       "spd": 70
     },
     "locations": [
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Ghost/Dark",
+      "Singer (X 1664 / Y 1031 / Z 7)",
       "One Island (X 2671 / Y 1154 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/425.png"
@@ -8798,7 +8816,7 @@
     },
     "locations": [
       "One island (X 2453 / Y 893 / Z 7)",
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Ghost/Dark"
+      "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/426.png"
   },
@@ -9000,7 +9018,7 @@
       "spd": 23
     },
     "locations": [
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Grama, após isso entre na caverna"
+      "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/436.png"
   },
@@ -9041,7 +9059,7 @@
       "spd": 10
     },
     "locations": [
-      "Singer (X 1664 / Y 1031 / Z 7) <entre no portal> e em seguida no TP de Grama, após isso entre na caverna"
+      "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/438.png"
   },
@@ -9227,7 +9245,7 @@
       "spd": 60
     },
     "locations": [
-      "Pesqueiro com Fishing Rod (X 1724 / Y 782 / Z 7) <clique no redemoinho> e depois  > (X 1688 / Y 798 / Z 8)"
+      "Pesqueiro com Fishing Rod (X 1724 / Y 782 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/447.png"
   },
@@ -9330,7 +9348,7 @@
       "spd": 95
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem > entre no portal em (X 3797 / Y 2266 / Z 100"
+      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/452.png"
   },
@@ -9451,7 +9469,7 @@
       "spd": 50
     },
     "locations": [
-      "Sunshine <desça a escada> (X 1441 Y 1822 Z 7)"
+      "Sunshine <desça a escada> (X 1441 / Y 1822 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/458.png"
   },
@@ -9824,7 +9842,7 @@
       "spd": 40
     },
     "locations": [
-      "Singer <entre no teleport> (X 1665 / Y 1030 / Z 7)  >> entre na parte de grama e >>> (X 2094 / Y 1335 / Z 15)"
+      "Singer <entre no teleport> (X 1665 / Y 1030 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/476.png"
   },
@@ -9851,7 +9869,7 @@
           "1. Vermilion (X 1291 / Y 1664 / Z 4)",
           "2. Desça a escada (X 1290 / Y 1583 / Z 8)",
           "3. Passagem secreta na parede (X 1263 / Y 1607 / Z 9)",
-		  "4. Entre no Portal!"
+          "4. Entre no Portal!"
         ]
       }
     ]
@@ -11203,7 +11221,7 @@
     },
     "locations": [
       "Jublife (X 3567 / Y 1845 / Z 7)",
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7"
+      "Hearthome (X 3770 / Y 2056 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/548.png"
   },
@@ -11224,7 +11242,7 @@
     },
     "locations": [
       "Jublife (X 3567 / Y 1845 / Z 7)",
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7"
+      "Hearthome (X 3770 / Y 2056 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/549.png"
   },
@@ -11244,7 +11262,7 @@
       "spd": 0
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
+      "Hearthome (X 3770 / Y 2056 / Z 6)",
       "Solaceon (X 3964 / Y 2001 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/550.png"
@@ -11494,7 +11512,7 @@
       "spd": 30
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem"
+      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/562.png"
   },
@@ -11514,7 +11532,7 @@
       "spd": 30
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem"
+      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/563.png"
   },
@@ -11939,7 +11957,7 @@
       "spd": 60
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3721 / Y 2316 / 9)"
+      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/588.png"
   },
@@ -11960,7 +11978,7 @@
       "spd": 20
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3721 / Y 2316 / 9)"
+      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/589.png"
   },
@@ -12627,7 +12645,7 @@
       "spd": 35
     },
     "locations": [
-      "Snowpoint (X 3682 / Y 1610 / Z 7) e pegue surf até > (X 3706 / Y 1642 / Z 7), entre no dive e vá até o fim, e entao > (X 3460 / Y 1563 / Z 7)"
+      "Snowpoint (X 3682 / Y 1610 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/622.png"
   },
@@ -12648,7 +12666,7 @@
       "spd": 55
     },
     "locations": [
-      "Snowpoint (X 3682 / Y 1610 / Z 7) e pegue surf até > (X 3706 / Y 1642 / Z 7), entre no dive e vá até o fim, e entao > (X 3460 / Y 1563 / Z 7)"
+      "Snowpoint (X 3682 / Y 1610 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/623.png"
   },
@@ -12775,7 +12793,7 @@
       "spd": 65
     },
     "locations": [
-      "Canavale - > FLY (X 3348 Y 1955 Z 0 ), desce do fly no quadrado de lava, vai >> (X 3376 Y 1952 Z 7) anda pro quadrado preto, vai (X 3331 Y 1955) anda no buraco de lava"
+      "Canavale - > FLY (X 3348 / Y 1955 / Z 0)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/631.png"
   },
@@ -12796,14 +12814,14 @@
       "spdef": 50,
       "spd": 38
     },
-    "locations": [  
+    "locations": [
       {
         "rota": "Sandgem",
         "passos": [
           "1. Sandgem (X 3788 / Y 2330 / Z 7)",
           "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
           "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
-		  "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
+          "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
         ]
       }
     ]
@@ -12825,14 +12843,14 @@
       "spdef": 70,
       "spd": 58
     },
-    "locations": [  
+    "locations": [
       {
         "rota": "Sandgem",
         "passos": [
           "1. Sandgem (X 3788 / Y 2330 / Z 7)",
           "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
           "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
-		  "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
+          "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
         ]
       }
     ]
@@ -12854,14 +12872,14 @@
       "spdef": 90,
       "spd": 98
     },
-    "locations": [  
+    "locations": [
       {
         "rota": "Sandgem",
         "passos": [
           "1. Sandgem (X 3788 / Y 2330 / Z 7)",
           "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
           "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
-		  "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
+          "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
         ]
       }
     ]
@@ -13178,7 +13196,7 @@
       "spd": 0
     },
     "locations": [
-      "Hearthome (X 3770 / Y 2056 / Z 6) vá de fly até a agua e desça > deve passar por cima da cachoeira e pegue surf > Hearthome (X 3732 / Y 2118 / Z 7",
+      "Hearthome (X 3770 / Y 2056 / Z 6)",
       "Hearthome (X 3791 / Y 2084 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/902.png"
