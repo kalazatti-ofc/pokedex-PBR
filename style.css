@@ -22,6 +22,7 @@ body {
     background-size: 20px 20px;
     color: #fff; overflow-x: hidden; 
     display: flex; justify-content: center; padding: 20px; min-height: 100vh;
+    transition: background-color 0.3s ease;
 }
 
 /* =========================================
@@ -35,12 +36,14 @@ body {
                 inset 10px 10px 0px rgba(255,255,255,0.2),
                 0 20px 40px rgba(0,0,0,0.6);
     overflow: hidden; position: relative;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .pokedex-left-panel {
     background: linear-gradient(135deg, #ff4b2b, var(--dex-red));
     padding: 25px; border-bottom: 6px solid var(--dex-border);
     display: flex; flex-direction: column;
+    transition: background 0.3s ease;
 }
 
 .pokedex-header { display: flex; flex-direction: column; align-items: stretch; }
@@ -50,15 +53,24 @@ body {
     width: 75px; height: 75px; border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #aeeeee, #2980b9 60%, #1a5276);
     border: 5px solid #e0e0e0; box-shadow: 0 0 0 5px var(--dex-border), inset 0 0 15px #000;
-    position: relative;
+    position: relative; transition: all 0.3s ease;
 }
 .big-blue-lens::after {
     content: ''; position: absolute; top: 12px; left: 12px;
     width: 20px; height: 20px; background: rgba(255,255,255,0.9); border-radius: 50%; filter: blur(1px);
 }
-.mini-lights { display: flex; gap: 8px; margin-top: 5px; }
-.light { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--dex-border); box-shadow: inset -2px -2px 0 rgba(0,0,0,0.3); }
+.mini-lights { display: flex; gap: 8px; margin-top: 5px; align-items: center; }
+.light { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--dex-border); box-shadow: inset -2px -2px 0 rgba(0,0,0,0.3); transition: all 0.3s ease; }
 .light.red { background: #ff3333; } .light.yellow { background: #ffcb05; } .light.green { background: #32cd32; }
+
+/* Botão de alternância Tema Escuro */
+.theme-btn {
+    background: #111; border: 2px solid #444; border-radius: 50%;
+    width: 32px; height: 32px; cursor: pointer; color: #fff; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-left: 15px; transition: 0.2s; box-shadow: 2px 2px 0 #000;
+}
+.theme-btn:active { transform: scale(0.9); box-shadow: 0 0 0 transparent; }
 
 .pokedex-title { 
     font-size: 2.8rem; font-weight: 900; text-transform: uppercase; color: #fff; 
@@ -121,11 +133,12 @@ body {
 .footer-msg { font-size: 0.7rem; color: #fff; line-height: 1.4; text-shadow: 1px 1px 0 #000;}
 .footer-msg strong { color: #ffcb05; font-weight: 800; }
 
-.pokedex-right-panel { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.pokedex-right-panel { padding: 20px; display: flex; flex-direction: column; flex: 1; transition: background 0.3s ease; }
 .pokedex-main-display {
     background: var(--screen-bg); border-radius: 15px; border: 6px solid var(--dex-border);
     box-shadow: inset 0 10px 20px rgba(0,0,0,0.1); padding: 15px;
     height: 500px; overflow-y: auto; position: relative; flex: 1;
+    transition: background 0.3s ease;
 }
 .pokedex-main-display::-webkit-scrollbar { width: 14px; }
 .pokedex-main-display::-webkit-scrollbar-track { background: #d0d0d0; border-left: 3px solid var(--dex-border); border-radius: 0 10px 10px 0;}
@@ -167,12 +180,11 @@ body {
     display: flex; flex-direction: column; background: var(--dex-red);
     border: 6px solid var(--dex-border); border-radius: 20px;
     box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2), 0 20px 50px rgba(0,0,0,0.8);
-    overflow: hidden; max-height: 90vh;
+    overflow: hidden; max-height: 90vh; transition: background 0.3s ease;
 }
 
-/* LADO ESQUERDO DO MODAL */
-.modal-left-wing { padding: 25px; background: #c22e28; border-bottom: 6px solid var(--dex-border); display: flex; flex-direction: column;}
-.screen-border { background: #e0e0e0; padding: 15px; border-radius: 15px 15px 15px 40px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.3); margin-bottom: 20px; }
+.modal-left-wing { padding: 25px; background: #c22e28; border-bottom: 6px solid var(--dex-border); display: flex; flex-direction: column; transition: background 0.3s ease;}
+.screen-border { background: #e0e0e0; padding: 15px; border-radius: 15px 15px 15px 40px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.3); margin-bottom: 20px; transition: background 0.3s ease; }
 .main-screen {
     background: #8eedd1; border-radius: 10px; border: 4px solid var(--dex-border);
     padding: 15px; display: flex; align-items: center; justify-content: space-between;
@@ -185,13 +197,11 @@ body {
 .type-tags { display: flex; gap: 5px; justify-content: flex-end;}
 .tag { padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; color: #fff; font-weight: 800; border: 2px solid var(--dex-border); box-shadow: 2px 2px 0 var(--dex-border); text-transform: uppercase;}
 
-/* ENQUADRAMENTO DA LISTA (OCUPANDO TODO O ESPAÇO) */
 .location-module { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .label-tech { font-family: monospace; font-size: 0.8rem; color: #ffcb05; text-shadow: 1px 1px 0 #000; margin-bottom: 8px; border-bottom: 2px dashed rgba(255,215,0,0.4); padding-bottom: 4px;}
 
 .loc-list-scroll { 
-    flex: 1; /* Isto estica a lista até ao fundo */
-    overflow-y: auto; padding-right: 5px; 
+    flex: 1; overflow-y: auto; padding-right: 5px; 
     display: flex; flex-direction: column; gap: 8px; 
 }
 .loc-list-scroll::-webkit-scrollbar { width: 8px; } 
@@ -217,24 +227,15 @@ body {
 .accordion-toggle {
     background: var(--terminal-bg); border-color: var(--dex-border);
 }
-
-/* ESTILIZAÇÃO DA SETA AMARELA ISOLADA */
 .expand-arrow {
-    color: #ffcb05; /* Amarelo */
-    opacity: 0.9;
-    font-size: 1.1rem;
-    padding: 5px 10px; /* Aumenta a área de clique */
-    transition: transform 0.2s ease, text-shadow 0.2s;
-    cursor: pointer;
+    color: #ffcb05; opacity: 0.9; font-size: 1.1rem;
+    padding: 5px 10px; transition: transform 0.2s ease, text-shadow 0.2s; cursor: pointer;
 }
 .expand-arrow:hover {
-    transform: scale(1.2);
-    text-shadow: 0 0 8px rgba(255, 203, 5, 0.8);
+    transform: scale(1.2); text-shadow: 0 0 8px rgba(255, 203, 5, 0.8);
 }
-/* Força a seta a continuar amarela mesmo se o botão for verde */
 .loc-button.active .expand-arrow {
-    filter: drop-shadow(0 0 0 transparent);
-    color: #ffcb05;
+    filter: drop-shadow(0 0 0 transparent); color: #ffcb05;
 }
 
 .loc-steps-container {
@@ -254,7 +255,7 @@ body {
 .loc-step.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; color: var(--radar-green); }
 
 /* LADO DIREITO DO MODAL */
-.modal-right-wing { padding: 25px; background: var(--dex-red); display: flex; flex-direction: column; gap: 15px; overflow-y: auto;}
+.modal-right-wing { padding: 25px; background: var(--dex-red); display: flex; flex-direction: column; gap: 15px; overflow-y: auto; transition: background 0.3s ease;}
 .radar-module { background: #222; padding: 12px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: inset 0 0 10px #000; }
 
 .radar-display {
@@ -296,25 +297,25 @@ body {
     text-shadow: 0 0 3px rgba(255, 75, 43, 0.8); animation: blinker 1.5s infinite;
 }
 
-.data-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
+.data-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; }
 .data-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
 .stats-list { display: flex; flex-direction: column; gap: 6px; }
 .stat-row { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 800;}
-.stat-row label { width: 55px; color: #555; }
+.stat-row label { width: 55px; color: #555; transition: color 0.3s ease; }
 .bar-container { flex: 1; height: 10px; background: #bbb; border-radius: 5px; border: 2px solid var(--dex-border); overflow: hidden; }
 .bar-fill { height: 100%; background: #ff4b2b; }
 .stat-num { width: 30px; text-align: right; color: var(--dex-border); }
 
-.eff-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin-bottom: 5px;}
+.eff-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin-bottom: 5px; transition: background 0.3s ease; }
 .eff-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
 .eff-group { margin-bottom: 8px; }
 .eff-group:last-child { margin-bottom: 0; }
-.eff-group label { display: block; font-size: 0.65rem; color: #666; margin-bottom: 4px; font-weight: 800;}
+.eff-group label { display: block; font-size: 0.65rem; color: #666; margin-bottom: 4px; font-weight: 800; transition: color 0.3s ease; }
 .eff-icons { display: flex; gap: 6px; flex-wrap: wrap; }
 .eff-dot { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--dex-border); position: relative;}
 .eff-dot:hover::after { content: attr(title); position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--dex-border); color: #fff; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; white-space: nowrap; z-index: 10;}
 
-.evo-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2);}
+.evo-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease;}
 .evo-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
 .evo-icons { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px;}
 .evo-sprite { width: 45px; height: 45px; cursor: pointer; transition: 0.2s; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.3)); border: 2px solid transparent; border-radius: 50%; }
@@ -397,3 +398,29 @@ body {
 
 .oak-dialog-box p { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #111; line-height: 1.8; text-transform: uppercase; margin: 0; padding-right: 15px; }
 .oak-arrow { position: absolute; bottom: 12px; right: 15px; font-size: 1.2rem; color: #e3350d; display: none; }
+
+/* ==============================================================
+   TEMA ESCURO (DARK MODE) E LUZES NEON
+============================================================== */
+body.dark-mode {
+    --dex-red: #242426;       
+    --dex-dark-red: #111111;  
+    --dex-border: #050505;    
+    --screen-bg: #1c2331;     
+    background-color: #0d1117; 
+}
+
+body.dark-mode .pokedex-left-panel { background: linear-gradient(135deg, #3a3a3c, var(--dex-red)); }
+body.dark-mode .modal-left-wing, body.dark-mode .pokedex-right-panel { background: #1a1a1c; }
+body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-module, body.dark-mode .screen-border { background: #2a2a2c; border-color: #111; }
+body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
+
+body.dark-mode .big-blue-lens {
+    box-shadow: 0 0 15px 2px rgba(52, 152, 219, 0.8), inset 0 0 20px #fff;
+    background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 40%, #002244);
+    border-color: #3498db;
+}
+
+body.dark-mode .light.red { background: #ff4d4d; box-shadow: 0 0 12px 2px #ff4d4d; border-color: #ff4d4d; }
+body.dark-mode .light.yellow { background: #ffda33; box-shadow: 0 0 12px 2px #ffda33; border-color: #ffda33; }
+body.dark-mode .light.green { background: #4dff4d; box-shadow: 0 0 12px 2px #4dff4d; border-color: #4dff4d; }
