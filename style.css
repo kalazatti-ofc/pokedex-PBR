@@ -25,7 +25,9 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* CARCAÇA PRINCIPAL */
+/* =========================================
+   CARCAÇA PRINCIPAL
+========================================= */
 .pokedex-body {
     display: flex; flex-direction: column; width: 100%; max-width: 1200px;
     background: var(--dex-red); border-radius: 20px;
@@ -102,6 +104,9 @@ body {
 .pokedex-title span { color: #ffcb05; display: block; font-size: 1.5rem; transition: 0.3s; }
 .pokedex-title:hover { transform: scale(1.08) rotate(-2deg); text-shadow: 5px 5px 0 var(--dex-border), 0 0 20px rgba(255,203,5,0.6); color: #ffcb05; }
 
+/* =========================================
+   CONTROLES E FILTROS
+========================================= */
 .pokedex-controls { flex: 1; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; }
 .search-module { width: 100%; margin-bottom: 20px; }
 .tech-label { font-family: monospace; font-size: 0.8rem; color: #ffcb05; font-weight: bold; text-shadow: 1px 1px 0 #000; margin-bottom: 5px; display: block; }
@@ -128,6 +133,9 @@ body {
 .footer-msg { font-size: 0.7rem; color: #fff; line-height: 1.4; text-shadow: 1px 1px 0 #000;}
 .footer-msg strong { color: #ffcb05; font-weight: 800; }
 
+/* =========================================
+   PAINEL DIREITO (Tela Principal e Cards)
+========================================= */
 .pokedex-right-panel { padding: 20px; display: flex; flex-direction: column; flex: 1; transition: background 0.3s ease; }
 .pokedex-main-display {
     background: var(--screen-bg); border-radius: 15px; border: 6px solid var(--dex-border);
@@ -189,20 +197,28 @@ body {
 .loc-button.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; }
 
 /* ==============================================================
-   TOOLTIP: NOTAS DE CAMPO E REQUISITOS (ESQUERDA)
+   TOOLTIP: NOTAS DE CAMPO E REQUISITOS (ESQUERDA + QUEBRA LINHA)
 ============================================================== */
 .loc-actions { display: flex; align-items: center; gap: 12px; }
 
 .info-tooltip { position: relative; cursor: help; }
 .info-tooltip:hover { opacity: 1; filter: drop-shadow(0 0 5px #ffcb05); }
 
-/* Balão abre para a ESQUERDA */
+/* Balão abre para a ESQUERDA e quebra linha se for muito grande */
 .info-tooltip::after {
     content: attr(data-tooltip); 
     position: absolute; right: 150%; top: 50%; transform: translateY(-50%);
     background: #111; color: #ffcb05;
-    border: 2px solid var(--dex-border); padding: 6px 10px; border-radius: 6px;
-    font-size: 0.7rem; font-family: monospace; white-space: nowrap;
+    border: 2px solid var(--dex-border); padding: 8px 12px; border-radius: 6px;
+    font-size: 0.7rem; font-family: monospace; 
+    
+    /* Configurações mágicas que evitam cortes e quebram a linha */
+    white-space: normal; 
+    max-width: 220px;    
+    width: max-content;  
+    text-align: left;    
+    line-height: 1.4;    
+    
     opacity: 0; visibility: hidden; transition: 0.2s; z-index: 100;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5); pointer-events: none;
 }
@@ -318,7 +334,7 @@ body {
 .oak-arrow { position: absolute; bottom: 12px; right: 15px; font-size: 1.2rem; color: #e3350d; display: none; }
 
 /* ==============================================================
-   TEMA ESCURO (DARK MODE) E LUZES NEON
+   TEMA ESCURO (DARK MODE)
 ============================================================== */
 body.dark-mode { background-color: #080a0f; }
 body.dark-mode .pokedex-main-display { background: #0f141e; box-shadow: inset 0 10px 30px rgba(0,0,0,0.5); }
@@ -328,16 +344,7 @@ body.dark-mode .pk-id { color: #888; }
 body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-module, body.dark-mode .screen-border { background: #2a2a2c; border-color: #111; }
 body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
 body.dark-mode .stat-num { color: #ddd; }
-
-/* O Botão Joystick acende no escuro */
-body.dark-mode .joystick-theme-btn {
-    opacity: 1; filter: grayscale(0);
-    color: #ffcb05; 
-    text-shadow: 0 0 10px #ffcb05;
-    background: #111;
-    border-color: #050505;
-}
-
+body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 10px #ffcb05; background: #111; border-color: #050505;}
 body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
 body.dark-mode .light.red { background: #ff3333; box-shadow: 0 0 15px 3px rgba(255, 51, 51, 0.8); border-color: #ff9999; }
 body.dark-mode .light.yellow { background: #ffcb05; box-shadow: 0 0 15px 3px rgba(255, 203, 5, 0.8); border-color: #ffee99; }
