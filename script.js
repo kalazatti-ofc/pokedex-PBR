@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData();
     renderTypeButtons();
     setupToggles();
+    initOakModal();
     
     document.querySelector('.close-btn').onclick = () => document.getElementById('pokemon-modal').classList.add('hidden');
     window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
@@ -99,15 +100,13 @@ function renderPokemon(list) {
     `).join('');
 }
 
-// Lógica ajustada: O botão abre o mapa do primeiro passo e desce a sanfona
-window.toggleAccordion = (el) => {
-    const container = el.nextElementSibling;
-    container.classList.toggle('hidden-steps');
+// A SANFONA AGORA SÓ ABRE SE CLICAR NA SETINHA
+window.toggleAccordion = (arrowEl, event) => {
+    if(event) event.stopPropagation(); // Impede de ativar o radar sem querer
     
-    const icon = el.querySelector('.expand-arrow');
-    if(icon) {
-        icon.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
-    }
+    const container = arrowEl.closest('.loc-accordion').querySelector('.loc-steps-container');
+    container.classList.toggle('hidden-steps');
+    arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
 };
 
 window.openModal = (id) => {
@@ -125,7 +124,6 @@ window.openModal = (id) => {
                 </div>
             `;
         } else if (typeof loc === 'object' && loc.rota) {
-            // Se for Rota com passos
             const stepsHTML = loc.passos.map(passo => `
                 <div class="loc-step" onclick="updateRadar('${passo}', this, event)">
                     <span class="loc-text">${passo}</span>
@@ -133,12 +131,12 @@ window.openModal = (id) => {
                 </div>
             `).join('');
 
-            // Botão principal mais discreto com a setinha que acende
+            // O clique no botão atualiza o mapa, o clique na setinha abre os passos
             return `
                 <div class="loc-accordion">
-                    <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this); toggleAccordion(this)">
+                    <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this, event)">
                         <span class="loc-text">${loc.rota}</span>
-                        <span class="loc-icon expand-arrow">▼</span>
+                        <span class="loc-icon expand-arrow" title="Ver Coordenadas" onclick="toggleAccordion(this, event)">▼</span>
                     </div>
                     <div class="loc-steps-container hidden-steps">
                         ${stepsHTML}
@@ -206,7 +204,7 @@ window.openModal = (id) => {
                 <div class="evo-module">
                     <h4 class="label-tech">CADEIA EVOLUTIVA</h4>
                     <div class="evo-icons" id="evo-container">
-                        <span class="blink" style="color: #ffcb05;">Sincronizando com a Silph Co...</span>
+                        <span class="blink" style="color: #ffcb05;">Sincronizando...</span>
                     </div>
                 </div>
             </div>
@@ -215,15 +213,11 @@ window.openModal = (id) => {
     
     document.getElementById('pokemon-modal').classList.remove('hidden');
     
+    // Agora ele apenas seleciona o mapa inicial, SEM abrir a sanfona
     setTimeout(() => {
-        const firstLoc = document.querySelector('.loc-button:not(.accordion-toggle), .loc-step');
+        const firstLoc = document.querySelector('.loc-button');
         if(firstLoc) {
-            const parentAccordion = firstLoc.closest('.loc-steps-container');
-            if(parentAccordion && parentAccordion.classList.contains('hidden-steps')) {
-                parentAccordion.previousElementSibling.click();
-            } else {
-                firstLoc.click();
-            }
+            firstLoc.click();
         }
     }, 100);
 
@@ -281,8 +275,7 @@ function calculateMatchups(pTypes) {
 }
 
 window.updateRadar = (name, el, event) => {
-    if(event) event.stopPropagation(); // Evita bugs de clique duplo na sanfona
-
+    // Remove o brilho verde de todos os botões e passos ativos
     document.querySelectorAll('.loc-button, .loc-step').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
     
@@ -339,64 +332,49 @@ window.showRadarFallback = (name) => {
 // ==============================================================
 // SISTEMA DO PROFESSOR OAK (POP-UP DE BOAS VINDAS)
 // ==============================================================
-
-// Textos que o professor vai falar (Páginas)
 const oakDialogues = [
-    "Olá! Bem-vindo ao mundo de PokemonBR-PBR!",
-    "Esta Pokedex e uma pagina criada de fãs para fãs e NÃO é um produto oficial do servidor!",
-    "Desenvolvida com muito carinho pelo player Kalazatti.",
+    "Olá! Bem-vindo ao mundo de POKeMON!",
+    "Esta Pokedex PBR e uma pagina criada de fa para fa. Desenvolvida por: Kalazatti.",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: Paleguazv, Marllin, Leander Hastings, Upzin (Ainda preciso adicionar outros :D) ",
-    "Use a barra de pesquisa ou os filtros para rastrear os POKeMONs. Boa caça!"
+    "Apoiadores: [Nick1], [Nick2], [Nick3]... Insira os nicks aqui!",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
 ];
 
 let currentDialogIndex = 0;
 let currentCharIndex = 0;
 let isTyping = false;
-let typingSpeed = 55; // Velocidade da digitação (ms)
+let typingSpeed = 40;
 let typeInterval;
-
-document.addEventListener('DOMContentLoaded', () => {
-    initOakModal();
-});
 
 function initOakModal() {
     const oakModal = document.getElementById('oak-modal');
     const closeBtn = document.getElementById('close-oak');
     const dialogBox = document.getElementById('oak-dialog-box');
     
-    // Verifica se é a primeira vez do usuário (Usando LocalStorage)
-    // Se quiser que apareça toda vez que atualizar a página para testar, comente o IF abaixo.
     if (!localStorage.getItem('hasSeenOakIntro')) {
         oakModal.classList.remove('hidden');
         startTyping();
     }
 
-    // Fechar no X
     closeBtn.addEventListener('click', () => {
         oakModal.classList.add('hidden');
         localStorage.setItem('hasSeenOakIntro', 'true');
     });
 
-    // Interação com a caixa de diálogo (Clique para acelerar ou avançar)
     dialogBox.addEventListener('click', () => {
         const textContainer = document.getElementById('oak-text');
         const arrow = document.getElementById('oak-arrow');
 
-        // Se ainda está digitando, pula para o final do texto atual
         if (isTyping) {
             clearInterval(typeInterval);
             textContainer.innerHTML = oakDialogues[currentDialogIndex];
             isTyping = false;
-            arrow.style.display = 'block'; // Mostra a seta pra avançar
-        } 
-        // Se terminou de digitar, vai para a próxima página
-        else {
+            arrow.style.display = 'block';
+        } else {
             currentDialogIndex++;
             if (currentDialogIndex < oakDialogues.length) {
                 startTyping();
             } else {
-                // Acabaram os textos, fecha o modal
                 oakModal.classList.add('hidden');
                 localStorage.setItem('hasSeenOakIntro', 'true');
             }
@@ -411,7 +389,7 @@ function startTyping() {
     textContainer.innerHTML = '';
     currentCharIndex = 0;
     isTyping = true;
-    arrow.style.display = 'none'; // Esconde a seta enquanto digita
+    arrow.style.display = 'none';
 
     clearInterval(typeInterval);
     typeInterval = setInterval(() => {
@@ -421,7 +399,7 @@ function startTyping() {
         if (currentCharIndex >= oakDialogues[currentDialogIndex].length) {
             clearInterval(typeInterval);
             isTyping = false;
-            arrow.style.display = 'block'; // Mostra a seta piscando
+            arrow.style.display = 'block';
         }
     }, typingSpeed);
 }
