@@ -126,25 +126,23 @@ window.openModal = (id) => {
     const matchups = calculateMatchups(p.types);
     
     const locationsHTML = p.locations.map(loc => {
-        // Se for apenas texto simples
+        // Se for texto simples (sem nota ou passos)
         if (typeof loc === 'string') {
             return `
                 <div class="loc-button" onclick="updateRadar('${loc}', this)">
-                    <div class="loc-title-wrapper">
-                        <span class="loc-text">${loc}</span>
-                    </div>
+                    <span class="loc-text">${loc}</span>
                     <span class="loc-icon">🗺️</span>
                 </div>
             `;
         } 
-        // Se for um Objeto (Rota com passos OU Local com Nota)
+        // Se for um Objeto (Rota com passos OU Local único com Nota)
         else if (typeof loc === 'object') {
             const isRoute = loc.passos && loc.passos.length > 0;
             const locName = loc.rota || loc.local || 'Local Desconhecido';
             
-            // O ÍCONE DA NOTA DE CAMPO
+            // Ícone da Nota usando Emoji de Chat (com mesma classe loc-icon para o efeito)
             const noteHTML = loc.nota 
-                ? `<span class="info-tooltip" data-tooltip="${loc.nota}">[ i ]</span>` 
+                ? `<span class="info-tooltip loc-icon" data-tooltip="${loc.nota}">💬</span>` 
                 : '';
 
             if (isRoute) {
@@ -158,11 +156,11 @@ window.openModal = (id) => {
                 return `
                     <div class="loc-accordion">
                         <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this, event)">
-                            <div class="loc-title-wrapper">
-                                <span class="loc-text">${locName}</span>
+                            <span class="loc-text">${locName}</span>
+                            <div class="loc-actions">
                                 ${noteHTML}
+                                <span class="loc-icon expand-arrow" title="Ver Coordenadas" onclick="toggleAccordion(this, event)">▼</span>
                             </div>
-                            <span class="loc-icon expand-arrow" title="Ver Coordenadas" onclick="toggleAccordion(this, event)">▼</span>
                         </div>
                         <div class="loc-steps-container hidden-steps">
                             ${stepsHTML}
@@ -170,14 +168,13 @@ window.openModal = (id) => {
                     </div>
                 `;
             } else {
-                // Se for apenas um Local Único mas que tem nota
                 return `
                     <div class="loc-button" onclick="updateRadar('${locName}', this)">
-                        <div class="loc-title-wrapper">
-                            <span class="loc-text">${locName}</span>
+                        <span class="loc-text">${locName}</span>
+                        <div class="loc-actions">
                             ${noteHTML}
+                            <span class="loc-icon">🗺️</span>
                         </div>
-                        <span class="loc-icon">🗺️</span>
                     </div>
                 `;
             }
