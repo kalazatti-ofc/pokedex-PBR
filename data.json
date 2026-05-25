@@ -7399,8 +7399,7 @@
       "spdef": 130,
       "spd": 25
     },
-    "locations": [
-      "Vermilion (X 1291 / Y 1664 / Z 4)",	  
+    "locations": [  
       {
         "rota": "Vermilion (X 1291 / Y 1664 / Z 4)",
         "passos": [
@@ -12825,11 +12824,12 @@
   {
     "id": 635,
     "name": "Hydreigon",
+    "generation": 5,
     "types": [
       "Dark",
       "Dragon"
     ],
-    "generation": 5,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/635.png",
     "stats": {
       "hp": 92,
       "atk": 105,
@@ -12838,10 +12838,17 @@
       "spdef": 90,
       "spd": 98
     },
-    "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7) e em seguida entre no buraco > (X 3752 / Y 2282 / Z 8) por ultimo vá até (X 3774 / Y 2283 / Z 9) e escreva “Onied” de frente para o totem > entre no portal em (X 3797 / Y 2266 / Z 100"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/635.png"
+    "locations": [  
+      {
+        "rota": "Sandgem",
+        "passos": [
+          "1. Sandgem (X 3788 / Y 2330 / Z 7)",
+          "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
+          "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
+		  "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
+        ]
+      }
+    ]
   },
   {
     "id": 636,
