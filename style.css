@@ -162,43 +162,46 @@ body {
 .loc-button:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
 .loc-button.active { border-color: var(--radar-green); background: #0a1f10; box-shadow: 3px 3px 0 var(--radar-green); }
 .loc-text { font-size: 0.8rem; font-weight: bold; color: #fff; font-family: monospace; }
+.loc-icon { opacity: 0.4; font-size: 1rem; transition: 0.2s; }
 .loc-button.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; }
-.loc-icon { opacity: 0.4; font-size: 1rem; }
 
 /* ==============================================================
-   TOOLTIP: NOTAS DE CAMPO E REQUISITOS ESPECIAIS
+   TOOLTIP: NOTAS DE CAMPO E REQUISITOS (NOVO ALINHAMENTO)
 ============================================================== */
-.loc-title-wrapper { display: flex; align-items: center; gap: 8px; }
-.info-tooltip {
-    display: inline-block; color: #8eedd1; background: rgba(0,0,0,0.5);
-    border: 1px solid #8eedd1; border-radius: 4px; padding: 1px 6px;
-    font-size: 0.6rem; cursor: help; position: relative;
-    vertical-align: middle; transition: all 0.2s;
-}
-.info-tooltip:hover { background: #8eedd1; color: #000; }
+/* Agrupa os ícones do lado direito */
+.loc-actions { display: flex; align-items: center; gap: 12px; }
+
+.info-tooltip { position: relative; cursor: help; }
+.info-tooltip:hover { opacity: 1; filter: drop-shadow(0 0 5px #ffcb05); }
+
+/* O Balão agora abre para a ESQUERDA para evitar cortes do scroll */
 .info-tooltip::after {
-    content: attr(data-tooltip); position: absolute; bottom: 150%; left: 50%;
-    transform: translateX(-50%); background: #111; color: #ffcb05;
+    content: attr(data-tooltip); 
+    position: absolute; right: 150%; top: 50%; transform: translateY(-50%);
+    background: #111; color: #ffcb05;
     border: 2px solid var(--dex-border); padding: 6px 10px; border-radius: 6px;
     font-size: 0.7rem; font-family: monospace; white-space: nowrap;
     opacity: 0; visibility: hidden; transition: 0.2s; z-index: 100;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5); pointer-events: none;
 }
+/* O biquinho do balão apontando para o ícone */
 .info-tooltip::before {
-    content: ''; position: absolute; bottom: 100%; left: 50%;
-    transform: translateX(-50%); border-width: 5px; border-style: solid;
-    border-color: #111 transparent transparent transparent;
+    content: ''; position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
+    border-width: 5px; border-style: solid;
+    border-color: transparent transparent transparent #111;
     opacity: 0; visibility: hidden; transition: 0.2s; pointer-events: none;
 }
-.info-tooltip:hover::after, .info-tooltip:hover::before {
-    opacity: 1; visibility: visible; bottom: 130%;
-}
-.info-tooltip:hover::before { bottom: calc(130% - 10px); }
 
+.info-tooltip:hover::after, .info-tooltip:hover::before { opacity: 1; visibility: visible; }
+.info-tooltip:hover::after { right: 160%; }
+.info-tooltip:hover::before { right: calc(160% - 10px); }
 
+/* ==============================================================
+   ACORDEÃO DE PASSOS 
+============================================================== */
 .loc-accordion { display: flex; flex-direction: column; gap: 5px; margin-bottom: 5px; }
 .accordion-toggle { background: var(--terminal-bg); border-color: var(--dex-border); }
-.expand-arrow { color: #ffcb05; opacity: 0.9; font-size: 1.1rem; padding: 5px 10px; transition: transform 0.2s ease, text-shadow 0.2s; cursor: pointer; }
+.expand-arrow { color: #ffcb05; font-size: 1.1rem; padding: 5px 5px; cursor: pointer; }
 .expand-arrow:hover { transform: scale(1.2); text-shadow: 0 0 8px rgba(255, 203, 5, 0.8); }
 .loc-button.active .expand-arrow { filter: drop-shadow(0 0 0 transparent); color: #ffcb05; }
 .loc-steps-container { display: flex; flex-direction: column; gap: 6px; padding-left: 15px; border-left: 2px dashed #ffcb05; margin-left: 10px; margin-bottom: 5px; transition: 0.3s; }
@@ -295,39 +298,18 @@ body {
 .oak-arrow { position: absolute; bottom: 12px; right: 15px; font-size: 1.2rem; color: #e3350d; display: none; }
 
 /* ==============================================================
-   TEMA ESCURO (DARK MODE) E LUZES NEON - TOTALMENTE INTEGRADO
+   TEMA ESCURO (DARK MODE)
 ============================================================== */
-body.dark-mode {
-    background-color: #080a0f; 
-}
-
-body.dark-mode .pokedex-main-display { 
-    background: #0f141e; 
-    box-shadow: inset 0 10px 30px rgba(0,0,0,0.5);
-}
-
-body.dark-mode .pk-card {
-    background: #2a2a2c;
-    border-color: #111;
-    box-shadow: 3px 3px 0 rgba(0,0,0,0.6);
-}
+body.dark-mode { background-color: #080a0f; }
+body.dark-mode .pokedex-main-display { background: #0f141e; box-shadow: inset 0 10px 30px rgba(0,0,0,0.5); }
+body.dark-mode .pk-card { background: #2a2a2c; border-color: #111; box-shadow: 3px 3px 0 rgba(0,0,0,0.6); }
 body.dark-mode .pk-name { color: #f0f0f0; } 
 body.dark-mode .pk-id { color: #888; }
-
 body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-module, body.dark-mode .screen-border { background: #2a2a2c; border-color: #111; }
 body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
 body.dark-mode .stat-num { color: #ddd; }
-
-body.dark-mode .theme-btn {
-    opacity: 1; filter: grayscale(0);
-    color: #ffcb05; text-shadow: 0 0 15px #ffcb05;
-}
-
-body.dark-mode .big-blue-lens {
-    box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff;
-    background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244);
-    border-color: #85c1e9;
-}
+body.dark-mode .theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 15px #ffcb05; }
+body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
 body.dark-mode .light.red { background: #ff3333; box-shadow: 0 0 15px 3px rgba(255, 51, 51, 0.8); border-color: #ff9999; }
 body.dark-mode .light.yellow { background: #ffcb05; box-shadow: 0 0 15px 3px rgba(255, 203, 5, 0.8); border-color: #ffee99; }
 body.dark-mode .light.green { background: #32cd32; box-shadow: 0 0 15px 3px rgba(50, 205, 50, 0.8); border-color: #99ff99; }
