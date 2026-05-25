@@ -23,18 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setupToggles();
     initOakModal();
     
-    // SISTEMA DE TEMA ESCURO (DARK MODE)
+    // SISTEMA DO TEMA ESCURO
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         if (localStorage.getItem('pokedex-dark-mode') === 'true') {
             document.body.classList.add('dark-mode');
-            themeBtn.innerText = '☀️';
         }
         themeBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('pokedex-dark-mode', isDark);
-            themeBtn.innerText = isDark ? '☀️' : '🌙';
+            localStorage.setItem('pokedex-dark-mode', document.body.classList.contains('dark-mode'));
         });
     }
     
@@ -115,10 +112,8 @@ function renderPokemon(list) {
     `).join('');
 }
 
-// Controle da Sanfona isolado na setinha
 window.toggleAccordion = (arrowEl, event) => {
-    if(event) event.stopPropagation(); // Impede de ativar o radar sem querer
-    
+    if(event) event.stopPropagation();
     const container = arrowEl.closest('.loc-accordion').querySelector('.loc-steps-container');
     container.classList.toggle('hidden-steps');
     arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
@@ -344,7 +339,7 @@ window.showRadarFallback = (name) => {
 };
 
 // ==============================================================
-// SISTEMA DO PROFESSOR OAK (POP-UP DE BOAS VINDAS)
+// PROFESSOR OAK
 // ==============================================================
 const oakDialogues = [
     "Olá! Bem-vindo ao mundo de POKeMON!",
@@ -398,7 +393,6 @@ function initOakModal() {
 function startTyping() {
     const textContainer = document.getElementById('oak-text');
     const arrow = document.getElementById('oak-arrow');
-    
     textContainer.innerHTML = '';
     currentCharIndex = 0;
     isTyping = true;
