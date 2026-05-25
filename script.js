@@ -1,4 +1,3 @@
-// script.js
 let pokemonData = [];
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
@@ -127,32 +126,61 @@ window.openModal = (id) => {
     const matchups = calculateMatchups(p.types);
     
     const locationsHTML = p.locations.map(loc => {
+        // Se for apenas texto simples
         if (typeof loc === 'string') {
             return `
                 <div class="loc-button" onclick="updateRadar('${loc}', this)">
-                    <span class="loc-text">${loc}</span>
+                    <div class="loc-title-wrapper">
+                        <span class="loc-text">${loc}</span>
+                    </div>
                     <span class="loc-icon">🗺️</span>
                 </div>
             `;
-        } else if (typeof loc === 'object' && loc.rota) {
-            const stepsHTML = loc.passos.map(passo => `
-                <div class="loc-step" onclick="updateRadar('${passo}', this, event)">
-                    <span class="loc-text">${passo}</span>
-                    <span class="loc-icon">📍</span>
-                </div>
-            `).join('');
+        } 
+        // Se for um Objeto (Rota com passos OU Local com Nota)
+        else if (typeof loc === 'object') {
+            const isRoute = loc.passos && loc.passos.length > 0;
+            const locName = loc.rota || loc.local || 'Local Desconhecido';
+            
+            // O ÍCONE DA NOTA DE CAMPO
+            const noteHTML = loc.nota 
+                ? `<span class="info-tooltip" data-tooltip="${loc.nota}">[ i ]</span>` 
+                : '';
 
-            return `
-                <div class="loc-accordion">
-                    <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this, event)">
-                        <span class="loc-text">${loc.rota}</span>
-                        <span class="loc-icon expand-arrow" title="Ver Coordenadas" onclick="toggleAccordion(this, event)">▼</span>
+            if (isRoute) {
+                const stepsHTML = loc.passos.map(passo => `
+                    <div class="loc-step" onclick="updateRadar('${passo}', this, event)">
+                        <span class="loc-text">${passo}</span>
+                        <span class="loc-icon">📍</span>
                     </div>
-                    <div class="loc-steps-container hidden-steps">
-                        ${stepsHTML}
+                `).join('');
+
+                return `
+                    <div class="loc-accordion">
+                        <div class="loc-button accordion-toggle" onclick="updateRadar('${loc.passos[0]}', this, event)">
+                            <div class="loc-title-wrapper">
+                                <span class="loc-text">${locName}</span>
+                                ${noteHTML}
+                            </div>
+                            <span class="loc-icon expand-arrow" title="Ver Coordenadas" onclick="toggleAccordion(this, event)">▼</span>
+                        </div>
+                        <div class="loc-steps-container hidden-steps">
+                            ${stepsHTML}
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                // Se for apenas um Local Único mas que tem nota
+                return `
+                    <div class="loc-button" onclick="updateRadar('${locName}', this)">
+                        <div class="loc-title-wrapper">
+                            <span class="loc-text">${locName}</span>
+                            ${noteHTML}
+                        </div>
+                        <span class="loc-icon">🗺️</span>
+                    </div>
+                `;
+            }
         }
     }).join('');
 
