@@ -8487,7 +8487,7 @@
       {
         "local": "One island (X 2453 / Y 893 / Z 7)",
         "nota": "📌 Fim do caminho, subindo as escadas"
-      },
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/408.png"
   },
@@ -8510,7 +8510,7 @@
       {
         "local": "One island (X 2453 / Y 893 / Z 7)",
         "nota": "📌 Fim do caminho, subindo as escadas"
-      },      
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/409.png"
   },
