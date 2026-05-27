@@ -354,7 +354,8 @@
       "spd": 56
     },
     "locations": [
-      "Saffron (X 1121 / Y 924 / Z 7)"
+      "Saffron (X 1121 / Y 924 / Z 7)",
+      "Vermilion (X 962 / Y 130 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/16.png"
   },
@@ -376,7 +377,8 @@
     },
     "locations": [
       "Saffron (X 1101 / Y 941 / Z 4)",
-      "Trost (X 1579 / Y 1205 / Z 5)"
+      "Trost (X 1579 / Y 1205 / Z 5)",
+      "Vermilion (X 962 / Y 130 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png"
   },
@@ -397,7 +399,8 @@
       "spd": 101
     },
     "locations": [
-      "Trost (X 1579 / Y 1205 / Z 5)"
+      "Trost (X 1579 / Y 1205 / Z 5)",
+      "Vermilion (X 962 / Y 130 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/18.png"
   },
@@ -565,6 +568,10 @@
     },
     "locations": [
       "Vermilion (X 965 / Y 1309 / Z 2)",
+      {
+        "local": "Vermilion (X 965 / Y 1309 / Z 2)"",
+        "nota": "📌 Casa Elétrica"
+      }            
       {
         "local": "Singer (X 1651 / Y 1015 / Z 7)",
         "nota": "📌 Casa Elétrica"
@@ -3781,7 +3788,11 @@
       "spd": 55
     },
     "locations": [
-      "Phenac (X 2397 / Y 1438 / Z 3)"
+      "Phenac (X 2397 / Y 1438 / Z 3)",
+      {
+        "local": "Vermilion (X 965 / Y 1309 / Z 2)"",
+        "nota": "📌 Casa Elétrica"
+      }      
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/181.png"
   },
