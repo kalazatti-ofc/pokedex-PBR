@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.close-btn').onclick = () => document.getElementById('pokemon-modal').classList.add('hidden');
     window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
     
+    // Filtro em tempo real ao digitar
     document.getElementById('search-input').addEventListener('input', applyFilters);
 
     // Esconde o teclado do celular ao apertar "Enter" / "Pesquisar"
@@ -45,6 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') {
             this.blur(); // Remove o foco do input
         }
+    });
+
+    // Ação do Botão da Lupa
+    document.getElementById('search-btn').addEventListener('click', () => {
+        applyFilters();
+        document.getElementById('search-input').blur(); // Tira o foco para abaixar o teclado
     });
 });
 
