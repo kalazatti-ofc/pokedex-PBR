@@ -32,7 +32,7 @@ Espero que goste, faça bom use e divulge! ^^
 
 ## 📸 Interface da Pokedex
 
-<img width="5000" height="3333" alt="PokedexPBR2" src="https://github.com/user-attachments/assets/7910dc00-d4b9-49bd-9baa-aba7c7c2311c" />
+<img width="2878" height="1946" alt="PokedexPBR4" src="https://github.com/user-attachments/assets/80f16545-16d5-4457-8f89-d80a3072b6fc" />
 
 ---
 
