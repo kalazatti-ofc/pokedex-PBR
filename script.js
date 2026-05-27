@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
     
     document.getElementById('search-input').addEventListener('input', applyFilters);
+
+    // Esconde o teclado do celular ao apertar "Enter" / "Pesquisar"
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            this.blur(); // Remove o foco do input
+        }
+    });
 });
 
 async function fetchData() {
@@ -126,7 +133,6 @@ window.openModal = (id) => {
     const matchups = calculateMatchups(p.types);
     
     const locationsHTML = p.locations.map(loc => {
-        // Se for texto simples (sem nota ou passos)
         if (typeof loc === 'string') {
             return `
                 <div class="loc-button" onclick="updateRadar('${loc}', this)">
@@ -135,12 +141,10 @@ window.openModal = (id) => {
                 </div>
             `;
         } 
-        // Se for um Objeto (Rota com passos OU Local único com Nota)
         else if (typeof loc === 'object') {
             const isRoute = loc.passos && loc.passos.length > 0;
             const locName = loc.rota || loc.local || 'Local Desconhecido';
             
-            // Ícone da Nota usando Emoji de Chat (com mesma classe loc-icon para o efeito)
             const noteHTML = loc.nota 
                 ? `<span class="info-tooltip loc-icon" data-tooltip="${loc.nota}">💬</span>` 
                 : '';
