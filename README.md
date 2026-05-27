@@ -37,10 +37,12 @@ Espero que goste, faça bom use e divulge! ^^
 ### 🌟 Funcionalidades Principais
 
 * 🗺️ **Radar de Coordenadas:** Localizações exatas (X, Y, Z) divididas por Região e Rota.
-* ✅ **Checklist de Pokedex (Local Save):** Marque os Pokémon já registrados na sua pokedex clicando na Pokébola direto no card. Seu progresso fica salvo no navegador, e você pode usar o filtro inteligente para focar apenas nos que estão "Faltando" para o seu 100%!
-* 💬 **Notas de Campo e Restrições:** Avisos visuais se um Pokémon precisa de Quests, itens de pesca ou acesso VIP.
+* 📋 **Cópia Rápida (QoL):** Achou o respawn? Clique no ícone da prancheta (📋) ao lado da coordenada para copiá-la automaticamente e colar no chat do jogo ou Discord para seus amigos!
+* ✅ **Checklist de Captura (Local Save):** Marque os Pokémon já capturados clicando na Pokébola direto no card. Seu progresso fica salvo no seu navegador!
+* 🔍 **Filtro de Status Inteligente:** Use a gaveta "Status de Captura" para esconder quem você já pegou e focar apenas nos Pokémon que estão "Faltando".
+* 💬 **Notas de Campo e Restrições:** Avisos em balões visuais se um Pokémon precisa de Quests, itens de pesca ou acesso VIP.
 * 🌙 **Modo Noturno (Joystick Mode):** Cansou a vista? Aperte o botão de tema no canto superior direito para ativar o painel noturno neon.
-* 🧬 **Cadeia Evolutiva Dinâmica:** Sincronização de DNA para mostrar as evoluções diretas do Pokémon.
+* 🧬 **Cadeia Evolutiva Dinâmica:** Sincronização de DNA puxando direto da PokeAPI para mostrar as evoluções diretas do Pokémon.
 * 📊 **Status e Fraquezas:** Cálculo automático de vantagem de tipos (Resistências e Fraquezas).
 
 ---
