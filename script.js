@@ -1,6 +1,7 @@
 let pokemonData = [];
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
+let activeCatchFilter = 'all'; // Nova variável para o filtro de captura
 
 // Variável que guarda a checklist de capturados lendo direto do navegador do jogador
 let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
@@ -52,6 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
         applyFilters();
         document.getElementById('search-input').blur(); 
     });
+
+    // Lógica dos Botões de Filtro de Captura
+    document.querySelectorAll('#catch-filters .filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            document.querySelectorAll('#catch-filters .filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            activeCatchFilter = pill.dataset.catch;
+            applyFilters();
+        });
+    });
 });
 
 async function fetchData() {
@@ -74,6 +85,7 @@ function renderTypeButtons() {
     document.querySelectorAll('.filter-pill').forEach(pill => {
         pill.addEventListener('click', () => {
             const group = pill.closest('.pills-container').id;
+            // Só reseta os botões que estão dentro do grupo em que clicamos
             document.getElementById(group).querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             pill.classList.add('active');
             
@@ -96,6 +108,12 @@ function setupToggles() {
         group.classList.toggle('hidden-filter');
         this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTRAR POR TIPO' : '▲ ESCONDER TIPOS';
     };
+    // Novo evento de recolher para o botão de Captura
+    document.getElementById('toggle-catch').onclick = function() {
+        const group = document.getElementById('group-catch');
+        group.classList.toggle('hidden-filter');
+        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DE CAPTURA' : '▲ ESCONDER STATUS';
+    };
 }
 
 function applyFilters() {
@@ -104,7 +122,14 @@ function applyFilters() {
         const mName = p.name.toLowerCase().includes(search) || p.id.toString() === search;
         const mGen = activeGenFilter === 'all' || p.generation.toString() === activeGenFilter;
         const mType = activeTypeFilter === 'all' || p.types.includes(activeTypeFilter);
-        return mName && mGen && mType;
+        
+        // Aplicação lógica do Filtro de Capturados
+        const isCaught = caughtPokemon.includes(p.id);
+        let mCatch = true;
+        if (activeCatchFilter === 'caught') mCatch = isCaught;
+        if (activeCatchFilter === 'uncaught') mCatch = !isCaught;
+
+        return mName && mGen && mType && mCatch;
     });
     renderPokemon(filtered);
 }
@@ -123,6 +148,11 @@ window.toggleCatch = (event, id) => {
     }
     
     localStorage.setItem('pokedex-caught', JSON.stringify(caughtPokemon));
+
+    // Re-aplica o filtro na hora. Ex: Se estou visualizando só "Faltando" e clico na pokebola, o pokemon some da tela.
+    if (activeCatchFilter !== 'all') {
+        applyFilters();
+    }
 };
 
 function renderPokemon(list) {
