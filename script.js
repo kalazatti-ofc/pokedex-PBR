@@ -432,11 +432,12 @@ window.showRadarFallback = (name) => {
 // PROFESSOR OAK (AGORA APARECE SEMPRE)
 // ==============================================================
 const oakDialogues = [
-    "Olá! Bem-vindo ao mundo de POKeMON!",
-    "Esta Pokedex PBR e uma pagina criada de fa para fa. Desenvolvida por: Kalazatti.",
+    "Olá! Bem-vindo ao mundo de PokemonBR!",
+    "Esta é uma Pokedex criada de fãs para fãs, e não é um produto oficial do servidor!",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: [Nick1], [Nick2], [Nick3]... Insira os nicks aqui!",
-    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
+    "Apoiadores: Leander Hastings, Upzin, Paleguazv, Marlin...(Ainda preciso adicionar outros :D )",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!",
+    "Desenvolvida por: Kalazatti."
 ];
 
 let currentDialogIndex = 0;
