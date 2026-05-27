@@ -12,7 +12,7 @@
 
 ## 🔎 Sobre o Projeto
 
-A **Pokédex PBR** é uma aplicação web interativa criada de **fãs para fãs**, com um único objetivo: facilitar a vida dos treinadores na hora de caçar! 
+A **Pokédex PBR** é um site criado de **fãs para fãs**, com um único objetivo: facilitar a vida dos treinadores na hora de caçar! 
 
 Cansado de esquecer onde fica aquele respawn específico? 
 Ou de viajar o mapa inteiro e descobrir que o Pokémon precisava de uma *Quest* ou de uma *Super Rod*? 
