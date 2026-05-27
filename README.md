@@ -1,9 +1,8 @@
-# 🔴 POKÉDEX PBR | Sistema de Rastreamento Global 🟢
+# <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif" width="45" align="center"> POKÉDEX PBR | Sistema de Rastreamento Global
 
 ![Badge HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![Badge CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![Badge JS](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
-
 ![Badge Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-success?style=for-the-badge)
 ![Badge FanMade](https://img.shields.io/badge/Projeto-De_Fã_Para_Fã-red?style=for-the-badge)
 
