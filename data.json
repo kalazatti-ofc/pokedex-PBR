@@ -540,7 +540,7 @@
       "spd": 90
     },
     "locations": [
-      "Vermilion (X 965 / Y 1309 / Z 2)"
+      "Vermilion (X 965 / Y 1309 / Z 2)",
       {
         "local": "Singer (X 1651 / Y 1015 / Z 7)",
         "nota": "📌 Casa Elétrica"
@@ -564,7 +564,7 @@
       "spd": 110
     },
     "locations": [
-      "Vermilion (X 965 / Y 1309 / Z 2)"
+      "Vermilion (X 965 / Y 1309 / Z 2)",
       {
         "local": "Singer (X 1651 / Y 1015 / Z 7)",
         "nota": "📌 Casa Elétrica"
