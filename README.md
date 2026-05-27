@@ -36,7 +36,7 @@ Espero que goste, faça bom use e divulge! ^^
 
 ## 🤝 Como Contribuir 
 
-Este projeto é movido pela comunidade! Como o mundo Pokémon é gigantesco, novos respawns e locais são descobertos todos os dias. Se você encontrou um ninho que não está na Pokédex, você pode ajudar a atualizar nosso banco de dados!
+Este projeto é movido pela comunidade! Como o mundo Pokémon é gigantesco, novos respawns e locais são descobertos todos os dias. Se você encontrou um spawn que não está na Pokédex, você pode ajudar a atualizar nosso banco de dados!
 
 1. Faça um **Fork** deste repositório.
 2. Abra o arquivo `data.json`.
