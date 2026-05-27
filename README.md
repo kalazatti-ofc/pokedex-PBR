@@ -32,11 +32,7 @@ Espero que goste, faça bom use e divulge! ^^
 
 ## 📸 Interface da Pokedex
 
-*(Dica: Tire um print da sua Pokédex bonita no PC e no Mobile e arraste as imagens para cá no GitHub para elas aparecerem no Readme!)*
-
-| 💻 Visão do Terminal (Desktop) | 📱 Visão de Bolso (Mobile) |
-| :---: | :---: |
-| ` <img width="5000" height="3333" alt="PokedexPBR2" src="https://github.com/user-attachments/assets/7910dc00-d4b9-49bd-9baa-aba7c7c2311c" /> ` |
+<img width="5000" height="3333" alt="PokedexPBR2" src="https://github.com/user-attachments/assets/7910dc00-d4b9-49bd-9baa-aba7c7c2311c" />
 
 ---
 
