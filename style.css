@@ -115,6 +115,31 @@ body {
 .cursor-blink { color: var(--dex-red); font-family: monospace; font-size: 1.2rem; font-weight: bold; animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* ==============================================================
+   BOTÃO LUPA DE PESQUISA
+============================================================== */
+.search-btn {
+    background: #ffcb05; 
+    border: 3px solid var(--dex-border);
+    border-radius: 8px;
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-shrink: 0; 
+    box-shadow: 2px 2px 0 var(--dex-border); 
+    transition: 0.1s ease-in-out;
+    outline: none;
+}
+.search-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 transparent;
+}
+
 .pokedex-filters { margin-bottom: 20px; }
 .filter-toggle { width: 100%; background: #111; color: #ffcb05; border: 3px solid var(--dex-border); padding: 10px 15px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; font-weight: bold; text-align: left; cursor: pointer; margin-bottom: 8px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); transition: 0.1s; text-shadow: 1px 1px 0 #000; }
 .filter-toggle:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
@@ -211,7 +236,6 @@ body {
     border: 2px solid var(--dex-border); padding: 8px 12px; border-radius: 6px;
     font-size: 0.7rem; font-family: monospace; 
     
-    /* Configurações mágicas que evitam cortes e quebram a linha */
     white-space: normal; 
     max-width: 220px;    
     width: max-content;  
@@ -316,7 +340,6 @@ body {
     .pk-card { padding: 8px; border-width: 2px; }
     .pk-card img { width: 55px; height: 55px; }
     
-    /* Nome no Card: Ajustado para o tamanho correto e com corte "..." se for bizarramente longo */
     .pk-name { 
         font-size: 0.6rem; 
         white-space: nowrap; 
@@ -328,7 +351,6 @@ body {
     .pokedex-title { font-size: 2.2rem; }
     .pokedex-title span { font-size: 1.2rem; }
 
-    /* Ajustes na Tela Principal do Modal para Mobile (Sem empilhar e sem quebrar layout) */
     .main-screen { padding: 10px; }
     .poke-img-large { width: 80px; height: 80px; } 
     .screen-info h2 { font-size: 1.1rem; margin-bottom: 4px; } 
@@ -362,6 +384,14 @@ body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-mod
 body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
 body.dark-mode .stat-num { color: #ddd; }
 body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 10px #ffcb05; background: #111; border-color: #050505;}
+
+/* O botão de pesquisa também fica no clima noturno! */
+body.dark-mode .search-btn {
+    background: #e6b800;
+    border-color: #111;
+    box-shadow: 2px 2px 0 #111;
+}
+
 body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
 body.dark-mode .light.red { background: #ff3333; box-shadow: 0 0 15px 3px rgba(255, 51, 51, 0.8); border-color: #ff9999; }
 body.dark-mode .light.yellow { background: #ffcb05; box-shadow: 0 0 15px 3px rgba(255, 203, 5, 0.8); border-color: #ffee99; }
