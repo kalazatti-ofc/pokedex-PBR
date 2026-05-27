@@ -1,10 +1,9 @@
 <div align="center">
   <h1>
     <img src="https://raw.githubusercontent.com/RajinV/pokedex-project-1/master/Pokeball-ani.gif" width="35" align="center"> 
-    POKÉDEX PBR 
+    POKEDEX PBR 
     <img src="https://raw.githubusercontent.com/RajinV/pokedex-project-1/master/Pokeball-ani.gif" width="35" align="center">
   </h1>
-  
   <h3>Sistema de Rastreamento Global</h3>
 
   <p>
@@ -16,7 +15,7 @@
   </p>
 
   <br>
-  <em>"Olá! Bem-vindo ao mundo de POKéMON! Este equipamento contém o conhecimento coletivo de vários treinadores experientes..." 👴🏽🎓</em>
+  <em>"Olá! Bem-vindo ao mundo de PokemonBR - PBR! Este Site contém o conhecimento coletivo de vários treinadores experientes..." 👴🏽🎓</em>
 </div>
 
 ---
