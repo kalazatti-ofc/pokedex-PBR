@@ -23,10 +23,11 @@ Espero que goste, faça bom use e divulge! ^^
 ### 🌟 Funcionalidades Principais
 
 * 🗺️ **Radar de Coordenadas:** Localizações exatas (X, Y, Z) divididas por Região e Rota.
+* ✅ **Checklist de Pokedex (Local Save):** Marque os Pokémon já registrados na sua pokedex clicando na Pokébola direto no card. Seu progresso fica salvo no navegador, e você pode usar o filtro inteligente para focar apenas nos que estão "Faltando" para o seu 100%!
 * 💬 **Notas de Campo e Restrições:** Avisos visuais se um Pokémon precisa de Quests, itens de pesca ou acesso VIP.
+* 🌙 **Modo Noturno (Joystick Mode):** Cansou a vista? Aperte o botão de tema no canto superior direito para ativar o painel noturno neon.
 * 🧬 **Cadeia Evolutiva Dinâmica:** Sincronização de DNA para mostrar as evoluções diretas do Pokémon.
 * 📊 **Status e Fraquezas:** Cálculo automático de vantagem de tipos (Resistências e Fraquezas).
-* 🌙 **Modo Noturno (Joystick Mode):** Cansou a vista? Aperte o botão de tema no canto superior direito para ativar o painel noturno neon.
 
 ---
 
