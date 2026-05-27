@@ -46,7 +46,6 @@ body {
     transition: background 0.3s ease;
 }
 
-/* Header com position relative para o Botão Joystick se alinhar a ele */
 .pokedex-header { display: flex; flex-direction: column; align-items: stretch; position: relative; }
 
 .main-lens-container { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 10px; }
@@ -306,16 +305,34 @@ body {
         transform: translateX(-50%);
     }
 }
+
+/* ==============================================================
+   OTIMIZAÇÕES EXCLUSIVAS PARA CELULAR (MOBILE)
+============================================================== */
 @media (max-width: 768px) {
     .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
     .pokedex-main-display { flex: none; height: 350px; max-height: 350px; }
     .pokemon-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 8px; }
     .pk-card { padding: 8px; border-width: 2px; }
     .pk-card img { width: 55px; height: 55px; }
-    .pk-name { font-size: 0.7rem; }
+    
+    /* Nome no Card: Ajustado para o tamanho correto e com corte "..." se for bizarramente longo */
+    .pk-name { 
+        font-size: 0.6rem; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+    }
     .pk-id { font-size: 0.55rem; }
+    
     .pokedex-title { font-size: 2.2rem; }
     .pokedex-title span { font-size: 1.2rem; }
+
+    /* Ajustes na Tela Principal do Modal para Mobile (Sem empilhar e sem quebrar layout) */
+    .main-screen { padding: 10px; }
+    .poke-img-large { width: 80px; height: 80px; } 
+    .screen-info h2 { font-size: 1.1rem; margin-bottom: 4px; } 
+    .tag { padding: 3px 6px; font-size: 0.6rem; } 
 }
 
 /* POP-UP DO PROFESSOR OAK */
