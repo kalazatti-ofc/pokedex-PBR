@@ -141,8 +141,31 @@ body {
 }
 
 .pokedex-filters { margin-bottom: 20px; }
-.filter-toggle { width: 100%; background: #111; color: #ffcb05; border: 3px solid var(--dex-border); padding: 10px 15px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; font-weight: bold; text-align: left; cursor: pointer; margin-bottom: 8px; box-shadow: 3px 3px 0 rgba(0,0,0,0.4); transition: 0.1s; text-shadow: 1px 1px 0 #000; }
-.filter-toggle:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
+
+/* ==============================================================
+   BOTÕES DE FILTRO (AGORA NO ESTILO AMARELO 3D)
+============================================================== */
+.filter-toggle { 
+    width: 100%; 
+    background: #ffcb05; 
+    color: var(--dex-border); 
+    border: 3px solid var(--dex-border); 
+    padding: 10px 15px; 
+    border-radius: 8px; 
+    font-family: monospace; 
+    font-size: 0.8rem; 
+    font-weight: 900; 
+    text-align: left; 
+    cursor: pointer; 
+    margin-bottom: 8px; 
+    box-shadow: 3px 3px 0 var(--dex-border); 
+    transition: 0.1s ease-in-out; 
+    outline: none; 
+}
+.filter-toggle:active { 
+    transform: translate(3px, 3px); 
+    box-shadow: 0 0 0 transparent; 
+}
 .hidden-filter { display: none !important; }
 
 .filter-group { background: rgba(0,0,0,0.15); padding: 12px; border-radius: 8px; border: 2px dashed rgba(0,0,0,0.3); margin-bottom: 12px; }
@@ -228,7 +251,6 @@ body {
 .info-tooltip { position: relative; cursor: help; }
 .info-tooltip:hover { opacity: 1; filter: drop-shadow(0 0 5px #ffcb05); }
 
-/* Balão abre para a ESQUERDA e quebra linha se for muito grande */
 .info-tooltip::after {
     content: attr(data-tooltip); 
     position: absolute; right: 150%; top: 50%; transform: translateY(-50%);
@@ -385,11 +407,14 @@ body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
 body.dark-mode .stat-num { color: #ddd; }
 body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 10px #ffcb05; background: #111; border-color: #050505;}
 
-/* O botão de pesquisa também fica no clima noturno! */
-body.dark-mode .search-btn {
+body.dark-mode .search-btn { background: #e6b800; border-color: #111; box-shadow: 2px 2px 0 #111; }
+
+/* Adicionado o filtro de botões no modo escuro também */
+body.dark-mode .filter-toggle {
     background: #e6b800;
     border-color: #111;
-    box-shadow: 2px 2px 0 #111;
+    box-shadow: 3px 3px 0 #111;
+    color: #111;
 }
 
 body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
