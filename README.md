@@ -16,7 +16,7 @@
 
 Cansado de esquecer onde fica aquele respawn específico? 
 Ou de viajar o mapa inteiro e descobrir que o Pokémon precisava de uma *Quest* ou de uma *Super Rod*? 
-Spoiler : Eu também. 
+* Spoiler : Eu também. 
 Por isso, desencolvi este banco de dados com a ajuda da comunidade, para facilitar a vida de novos e velhos jogadores.
 Espero que goste, faça bom use e divulge! ^^
 
@@ -42,6 +42,16 @@ Este projeto é movido pela comunidade! Como o mundo Pokémon é gigantesco, nov
 2. Abra o arquivo `data.json`.
 3. Adicione a nova localização seguindo a sintaxe do sistema.
 4. Envie um **Pull Request** para avaliarmos a sua descoberta!
+
+---
+
+## 📬 Contato & Feedback
+
+Encontrou algum bug? Tem uma sugestão de nova funcionalidade ou descobriu um respawn secreto que precisa entrar na Dex? 
+Fique à vontade para me chamar!
+
+* 🎮 **In-game:** Kalazatti
+* 👾 **Discord:** Kalazatti
 
 ---
 
