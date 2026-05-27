@@ -57,4 +57,4 @@ Fique à vontade para me chamar!
 
 ## ⚠️ Disclaimer 
 
-Este é um projeto sem fins lucrativos, feito por paixão à franquia e à comunidade de MMO. Não possuímos os direitos de imagem sobre a marca Pokémon, artes ou sprites, que pertencem legalmente à Nintendo/Creatures Inc./GAME FREAK inc.
+Este é um projeto sem fins lucrativos, feito por paixão à franquia e à comunidade do PBR. Não possuímos os direitos de imagem sobre a marca Pokémon, artes ou sprites, que pertencem legalmente à Nintendo/Creatures Inc./GAME FREAK inc.
