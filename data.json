@@ -545,6 +545,10 @@
     "locations": [
       "Vermilion (X 965 / Y 1309 / Z 2)",
       {
+        "local": "Vermilion (X 965 / Y 1309 / Z 2)"",
+        "nota": "📌 Casa Elétrica"
+      },
+      {
         "local": "Singer (X 1651 / Y 1015 / Z 7)",
         "nota": "📌 Casa Elétrica"
       }
@@ -571,7 +575,7 @@
       {
         "local": "Vermilion (X 965 / Y 1309 / Z 2)"",
         "nota": "📌 Casa Elétrica"
-      }            
+      },
       {
         "local": "Singer (X 1651 / Y 1015 / Z 7)",
         "nota": "📌 Casa Elétrica"
