@@ -2,6 +2,9 @@ let pokemonData = [];
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
 
+// Variável que guarda a checklist de capturados lendo direto do navegador do jogador
+let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
+
 const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 
 const typeModifiers = {
@@ -23,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupToggles();
     initOakModal();
     
-    // SISTEMA DO TEMA ESCURO
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         if (localStorage.getItem('pokedex-dark-mode') === 'true') {
@@ -38,20 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.close-btn').onclick = () => document.getElementById('pokemon-modal').classList.add('hidden');
     window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
     
-    // Filtro em tempo real ao digitar
     document.getElementById('search-input').addEventListener('input', applyFilters);
 
-    // Esconde o teclado do celular ao apertar "Enter" / "Pesquisar"
     document.getElementById('search-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            this.blur(); // Remove o foco do input
+            this.blur(); 
         }
     });
 
-    // Ação do Botão da Lupa
     document.getElementById('search-btn').addEventListener('click', () => {
         applyFilters();
-        document.getElementById('search-input').blur(); // Tira o foco para abaixar o teclado
+        document.getElementById('search-input').blur(); 
     });
 });
 
@@ -110,20 +109,44 @@ function applyFilters() {
     renderPokemon(filtered);
 }
 
+// Lógica de Salvar e Remover da Checklist de Capturados
+window.toggleCatch = (event, id) => {
+    event.stopPropagation(); // Evita que o modal do Pokémon abra ao clicar na Pokébola
+    const idx = caughtPokemon.indexOf(id);
+    
+    if(idx > -1) {
+        caughtPokemon.splice(idx, 1);
+        event.target.classList.remove('caught');
+    } else {
+        caughtPokemon.push(id);
+        event.target.classList.add('caught');
+    }
+    
+    localStorage.setItem('pokedex-caught', JSON.stringify(caughtPokemon));
+};
+
 function renderPokemon(list) {
     const grid = document.getElementById('pokedex-grid');
-    grid.innerHTML = list.map(p => `
-        <div class="pk-card" onclick="openModal(${p.id})">
-            <div class="pk-card-inner">
-                <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
-                <img src="${p.image}" loading="lazy">
-                <h3 class="pk-name">${p.name}</h3>
-                <div class="pk-types-mini">
-                    ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
+    grid.innerHTML = list.map(p => {
+        // Verifica se o Pokémon já está na lista de capturados
+        const isCaught = caughtPokemon.includes(p.id);
+        
+        return `
+            <div class="pk-card" onclick="openModal(${p.id})">
+                <div class="pk-card-inner">
+                    <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
+                    
+                    <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, ${p.id})" title="Marcar como Capturado"></div>
+                    
+                    <img src="${p.image}" loading="lazy">
+                    <h3 class="pk-name">${p.name}</h3>
+                    <div class="pk-types-mini">
+                        ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 window.toggleAccordion = (arrowEl, event) => {
@@ -376,15 +399,14 @@ window.showRadarFallback = (name) => {
 };
 
 // ==============================================================
-// PROFESSOR OAK
+// PROFESSOR OAK (AGORA APARECE SEMPRE)
 // ==============================================================
 const oakDialogues = [
-    "Olá! Bem-vindo ao mundo do PokemonBR - PBR!",
-    "Esta Pokedex e uma pagina criada de fãs para fãs. E não é um produto oficial do servidor PBR!",
+    "Olá! Bem-vindo ao mundo de POKeMON!",
+    "Esta Pokedex PBR e uma pagina criada de fa para fa. Desenvolvida por: Kalazatti.",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: Paleguazv, Upzin, Leander Hastings, Marllin ... Insira os nicks aqui!",
-    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caça!",
-    "Desenvolvida por: Kalazatti."
+    "Apoiadores: [Nick1], [Nick2], [Nick3]... Insira os nicks aqui!",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
 ];
 
 let currentDialogIndex = 0;
@@ -398,14 +420,12 @@ function initOakModal() {
     const closeBtn = document.getElementById('close-oak');
     const dialogBox = document.getElementById('oak-dialog-box');
     
-    if (!localStorage.getItem('hasSeenOakIntro')) {
-        oakModal.classList.remove('hidden');
-        startTyping();
-    }
+    // Removido o bloqueio do localStorage. Agora abre sempre!
+    oakModal.classList.remove('hidden');
+    startTyping();
 
     closeBtn.addEventListener('click', () => {
         oakModal.classList.add('hidden');
-        localStorage.setItem('hasSeenOakIntro', 'true');
     });
 
     dialogBox.addEventListener('click', () => {
@@ -423,11 +443,11 @@ function initOakModal() {
                 startTyping();
             } else {
                 oakModal.classList.add('hidden');
-                localStorage.setItem('hasSeenOakIntro', 'true');
             }
         }
     });
 }
+
 function startTyping() {
     const textContainer = document.getElementById('oak-text');
     const arrow = document.getElementById('oak-arrow');
