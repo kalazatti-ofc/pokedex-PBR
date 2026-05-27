@@ -1,3 +1,26 @@
+<div align="center">
+  <h1>
+    <img src="https://raw.githubusercontent.com/RajinV/pokedex-project-1/master/Pokeball-ani.gif" width="35" align="center"> 
+    POKÉDEX PBR 
+    <img src="https://raw.githubusercontent.com/RajinV/pokedex-project-1/master/Pokeball-ani.gif" width="35" align="center">
+  </h1>
+  
+  <h3>Sistema de Rastreamento Global</h3>
+
+  <p>
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+    <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E">
+    <img src="https://img.shields.io/badge/Status-Em_Desenvolvimento-success?style=for-the-badge">
+    <img src="https://img.shields.io/badge/Projeto-De_Fã_Para_Fã-red?style=for-the-badge">
+  </p>
+
+  <br>
+  <em>"Olá! Bem-vindo ao mundo de POKéMON! Este equipamento contém o conhecimento coletivo de vários treinadores experientes..." 👴🏽🎓</em>
+</div>
+
+---
+
 # <img src="https://raw.githubusercontent.com/RajinV/pokedex-project-1/master/Pokeball-ani.gif" width="35" align="center"> POKÉDEX PBR <img src="https://raw.githubusercontent.com/RajinV/pokedex-project-1/master/Pokeball-ani.gif" width="35" align="center">
 > Sistema de Rastreamento Global
 
