@@ -112,7 +112,7 @@ function setupToggles() {
     document.getElementById('toggle-catch').onclick = function() {
         const group = document.getElementById('group-catch');
         group.classList.toggle('hidden-filter');
-        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DE CAPTURA' : '▲ ESCONDER STATUS';
+        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DA POKEDEX' : '▲ ESCONDER STATUS';
     };
 }
 
