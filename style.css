@@ -141,10 +141,6 @@ body {
 }
 
 .pokedex-filters { margin-bottom: 20px; }
-
-/* ==============================================================
-   BOTÕES DE FILTRO (AGORA NO ESTILO AMARELO 3D)
-============================================================== */
 .filter-toggle { 
     width: 100%; 
     background: #ffcb05; 
@@ -207,6 +203,50 @@ body {
 .pk-name { font-size: 0.8rem; font-weight: 800; color: var(--dex-border); text-transform: uppercase; z-index: 2; position: relative; margin: 4px 0; transition: color 0.3s ease;}
 .pk-types-mini { display: flex; justify-content: center; gap: 4px; z-index: 2; position: relative;}
 .type-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--dex-border); }
+
+/* ==============================================================
+   BOTÃO DE CHECKLIST (POKÉBOLA CAPTURADO)
+============================================================== */
+.catch-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--dex-border);
+    background: linear-gradient(to bottom, #ccc 45%, var(--dex-border) 45%, var(--dex-border) 55%, #f0f0f0 55%);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    opacity: 0.6;
+}
+.catch-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px; height: 6px;
+    background: #fff;
+    border: 2px solid var(--dex-border);
+    border-radius: 50%;
+}
+.catch-btn:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+.catch-btn.caught {
+    background: linear-gradient(to bottom, #ff3333 45%, var(--dex-border) 45%, var(--dex-border) 55%, #fff 55%);
+    opacity: 1;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+    animation: catchBounce 0.4s ease;
+}
+@keyframes catchBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3) rotate(-15deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
 
 /* =========================================
    MODAL POKÉDEX AVANÇADA
@@ -409,13 +449,16 @@ body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #f
 
 body.dark-mode .search-btn { background: #e6b800; border-color: #111; box-shadow: 2px 2px 0 #111; }
 
-/* Adicionado o filtro de botões no modo escuro também */
 body.dark-mode .filter-toggle {
     background: #e6b800;
     border-color: #111;
     box-shadow: 3px 3px 0 #111;
     color: #111;
 }
+
+/* Pokébola escura na checklist */
+body.dark-mode .catch-btn { border-color: #111; box-shadow: 2px 2px 0 rgba(0,0,0,0.8); }
+body.dark-mode .catch-btn::after { border-color: #111; }
 
 body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
 body.dark-mode .light.red { background: #ff3333; box-shadow: 0 0 15px 3px rgba(255, 51, 51, 0.8); border-color: #ff9999; }
