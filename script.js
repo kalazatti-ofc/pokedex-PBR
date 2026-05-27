@@ -1,7 +1,7 @@
 let pokemonData = [];
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
-let activeCatchFilter = 'all'; // Nova variável para o filtro de captura
+let activeCatchFilter = 'all';
 
 // Variável que guarda a checklist de capturados lendo direto do navegador do jogador
 let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('search-input').blur(); 
     });
 
-    // Lógica dos Botões de Filtro de Captura
     document.querySelectorAll('#catch-filters .filter-pill').forEach(pill => {
         pill.addEventListener('click', () => {
             document.querySelectorAll('#catch-filters .filter-pill').forEach(p => p.classList.remove('active'));
@@ -85,7 +84,6 @@ function renderTypeButtons() {
     document.querySelectorAll('.filter-pill').forEach(pill => {
         pill.addEventListener('click', () => {
             const group = pill.closest('.pills-container').id;
-            // Só reseta os botões que estão dentro do grupo em que clicamos
             document.getElementById(group).querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             pill.classList.add('active');
             
@@ -108,11 +106,10 @@ function setupToggles() {
         group.classList.toggle('hidden-filter');
         this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTRAR POR TIPO' : '▲ ESCONDER TIPOS';
     };
-    // Novo evento de recolher para o botão de Captura
     document.getElementById('toggle-catch').onclick = function() {
         const group = document.getElementById('group-catch');
         group.classList.toggle('hidden-filter');
-        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DA POKEDEX' : '▲ ESCONDER STATUS';
+        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DE CAPTURA' : '▲ ESCONDER STATUS';
     };
 }
 
@@ -123,7 +120,6 @@ function applyFilters() {
         const mGen = activeGenFilter === 'all' || p.generation.toString() === activeGenFilter;
         const mType = activeTypeFilter === 'all' || p.types.includes(activeTypeFilter);
         
-        // Aplicação lógica do Filtro de Capturados
         const isCaught = caughtPokemon.includes(p.id);
         let mCatch = true;
         if (activeCatchFilter === 'caught') mCatch = isCaught;
@@ -134,9 +130,8 @@ function applyFilters() {
     renderPokemon(filtered);
 }
 
-// Lógica de Salvar e Remover da Checklist de Capturados
 window.toggleCatch = (event, id) => {
-    event.stopPropagation(); // Evita que o modal do Pokémon abra ao clicar na Pokébola
+    event.stopPropagation();
     const idx = caughtPokemon.indexOf(id);
     
     if(idx > -1) {
@@ -149,7 +144,6 @@ window.toggleCatch = (event, id) => {
     
     localStorage.setItem('pokedex-caught', JSON.stringify(caughtPokemon));
 
-    // Re-aplica o filtro na hora. Ex: Se estou visualizando só "Faltando" e clico na pokebola, o pokemon some da tela.
     if (activeCatchFilter !== 'all') {
         applyFilters();
     }
@@ -158,16 +152,12 @@ window.toggleCatch = (event, id) => {
 function renderPokemon(list) {
     const grid = document.getElementById('pokedex-grid');
     grid.innerHTML = list.map(p => {
-        // Verifica se o Pokémon já está na lista de capturados
         const isCaught = caughtPokemon.includes(p.id);
-        
         return `
             <div class="pk-card" onclick="openModal(${p.id})">
                 <div class="pk-card-inner">
                     <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
-                    
                     <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, ${p.id})" title="Marcar como Capturado"></div>
-                    
                     <img src="${p.image}" loading="lazy">
                     <h3 class="pk-name">${p.name}</h3>
                     <div class="pk-types-mini">
@@ -186,6 +176,28 @@ window.toggleAccordion = (arrowEl, event) => {
     arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
 };
 
+// Nova Função Global de Copiar
+window.copyLoc = (text, el, event) => {
+    if(event) event.stopPropagation(); // Evita ativar o radar
+    
+    const msg = `📍 Respawn: ${text}`;
+    
+    navigator.clipboard.writeText(msg).then(() => {
+        const originalIcon = el.innerText;
+        el.innerText = '✅';
+        el.style.color = '#32cd32';
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1.2)';
+        
+        setTimeout(() => { 
+            el.innerText = originalIcon; 
+            el.style.color = '';
+            el.style.opacity = '';
+            el.style.transform = '';
+        }, 1200);
+    }).catch(err => console.error('Erro ao copiar: ', err));
+};
+
 window.openModal = (id) => {
     const p = pokemonData.find(x => x.id === id);
     if(!p) return;
@@ -197,7 +209,10 @@ window.openModal = (id) => {
             return `
                 <div class="loc-button" onclick="updateRadar('${loc}', this)">
                     <span class="loc-text">${loc}</span>
-                    <span class="loc-icon">🗺️</span>
+                    <div class="loc-actions">
+                        <span class="loc-icon copy-icon" title="Copiar Coordenada" onclick="copyLoc('${loc}', this, event)">📋</span>
+                        <span class="loc-icon">🗺️</span>
+                    </div>
                 </div>
             `;
         } 
@@ -213,7 +228,10 @@ window.openModal = (id) => {
                 const stepsHTML = loc.passos.map(passo => `
                     <div class="loc-step" onclick="updateRadar('${passo}', this, event)">
                         <span class="loc-text">${passo}</span>
-                        <span class="loc-icon">📍</span>
+                        <div class="loc-actions">
+                            <span class="loc-icon copy-icon" title="Copiar Passo" onclick="copyLoc('${passo}', this, event)">📋</span>
+                            <span class="loc-icon">📍</span>
+                        </div>
                     </div>
                 `).join('');
 
@@ -223,6 +241,7 @@ window.openModal = (id) => {
                             <span class="loc-text">${locName}</span>
                             <div class="loc-actions">
                                 ${noteHTML}
+                                <span class="loc-icon copy-icon" title="Copiar Local" onclick="copyLoc('${locName}', this, event)">📋</span>
                                 <span class="loc-icon expand-arrow" title="Ver Coordenadas" onclick="toggleAccordion(this, event)">▼</span>
                             </div>
                         </div>
@@ -237,6 +256,7 @@ window.openModal = (id) => {
                         <span class="loc-text">${locName}</span>
                         <div class="loc-actions">
                             ${noteHTML}
+                            <span class="loc-icon copy-icon" title="Copiar Coordenada" onclick="copyLoc('${locName}', this, event)">📋</span>
                             <span class="loc-icon">🗺️</span>
                         </div>
                     </div>
@@ -429,15 +449,14 @@ window.showRadarFallback = (name) => {
 };
 
 // ==============================================================
-// PROFESSOR OAK (AGORA APARECE SEMPRE)
+// PROFESSOR OAK
 // ==============================================================
 const oakDialogues = [
-    "Olá! Bem-vindo ao mundo de PokemonBR!",
-    "Esta é uma Pokedex criada de fãs para fãs, e não é um produto oficial do servidor!",
+    "Olá! Bem-vindo ao mundo de POKeMON!",
+    "Esta Pokedex PBR e uma pagina criada de fa para fa. Desenvolvida por: Kalazatti.",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: Leander Hastings, Upzin, Paleguazv, Marlin...(Ainda preciso adicionar outros :D )",
-    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!",
-    "Desenvolvida por: Kalazatti."
+    "Apoiadores: [Nick1], [Nick2], [Nick3]... Insira os nicks aqui!",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
 ];
 
 let currentDialogIndex = 0;
@@ -451,7 +470,6 @@ function initOakModal() {
     const closeBtn = document.getElementById('close-oak');
     const dialogBox = document.getElementById('oak-dialog-box');
     
-    // Removido o bloqueio do localStorage. Agora abre sempre!
     oakModal.classList.remove('hidden');
     startTyping();
 
