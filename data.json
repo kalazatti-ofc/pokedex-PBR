@@ -2761,7 +2761,7 @@
       },
       {
         "local": "Pewter (X 807 / Y 725 / Z 7)",
-        "nota": "📌 Buraco na frente da árvore amarela."
+        "nota": "📌 Quest Cristal Stone - Entre no buraco em frente a árvore amarela."
       }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/131.png"
@@ -3034,8 +3034,14 @@
       "spd": 85
     },
     "locations": [
-      "Quest Crystal stone",
-      "Quest Ice Stone"
+      {
+        "local": "Sunshine (X 1329 / Y 1827 / Z 7)",
+        "nota": "📌 Quest Ice Stone - LVL 250."
+      },
+      {
+        "local": "Pewter (X 807 / Y 725 / Z 7)",
+        "nota": "📌 Quest Cristal Stone - Entre no buraco em frente a árvore amarela."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/144.png"
   },
