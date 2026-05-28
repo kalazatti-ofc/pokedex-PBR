@@ -2727,7 +2727,10 @@
       "spd": 81
     },
     "locations": [
-      "Pewter <tem um buraco na frende da árvore amarela) (X 807 / Y 725 / Z 7)"
+      {
+        "local": "Pewter (X 807 / Y 725 / Z 7)",
+        "nota": "📌 Buraco na frente da árvore amarela."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png"
   },
@@ -2748,8 +2751,18 @@
       "spd": 60
     },
     "locations": [
-      "Singer (X 1849 / Y 1098 / Z 5)",
-      "Pewter <tem um buraco na frende da árvore amarela) (X 807 / Y 725 / Z 7)"
+      {
+        "local": "Singer (X 1849 / Y 1098 / Z 5)",
+        "nota": ""
+      },
+      {
+        "local": "Sunshine (X 1329 / Y 1827 / Z 7)",
+        "nota": "📌 Quest Ice Stone - LVL 250."
+      },
+      {
+        "local": "Pewter (X 807 / Y 725 / Z 7)",
+        "nota": "📌 Buraco na frente da árvore amarela."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/131.png"
   },
