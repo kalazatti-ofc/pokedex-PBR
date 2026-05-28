@@ -31,7 +31,7 @@
 Cansado de esquecer onde fica aquele respawn específico? 
 Ou de viajar o mapa inteiro e descobrir que o Pokémon precisava de uma *Quest* ou de uma *Super Rod*? 
 * Spoiler : Eu também. 
-Por isso, desencolvi este banco de dados com a ajuda da comunidade, para facilitar a vida de novos e velhos jogadores.
+Por isso, desenvolvi este banco de dados com a ajuda da comunidade, para facilitar a vida de novos e velhos jogadores.
 Espero que goste, faça bom use e divulge! ^^
 
 ### 🌟 Funcionalidades Principais
