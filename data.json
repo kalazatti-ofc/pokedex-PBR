@@ -1067,7 +1067,8 @@
         "local": "Azalea (X 1691 / Y 566 / Z 7)",
         "nota": "Respawn direto"
       }
-    ],
+    ]
+  },
   {
     "id": 50,
     "name": "Diglett",
@@ -3821,7 +3822,7 @@
       {
         "local": "Vermilion (X 965 / Y 1309 / Z 2)",
         "nota": "📌 Casa Elétrica"
-      }      
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/181.png"
   },
