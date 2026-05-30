@@ -7843,7 +7843,13 @@
       "spd": 30
     },
     "locations": [
-      "Cinnabar <descendo a escada> (X 802 / Y 1264 / Z 7)"
+      {
+        "rota": "Cinnabar (X 802 / Y 1264 / Z 7)",
+        "passos": [
+          "1. Cinnabar (X 802 / Y 1264 / Z 7)",
+          "2. Desça as escadas (X 796 / Y 1273 / Z 9)"
+        ]
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/374.png"
   },
@@ -7869,7 +7875,7 @@
         "rota": "Cinnabar (X 802 / Y 1264 / Z 7)",
         "passos": [
           "1. Cinnabar (X 802 / Y 1264 / Z 7)",
-          "2. Dessa as escadas (X 796 / Y 1273 / Z 9)"
+          "2. Desça as escadas (X 796 / Y 1273 / Z 9)"
         ]
       }
     ]
@@ -7891,7 +7897,7 @@
       "spd": 70
     },
     "locations": [
-      "Cinnabar <descendo a escada> (X 802 / Y 1264 / Z 7)"
+      "Cinnabar (X 802 / Y 1264 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/376.png"
   },
