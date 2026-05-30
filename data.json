@@ -1056,11 +1056,18 @@
       "spd": 90
     },
     "locations": [
-      "NPC Hunt no Trainer Center",
-      "Azalea (X 1691 / Y 566 / Z 7)"
+      {
+        "rota": "Trainer Center (X 100 / Y 200 / Z 3)",
+        "passos": [
+          "NPC Hunt no Trainer Center",
+        ],
+        "nota": "📌 Necessário pagar HDs para poder farmar"
+      },
+      {
+        "local": "Azalea (X 1691 / Y 566 / Z 7)",
+        "nota": "Respawn direto"
+      }
     ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png"
-  },
   {
     "id": 50,
     "name": "Diglett",
