@@ -1056,7 +1056,7 @@
       "spd": 90
     },
     "locations": [
-      "NPC Hunt no TC",
+      "NPC Hunt no Trainer Center",
       "Azalea (X 1691 / Y 566 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png"
@@ -2646,7 +2646,8 @@
     },
     "locations": [
       "Vermilion (X 886 / Y 1566 / Z 4)",
-      "Yorkshin (X 2040 / Y 984 / Z 7)"
+      "Yorkshin (X 2040 / Y 984 / Z 7)",
+      "Azalea (X 1400 / Y 558 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/126.png"
   },
@@ -3269,7 +3270,7 @@
       "spd": 65
     },
     "locations": [
-      "Azalea (X 1381 / Y 556 / Z 7)"
+      "Azalea (X 1400 / Y 558 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/155.png"
   },
@@ -3289,7 +3290,7 @@
       "spd": 80
     },
     "locations": [
-      "Azalea (X 1381 / Y 556 / Z 7)"
+      "Azalea (X 1400 / Y 558 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/156.png"
   },
@@ -3309,7 +3310,7 @@
       "spd": 100
     },
     "locations": [
-      "Azalea (X 1489 / Y 527 / Z 6)"
+      "Azalea (X 1400 / Y 558 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/157.png"
   },
@@ -4040,7 +4041,7 @@
       "spd": 30
     },
     "locations": [
-      "NPC Hunt"
+      "NPC Hunt no Trainer Center"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/192.png"
   },
@@ -9702,8 +9703,9 @@
       "spd": 83
     },
     "locations": [
-      "NPC Hunt no TC",
-      "Yorkshin (X 2040 / Y 984 / Z 7)"
+      "NPC Hunt no Trainer Center",
+      "Yorkshin (X 2040 / Y 984 / Z 7)",
+      "Azalea (X 1400 / Y 558 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/467.png"
   },
