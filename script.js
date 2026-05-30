@@ -180,7 +180,7 @@ window.toggleAccordion = (arrowEl, event) => {
 window.copyLoc = (text, el, event) => {
     if(event) event.stopPropagation(); // Evita ativar o radar
     
-    const msg = `📍 Respawn: ${text}`;
+    const msg = text;
     
     navigator.clipboard.writeText(msg).then(() => {
         const originalIcon = el.innerText;
