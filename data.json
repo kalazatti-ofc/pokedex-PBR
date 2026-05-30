@@ -10653,7 +10653,10 @@
       "spd": 24
     },
     "locations": [
-      "Pastoria <clique na bancada> (X 3872 / Y 2136 / Z 7)"
+      {
+        "local": "Pastoria (X 3872 / Y 2136 / Z 7)",
+        "nota": "🔑 Clique na Bancada"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/517.png"
   },
