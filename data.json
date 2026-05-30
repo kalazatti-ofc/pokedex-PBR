@@ -7426,7 +7426,15 @@
       "spd": 65
     },
     "locations": [
-      "bannete Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "rota": "Banete Sandgem (X 3788 / Y 2330 / Z 7)",
+        "passos": [
+          "1. Buraco entre as Árvores (X 3788 / Y 2330 / Z 7)",
+          "2. Entre no Buraco (X 3752 / Y 2282 / Z 8)",
+          "3.  Vá até o Totem (X 3774 / Y 2283 / Z 9)",
+          "4. Escreva “Onied” de frente para o Totem "
+        ]
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/354.png"
   },
@@ -7897,7 +7905,15 @@
       "spd": 70
     },
     "locations": [
-      "Cinnabar (X 802 / Y 1264 / Z 7)"
+      {
+        "rota": "Cinnabar (X 802 / Y 1264 / Z 7)",
+        "passos": [
+          "1. Cinnabar (X 802 / Y 1264 / Z 7)",
+          "2. Desça as escadas (X 796 / Y 1273 / Z 9)",
+          "3. Clique nos livros (X 791 / Y 1328 / Z 9)",
+          "4. Entre na Porta (X 750 / Y 1306 / Z 10)"
+        ]
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/376.png"
   },
