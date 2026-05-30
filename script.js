@@ -176,7 +176,7 @@ window.toggleAccordion = (arrowEl, event) => {
     arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
 };
 
-// Nova Função Global de Copiar
+// Nova Função Global de Copiar (Texto Limpo)
 window.copyLoc = (text, el, event) => {
     if(event) event.stopPropagation(); // Evita ativar o radar
     
