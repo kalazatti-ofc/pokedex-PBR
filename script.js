@@ -257,7 +257,6 @@ window.openModal = (id) => {
                         <div class="loc-actions">
                             ${noteHTML}
                             <span class="loc-icon copy-icon" title="Copiar Coordenada" onclick="copyLoc('${locName}', this, event)">📋</span>
-                            <span class="loc-icon">🗺️</span>
                         </div>
                     </div>
                 `;
@@ -271,7 +270,7 @@ window.openModal = (id) => {
             <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
             <span class="stat-num">${val}</span>
         </div>
-    `).join('');
+    `);
 
     document.getElementById('modal-body').innerHTML = `
         <div class="modal-pokedex-view">
@@ -305,7 +304,7 @@ window.openModal = (id) => {
 
                 <div class="data-module">
                     <h4 class="label-tech">STATUS BASE</h4>
-                    <div class="stats-list">${statsHTML}</div>
+                    <div class="stats-list">${statsHTML.join('')}</div>
                 </div>
 
                 <div class="eff-module">
