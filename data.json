@@ -1057,9 +1057,9 @@
     },
     "locations": [
       {
-        "rota": "Trainer Center (X 100 / Y 200 / Z 3)",
+        "rota": "Trainer Center",
         "passos": [
-          "NPC Hunt no Trainer Center"
+          "NPC Hunt no Trainer Center (X 868 / Y 2104 / Z 7)"
         ],
         "nota": "📌 Necessário pagar HDs para poder farmar"
       },
@@ -4051,9 +4051,9 @@
     },
     "locations": [
       {
-        "rota": "Trainer Center (X 100 / Y 200 / Z 3)",
+        "rota": "Trainer Center",
         "passos": [
-          "NPC Hunt no Trainer Center"
+          "NPC Hunt no Trainer Center (X 868 / Y 2104 / Z 7)"
         ],
         "nota": "📌 Necessário pagar HDs para poder farmar"
       }
@@ -9718,7 +9718,13 @@
       "spd": 83
     },
     "locations": [
-      "NPC Hunt no Trainer Center",
+      {
+        "rota": "Trainer Center",
+        "passos": [
+          "NPC Hunt no Trainer Center (X 868 / Y 2104 / Z 7)"
+        ],
+        "nota": "📌 Necessário pagar HDs para poder farmar"
+      },
       "Yorkshin (X 2040 / Y 984 / Z 7)",
       "Azalea (X 1400 / Y 558 / Z 7)"
     ],
