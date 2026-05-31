@@ -887,7 +887,10 @@
       "spd": 55
     },
     "locations": [
-      "Saffron <Entre no Bueiro> (X 1028 / Y 1039 / Z 7)"
+      {
+        "local": "Saffron (X 1028 / Y 1039 / Z 7)",
+        "nota": "📌 Entre no Bueiro"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/41.png"
   },
