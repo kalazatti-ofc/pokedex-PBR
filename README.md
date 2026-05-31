@@ -26,10 +26,10 @@
 
 ## 🔎 Sobre o Projeto
 
-**Pokédex PBR** é um site criado de **fãs para fãs**, com um único objetivo: facilitar a vida dos treinadores na hora de caçar! 
+**Pokedex PBR** é um site criado de **fãs para fãs**, com um único objetivo: facilitar a vida dos treinadores na hora de caçar! 
 
 Cansado de esquecer onde fica aquele respawn específico? 
-Ou de viajar o mapa inteiro e descobrir que o Pokémon precisava de uma *Quest* ou de uma *Super Rod*? 
+Ou de viajar o mapa inteiro e descobrir que o Pokemon precisava de uma *Quest* ou de uma *Super Rod*? 
 * Spoiler : Eu também. 
 Por isso, desenvolvi este banco de dados com a ajuda da comunidade, para facilitar a vida de novos e velhos jogadores.
 Espero que goste, faça bom use e divulge! ^^
@@ -38,11 +38,11 @@ Espero que goste, faça bom use e divulge! ^^
 
 * 🗺️ **Radar de Coordenadas:** Localizações exatas (X, Y, Z) divididas por Região e Rota.
 * 📋 **Cópia Rápida (QoL):** Achou o respawn? Clique no ícone da prancheta (📋) ao lado da coordenada para copiá-la automaticamente e colar no chat do jogo ou Discord para seus amigos!
-* ✅ **Checklist de Captura (Local Save):** Marque os Pokémon já capturados clicando na Pokébola direto no card. Seu progresso fica salvo no seu navegador!
-* 🔍 **Filtro de Status Inteligente:** Use a gaveta "Status de Captura" para esconder quem você já pegou e focar apenas nos Pokémon que estão "Faltando".
-* 💬 **Notas de Campo e Restrições:** Avisos em balões visuais se um Pokémon precisa de Quests, itens de pesca ou acesso VIP.
+* ✅ **Checklist de Captura (Local Save):** Marque os Pokemon já capturados clicando na Pokebola direto no card. Seu progresso fica salvo no seu navegador!
+* 🔍 **Filtro de Status Inteligente:** Use a gaveta "Status de Captura" para esconder quem você já pegou e focar apenas nos Pokemon que estão "Faltando".
+* 💬 **Notas de Campo e Restrições:** Avisos em balões visuais se um Pokemon precisa de Quests, itens de pesca ou acesso VIP.
 * 🌙 **Modo Noturno (Joystick Mode):** Cansou a vista? Aperte o botão de tema no canto superior direito para ativar o painel noturno neon.
-* 🧬 **Cadeia Evolutiva Dinâmica:** Sincronização de DNA puxando direto da PokeAPI para mostrar as evoluções diretas do Pokémon.
+* 🧬 **Cadeia Evolutiva Dinâmica:** Sincronização de DNA puxando direto da PokeAPI para mostrar as evoluções diretas do Pokemon.
 * 📊 **Status e Fraquezas:** Cálculo automático de vantagem de tipos (Resistências e Fraquezas).
 
 ---
@@ -55,7 +55,7 @@ Espero que goste, faça bom use e divulge! ^^
 
 ## 🤝 Como Contribuir 
 
-Este projeto é movido pela comunidade! Como o mundo Pokémon é gigantesco, novos respawns e locais são descobertos todos os dias. Se você encontrou um spawn que não está na Pokédex, você pode ajudar a atualizar nosso banco de dados!
+Este projeto é movido pela comunidade! Como o mundo Pokemon é gigantesco, novos respawns e locais são descobertos todos os dias. Se você encontrou um spawn que não está na Pokedex, você pode ajudar a atualizar nosso banco de dados!
 
 1. Faça um **Fork** deste repositório.
 2. Abra o arquivo `data.json`.
@@ -76,4 +76,4 @@ Fique à vontade para me chamar!
 
 ## ⚠️ Disclaimer 
 
-Este é um projeto sem fins lucrativos, feito por paixão à franquia e à comunidade do PBR. Não possuímos os direitos de imagem sobre a marca Pokémon, artes ou sprites, que pertencem legalmente à Nintendo/Creatures Inc./GAME FREAK inc.
+Este é um projeto sem fins lucrativos, feito por paixão à franquia e à comunidade do PBR. Não possuímos os direitos de imagem sobre a marca Pokemon, artes ou sprites, que pertencem legalmente à Nintendo/Creatures Inc./GAME FREAK inc.
