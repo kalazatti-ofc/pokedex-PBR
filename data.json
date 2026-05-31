@@ -911,7 +911,10 @@
       "spd": 90
     },
     "locations": [
-      "Cerulean <Entre na caverna> (X 1027 / Y 840 / Z 7)"
+      {
+        "local": "Cerulean (X 1027 / Y 840 / Z 7)",
+        "nota": "📌 Entre na Caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/42.png"
   },
@@ -996,7 +999,10 @@
       "spd": 25
     },
     "locations": [
-      "trost <entre no buraco> (X 1378 / Y 1331 / Z 7)"
+      {
+        "local": "Trost (X 1378 / Y 1331 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/46.png"
   },
@@ -1017,7 +1023,10 @@
       "spd": 30
     },
     "locations": [
-      "trost <entre no buraco> (X 1378 / Y 1331 / Z 7)"
+      {
+        "local": "Trost (X 1378 / Y 1331 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/47.png"
   },
@@ -1089,7 +1098,10 @@
       "spd": 95
     },
     "locations": [
-      "Cerulean <Entre na caveira> (X 1114 / Y 856 / Z 7)"
+      {
+        "local": "Cerulean (X 1114 / Y 856 / Z 7)",
+        "nota": "📌 Entre na Caveira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png"
   },
