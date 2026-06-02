@@ -2,8 +2,8 @@ let pokemonData = [];
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
 let activeCatchFilter = 'all';
+let activeCategory = 'normal'; // Controla a aba atual
 
-// Variável que guarda a checklist de capturados lendo direto do navegador do jogador
 let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
 
 const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
@@ -42,13 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onclick = e => { if(e.target.classList.contains('modal-overlay')) document.getElementById('pokemon-modal').classList.add('hidden'); };
     
     document.getElementById('search-input').addEventListener('input', applyFilters);
-
     document.getElementById('search-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            this.blur(); 
-        }
+        if (e.key === 'Enter') this.blur(); 
     });
-
     document.getElementById('search-btn').addEventListener('click', () => {
         applyFilters();
         document.getElementById('search-input').blur(); 
@@ -62,15 +58,36 @@ document.addEventListener('DOMContentLoaded', () => {
             applyFilters();
         });
     });
+
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCategory = btn.dataset.cat;
+            applyFilters();
+        });
+    });
 });
 
 async function fetchData() {
     try {
-        const response = await fetch('data.json?v=' + new Date().getTime());
-        pokemonData = await response.json();
+        // Puxa os três arquivos JSON ao mesmo tempo para não perder velocidade
+        const [normalRes, darkRes, bossRes] = await Promise.all([
+            fetch('data_normal.json?v=' + new Date().getTime()),
+            fetch('data_dark.json?v=' + new Date().getTime()),
+            fetch('data_boss.json?v=' + new Date().getTime())
+        ]);
+
+        // Converte as respostas para JSON
+        const normalData = await normalRes.json();
+        const darkData = await darkRes.json();
+        const bossData = await bossRes.json();
+
+        // Une todos os dados em uma única lista para a Pokédex
+        pokemonData = [...normalData, ...darkData, ...bossData];
         renderPokemon(pokemonData);
     } catch (e) { 
-        console.error("Erro ao carregar banco de dados:", e); 
+        console.error("Erro ao carregar os bancos de dados. Verifique se os nomes dos 3 arquivos JSON estão corretos.", e); 
     }
 }
 
@@ -86,10 +103,8 @@ function renderTypeButtons() {
             const group = pill.closest('.pills-container').id;
             document.getElementById(group).querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             pill.classList.add('active');
-            
             if(group === 'gen-filters') activeGenFilter = pill.dataset.gen;
             if(group === 'type-filters') activeTypeFilter = pill.dataset.type;
-            
             applyFilters();
         });
     });
@@ -115,9 +130,13 @@ function setupToggles() {
 
 function applyFilters() {
     const search = document.getElementById('search-input').value.toLowerCase();
+    
     const filtered = pokemonData.filter(p => {
+        const pCat = p.category || 'normal';
+        if (pCat !== activeCategory) return false;
+
         const mName = p.name.toLowerCase().includes(search) || p.id.toString() === search;
-        const mGen = activeGenFilter === 'all' || p.generation.toString() === activeGenFilter;
+        const mGen = activeGenFilter === 'all' || (p.generation && p.generation.toString() === activeGenFilter);
         const mType = activeTypeFilter === 'all' || p.types.includes(activeTypeFilter);
         
         const isCaught = caughtPokemon.includes(p.id);
@@ -153,15 +172,17 @@ function renderPokemon(list) {
     const grid = document.getElementById('pokedex-grid');
     grid.innerHTML = list.map(p => {
         const isCaught = caughtPokemon.includes(p.id);
+        const pCategory = p.category || 'normal';
+        
         return `
-            <div class="pk-card" onclick="openModal(${p.id})">
+            <div class="pk-card" onclick="openModal('${p.id}')">
                 <div class="pk-card-inner">
                     <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
-                    <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, ${p.id})" title="Marcar como Capturado"></div>
+                    <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, '${p.id}')" title="Marcar como Capturado"></div>
                     <img src="${p.image}" loading="lazy">
                     <h3 class="pk-name">${p.name}</h3>
                     
-                    <div class="pk-gen-bar">GEN ${p.generation}</div>
+                    <div class="pk-gen-bar">${pCategory === 'boss' ? 'BOSS 24H' : (pCategory === 'dark' ? 'DARK' : 'GEN ' + p.generation)}</div>
                     
                     <div class="pk-types-mini">
                         ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
@@ -179,19 +200,15 @@ window.toggleAccordion = (arrowEl, event) => {
     arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
 };
 
-// Função Global de Copiar (Texto Limpo)
 window.copyLoc = (text, el, event) => {
-    if(event) event.stopPropagation(); // Evita ativar o radar
-    
+    if(event) event.stopPropagation(); 
     const msg = text;
-    
     navigator.clipboard.writeText(msg).then(() => {
         const originalIcon = el.innerText;
         el.innerText = '✅';
         el.style.color = '#32cd32';
         el.style.opacity = '1';
         el.style.transform = 'scale(1.2)';
-        
         setTimeout(() => { 
             el.innerText = originalIcon; 
             el.style.color = '';
@@ -202,12 +219,13 @@ window.copyLoc = (text, el, event) => {
 };
 
 window.openModal = (id) => {
-    const p = pokemonData.find(x => x.id === id);
+    const p = pokemonData.find(x => x.id.toString() === id.toString());
     if(!p) return;
     
     const matchups = calculateMatchups(p.types);
+    const pCategory = p.category || 'normal';
     
-    const locationsHTML = p.locations.map(loc => {
+    const locationsHTML = (p.locations || []).map(loc => {
         if (typeof loc === 'string') {
             return `
                 <div class="loc-button" onclick="updateRadar('${loc}', this)">
@@ -222,10 +240,7 @@ window.openModal = (id) => {
         else if (typeof loc === 'object') {
             const isRoute = loc.passos && loc.passos.length > 0;
             const locName = loc.rota || loc.local || 'Local Desconhecido';
-            
-            const noteHTML = loc.nota 
-                ? `<span class="info-tooltip loc-icon" data-tooltip="${loc.nota}">💬</span>` 
-                : '';
+            const noteHTML = loc.nota ? `<span class="info-tooltip loc-icon" data-tooltip="${loc.nota}">💬</span>` : '';
 
             if (isRoute) {
                 const stepsHTML = loc.passos.map(passo => `
@@ -267,70 +282,182 @@ window.openModal = (id) => {
         }
     }).join('');
 
-    const statsHTML = Object.entries(p.stats).map(([name, val]) => `
-        <div class="stat-row">
-            <label>${name.toUpperCase()}</label>
-            <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
-            <span class="stat-num">${val}</span>
-        </div>
-    `).join('');
+    let rightWingHTML = '';
+
+    if (pCategory === 'boss') {
+        rightWingHTML = `
+            <div class="radar-module">
+                <div class="radar-display" id="radar-screen">
+                    <div class="radar-grid"></div><div class="radar-beam"></div>
+                    <p id="radar-label">RASTREANDO...</p>
+                </div>
+            </div>
+
+            <div class="boss-guide-module">
+                <h4 class="label-tech">MANUAL DE COMBATE</h4>
+                <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
+            </div>
+
+            <div class="boss-loot-module">
+                <h4 class="label-tech">RECOMPENSA DIÁRIA</h4>
+                <div class="loot-box">${p.loot || '???'}</div>
+            </div>
+
+            <div class="eff-module">
+                <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                <div class="eff-group">
+                    <label>FRAQUEZAS (Leva 2x Dano)</label>
+                    <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+                <div class="eff-group">
+                    <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                    <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+            </div>
+        `;
+    } else if (pCategory === 'dark') {
+        const statsHTML = Object.entries(p.stats || {}).map(([name, val]) => `
+            <div class="stat-row">
+                <label>${name.toUpperCase()}</label>
+                <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
+                <span class="stat-num">${val}</span>
+            </div>
+        `).join('');
+
+        let soulsHTML = '';
+        if (p.souls) {
+            const soulsNormal = p.souls.normal ? p.souls.normal : '???';
+            const soulsEternizado = p.souls.eternizado ? p.souls.eternizado : '???';
+            soulsHTML = `
+                <div class="souls-module">
+                    <h4 class="label-tech">CUSTO DE CONVERSÃO (SOULS)</h4>
+                    <div class="souls-container">
+                        <div class="soul-box">
+                            <span class="soul-label">NORMAL</span>
+                            <span class="soul-value">${soulsNormal}</span>
+                        </div>
+                        <div class="soul-box eternizado">
+                            <span class="soul-label">ETERNIZADO</span>
+                            <span class="soul-value">${soulsEternizado}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            const textoExclusivo = p.exclusive ? p.exclusive : 'CAPTURA EXCLUSIVA / EVENTO';
+            soulsHTML = `
+                <div class="souls-module">
+                    <h4 class="label-tech">MÉTODO DE OBTENÇÃO</h4>
+                    <span class="exclusive-badge">${textoExclusivo.toUpperCase()}</span>
+                </div>
+            `;
+        }
+
+        rightWingHTML = `
+            <div class="radar-module">
+                <div class="radar-display" id="radar-screen">
+                    <div class="radar-grid"></div><div class="radar-beam"></div>
+                    <p id="radar-label">RASTREANDO...</p>
+                </div>
+            </div>
+
+            <div class="data-module">
+                <h4 class="label-tech">STATUS BASE</h4>
+                <div class="stats-list">${statsHTML}</div>
+            </div>
+
+            ${soulsHTML}
+
+            <div class="eff-module">
+                <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                <div class="eff-group">
+                    <label>FRAQUEZAS (Leva 2x Dano)</label>
+                    <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+                <div class="eff-group">
+                    <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                    <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+            </div>
+        `;
+    } else {
+        const statsHTML = Object.entries(p.stats || {}).map(([name, val]) => `
+            <div class="stat-row">
+                <label>${name.toUpperCase()}</label>
+                <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
+                <span class="stat-num">${val}</span>
+            </div>
+        `).join('');
+
+        rightWingHTML = `
+            <div class="radar-module">
+                <div class="radar-display" id="radar-screen">
+                    <div class="radar-grid"></div><div class="radar-beam"></div>
+                    <p id="radar-label">RASTREANDO...</p>
+                </div>
+            </div>
+
+            <div class="data-module">
+                <h4 class="label-tech">STATUS BASE</h4>
+                <div class="stats-list">${statsHTML}</div>
+            </div>
+
+            <div class="eff-module">
+                <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                <div class="eff-group">
+                    <label>FRAQUEZAS (Leva 2x Dano)</label>
+                    <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+                <div class="eff-group">
+                    <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                    <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+            </div>
+
+            <div class="evo-module">
+                <h4 class="label-tech">CADEIA EVOLUTIVA</h4>
+                <div class="evo-icons" id="evo-container">
+                    <span class="blink" style="color: #ffcb05;">Sincronizando...</span>
+                </div>
+            </div>
+        `;
+    }
 
     document.getElementById('modal-body').innerHTML = `
         <div class="modal-pokedex-view">
             <div class="modal-left-wing">
                 <div class="screen-border">
-                    <div class="main-screen">
-                        <img src="${p.image}" class="poke-img-large">
-                        <div class="screen-info">
-                            <h2>${p.name}</h2>
-                            
-                            <div class="modal-gen-bar">GERAÇÃO ${p.generation}</div>
-                            
-                            <div class="type-tags">
-                                ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
+                    <div class="main-screen ${pCategory !== 'normal' ? 'main-screen-stacked' : ''}">
+                        ${pCategory !== 'normal' ? `
+                            <div class="stacked-container">
+                                <img src="${p.image}" class="poke-img-stacked">
+                                <h2 class="poke-name-stacked">${p.name}</h2>
+                                <div class="modal-gen-bar stacked-gen-bar">${pCategory === 'boss' ? 'ALERTA DE BOSS' : 'CLASSE DARK'}</div>
+                                <div class="type-tags stacked-type-tags">
+                                    ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
+                                </div>
                             </div>
-                        </div>
+                        ` : `
+                            <img src="${p.image}" class="poke-img-large">
+                            <div class="screen-info">
+                                <h2>${p.name}</h2>
+                                <div class="modal-gen-bar">GERAÇÃO ${p.generation}</div>
+                                <div class="type-tags">
+                                    ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                        `}
                     </div>
                 </div>
                 
                 <div class="location-module">
-                    <h4 class="label-tech">LOCALIZAÇÕES DETECTADAS</h4>
+                    <h4 class="label-tech">${pCategory === 'boss' ? 'COORDENADA DO COVIL' : 'LOCALIZAÇÕES DETECTADAS'}</h4>
                     <div class="loc-list-scroll">${locationsHTML || '<p style="color:#aaa; font-family:monospace;">Nenhum registro encontrado.</p>'}</div>
                 </div>
             </div>
 
             <div class="modal-right-wing">
-                <div class="radar-module">
-                    <div class="radar-display" id="radar-screen">
-                        <div class="radar-grid"></div>
-                        <div class="radar-beam"></div>
-                        <p id="radar-label">RASTREANDO...</p>
-                    </div>
-                </div>
-
-                <div class="data-module">
-                    <h4 class="label-tech">STATUS BASE</h4>
-                    <div class="stats-list">${statsHTML}</div>
-                </div>
-
-                <div class="eff-module">
-                    <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
-                    <div class="eff-group">
-                        <label>FRAQUEZAS (Leva 2x Dano)</label>
-                        <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
-                    </div>
-                    <div class="eff-group">
-                        <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
-                        <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
-                    </div>
-                </div>
-
-                <div class="evo-module">
-                    <h4 class="label-tech">CADEIA EVOLUTIVA</h4>
-                    <div class="evo-icons" id="evo-container">
-                        <span class="blink" style="color: #ffcb05;">Sincronizando...</span>
-                    </div>
-                </div>
+                ${rightWingHTML}
             </div>
         </div>
     `;
@@ -339,16 +466,17 @@ window.openModal = (id) => {
     
     setTimeout(() => {
         const firstLoc = document.querySelector('.loc-button');
-        if(firstLoc) {
-            firstLoc.click();
-        }
+        if(firstLoc) firstLoc.click();
     }, 100);
 
-    loadEvolutions(p.name);
+    if (pCategory === 'normal') {
+        loadEvolutions(p.name);
+    }
 };
 
 async function loadEvolutions(pokemonName) {
     const container = document.getElementById('evo-container');
+    if (!container) return; 
     try {
         let apiName = pokemonName.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/\s+/g, '-');
         if(apiName === 'mrmime') apiName = 'mr-mime'; 
@@ -369,16 +497,16 @@ async function loadEvolutions(pokemonName) {
         extractEvo(evoData.chain);
         
         container.innerHTML = allEvos.map(e => {
-            const inOurDex = pokemonData.find(p => p.id === e.id);
+            const inOurDex = pokemonData.find(p => p.id.toString() === e.id.toString() && (!p.category || p.category === 'normal'));
             if(inOurDex) {
-                return `<img src="${inOurDex.image}" class="evo-sprite" title="${inOurDex.name}" onclick="openModal(${inOurDex.id})">`;
+                return `<img src="${inOurDex.image}" class="evo-sprite" title="${inOurDex.name}" onclick="openModal('${inOurDex.id}')">`;
             } else {
                 return `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${e.id}.png" class="evo-sprite missing" title="${e.name} (Fora do DB)">`;
             }
         }).join('<span class="evo-arrow">❯</span>'); 
 
     } catch(err) {
-        container.innerHTML = '<span style="color:#ff6b6b; font-size:0.7rem; font-family: monospace;">Falha no sinal. DNA não encontrado.</span>';
+        container.innerHTML = '<span style="color:#ff6b6b; font-size:0.7rem; font-family: monospace;">Sincronização Indisponível.</span>';
     }
 }
 
@@ -453,14 +581,11 @@ window.showRadarFallback = (name) => {
     `;
 };
 
-// ==============================================================
-// PROFESSOR OAK
-// ==============================================================
 const oakDialogues = [
     "Olá! Bem-vindo ao mundo de PokemonR - PBR!",
     "Esta Pokedex e uma pagina criada de fãs para fãs e NAO é um produto oficial do Servidor",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: Upzin, Jurubinha, Marlin, Paleguazv, Leander Hastings",
+    "Apoiadores: Upzin, Marlin, Paleguazv, Leander Hastings",
     "Desenvolvida por: Kalazatti.",
     "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
 ];
@@ -479,9 +604,7 @@ function initOakModal() {
     oakModal.classList.remove('hidden');
     startTyping();
 
-    closeBtn.addEventListener('click', () => {
-        oakModal.classList.add('hidden');
-    });
+    closeBtn.addEventListener('click', () => { oakModal.classList.add('hidden'); });
 
     dialogBox.addEventListener('click', () => {
         const textContainer = document.getElementById('oak-text');
