@@ -160,6 +160,9 @@ function renderPokemon(list) {
                     <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, ${p.id})" title="Marcar como Capturado"></div>
                     <img src="${p.image}" loading="lazy">
                     <h3 class="pk-name">${p.name}</h3>
+                    
+                    <div class="pk-gen-bar">GEN ${p.generation}</div>
+                    
                     <div class="pk-types-mini">
                         ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
                     </div>
@@ -176,7 +179,7 @@ window.toggleAccordion = (arrowEl, event) => {
     arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
 };
 
-// Nova Função Global de Copiar (Texto Limpo)
+// Função Global de Copiar (Texto Limpo)
 window.copyLoc = (text, el, event) => {
     if(event) event.stopPropagation(); // Evita ativar o radar
     
@@ -270,7 +273,7 @@ window.openModal = (id) => {
             <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
             <span class="stat-num">${val}</span>
         </div>
-    `);
+    `).join('');
 
     document.getElementById('modal-body').innerHTML = `
         <div class="modal-pokedex-view">
@@ -280,6 +283,9 @@ window.openModal = (id) => {
                         <img src="${p.image}" class="poke-img-large">
                         <div class="screen-info">
                             <h2>${p.name}</h2>
+                            
+                            <div class="modal-gen-bar">GERAÇÃO ${p.generation}</div>
+                            
                             <div class="type-tags">
                                 ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
                             </div>
@@ -304,7 +310,7 @@ window.openModal = (id) => {
 
                 <div class="data-module">
                     <h4 class="label-tech">STATUS BASE</h4>
-                    <div class="stats-list">${statsHTML.join('')}</div>
+                    <div class="stats-list">${statsHTML}</div>
                 </div>
 
                 <div class="eff-module">
