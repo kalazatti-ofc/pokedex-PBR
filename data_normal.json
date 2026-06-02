@@ -2385,7 +2385,10 @@
       "spd": 40
     },
     "locations": [
-      "Orre (X 2481 / Y 1363 / Z 7)"
+      {
+        "local": "Orre (X 2481 / Y 1363 / Z 7)"",
+        "nota": "📌 Entre no Buraco. (TM Dig)"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/112.png"
   },
