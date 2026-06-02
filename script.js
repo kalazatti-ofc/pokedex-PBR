@@ -159,14 +159,7 @@ function renderPokemon(list) {
                     <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
                     <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, ${p.id})" title="Marcar como Capturado"></div>
                     <img src="${p.image}" loading="lazy">
-                    <img src="${p.image}" loading="lazy">
                     <h3 class="pk-name">${p.name}</h3>
-                    
-                    <div class="pk-gen-bar">GEN ${p.generation}</div>
-                    
-                    <div class="pk-types-mini">
-                        ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
-                    </div>
                     <div class="pk-types-mini">
                         ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
                     </div>
@@ -286,15 +279,7 @@ window.openModal = (id) => {
                     <div class="main-screen">
                         <img src="${p.image}" class="poke-img-large">
                         <div class="screen-info">
-                            <div class="screen-info">
                             <h2>${p.name}</h2>
-                            
-                            <div class="modal-gen-bar">GERAÇÃO ${p.generation}</div>
-                            
-                            <div class="type-tags">
-                                ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
-                            </div>
-                        </div>
                             <div class="type-tags">
                                 ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
                             </div>
