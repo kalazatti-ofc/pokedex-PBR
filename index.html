@@ -3,77 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex PBR | Localizador de Respawns</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Pokédex PBR | Sistema de Rastreamento</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="oak-modal" class="oak-overlay hidden">
-        <div class="oak-container">
-            <button class="oak-close-btn" id="close-oak" title="Fechar">&times;</button>
-            <div class="oak-screen">
-                <div class="oak-sprite-area">
-                    <img src="https://play.pokemonshowdown.com/sprites/trainers/oak-gen1rb.png" alt="Professor Oak" class="oak-sprite">
-                </div>
-                <div class="oak-dialog-box" id="oak-dialog-box">
-                    <p id="oak-text"></p>
-                    <span class="oak-arrow blink" id="oak-arrow">▼</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="pokedex-body">
         
-        <aside class="pokedex-left-panel">
-            <header class="pokedex-header">
+        <div class="pokedex-left-panel">
+            <div class="pokedex-header">
+                <button id="theme-toggle" class="joystick-theme-btn" title="Modo Noturno">🌙</button>
                 <div class="main-lens-container">
                     <div class="big-blue-lens"></div>
                     <div class="mini-lights">
-                        <span class="light red"></span>
-                        <span class="light yellow"></span>
-                        <span class="light green"></span>
+                        <div class="light red"></div>
+                        <div class="light yellow"></div>
+                        <div class="light green"></div>
                     </div>
                 </div>
-                
-                <button id="theme-toggle" class="joystick-theme-btn" title="Alternar Modo Escuro">🌙</button>
-                
-                <h1 class="pokedex-title">Pokedex <span>PBR</span></h1>
-            </header>
+                <h1 class="pokedex-title">POKÉDEX <span>Global Tracker</span></h1>
+            </div>
 
-            <section class="pokedex-controls">
+            <div class="pokedex-controls">
+                
                 <div class="search-module">
-                    <label class="tech-label">BUSCA DE DADOS</label>
+                    <span class="tech-label">SISTEMA DE BUSCA</span>
                     <div class="search-console">
-                        <input type="text" id="search-input" placeholder="Pesquisar ID ou Nome...">
-                        <span class="cursor-blink">|</span>
-                        <button id="search-btn" class="search-btn" title="Buscar">🔍</button>
+                        <span class="cursor-blink">>_</span>
+                        <input type="text" id="search-input" placeholder="NOME OU ID..." autocomplete="off">
+                        <button id="search-btn" class="search-btn red-btn" title="Pesquisar">🔎</button>
                     </div>
+                </div>
+
+                <div class="category-module">
+                    <button class="cat-btn active" data-cat="normal">NORMAL</button>
+                    <button class="cat-btn" data-cat="boss">BOSS 24H</button>
+                    <button class="cat-btn" data-cat="dark">DARK'S</button>
                 </div>
 
                 <div class="pokedex-filters">
-                    
-                    <button class="filter-toggle" id="toggle-catch">▼ STATUS DA POKEDEX</button>
-                    <div class="filter-group hidden-filter" id="group-catch">
-                        <div class="pills-container" id="catch-filters">
-                            <button class="filter-pill active" data-catch="all">TODOS</button>
-                            <button class="filter-pill" data-catch="caught">REGISTRADOS</button>
-                            <button class="filter-pill" data-catch="uncaught">FALTANDO</button>
-                        </div>
-                    </div>
-
                     <button class="filter-toggle" id="toggle-gen">▼ FILTRAR POR REGIÃO</button>
                     <div class="filter-group hidden-filter" id="group-gen">
                         <div class="pills-container" id="gen-filters">
-                            <button class="filter-pill active" data-gen="all">TODOS</button>
+                            <button class="filter-pill active" data-gen="all">TODAS</button>
                             <button class="filter-pill" data-gen="1">KANTO</button>
                             <button class="filter-pill" data-gen="2">JOHTO</button>
                             <button class="filter-pill" data-gen="3">HOENN</button>
                             <button class="filter-pill" data-gen="4">SINNOH</button>
-                            <button class="filter-pill" data-gen="5">UNOVA</button>
-                            <button class="filter-pill" data-gen="6">KALOS</button>
                         </div>
                     </div>
 
@@ -82,32 +59,52 @@
                         <div class="pills-container" id="type-filters">
                             </div>
                     </div>
-                </div>
-            </section>
 
-            <footer class="dex-footer">
-                <div class="visitor-module">
-                    <img src="https://api.visitorbadge.io/api/visitors?path=pokedex-pbr-kalazatti&labelColor=%231a1a1a&countColor=%23ffd700&style=flat-square" alt="Visitas">
+                    <button class="filter-toggle" id="toggle-catch">▼ STATUS DE CAPTURA</button>
+                    <div class="filter-group hidden-filter" id="group-catch">
+                        <div class="pills-container" id="catch-filters">
+                            <button class="filter-pill active" data-catch="all">TODOS</button>
+                            <button class="filter-pill" data-catch="caught" style="background:#32cd32; color:#111;">CAPTURADOS</button>
+                            <button class="filter-pill" data-catch="uncaught" style="background:#ff4b2b; color:#fff;">FALTANDO</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-msg">
-                    <p>Encontrou bugs ou faltam locais?</p>
-                    <p>🎮 In-game: <strong>Kalazatti</strong> | 👾 Discord: <strong>Kalazatti</strong></p>
-                </div>
-            </footer>
-        </aside>
 
-        <main class="pokedex-right-panel">
-            <section class="pokedex-main-display">
-                <div id="pokedex-grid" class="pokemon-grid"></div>
-            </section>
-        </main>
+                <div class="dex-footer">
+                    <p class="footer-msg">Desenvolvido por <strong>Kalazatti</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pokedex-right-panel">
+            <div class="pokedex-main-display">
+                <div class="pokemon-grid" id="pokedex-grid">
+                    </div>
+            </div>
+        </div>
     </div>
 
     <div id="pokemon-modal" class="modal hidden">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <button class="close-btn">&times;</button>
-            <div id="modal-body"></div>
+            <div id="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <div id="oak-modal" class="oak-overlay hidden">
+        <div class="oak-container">
+            <button class="oak-close-btn" id="close-oak">&times;</button>
+            <div class="oak-screen">
+                <div class="oak-sprite-area">
+                    <img src="https://play.pokemonshowdown.com/sprites/trainers/oak.png" class="oak-sprite" alt="Professor Oak">
+                </div>
+                <div class="oak-dialog-box" id="oak-dialog-box">
+                    <p id="oak-text"></p>
+                    <span class="oak-arrow" id="oak-arrow">▼</span>
+                </div>
+            </div>
         </div>
     </div>
 
