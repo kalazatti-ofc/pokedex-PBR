@@ -1,0 +1,79 @@
+[
+  {
+    "id": "Dark-Dragonite",
+    "category": "dark",
+    "name": "Dark Dragonite",
+    "types": [
+      "Water",
+      "Flying"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 91,
+      "atk": 134,
+      "def": 95,
+      "spatk": 100,
+      "spdef": 100,
+      "spd": 80
+    },
+    "souls": {
+      "normal": "130",
+      "eternizado": "390"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-dragonite.png"
+  },
+  {
+    "id": "Dark-Gardevoir",
+    "category": "dark",
+    "name": "Dark Gardevoir",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 68,
+      "atk": 65,
+      "def": 65,
+      "spatk": 125,
+      "spdef": 115,
+      "spd": 80
+    },
+    "souls": {
+      "normal": "110",
+      "eternizado": "330"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-gardevoir.png"
+  },
+  {
+    "id": "Dark-Raichu-Fly",
+    "category": "dark",
+    "name": "Dark Raichu Fly",
+    "types": [
+      "Electric"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 90,
+      "atk": 135,
+      "def": 82,
+      "spatk": 135,
+      "spdef": 120,
+      "spd": 165
+    },
+    "exclusive": "Somente na Quest de Natal 2021", 
+    "image": "Sprites/dark-raichufly.png"
+  }
+]
