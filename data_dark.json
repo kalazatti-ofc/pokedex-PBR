@@ -58,6 +58,35 @@
     "image": "Sprites/dark-gardevoir.png"
   },
   {
+    "id": "Dark-Gallade",
+    "category": "dark",
+    "name": "Dark Gallade",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "generation": 3,
+    "stats": {
+      "hp": 68,
+      "atk": 125,
+      "def": 65,
+      "spatk": 65,
+      "spdef": 115,
+      "spd": 80
+    },
+    "souls": {
+      "normal": "110",
+      "eternizado": "330"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-gallade.png"
+  },
+  {
     "id": "Dark-Raichu-Fly",
     "category": "dark",
     "name": "Dark Raichu Fly",
