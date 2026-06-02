@@ -1201,7 +1201,10 @@
       "spd": 85
     },
     "locations": [
-      "Quest castform"
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png"
   },
@@ -2847,7 +2850,10 @@
       "spd": 65
     },
     "locations": [
-      "Quest castform"
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png"
   },
@@ -2887,7 +2893,10 @@
       "spd": 65
     },
     "locations": [
-      "Quest castform",
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
       "Hunter Village (X 1704 / Y 1629 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png"
@@ -7380,7 +7389,10 @@
       "spd": 70
     },
     "locations": [
-      "Quest **Castform**"
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/351.png"
   },
@@ -9864,7 +9876,10 @@
       "spd": 65
     },
     "locations": [
-      "Quest castform"
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png"
   },
@@ -10018,7 +10033,10 @@
     },
     "locations": [
       "one island (X 2723 / Y 1095 / Z 7)",
-      "Quest castform"
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/478.png"
   },
@@ -11970,6 +11988,10 @@
       "spd": 44
     },
     "locations": [
+      {
+        "local": "Quest Castform",
+        "nota": "🔑 Quest Level 185"
+      },
       "Snowpoint (X 3682 / Y 1610 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/582.png"
