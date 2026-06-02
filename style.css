@@ -64,32 +64,14 @@ body {
 .light.red { background: #ff3333; } .light.yellow { background: #ffcb05; } .light.green { background: #32cd32; }
 
 .joystick-theme-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 45px;
-    height: 45px;
-    background: #333; 
-    border: 4px solid var(--dex-border);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    color: #fff;
-    box-shadow: 
-        inset -3px -3px 5px rgba(0,0,0,0.6), 
-        inset 2px 2px 4px rgba(255,255,255,0.3), 
-        3px 3px 0 var(--dex-border); 
-    transition: 0.1s ease-in-out;
-    outline: none;
-    z-index: 10;
+    position: absolute; top: 0; right: 0; width: 45px; height: 45px;
+    background: #333; border: 4px solid var(--dex-border); border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: #fff;
+    box-shadow: inset -3px -3px 5px rgba(0,0,0,0.6), inset 2px 2px 4px rgba(255,255,255,0.3), 3px 3px 0 var(--dex-border); 
+    transition: 0.1s ease-in-out; outline: none; z-index: 10;
 }
-.joystick-theme-btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: 0 0 0 transparent;
-}
+.joystick-theme-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
 
 .pokedex-title { 
     font-size: 2.8rem; font-weight: 900; text-transform: uppercase; color: #fff; 
@@ -101,7 +83,7 @@ body {
 .pokedex-title:hover { transform: scale(1.08) rotate(-2deg); text-shadow: 5px 5px 0 var(--dex-border), 0 0 20px rgba(255,203,5,0.6); color: #ffcb05; }
 
 /* =========================================
-   CONTROLES E FILTROS
+   CONTROLES, BUSCA E ABAS (CATEGORIAS)
 ========================================= */
 .pokedex-controls { flex: 1; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; }
 .search-module { width: 100%; margin-bottom: 20px; }
@@ -113,49 +95,36 @@ body {
 @keyframes blink { 50% { opacity: 0; } }
 
 .search-btn {
-    background: #ffcb05; 
-    border: 3px solid var(--dex-border);
-    border-radius: 8px;
-    width: 35px;
-    height: 35px;
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1rem;
-    flex-shrink: 0; 
-    box-shadow: 2px 2px 0 var(--dex-border); 
-    transition: 0.1s ease-in-out;
-    outline: none;
+    border: 3px solid var(--dex-border); border-radius: 8px; width: 35px; height: 35px;
+    margin-left: 10px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem; flex-shrink: 0; box-shadow: 2px 2px 0 var(--dex-border); 
+    transition: 0.1s ease-in-out; outline: none;
 }
-.search-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0 0 0 transparent;
-}
+.search-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
+.search-btn.red-btn { background: var(--dex-red); color: #fff; }
 
+.category-module { display: flex; gap: 8px; margin-bottom: 20px; }
+.cat-btn {
+    flex: 1; padding: 10px 5px; border-radius: 8px; font-family: monospace; font-size: 0.8rem;
+    font-weight: 900; text-align: center; border: 3px solid var(--dex-border);
+    box-shadow: 3px 3px 0 var(--dex-border); transition: 0.1s ease-in-out; cursor: pointer;
+    background: #444; color: #aaa;
+}
+.cat-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
+
+.cat-btn[data-cat="normal"].active { background: #fff; color: var(--dex-border); }
+.cat-btn[data-cat="boss"].active { background: #ffcb05; color: var(--dex-border); }
+.cat-btn[data-cat="dark"].active { background: #8a2be2; color: #fff; }
+
+/* FILTROS SECUNDÁRIOS EM GRAFITE ELEGANTE */
 .pokedex-filters { margin-bottom: 20px; }
 .filter-toggle { 
-    width: 100%; 
-    background: #ffcb05; 
-    color: var(--dex-border); 
-    border: 3px solid var(--dex-border); 
-    padding: 10px 15px; 
-    border-radius: 8px; 
-    font-family: monospace; 
-    font-size: 0.8rem; 
-    font-weight: 900; 
-    text-align: left; 
-    cursor: pointer; 
-    margin-bottom: 8px; 
-    box-shadow: 3px 3px 0 var(--dex-border); 
-    transition: 0.1s ease-in-out; 
-    outline: none; 
+    width: 100%; background: #444444; color: #ffffff; border: 3px solid var(--dex-border); 
+    padding: 10px 15px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; 
+    font-weight: 900; text-align: left; cursor: pointer; margin-bottom: 8px; 
+    box-shadow: 3px 3px 0 var(--dex-border); transition: 0.1s ease-in-out; outline: none; 
 }
-.filter-toggle:active { 
-    transform: translate(3px, 3px); 
-    box-shadow: 0 0 0 transparent; 
-}
+.filter-toggle:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
 .hidden-filter { display: none !important; }
 
 .filter-group { background: rgba(0,0,0,0.15); padding: 12px; border-radius: 8px; border: 2px dashed rgba(0,0,0,0.3); margin-bottom: 12px; }
@@ -166,12 +135,11 @@ body {
 
 .dex-footer { margin-top: auto; padding-top: 20px; text-align: center; opacity: 0.6; transition: 0.3s; }
 .dex-footer:hover { opacity: 1; }
-.visitor-module img { border: 2px solid var(--dex-border); border-radius: 6px; }
 .footer-msg { font-size: 0.7rem; color: #fff; line-height: 1.4; text-shadow: 1px 1px 0 #000;}
 .footer-msg strong { color: #ffcb05; font-weight: 800; }
 
 /* =========================================
-   PAINEL DIREITO (Tela Principal e Cards)
+   PAINEL DIREITO E CARDS INICIAIS
 ========================================= */
 .pokedex-right-panel { padding: 20px; display: flex; flex-direction: column; flex: 1; transition: background 0.3s ease; }
 .pokedex-main-display {
@@ -191,56 +159,52 @@ body {
     overflow: hidden; position: relative; text-align: center; padding: 10px;
 }
 .pk-card:active { transform: translate(3px, 3px); box-shadow: 0 0 0 rgba(0,0,0,0); }
-.pk-card::before { content: ''; position: absolute; inset: 0; background: var(--bg-type); opacity: 0.15; z-index: 0; }
 .pk-id { position: absolute; top: 6px; left: 6px; font-family: monospace; font-size: 0.65rem; font-weight: bold; color: #888; z-index: 2; transition: color 0.3s ease;}
-.pk-card img { width: 70px; height: 70px; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); z-index: 2; position: relative;}
+
+/* AJUSTE DE PROPORÇÃO DE IMAGEM (CORREÇÃO DE DISTORÇÃO) */
+.pk-card img { 
+    width: 70px; 
+    height: 70px; 
+    object-fit: contain; 
+    filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); 
+    z-index: 2; 
+    position: relative;
+}
+
 .pk-name { font-size: 0.8rem; font-weight: 800; color: var(--dex-border); text-transform: uppercase; z-index: 2; position: relative; margin: 4px 0; transition: color 0.3s ease;}
 .pk-types-mini { display: flex; justify-content: center; gap: 4px; z-index: 2; position: relative;}
 .type-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--dex-border); }
 
-/* ==============================================================
-   BOTÃO DE CHECKLIST (POKÉBOLA CAPTURADO)
-============================================================== */
-.catch-btn {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid var(--dex-border);
-    background: linear-gradient(to bottom, #ccc 45%, var(--dex-border) 45%, var(--dex-border) 55%, #f0f0f0 55%);
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-    opacity: 0.6;
+/* BARRINHAS DE GERAÇÃO E CATEGORIA */
+.pk-gen-bar {
+    font-family: monospace; font-size: 0.6rem; font-weight: 800; color: #666;
+    background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px; padding: 2px 8px; margin: 2px auto 6px auto;
+    display: inline-block; letter-spacing: 0.5px; transition: all 0.3s ease; z-index: 2; position: relative;
 }
-.catch-btn::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 6px; height: 6px;
-    background: #fff;
-    border: 2px solid var(--dex-border);
-    border-radius: 50%;
-}
-.catch-btn:hover { opacity: 1; transform: scale(1.15); }
-.catch-btn.caught {
-    background: linear-gradient(to bottom, #ff3333 45%, var(--dex-border) 45%, var(--dex-border) 55%, #fff 55%);
-    opacity: 1;
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
-    animation: catchBounce 0.4s ease;
-}
-@keyframes catchBounce {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3) rotate(-15deg); }
-    100% { transform: scale(1) rotate(0deg); }
+.modal-gen-bar {
+    font-family: monospace; font-size: 0.7rem; font-weight: 800; color: var(--dex-border);
+    background: rgba(0, 0, 0, 0.1); border: 1px dashed rgba(0, 0, 0, 0.3);
+    padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block;
 }
 
+/* BOTÃO DE CAPTURA (POKÉBOLA) */
+.catch-btn {
+    position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid var(--dex-border); background: linear-gradient(to bottom, #ccc 45%, var(--dex-border) 45%, var(--dex-border) 55%, #f0f0f0 55%);
+    cursor: pointer; z-index: 10; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1); opacity: 0.6;
+}
+.catch-btn::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 6px; height: 6px; background: #fff; border: 2px solid var(--dex-border); border-radius: 50%;
+}
+.catch-btn:hover { opacity: 1; transform: scale(1.15); }
+.catch-btn.caught { background: linear-gradient(to bottom, #ff3333 45%, var(--dex-border) 45%, var(--dex-border) 55%, #fff 55%); opacity: 1; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); animation: catchBounce 0.4s ease; }
+@keyframes catchBounce { 0% { transform: scale(1); } 50% { transform: scale(1.3) rotate(-15deg); } 100% { transform: scale(1) rotate(0deg); } }
+
 /* =========================================
-   MODAL POKÉDEX AVANÇADA
+   ESTRUTURA GERAL DO MODAL
 ========================================= */
 .modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 15px;}
 .modal.hidden { display: none; }
@@ -254,6 +218,8 @@ body {
 .modal-pokedex-view { display: flex; flex-direction: column; background: var(--dex-red); border: 6px solid var(--dex-border); border-radius: 20px; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2), 0 20px 50px rgba(0,0,0,0.8); overflow: hidden; max-height: 90vh; transition: background 0.3s ease; }
 .modal-left-wing { padding: 25px; background: #c22e28; border-bottom: 6px solid var(--dex-border); display: flex; flex-direction: column; transition: background 0.3s ease;}
 .screen-border { background: #e0e0e0; padding: 15px; border-radius: 15px 15px 15px 40px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.3); margin-bottom: 20px; transition: background 0.3s ease; }
+
+/* VISOR NORMAL */
 .main-screen { background: #8eedd1; border-radius: 10px; border: 4px solid var(--dex-border); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: inset 0 0 15px rgba(0,0,0,0.2); position: relative; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px); }
 .poke-img-large { width: 110px; height: 110px; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.3)); z-index: 2; }
 .screen-info { text-align: right; z-index: 2;}
@@ -261,11 +227,34 @@ body {
 .type-tags { display: flex; gap: 5px; justify-content: flex-end;}
 .tag { padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; color: #fff; font-weight: 800; border: 2px solid var(--dex-border); box-shadow: 2px 2px 0 var(--dex-border); text-transform: uppercase;}
 
+/* ==============================================================
+   VISOR VERTICAL EM TORRE (EXCLUSIVO PARA BOSSES E DARK'S)
+============================================================== */
+.main-screen.main-screen-stacked {
+    flex-direction: column; justify-content: center; align-items: center;
+    padding: 20px 15px; min-height: 285px; text-align: center;
+}
+.stacked-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 10px; }
+.poke-img-stacked {
+    width: 145px; height: 145px; object-fit: contain;
+    filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.3)); margin-bottom: 5px;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+.poke-name-stacked { color: var(--dex-border); font-size: 1.55rem; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1.1; }
+.modal-gen-bar.stacked-gen-bar { margin-bottom: 2px; font-size: 0.65rem; padding: 2px 10px; }
+.stacked-type-tags { justify-content: center !important; width: 100%; }
+
+/* =========================================
+   MÓDULO DE LOCALIZAÇÕES
+========================================= */
 .location-module { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .label-tech { font-family: monospace; font-size: 0.8rem; color: #ffcb05; text-shadow: 1px 1px 0 #000; margin-bottom: 8px; border-bottom: 2px dashed rgba(255,215,0,0.4); padding-bottom: 4px;}
 .loc-list-scroll { flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 8px; }
-.loc-list-scroll::-webkit-scrollbar { width: 8px; } 
-.loc-list-scroll::-webkit-scrollbar-thumb { background: var(--dex-border); border-radius: 4px; }
+.loc-list-scroll::-webkit-scrollbar { width: 8px; } .loc-list-scroll::-webkit-scrollbar-thumb { background: var(--dex-border); border-radius: 4px; }
 
 .loc-button { background: var(--terminal-bg); border: 3px solid var(--dex-border); border-radius: 8px; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; box-shadow: 3px 3px 0 rgba(0,0,0,0.3); transition: 0.1s; }
 .loc-button:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
@@ -276,33 +265,16 @@ body {
 
 .copy-icon { cursor: pointer; position: relative; }
 .copy-icon:hover { transform: scale(1.2); filter: drop-shadow(0 0 5px #ffcb05); opacity: 1; }
-
 .loc-actions { display: flex; align-items: center; gap: 12px; }
 
+/* BALÃOZINHOS DE OBSERVAÇÃO (TOOLTIP) */
 .info-tooltip { position: relative; cursor: help; }
 .info-tooltip:hover { opacity: 1; filter: drop-shadow(0 0 5px #ffcb05); }
-
-.info-tooltip::after {
-    content: attr(data-tooltip); 
-    position: absolute; right: 150%; top: 50%; transform: translateY(-50%);
-    background: #111; color: #ffcb05;
-    border: 2px solid var(--dex-border); padding: 8px 12px; border-radius: 6px;
-    font-size: 0.7rem; font-family: monospace; 
-    white-space: normal; max-width: 220px; width: max-content;  
-    text-align: left; line-height: 1.4;    
-    opacity: 0; visibility: hidden; transition: 0.2s; z-index: 100;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); pointer-events: none;
-}
-.info-tooltip::before {
-    content: ''; position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
-    border-width: 5px; border-style: solid;
-    border-color: transparent transparent transparent #111;
-    opacity: 0; visibility: hidden; transition: 0.2s; pointer-events: none;
-}
+.info-tooltip::after { content: attr(data-tooltip); position: absolute; right: 150%; top: 50%; transform: translateY(-50%); background: #111; color: #ffcb05; border: 2px solid var(--dex-border); padding: 8px 12px; border-radius: 6px; font-size: 0.7rem; font-family: monospace; white-space: normal; max-width: 220px; width: max-content; text-align: left; line-height: 1.4; opacity: 0; visibility: hidden; transition: 0.2s; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.5); pointer-events: none; }
+.info-tooltip::before { content: ''; position: absolute; right: 100%; top: 50%; transform: translateY(-50%); border-width: 5px; border-style: solid; border-color: transparent transparent transparent #111; opacity: 0; visibility: hidden; transition: 0.2s; pointer-events: none; }
 .info-tooltip:hover::after, .info-tooltip:hover::before { opacity: 1; visibility: visible; }
-.info-tooltip:hover::after { right: 160%; }
-.info-tooltip:hover::before { right: calc(160% - 10px); }
 
+/* ACORDEÃO DE ROTAS */
 .loc-accordion { display: flex; flex-direction: column; gap: 5px; margin-bottom: 5px; }
 .accordion-toggle { background: var(--terminal-bg); border-color: var(--dex-border); }
 .expand-arrow { color: #ffcb05; font-size: 1.1rem; padding: 5px 5px; cursor: pointer; }
@@ -315,7 +287,9 @@ body {
 .loc-step.active { border-color: var(--radar-green); background: #0a1f10; box-shadow: 2px 2px 0 var(--radar-green); }
 .loc-step.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; color: var(--radar-green); }
 
-/* LADO DIREITO DO MODAL */
+/* =========================================
+   TELA DIREITA DO MODAL (RADAR E MÓDULOS)
+========================================= */
 .modal-right-wing { padding: 25px; background: var(--dex-red); display: flex; flex-direction: column; gap: 15px; overflow-y: auto; transition: background 0.3s ease;}
 .radar-module { background: #222; padding: 12px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: inset 0 0 10px #000; }
 .radar-display { width: 100%; height: 110px; background: #111; border: 4px solid var(--dex-border); border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); }
@@ -324,7 +298,6 @@ body {
 @keyframes spin { 100% { transform: rotate(360deg); } }
 .blink { animation: blinker 1.5s infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
-
 .map-img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 3; filter: contrast(1.15) saturate(1.1); }
 .map-overlay { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px); box-shadow: inset 0 0 15px rgba(0,0,0,0.6); }
 
@@ -332,6 +305,7 @@ body {
 .sat-hud-line { background: rgba(0, 0, 0, 0.65); color: #8eedd1; font-family: monospace; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(142, 237, 209, 0.3); width: max-content; text-shadow: 0 0 3px rgba(142, 237, 209, 0.8); letter-spacing: 0.5px; font-weight: bold; }
 .sat-hud-line.rec { color: #ff4b2b; border-color: rgba(255, 75, 43, 0.3); text-shadow: 0 0 3px rgba(255, 75, 43, 0.8); animation: blinker 1.5s infinite; }
 
+/* REGRAS DE STATUS, FRAQUEZAS E EVOLUÇÃO */
 .data-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; }
 .data-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
 .stats-list { display: flex; flex-direction: column; gap: 6px; }
@@ -356,9 +330,50 @@ body {
 .evo-sprite { width: 45px; height: 45px; cursor: pointer; transition: 0.2s; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.3)); border: 2px solid transparent; border-radius: 50%; }
 .evo-sprite:hover { transform: scale(1.15); background: rgba(0,0,0,0.1); border-color: var(--dex-border); }
 .evo-sprite.missing { filter: grayscale(1) opacity(0.5); cursor: not-allowed; }
-.evo-sprite.missing:hover { transform: none; background: transparent; border-color: transparent;}
 .evo-arrow { color: #888; font-size: 1.2rem; font-weight: bold; }
 
+/* ==============================================================
+   MÓDULOS EXCLUSIVOS: BOSSES 24H
+============================================================== */
+.boss-guide-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; margin-bottom: 10px;}
+.boss-guide-module .label-tech { color: var(--dex-border); border-bottom: 2px dashed #999; }
+.boss-guide-text { font-size: 0.75rem; font-weight: 700; color: #444; line-height: 1.5; text-align: justify; margin-top: 8px;}
+
+.boss-loot-module { background: #ffcb05; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); text-align: center; margin-bottom: 10px;}
+.boss-loot-module .label-tech { color: var(--dex-border); border-bottom: 2px dashed rgba(0,0,0,0.2); text-shadow: none;}
+.loot-box { font-size: 1.1rem; font-weight: 900; color: var(--dex-red); text-transform: uppercase; margin-top: 10px; background: #fff; padding: 10px; border-radius: 8px; border: 3px solid var(--dex-border);}
+
+/* ==============================================================
+   MÓDULO EXCLUSIVO: CUSTO DE SOULS (DARK'S) - COMPACTO E ALINHADO
+============================================================== */
+.souls-module { 
+    background: #e0e0e0; padding: 10px 15px; border-radius: 12px; 
+    border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); 
+    transition: background 0.3s ease; margin-bottom: 10px; 
+}
+.souls-module .label-tech { 
+    color: var(--dex-border); border-bottom: 2px dashed #999; 
+    text-shadow: none; margin-bottom: 4px;
+}
+.souls-container { display: flex; gap: 8px; margin-top: 6px; }
+.soul-box { 
+    flex: 1; background: #fff; border: 2px solid var(--dex-border); 
+    border-radius: 6px; padding: 4px 8px; text-align: center; 
+    display: flex; justify-content: space-between; align-items: center; 
+}
+.soul-box.eternizado { background: #e6e6fa; border-color: #8a2be2; }
+.soul-label { font-size: 0.6rem; font-weight: 900; color: #666; }
+.soul-box.eternizado .soul-label { color: #8a2be2; }
+.soul-value { font-size: 0.9rem; font-weight: 900; color: var(--dex-border); }
+.exclusive-badge {
+    display: block; text-align: center; font-size: 0.8rem; font-weight: 900;
+    color: var(--dex-red); background: #fff; border: 2px solid var(--dex-border);
+    border-radius: 6px; padding: 6px; margin-top: 6px;
+}
+
+/* =========================================
+   RESPONSIVIDADE E ADAPTAÇÃO DE TELAS
+========================================= */
 @media (min-width: 850px) {
     .pokedex-body { flex-direction: row; height: 90vh; }
     .pokedex-left-panel { width: 380px; border-bottom: none; border-right: 6px solid var(--dex-border); display: flex; flex-direction: column;}
@@ -367,12 +382,7 @@ body {
     .modal-pokedex-view { flex-direction: row; height: 85vh; max-width: 900px; }
     .modal-left-wing { width: 50%; border-bottom: none; border-right: 6px solid var(--dex-border); }
     .modal-right-wing { width: 50%; }
-    .modal-pokedex-view::after {
-        content: ''; position: absolute; top: 0; bottom: 0; left: 50%;
-        width: 16px; background: linear-gradient(90deg, #8b0000, #ff4b2b, #8b0000);
-        border-left: 4px solid var(--dex-border); border-right: 4px solid var(--dex-border); z-index: 10;
-        transform: translateX(-50%);
-    }
+    .modal-pokedex-view::after { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 16px; background: linear-gradient(90deg, #8b0000, #ff4b2b, #8b0000); border-left: 4px solid var(--dex-border); border-right: 4px solid var(--dex-border); z-index: 10; transform: translateX(-50%); }
 }
 
 @media (max-width: 768px) {
@@ -381,36 +391,28 @@ body {
     .pokemon-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 8px; }
     .pk-card { padding: 8px; border-width: 2px; }
     .pk-card img { width: 55px; height: 55px; }
-    
     .pk-name { font-size: 0.6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .pk-id { font-size: 0.55rem; }
-    
-    .pokedex-title { font-size: 2.2rem; }
-    .pokedex-title span { font-size: 1.2rem; }
-
     .main-screen { padding: 10px; }
     .poke-img-large { width: 80px; height: 80px; } 
-    .screen-info h2 { font-size: 1.1rem; margin-bottom: 4px; } 
-    .tag { padding: 3px 6px; font-size: 0.6rem; } 
 }
 
-/* POP-UP DO PROFESSOR OAK */
+/* =========================================
+   POP-UP DO PROFESSOR OAK
+========================================= */
 .oak-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); background: radial-gradient(circle, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.95) 100%); }
 .oak-overlay.hidden { display: none !important; }
 .oak-container { width: 90%; max-width: 500px; position: relative; animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: transparent; padding: 0; box-shadow: 0 0 0 15px white, 0 20px 40px rgba(0,0,0,0.6); }
 @keyframes slideDown { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 .oak-close-btn { position: absolute; top: -25px; right: -25px; width: 40px; height: 40px; background: #e3350d; border: 3px solid #111; border-radius: 50%; color: #fff; font-size: 1.5rem; font-weight: bold; cursor: pointer; box-shadow: 2px 2px 0 #111; z-index: 20; }
-.oak-close-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
 .oak-screen { background: #f8f8f8; border: 6px solid #111; border-radius: 12px; padding: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; overflow: visible; }
-.oak-sprite-area { width: 120px; height: 160px; display: flex; align-items: flex-end; justify-content: center; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); margin: 0; border: none; overflow: visible; z-index: 10; }
+.oak-sprite-area { width: 120px; height: 160px; display: flex; align-items: flex-end; justify-content: center; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); z-index: 10; }
 .oak-sprite { width: 120px; height: auto; image-rendering: pixelated; animation: oakBob 2s infinite ease-in-out; }
 @keyframes oakBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 .oak-dialog-box { width: 100%; min-height: 100px; margin-top: 10px; background: #fff; border-radius: 8px; cursor: pointer; position: relative; padding: 15px 20px; border: 4px solid #111; box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 6px #111; z-index: 5; }
 .oak-dialog-box p { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #111; line-height: 1.8; text-transform: uppercase; margin: 0; padding-right: 15px; }
-.oak-arrow { position: absolute; bottom: 12px; right: 15px; font-size: 1.2rem; color: #e3350d; display: none; }
 
 /* ==============================================================
-   TEMA ESCURO (DARK MODE)
+   SISTEMA DE MODO ESCURO (DARK MODE)
 ============================================================== */
 body.dark-mode { background-color: #080a0f; }
 body.dark-mode .pokedex-main-display { background: #0f141e; box-shadow: inset 0 10px 30px rgba(0,0,0,0.5); }
@@ -421,56 +423,28 @@ body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-mod
 body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
 body.dark-mode .stat-num { color: #ddd; }
 body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 10px #ffcb05; background: #111; border-color: #050505;}
-body.dark-mode .search-btn { background: #e6b800; border-color: #111; box-shadow: 2px 2px 0 #111; }
-body.dark-mode .filter-toggle { background: #e6b800; border-color: #111; box-shadow: 3px 3px 0 #111; color: #111;}
+body.dark-mode .search-btn.red-btn { background: #9e1a00; border-color: #111; box-shadow: 2px 2px 0 #111; }
+body.dark-mode .filter-toggle { background: #2a2a2c; border-color: #111; box-shadow: 3px 3px 0 #111; color: #aaa;}
 body.dark-mode .catch-btn { border-color: #111; box-shadow: 2px 2px 0 rgba(0,0,0,0.8); }
 body.dark-mode .catch-btn::after { border-color: #111; }
 body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
 body.dark-mode .light.red { background: #ff3333; box-shadow: 0 0 15px 3px rgba(255, 51, 51, 0.8); border-color: #ff9999; }
 body.dark-mode .light.yellow { background: #ffcb05; box-shadow: 0 0 15px 3px rgba(255, 203, 5, 0.8); border-color: #ffee99; }
 body.dark-mode .light.green { background: #32cd32; box-shadow: 0 0 15px 3px rgba(50, 205, 50, 0.8); border-color: #99ff99; }
-
-/* ==============================================================
-   BARRINHAS DE GERAÇÃO (CARDS E MODAL)
-============================================================== */
-.pk-gen-bar {
-    font-family: monospace;
-    font-size: 0.6rem;
-    font-weight: 800;
-    color: #666;
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 2px 8px;
-    margin: 2px auto 6px auto;
-    display: inline-block;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    z-index: 2;
-    position: relative;
-}
-
-.modal-gen-bar {
-    font-family: monospace;
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: var(--dex-border);
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px dashed rgba(0, 0, 0, 0.3);
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    display: inline-block;
-}
-
-body.dark-mode .pk-gen-bar {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: #aaa;
-}
-
-body.dark-mode .modal-gen-bar {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #ddd;
-}
+body.dark-mode .pk-gen-bar { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); color: #aaa; }
+body.dark-mode .modal-gen-bar { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); color: #ddd; }
+body.dark-mode .cat-btn[data-cat="normal"].active { background: #ccc; color: #111; }
+body.dark-mode .cat-btn[data-cat="boss"].active { background: #e6b800; color: #111; }
+body.dark-mode .cat-btn[data-cat="dark"].active { background: #6a0dad; color: #fff; }
+body.dark-mode .boss-guide-module { background: #2a2a2c; border-color: #111; }
+body.dark-mode .boss-guide-text { color: #ccc; }
+body.dark-mode .boss-loot-module { background: #e6b800; border-color: #111; }
+body.dark-mode .loot-box { background: #111; border-color: #111; color: #ffcb05; }
+body.dark-mode .souls-module { background: #2a2a2c; border-color: #111; }
+body.dark-mode .souls-module .label-tech { color: #aaa; border-bottom-color: #555; }
+body.dark-mode .soul-box { background: #111; border-color: #111; }
+body.dark-mode .soul-box.eternizado { background: #1a0f2e; border-color: #6a0dad; }
+body.dark-mode .soul-label { color: #888; }
+body.dark-mode .soul-box.eternizado .soul-label { color: #b388ff; }
+body.dark-mode .soul-value { color: #fff; }
+body.dark-mode .exclusive-badge { background: #111; color: #ff4b2b; }
