@@ -87,6 +87,63 @@
     "image": "Sprites/dark-gallade.png"
   },
   {
+    "id": "Dark-Slaking",
+    "category": "dark",
+    "name": "Dark Slaking",
+    "types": [
+      "Normal"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 150,
+      "atk": 160,
+      "def": 100,
+      "spatk": 95,
+      "spdef": 65,
+      "spd": 100
+    },
+    "souls": {
+      "normal": "130",
+      "eternizado": "390"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-slaking.png"
+  },
+  {
+    "id": "Dark-Tyranitar",
+    "category": "dark",
+    "name": "Dark Tyranitar",
+    "types": [
+      "Rock",
+      "Dark"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 100,
+      "atk": 134,
+      "def": 110,
+      "spatk": 95,
+      "spdef": 100,
+      "spd": 61
+    },
+    "souls": {
+      "normal": "130",
+      "eternizado": "390"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-tyranitar.png"
+  },
+  {
     "id": "Dark-Raichu-Fly",
     "category": "dark",
     "name": "Dark Raichu Fly",
