@@ -33,10 +33,10 @@
     "category": "dark",
     "name": "Dark Gardevoir",
     "types": [
-      "Fire",
-      "Flying"
+      "Psychic",
+      "Fairy"
     ],
-    "generation": 1,
+    "generation": 3,
     "stats": {
       "hp": 68,
       "atk": 65,
@@ -62,8 +62,8 @@
     "category": "dark",
     "name": "Dark Gallade",
     "types": [
-      "Fire",
-      "Flying"
+      "Psychic",
+      "Fighting"
     ],
     "generation": 3,
     "stats": {
