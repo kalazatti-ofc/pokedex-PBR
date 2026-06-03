@@ -143,15 +143,15 @@
     ],
     "image": "Sprites/dark-tyranitar.png"
   },
-  {
-    "id": "Dark-Salamence",
+{
+    "id": "dark-salamence",
     "category": "dark",
     "name": "Dark Salamence",
     "types": [
       "Dragon",
       "Flying"
     ],
-    "generation": 2,
+    "generation": 3,
     "stats": {
       "hp": 95,
       "atk": 135,
@@ -173,7 +173,7 @@
     "image": "Sprites/dark-salamence.png"
   },
   {
-    "id": "Dark-Metagross",
+    "id": "dark-metagross",
     "category": "dark",
     "name": "Dark Metagross",
     "types": [
