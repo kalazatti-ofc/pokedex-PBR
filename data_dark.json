@@ -144,6 +144,64 @@
     "image": "Sprites/dark-tyranitar.png"
   },
   {
+    "id": "Dark-Salamence",
+    "category": "dark",
+    "name": "Dark Salamence",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "generation": 2,
+    "stats": {
+      "hp": 95,
+      "atk": 135,
+      "def": 80,
+      "spatk": 110,
+      "spdef": 80,
+      "spd": 100
+    },
+    "souls": {
+      "normal": "130",
+      "eternizado": "390"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-salamence.png"
+  },
+  {
+    "id": "Dark-Metagross",
+    "category": "dark",
+    "name": "Dark Metagross",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "generation": 3,
+    "stats": {
+      "hp": 80,
+      "atk": 135,
+      "def": 130,
+      "spatk": 95,
+      "spdef": 90,
+      "spd": 70
+    },
+    "souls": {
+      "normal": "130",
+      "eternizado": "390"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-metagross.png"
+  },
+  {
     "id": "Dark-Raichu-Fly",
     "category": "dark",
     "name": "Dark Raichu Fly",
