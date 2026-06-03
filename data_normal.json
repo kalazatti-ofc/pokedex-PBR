@@ -13344,6 +13344,69 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/660.png"
   },
   {
+    "id": 722,
+    "name": "Rowlet",
+    "types": [
+      "Grass",
+      "Flying"
+    ],
+    "generation": 7,
+    "stats": {
+      "hp": 68,
+      "atk": 55,
+      "def": 55,
+      "spatk": 50,
+      "spdef": 50,
+      "spd": 42
+    },
+    "locations": [
+      "Canavale (X 3263 / Y 2212 / Z 6)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/722.png"
+  },
+  {
+    "id": 723,
+    "name": "Dartrix",
+    "types": [
+      "Grass",
+      "Flying"
+    ],
+    "generation": 7,
+    "stats": {
+      "hp": 78,
+      "atk": 75,
+      "def": 75,
+      "spatk": 70,
+      "spdef": 70,
+      "spd": 52
+    },
+    "locations": [
+      "Canavale (X 3263 / Y 2212 / Z 6)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/723.png"
+  },
+  {
+    "id": 724,
+    "name": "Decidueye",
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "generation": 7,
+    "stats": {
+      "hp": 78,
+      "atk": 107,
+      "def": 75,
+      "spatk": 100,
+      "spdef": 100,
+      "spd": 70
+    },
+    "locations": [
+      "Canavale (X 3263 / Y 2212 / Z 6)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/724.png"
+  },
+  {
     "id": 902,
     "name": "Basculegion",
     "types": [
