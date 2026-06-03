@@ -1,6 +1,6 @@
 [
   {
-    "id": "Dark-Dragonite",
+    "id": "dark-dragonite",
     "category": "dark",
     "name": "Dark Dragonite",
     "types": [
@@ -29,7 +29,7 @@
     "image": "Sprites/dark-dragonite.png"
   },
   {
-    "id": "Dark-Gardevoir",
+    "id": "dark-gardevoir",
     "category": "dark",
     "name": "Dark Gardevoir",
     "types": [
@@ -58,7 +58,7 @@
     "image": "Sprites/dark-gardevoir.png"
   },
   {
-    "id": "Dark-Gallade",
+    "id": "dark-gallade",
     "category": "dark",
     "name": "Dark Gallade",
     "types": [
@@ -87,7 +87,7 @@
     "image": "Sprites/dark-gallade.png"
   },
   {
-    "id": "Dark-Slaking",
+    "id": "dark-slaking",
     "category": "dark",
     "name": "Dark Slaking",
     "types": [
@@ -115,7 +115,7 @@
     "image": "Sprites/dark-slaking.png"
   },
   {
-    "id": "Dark-Tyranitar",
+    "id": "dark-tyranitar",
     "category": "dark",
     "name": "Dark Tyranitar",
     "types": [
@@ -143,7 +143,7 @@
     ],
     "image": "Sprites/dark-tyranitar.png"
   },
-{
+  {
     "id": "dark-salamence",
     "category": "dark",
     "name": "Dark Salamence",
@@ -202,7 +202,7 @@
     "image": "Sprites/dark-metagross.png"
   },
   {
-    "id": "Dark-Raichu-Fly",
+    "id": "dark-raichu-fly",
     "category": "dark",
     "name": "Dark Raichu Fly",
     "types": [
@@ -217,7 +217,7 @@
       "spdef": 120,
       "spd": 165
     },
-    "exclusive": "Somente na Quest de Natal 2021", 
+    "exclusive": "Somente na Quest de Natal 2021",
     "image": "Sprites/dark-raichufly.png"
   }
 ]
