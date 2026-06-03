@@ -2039,7 +2039,10 @@
     },
     "locations": [
       "Pewter (X 761 / Y 787 / Z 6)",
-      "Orre (X 2481 / Y 1363 / Z 7)"
+      {
+        "local": "Orre (X 2481 / Y 1363 / Z 7)",
+        "nota": "📌 Entre no Buraco. (TM Dig)"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/95.png"
   },
@@ -2386,7 +2389,7 @@
     },
     "locations": [
       {
-        "local": "Orre (X 2481 / Y 1363 / Z 7)"",
+        "local": "Orre (X 2481 / Y 1363 / Z 7)",
         "nota": "📌 Entre no Buraco. (TM Dig)"
       }
     ],
@@ -4417,7 +4420,10 @@
     },
     "locations": [
       "Phenac (X 2514 / Y 1475 / Z 5)",
-      "Orre (X 2481 / Y 1363 / Z 7)"
+      {
+        "local": "Orre (X 2481 / Y 1363 / Z 7)",
+        "nota": "📌 Entre no Buraco. (TM Dig)"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/208.png"
   },
