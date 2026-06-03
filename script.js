@@ -585,7 +585,7 @@ const oakDialogues = [
     "Olá! Bem-vindo ao mundo de PokemonR - PBR!",
     "Esta Pokedex e uma pagina criada de fãs para fãs e NAO é um produto oficial do Servidor",
     "Um agradecimento super especial a comunidade pelo apoio continuo!",
-    "Apoiadores: Upzin, Marlin, Paleguazv, Leander Hastings",
+    "Apoiadores: Jurubinha, Upzin, Paleguazv, Marlin, Leander Hastings",
     "Desenvolvida por: Kalazatti.",
     "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
 ];
