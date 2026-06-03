@@ -6510,7 +6510,8 @@
       "spd": 80
     },
     "locations": [
-      "Quest boost stone",
+      "Quest Boost Stone",
+      "Canavale (X 3263 / Y 2212 / Z 6)",
       "Cianwood (X 905 / Y 177 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/308.png"
@@ -12748,7 +12749,8 @@
       "spd": 65
     },
     "locations": [
-      "Veilstone (X 4136 / Y 1965 / Z 6)"
+      "Veilstone (X 4136 / Y 1965 / Z 6)",
+      "Canavale (X 3263 / Y 2212 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/619.png"
   },
@@ -12768,7 +12770,8 @@
       "spd": 105
     },
     "locations": [
-      "Veilstone (X 4136 / Y 1965 / Z 6)"
+      "Veilstone (X 4136 / Y 1965 / Z 6)",
+      "Canavale (X 3263 / Y 2212 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/620.png"
   },
