@@ -18,6 +18,24 @@
     "image": "Sprites/boss-slaking.png"
   },
   {
+    "id": "BOSS 24H - Magmortar",
+    "category": "boss",
+    "name": "Magmortar",
+    "types": [
+      "Fire"
+    ],
+    "generation": 4,
+    "guide": "É recomendado que seja acessado apenas após o level 450, pois após esse level o BOSS tem 50% menos vida.",
+    "loot": "15x Diamond Black (Converte em Event Point).",
+    "locations": [
+      {
+        "local": "Trainer Center (X 948 - Y 2081 - Z 7)",
+        "nota": "📌 O Boss vem de forma RANDOM e pode ser feito apenas 1x por dia, caso não venha o que você deseja, pode sair do boss e retornar 2h depois novamente."
+      }
+    ],
+    "image": "Sprites/boss-magmortar.png"
+  },
+  {
     "id": "BOSS 24H - Scizor",
     "category": "boss",
     "name": "Scizor",
