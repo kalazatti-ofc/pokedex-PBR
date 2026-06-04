@@ -448,3 +448,33 @@ body.dark-mode .soul-label { color: #888; }
 body.dark-mode .soul-box.eternizado .soul-label { color: #b388ff; }
 body.dark-mode .soul-value { color: #fff; }
 body.dark-mode .exclusive-badge { background: #111; color: #ff4b2b; }
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.15);
+    color: var(--dex-border);
+    width: 25px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 10;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav-arrow:hover {
+    background: var(--dex-border);
+    color: #ffcb05;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-arrow { left: 5px; }
+.next-arrow { right: 5px; }
+
+body.dark-mode .nav-arrow { background: rgba(255,255,255,0.1); color: #fff; }
+body.dark-mode .nav-arrow:hover { background: #ffcb05; color: #111; }
