@@ -143,6 +143,63 @@
     "image": "Sprites/dark-slaking.png"
   },
   {
+    "id": "dark-gengar",
+    "category": "dark",
+    "name": "Dark Gengar",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 60,
+      "spatk": 130,
+      "spdef": 75,
+      "spd": 110
+    },
+    "souls": {
+      "normal": "100",
+      "eternizado": "300"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-gengar.png"
+  },
+  {
+    "id": "dark-reuniclus",
+    "category": "dark",
+    "name": "Dark Reuniclus",
+    "types": [
+      "Psychic"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 110 ,
+      "atk": 65,
+      "def": 75,
+      "spatk": 125,
+      "spdef": 85,
+      "spd": 30
+    },
+    "souls": {
+      "normal": "100",
+      "eternizado": "300"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-reuniclus.png"
+  },
+  {
     "id": "dark-tyranitar",
     "category": "dark",
     "name": "Dark Tyranitar",
