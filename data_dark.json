@@ -316,6 +316,62 @@
     "image": "Sprites/dark-golurk.png"
   },
   {
+    "id": "dark-ditto",
+    "category": "dark",
+    "name": "Dark Ditto",
+    "types": [
+      "Normal"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spatk": 100,
+      "spdef": 100,
+      "spd": 30
+    },
+    "souls": {
+      "normal": "100",
+      "eternizado": "300"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-ditto.png"
+  },
+  {
+    "id": "dark-zombie-ditto",
+    "category": "dark",
+    "name": "Dark Zombie Ditto",
+    "types": [
+      "Normal"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 108,
+      "atk": 108,
+      "def": 108,
+      "spatk": 108,
+      "spdef": 108,
+      "spd": 38
+    },
+    "souls": {
+      "normal": "120",
+      "eternizado": "360"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-zombieditto.png"
+  },
+  {
     "id": "dark-raichu-fly",
     "category": "dark",
     "name": "Dark Raichu Fly",
