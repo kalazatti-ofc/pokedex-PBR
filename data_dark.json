@@ -29,6 +29,34 @@
     "image": "Sprites/dark-dragonite.png"
   },
   {
+    "id": "dark-alakazam",
+    "category": "dark",
+    "name": "Dark Alakazam",
+    "types": [
+      "Psychic"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 55,
+      "atk": 50,
+      "def": 45,
+      "spatk": 135,
+      "spdef": 95,
+      "spd": 120
+    },
+    "souls": {
+      "normal": "100",
+      "eternizado": "300"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-alakazam.png"
+  },
+  {
     "id": "dark-gardevoir",
     "category": "dark",
     "name": "Dark Gardevoir",
@@ -200,6 +228,35 @@
       }
     ],
     "image": "Sprites/dark-metagross.png"
+  },
+  {
+    "id": "dark-golurk",
+    "category": "dark",
+    "name": "Dark Golurk",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 89,
+      "atk": 124,
+      "def": 80,
+      "spatk": 55,
+      "spdef": 80,
+      "spd": 55
+    },
+    "souls": {
+      "normal": "100",
+      "eternizado": "300"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-golurk.png"
   },
   {
     "id": "dark-raichu-fly",
