@@ -461,53 +461,84 @@ body.dark-mode .soul-value { color: #fff; }
 body.dark-mode .exclusive-badge { background: #111; color: #ff4b2b; }
 
 /* =========================================
-   SISTEMA DE SETAS DE NAVEGAÇÃO COMPLETO
+   SISTEMA DE SETAS DE NAVEGAÇÃO "HARMONIZADO" (MOLDURA UNIFICADA)
 ========================================= */
 .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--dex-border);
-    color: #fff;
-    border: 3px solid #fff;
-    width: 35px;
-    height: 45px;
+    background: #e0e0e0; /* Mesma cor da .screen-border */
+    color: var(--dex-border); /* Cor da setinha em tom grafite */
+    width: 40px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.8rem;
+    font-weight: 900;
     z-index: 10;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.15s ease;
     outline: none;
 }
 
+/* Seta Esquerda fundida na borda */
+.prev-arrow {
+    left: -39px; /* Sobrepõe 1px da tela para evitar falhas visuais */
+    border: 4px solid var(--dex-border);
+    border-right: none; /* Remove a linha divisória para fundir com a tela */
+    border-radius: 12px 0 0 12px;
+    /* Sombreamento interno para dar relevo de botão físico */
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.8), inset 0 -3px 0 rgba(0,0,0,0.15);
+}
+
+/* Seta Direita fundida na borda */
+.next-arrow {
+    right: -39px;
+    border: 4px solid var(--dex-border);
+    border-left: none; /* Remove a linha divisória para fundir com a tela */
+    border-radius: 0 12px 12px 0;
+    /* A sombra externa (4px 4px) acompanha e continua a sombra da moldura principal! */
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset -2px 2px 0 rgba(255,255,255,0.8), inset 0 -3px 0 rgba(0,0,0,0.15);
+}
+
+/* Efeitos para manter a ilusão de peça fixa no hover e active */
 .nav-arrow:hover {
-    background: #ffcb05;
-    color: var(--dex-border);
-    border-color: var(--dex-border);
-    transform: translateY(-50%) scale(1.15);
+    color: #ffcb05; /* Apenas o ícone acende, para não quebrar a ilusão da moldura */
 }
 
-.nav-arrow:active {
-    transform: translateY(-50%) scale(0.9);
+/* Simula o clique de botão afundando, sem mover o elemento para não soltar da tela */
+.prev-arrow:active {
+    background: #d4d4d4;
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.3);
+}
+.next-arrow:active {
+    background: #d4d4d4;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.3), inset -2px 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Encaixe milimétrico estourando ligeiramente para fora do visor cinza */
-.prev-arrow { left: -15px; }
-.next-arrow { right: -15px; }
-
-/* Suporte de cor premium para o Modo Escuro */
+/* =========================================
+   MODO ESCURO - SETAS HARMONIZADAS
+========================================= */
 body.dark-mode .nav-arrow { 
-    background: #2a2a2c; 
-    border-color: #555; 
-    color: #ccc;
-    box-shadow: 0 4px 10px #000;
+    background: #2a2a2c; /* Mesma cor do .screen-border no dark mode */
+    color: #888;
+    border-color: #111; 
+}
+body.dark-mode .prev-arrow {
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.05), inset 0 -3px 0 rgba(0,0,0,0.4);
+}
+body.dark-mode .next-arrow {
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.6), inset -2px 2px 0 rgba(255,255,255,0.05), inset 0 -3px 0 rgba(0,0,0,0.4);
 }
 body.dark-mode .nav-arrow:hover { 
-    background: #ffcb05; 
-    border-color: var(--dex-border);
-    color: #111; 
+    color: #ffcb05; 
+}
+body.dark-mode .prev-arrow:active { 
+    background: #222; 
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.8);
+}
+body.dark-mode .next-arrow:active { 
+    background: #222; 
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.6), inset -2px 2px 6px rgba(0,0,0,0.8);
 }
