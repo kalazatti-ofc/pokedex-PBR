@@ -1,4 +1,10 @@
+// ==========================================
+// VARIÁVEIS GLOBAIS DE ESTADO
+// ==========================================
 let pokemonData = [];
+let currentVisibleList = []; // Guarda a lista que está sendo exibida na tela (respeitando filtros)
+let currentModalIndex = 0;   // Guarda a posição do Pokémon aberto no modal
+
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
 let activeCatchFilter = 'all';
@@ -85,6 +91,9 @@ async function fetchData() {
 
         // Une todos os dados em uma única lista para a Pokédex
         pokemonData = [...normalData, ...darkData, ...bossData];
+        
+        // Define a lista atual como a lista completa no início
+        currentVisibleList = [...pokemonData]; 
         renderPokemon(pokemonData);
     } catch (e) { 
         console.error("Erro ao carregar os bancos de dados. Verifique se os nomes dos 3 arquivos JSON estão corretos.", e); 
@@ -146,6 +155,9 @@ function applyFilters() {
 
         return mName && mGen && mType && mCatch;
     });
+    
+    // Atualiza a lista atual visível para que o modal saiba quem navegar
+    currentVisibleList = filtered;
     renderPokemon(filtered);
 }
 
@@ -218,10 +230,37 @@ window.copyLoc = (text, el, event) => {
     }).catch(err => console.error('Erro ao copiar: ', err));
 };
 
+// ==========================================
+// FUNÇÃO DE NAVEGAÇÃO DE SETAS
+// ==========================================
+window.navigatePokemon = (direction, event) => {
+    if(event) event.stopPropagation(); 
+    
+    // Se a lista estiver vazia, aborta
+    if (currentVisibleList.length === 0) return;
+
+    // Atualiza o índice
+    currentModalIndex += direction;
+
+    // Lógica de loop infinito
+    if (currentModalIndex < 0) {
+        currentModalIndex = currentVisibleList.length - 1; 
+    } else if (currentModalIndex >= currentVisibleList.length) {
+        currentModalIndex = 0; 
+    }
+
+    // Pega o id do Pokémon alvo e chama a função de abrir o modal
+    const targetPokemon = currentVisibleList[currentModalIndex];
+    openModal(targetPokemon.id); 
+};
+
 window.openModal = (id) => {
     const p = pokemonData.find(x => x.id.toString() === id.toString());
     if(!p) return;
     
+    // Atualiza o índice do Modal baseado no Pokémon clicado na lista filtrada
+    currentModalIndex = currentVisibleList.findIndex(x => x.id.toString() === id.toString());
+
     const matchups = calculateMatchups(p.types);
     const pCategory = p.category || 'normal';
     
@@ -347,7 +386,7 @@ window.openModal = (id) => {
             const textoExclusivo = p.exclusive ? p.exclusive : 'CAPTURA EXCLUSIVA / EVENTO';
             soulsHTML = `
                 <div class="souls-module">
-                    <h4 class="label-tech">MÉTODO DE OBTENÇÃO</h4>
+                    <h4 class="label-tech">MÉÉTODO DE OBTENÇÃO</h4>
                     <span class="exclusive-badge">${textoExclusivo.toUpperCase()}</span>
                 </div>
             `;
@@ -426,7 +465,12 @@ window.openModal = (id) => {
     document.getElementById('modal-body').innerHTML = `
         <div class="modal-pokedex-view">
             <div class="modal-left-wing">
-                <div class="screen-border">
+                
+                <div class="screen-border" style="position: relative;">
+                    
+                    <button class="nav-arrow prev-arrow" title="Anterior" onclick="navigatePokemon(-1, event)">&#10094;</button>
+                    <button class="nav-arrow next-arrow" title="Próximo" onclick="navigatePokemon(1, event)">&#10095;</button>
+
                     <div class="main-screen ${pCategory !== 'normal' ? 'main-screen-stacked' : ''}">
                         ${pCategory !== 'normal' ? `
                             <div class="stacked-container">
