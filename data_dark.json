@@ -372,6 +372,82 @@
     "image": "Sprites/dark-zombieditto.png"
   },
   {
+    "id": "dark-probopass",
+    "category": "dark",
+    "name": "Dark Probopass",
+    "types": [
+      "Rock",
+	  "Steel"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 60,
+      "atk": 55,
+      "def": 145,
+      "spatk": 75,
+      "spdef": 150,
+      "spd": 40
+    },
+    "souls": {
+      "normal": "110",
+      "eternizado": "330"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-probopass.png"
+  },
+  {
+    "id": "dark-cryogonal",
+    "category": "dark",
+    "name": "Dark Cryogonal",
+    "types": [
+      "Ice"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 80,
+      "atk": 50,
+      "def": 50,
+      "spatk": 95,
+      "spdef": 135,
+      "spd": 105
+    },
+    "souls": {
+      "normal": "110",
+      "eternizado": "330"
+    },
+    "locations": [
+      {
+        "local": "Trainer Center (X 955 - Y 2088 - Z 7)",
+        "nota": "📌 Somente via Souls no NPC Doug Soul."
+      }
+    ],
+    "image": "Sprites/dark-cryogonal.png"
+  },
+  {
+    "id": "dark-cinderace",
+    "category": "dark",
+    "name": "Dark Cinderace",
+    "types": [
+      "Fire"
+    ],
+    "generation": 1,
+    "stats": {
+      "hp": 80,
+      "atk": 116,
+      "def": 75,
+      "spatk": 65,
+      "spdef": 75,
+      "spd": 119
+    },
+    "exclusive": "Somente Evento",
+    "image": "Sprites/dark-cinderace.png"
+  },
+  {
     "id": "dark-raichu-fly",
     "category": "dark",
     "name": "Dark Raichu Fly",
