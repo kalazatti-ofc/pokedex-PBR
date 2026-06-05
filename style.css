@@ -221,15 +221,14 @@ body {
 /* VISOR DA TELA COM POSITION RELATIVE PARA CONTER AS SETAS INTERNAS */
 .screen-border { 
     background: #e0e0e0; 
-    padding: 15px; 
+    padding: 15px 38px; /* O padding lateral de 38px abre espaço para a seta morar dentro da moldura */
     border-radius: 15px 15px 15px 40px; 
     border: 4px solid var(--dex-border); 
     box-shadow: 4px 4px 0 rgba(0,0,0,0.3); 
     margin-bottom: 20px; 
     transition: background 0.3s ease; 
-    position: relative; /* Garante o alinhamento das setas nas molduras */
+    position: relative; /* Essencial para alinhar as setas */
 }
-
 /* VISOR NORMAL */
 .main-screen { background: #8eedd1; border-radius: 10px; border: 4px solid var(--dex-border); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: inset 0 0 15px rgba(0,0,0,0.2); position: relative; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px); }
 .poke-img-large { width: 110px; height: 110px; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.3)); z-index: 2; }
@@ -397,14 +396,24 @@ body {
 }
 
 @media (max-width: 768px) {
-    .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
-    .pokedex-main-display { flex: none; height: 350px; max-height: 350px; }
-    .pokemon-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 8px; }
-    .pk-card { padding: 8px; border-width: 2px; }
-    .pk-card img { width: 55px; height: 55px; }
-    .pk-name { font-size: 0.6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .main-screen { padding: 10px; }
-    .poke-img-large { width: 80px; height: 80px; } 
+    /* ... seu css mobile anterior ... */
+
+    /* Diminui o recuo lateral para telas pequenas */
+    .screen-border { 
+        padding: 12px 30px; 
+    }
+    
+    /* Encolhe as setinhas mantendo o formato pílula */
+    .nav-arrow {
+        width: 20px;
+        height: 45px;
+        font-size: 1rem;
+        border-width: 2px;
+        border-radius: 12px;
+    }
+    
+    .prev-arrow { left: 4px; }
+    .next-arrow { right: 4px; }
 }
 
 /* =========================================
@@ -518,27 +527,60 @@ body.dark-mode .exclusive-badge { background: #111; color: #ff4b2b; }
 }
 
 /* =========================================
-   MODO ESCURO - SETAS HARMONIZADAS
+   SISTEMA DE SETAS EMBUTIDAS (PILL BUTTONS)
+========================================= */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333; /* Cor do botão físico emborrachado */
+    color: #fff;
+    border: 3px solid var(--dex-border);
+    width: 26px;
+    height: 55px;
+    border-radius: 15px; /* Deixa o botão totalmente arredondado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 900;
+    z-index: 10;
+    /* Sombreamento para dar volume 3D de botão de videogame */
+    box-shadow: inset 2px 2px 2px rgba(255,255,255,0.2), 2px 2px 0 rgba(0,0,0,0.15);
+    transition: all 0.1s ease;
+    outline: none;
+}
+
+/* Encaixadas perfeitamente no padding de 38px que criamos */
+.prev-arrow { left: 6px; }
+.next-arrow { right: 6px; }
+
+.nav-arrow:hover {
+    color: #ffcb05;
+    background: #444;
+}
+
+/* O efeito :active simula a mola do botão sendo apertada para o fundo */
+.nav-arrow:active {
+    background: #111;
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.6);
+}
+
+/* =========================================
+   MODO ESCURO - SETAS EMBUTIDAS
 ========================================= */
 body.dark-mode .nav-arrow { 
-    background: #2a2a2c; /* Mesma cor do .screen-border no dark mode */
-    color: #888;
-    border-color: #111; 
-}
-body.dark-mode .prev-arrow {
-    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.05), inset 0 -3px 0 rgba(0,0,0,0.4);
-}
-body.dark-mode .next-arrow {
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.6), inset -2px 2px 0 rgba(255,255,255,0.05), inset 0 -3px 0 rgba(0,0,0,0.4);
+    background: #1a1a1a;
+    color: #aaa;
+    border-color: #000;
+    box-shadow: inset 2px 2px 2px rgba(255,255,255,0.05), 2px 2px 0 rgba(0,0,0,0.4);
 }
 body.dark-mode .nav-arrow:hover { 
     color: #ffcb05; 
+    background: #2a2a2c;
 }
-body.dark-mode .prev-arrow:active { 
-    background: #222; 
-    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.8);
-}
-body.dark-mode .next-arrow:active { 
-    background: #222; 
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.6), inset -2px 2px 6px rgba(0,0,0,0.8);
+body.dark-mode .nav-arrow:active { 
+    background: #000; 
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8); 
 }
