@@ -4262,10 +4262,11 @@
   {
     "id": 201,
     "name": "Unown",
+    "generation": 2,
     "types": [
       "Psychic"
     ],
-    "generation": 2,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png",
     "stats": {
       "hp": 48,
       "atk": 72,
@@ -4275,17 +4276,25 @@
       "spd": 48
     },
     "locations": [
-      "Fim da quest psychic stone"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png"
+      {
+        "rota": "Cianwood (X 605 / Y 116 / Z 7)",
+        "passos": [
+          "Caminho 1 : Siga ao sul (X 614 / Y 142 / Z 8)",
+          "Vá até a proxima sala (X 630 / Y 111 / Z 9)",
+          "Caminho 2 : Siga ao norte (X 609 / Y 79 / Z 8)",
+          "Vá até a proxima sala (X 609 / Y 68 / Z 9)"
+        ]
+      }
+    ]
   },
   {
     "id": 202,
     "name": "Wobbuffet",
+    "generation": 2,
     "types": [
       "Psychic"
     ],
-    "generation": 2,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/202.png",
     "stats": {
       "hp": 190,
       "atk": 33,
@@ -4295,10 +4304,21 @@
       "spd": 33
     },
     "locations": [
-      "Hunter Village (X 1985 / Y 1375 / Z 4)",
-      "Singer <passe pela cachoeira> (X 1743 / Y 1026 / Z 7)"
-    ],
-    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/202.png"
+      {
+        "local": "Singer (X 1743 / Y 1026 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
+      },
+      {
+        "rota": "Cianwood (X 605 / Y 116 / Z 7)",
+        "passos": [
+          "Caminho 1 : Siga ao sul (X 614 / Y 142 / Z 8)",
+          "Vá até a proxima sala (X 630 / Y 111 / Z 9)",
+          "Caminho 2 : Siga ao norte (X 609 / Y 79 / Z 8)",
+          "Vá até a proxima sala (X 609 / Y 68 / Z 9)"
+        ]
+      },
+      "Hunter Village (X 1985 / Y 1375 / Z 4)"
+    ]
   },
   {
     "id": 203,
