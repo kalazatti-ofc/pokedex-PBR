@@ -420,7 +420,10 @@
       "spd": 72
     },
     "locations": [
-      "Saffron <Entre no Bueiro> (X 1028 / Y 1039 / Z 7)"
+      {
+        "local": "Saffron (X 1028 / Y 1039 / Z 7)",
+        "nota": "📌  Entre no Bueiro"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/19.png"
   },
@@ -440,7 +443,10 @@
       "spd": 97
     },
     "locations": [
-      "Yorkshin <entre no buero> (X 2233 / Y 1033 / Z 7)"
+      {
+        "local": "Yorkshin (X 2233 / Y 1033 / Z 7)",
+        "nota": "📌  Entre no buero"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/20.png"
   },
@@ -1121,7 +1127,10 @@
       "spd": 120
     },
     "locations": [
-      "Cerulean <Entre na caveira> (X 1114 / Y 856 / Z 7)"
+      {
+        "local": "Cerulean (X 1114 / Y 856 / Z 7)",
+        "nota": "📌  Entre na Caveira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png"
   },
@@ -1430,7 +1439,10 @@
       "spd": 35
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      {
+        "local": "Singer (X 1679 / Y 975 / Z 7)",
+        "nota": "📌  Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png"
   },
@@ -1450,7 +1462,10 @@
       "spd": 45
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)",
+      {
+        "local": "Singer (X 1679 / Y 975 / Z )",
+        "nota": "📌  Entre no Buraco"
+      },
       "Cherrygrove (X 1128 / Y 511 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png"
@@ -1471,7 +1486,10 @@
       "spd": 55
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      {
+        "local": "Singer (X 1679 / Y 975 / Z )",
+        "nota": "📌  Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/68.png"
   },
@@ -1598,7 +1616,10 @@
       "spd": 20
     },
     "locations": [
-      "Battle Point <Entre na caverna> (X 1516 / Y 1040 / Z 7)"
+      {
+        "local": "Battle Point (X 1516 / Y 1040 / Z 7)",
+        "nota": "📌  Entre na Caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/74.png"
   },
@@ -1619,7 +1640,10 @@
       "spd": 35
     },
     "locations": [
-      "Battle Point <Entre no buraco> (X 1525 / Y 1106 / Z 7)"
+      {
+        "local": "Battle Point (X 1525 / Y 1106 / Z 7)",
+        "nota": "📌  Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/75.png"
   },
@@ -1640,8 +1664,18 @@
       "spd": 45
     },
     "locations": [
-      "Battle Point <Entre na caverna> (X 1516 / Y 1040 / Z 7)",
-      "Battle Point <Entre no buraco> (X 1607 / Y 1125 / Z 8)"
+      {
+        "local": "Battle Point(X 1516 / Y 1040 / Z 7)",
+        "nota": "📌   Entre na Caverna"
+      },
+      {
+        "local": "Battle Point(X 1516 / Y 1040 / Z 7)",
+        "nota": "📌   Entre na Caverna"
+      },
+      {
+        "local": "Battle Point(X 1607 / Y 1125 / Z 8)",
+        "nota": "📌   Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/76.png"
   },
@@ -1745,7 +1779,10 @@
       "spd": 45
     },
     "locations": [
-      "Singer <Casa Eletrica) (X 1651 / Y 1015 / Z 7)",
+      {
+        "local": "Singer (X 1651 / Y 1015 / Z 7)",
+        "nota": "📌   Casa Elétrica"
+      },
       "Vermilion (X 965 / Y 1309 / Z 2)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png"
@@ -1767,7 +1804,10 @@
       "spd": 70
     },
     "locations": [
-      "Singer <Casa Eletrica) (X 1651 / Y 1015 / Z 7)",
+      {
+        "local": "Singer (X 1651 / Y 1015 / Z 7)",
+        "nota": "📌   Casa Elétrica"
+      },
       "Vermilion (X 965 / Y 1309 / Z 2)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/82.png"
@@ -2142,7 +2182,10 @@
       "spd": 100
     },
     "locations": [
-      "Singer <Casa Eletrica) (X 1651 / Y 1015 / Z 7)",
+      {
+        "local": "Singer (X 1651 / Y 1015 / Z 7)",
+        "nota": "📌   Casa Elétrica"
+      },
       "Vermilion (X 965 / Y 1309 / Z 2)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/100.png"
@@ -2163,7 +2206,10 @@
       "spd": 150
     },
     "locations": [
-      "Singer <Casa Eletrica) (X 1651 / Y 1015 / Z 7)",
+      {
+        "local": "Singer (X 1651 / Y 1015 / Z 7)",
+        "nota": "📌   Casa Elétrica"
+      },
       "Vermilion (X 965 / Y 1309 / Z 2)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/101.png"
@@ -2226,7 +2272,10 @@
       "spd": 35
     },
     "locations": [
-      "Armia <Entre na caveira> (X 1940 / Y 881 / Z 7)"
+      {
+        "local": "Armia (X 1940 / Y 881 / Z 7)",
+        "nota": "📌   Entre na Caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/104.png"
   },
@@ -2246,7 +2295,10 @@
       "spd": 45
     },
     "locations": [
-      "Armia <Entre na caveira> (X 1940 / Y 881 / Z 7)"
+      {
+        "local": "Armia (X 1940 / Y 881 / Z 7)",
+        "nota": "📌   Entre na Caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/105.png"
   },
@@ -2266,7 +2318,10 @@
       "spd": 87
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      {
+        "local": "Singer (X 1679 / Y 975 / Z 7)",
+        "nota": "📌   Entre no buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/106.png"
   },
@@ -2286,7 +2341,10 @@
       "spd": 76
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      {
+        "local": "Singer (X 1679 / Y 975 / Z 7)",
+        "nota": "📌   Entre no buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/107.png"
   },
@@ -2923,7 +2981,10 @@
       "spd": 40
     },
     "locations": [
-      "Phenac <entre no buraco a sua direita> (X 2594 / Y 1524 / Z 7)"
+      {
+        "local": "Phenac (X 2594 / Y 1524 / Z 7)",
+        "nota": "📌 Entre no buraco a sua direita"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/137.png"
   },
@@ -2988,7 +3049,10 @@
       "spd": 55
     },
     "locations": [
-      "Battle Point <desça a escada> (X 1492 / Y 954 / Z 5)"
+      {
+        "local": "Battle Point (X 1492 / Y 954 / Z 5)",
+        "nota": "📌   Desça a escada"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/140.png"
   },
@@ -3009,7 +3073,10 @@
       "spd": 80
     },
     "locations": [
-      "Battle Point <desça a escada> (X 1492 / Y 954 / Z 5)"
+      {
+        "local": "Battle Point (X 1492 / Y 954 / Z 5)",
+        "nota": "📌   Desça a escada"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/141.png"
   },
@@ -3031,7 +3098,10 @@
     },
     "locations": [
       "Battle Point (X 1492 / Y 954 / Z 5)",
-      "Pastoria <entre na montanha> (X 3904 / Y 2133 / Z 6)"
+      {
+        "local": "Pastoria (X 3904 / Y 2133 / Z 6)",
+        "nota": "📌   Entre na montanha"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/142.png"
   },
@@ -3598,8 +3668,13 @@
       "spd": 130
     },
     "locations": [
-      "Battle Point <Entre no buraco> (X 1525 / Y 1106 / Z 7)",
-      "Orre (X 2481 / Y 1363 / Z 7)"
+      {
+        "local": "Battle Point (X 1525 / Y 1106 / Z 7)",
+        "nota": "📌   Entre no buraco"
+      },
+      {
+        "local": "Orre (X 2481 / Y 1363 / Z 7)"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/169.png"
   },
@@ -3641,8 +3716,11 @@
       "spd": 67
     },
     "locations": [
-      "Pesca",
-      "Singer <passe pela cachoeira> (X 1743 / Y 1026 / Z 7)"
+      "Pescando",
+      {
+        "local": "Singer (X 1743 / Y 1026 / Z 7)",
+        "nota": "📌   Passe pela cachoeira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/171.png"
   },
@@ -3703,7 +3781,10 @@
       "spd": 15
     },
     "locations": [
-      "Vermilion <Entre no buraco> (X 1044 / Y 1747 / Z 7)"
+      {
+        "local": "Vermilion (X 1044 / Y 1747 / Z 7)",
+        "nota": "📌   Entre no buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/174.png"
   },
@@ -4235,7 +4316,10 @@
       "spd": 30
     },
     "locations": [
-      "Canavale <entre no buraco> (X 3273 / Y 2040 / Z 7)"
+      {
+        "local": "Canavale (X 3273 / Y 2040 / Z 7)",
+        "nota": "📌   Entre no buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/199.png"
   },
@@ -4737,7 +4821,10 @@
       "spd": 35
     },
     "locations": [
-      "Sunshine <desça a escada> (X 1463 / Y 1782 / Z 7)"
+      {
+        "local": "Sunshine (X 1463 / Y 1782 / Z 7)",
+        "nota": "📌  Desça as Escada"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/222.png"
   },
@@ -4758,7 +4845,10 @@
     },
     "locations": [
       "Sunshine (X 1509 / Y 1837 / Z 7)",
-      "Sunshine <desça a escada> (X 1463 / Y 1782 / Z 7)"
+      {
+        "local": "Sunshine (X 1463 / Y 1782 / Z 7)",
+        "nota": "📌 Desça as Escadas"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/223.png"
   },
@@ -4820,7 +4910,10 @@
       "spd": 70
     },
     "locations": [
-      "Sunshine <desça a escada> (X 1463 / Y 1782 / Z 7)"
+      {
+        "local": "Sunshine (X 1463 / Y 1782 / Z 7)",
+        "nota": "📌 Desça as Escadas"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/226.png"
   },
@@ -5026,7 +5119,10 @@
       "spd": 35
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      {
+        "local": "Singer (X 1679 / Y 975 / Z 7)",
+        "nota": "📌 Entre no buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/236.png"
   },
@@ -5046,7 +5142,10 @@
       "spd": 70
     },
     "locations": [
-      "Singer <Entre no buraco> (X 1679 / Y 975 / Z 7)"
+      {
+        "local": "Singer (X 1679 / Y 975 / Z 7)",
+        "nota": "📌 Entre no buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/237.png"
   },
@@ -6340,7 +6439,10 @@
       "spd": 30
     },
     "locations": [
-      "Singer <entre no teleport> (X 1665 / Y 1030 / Z 7)"
+      {
+        "local": "Singer (X 1665 / Y 1030 / Z 7)",
+        "nota": "📌 Entre no teleport"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/299.png"
   },
@@ -6444,7 +6546,10 @@
       "spd": 30
     },
     "locations": [
-      "Phenac <entre na caverna> (X 2780 / Y 1447 / Z 5)"
+      {
+        "local": "Phenac (X 2780 / Y 1447 / Z 5)",
+        "nota": "📌 Entre na caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/304.png"
   },
@@ -7484,7 +7589,7 @@
     },
     "locations": [
       {
-        "rota": "Banete Sandgem (X 3788 / Y 2330 / Z 7)",
+        "rota": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
         "passos": [
           "1. Buraco entre as Árvores (X 3788 / Y 2330 / Z 7)",
           "2. Entre no Buraco (X 3752 / Y 2282 / Z 8)",
@@ -7607,7 +7712,10 @@
     },
     "locations": [
       "Pirita (X 2387 / Y 1471 / Z 7)",
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Buraco entre as Árvores"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/359.png"
   },
@@ -9200,7 +9308,10 @@
       "spd": 33
     },
     "locations": [
-      "One island <desça a escada> (X 2439 / Y 1041 / Z 6)"
+      {
+        "local": "One island (X 2439 / Y 1041 / Z 6)",
+        "nota": "📌 Desça as Escadas"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/437.png"
   },
@@ -9509,7 +9620,10 @@
       "spd": 95
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Buraco entre as Árvores"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/452.png"
   },
@@ -9630,7 +9744,10 @@
       "spd": 50
     },
     "locations": [
-      "Sunshine <desça a escada> (X 1441 / Y 1822 / Z 7)"
+      {
+        "local": "Sunshine (X 1441 / Y 1822 / Z 7)",
+        "nota": "📌 Desça a Escada"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/458.png"
   },
@@ -10014,7 +10131,10 @@
       "spd": 40
     },
     "locations": [
-      "Singer <entre no teleport> (X 1665 / Y 1030 / Z 7)"
+      {
+        "local": "Singer (X 1665 / Y 1030 / Z 7)",
+        "nota": "📌 Entre no teleport"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/476.png"
   },
@@ -10908,7 +11028,10 @@
       "spd": 15
     },
     "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
+      {
+        "local": "Canavale (X 3283 / Y 2269 / Z 7)",
+        "nota": "📌 Use RockSmash na Grade"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/524.png"
   },
@@ -10928,7 +11051,10 @@
       "spd": 20
     },
     "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
+      {
+        "local": "Canavale (X 3283 / Y 2269 / Z 7)",
+        "nota": "📌 Use RockSmash na Grade"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/525.png"
   },
@@ -10948,7 +11074,10 @@
       "spd": 25
     },
     "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
+      {
+        "local": "Canavale (X 3283 / Y 2269 / Z 7)",
+        "nota": "📌 Use RockSmash na Grade"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/526.png"
   },
@@ -10969,7 +11098,10 @@
       "spd": 72
     },
     "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
+      {
+        "local": "Canavale (X 3283 / Y 2269 / Z 7)",
+        "nota": "📌 Use RockSmash na Grade"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/527.png"
   },
@@ -10990,7 +11122,10 @@
       "spd": 114
     },
     "locations": [
-      "Canavale <use RockSmash na grade> (X 3283 / Y 2269 / Z 7)"
+      {
+        "local": "Canavale (X 3283 / Y 2269 / Z 7)",
+        "nota": "📌 Use RockSmash na Grade"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/528.png"
   },
@@ -11297,7 +11432,10 @@
       "spd": 57
     },
     "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
+      {
+        "local": "Veilstone (X 4286 / Y 2088 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/543.png"
   },
@@ -11318,7 +11456,10 @@
       "spd": 47
     },
     "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
+      {
+        "local": "Veilstone (X 4286 / Y 2088 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/544.png"
   },
@@ -11339,7 +11480,10 @@
       "spd": 112
     },
     "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
+      {
+        "local": "Veilstone (X 4286 / Y 2088 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/545.png"
   },
@@ -11589,7 +11733,10 @@
       "spd": 55
     },
     "locations": [
-      "Canavale <entre na caverna> (X 3462 / Y 1961 / Z 7)"
+      {
+        "local": "Canavale (X 3462 / Y 1961 / Z 7)",
+        "nota": "📌 Entre na Caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/557.png"
   },
@@ -11610,7 +11757,10 @@
       "spd": 45
     },
     "locations": [
-      "Canavale <entre na caverna> (X 3462 / Y 1961 / Z 7)"
+      {
+        "local": "Canavale (X 3462 / Y 1961 / Z 7)",
+        "nota": "📌 Entre na Caverna"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/558.png"
   },
@@ -11693,7 +11843,10 @@
       "spd": 30
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/562.png"
   },
@@ -11713,7 +11866,10 @@
       "spd": 30
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/563.png"
   },
@@ -12142,7 +12298,10 @@
       "spd": 60
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/588.png"
   },
@@ -12163,7 +12322,10 @@
       "spd": 20
     },
     "locations": [
-      "Sandgem <Buraco entre as árvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/589.png"
   },
@@ -12708,7 +12870,10 @@
       "spd": 25
     },
     "locations": [
-      "Sandgem <tem um buraco entre as arvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/616.png"
   },
@@ -12728,7 +12893,10 @@
       "spd": 145
     },
     "locations": [
-      "Sandgem <tem um buraco entre as arvores> (X 3788 / Y 2330 / Z 7)"
+      {
+        "local": "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/617.png"
   },
@@ -13003,9 +13171,9 @@
     },
     "locations": [
       {
-        "rota": "Sandgem",
+        "rota": "Banette Sandgem",
         "passos": [
-          "1. Sandgem (X 3788 / Y 2330 / Z 7)",
+          "1. Banette Sandgem (X 3788 / Y 2330 / Z 7)",
           "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
           "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
           "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
@@ -13034,7 +13202,7 @@
       {
         "rota": "Sandgem",
         "passos": [
-          "1. Sandgem (X 3788 / Y 2330 / Z 7)",
+          "1. Banette Sandgem (X 3788 / Y 2330 / Z 7)",
           "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
           "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
           "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
@@ -13061,9 +13229,9 @@
     },
     "locations": [
       {
-        "rota": "Sandgem",
+        "rota": "Banette Sandgem",
         "passos": [
-          "1. Sandgem (X 3788 / Y 2330 / Z 7)",
+          "1. Banette Sandgem (X 3788 / Y 2330 / Z 7)",
           "2. Entre no buraco (X 3752 / Y 2282 / Z 8)",
           "3. Escreva “Onied” de frente para o totem (X 3774 / Y 2283 / Z 9)",
           "4. Entre no Portal (X 3797 / Y 2266 / Z 100)"
