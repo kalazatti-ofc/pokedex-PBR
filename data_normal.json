@@ -4284,7 +4284,8 @@
           "Caminho 2 : Siga ao norte (X 609 / Y 79 / Z 8)",
           "Vá até a proxima sala (X 609 / Y 68 / Z 9)"
         ]
-      }
+      },
+      "Quest Psychic Stone"
     ]
   },
   {
@@ -4305,17 +4306,15 @@
     },
     "locations": [
       {
-        "local": "Singer (X 1743 / Y 1026 / Z 7)",
-        "nota": "📌 Entre na Cachoeira"
-      },
-      {
         "rota": "Cianwood (X 605 / Y 116 / Z 7)",
         "passos": [
           "Caminho 1 : Siga ao sul (X 614 / Y 142 / Z 8)",
-          "Vá até a proxima sala (X 630 / Y 111 / Z 9)",
-          "Caminho 2 : Siga ao norte (X 609 / Y 79 / Z 8)",
-          "Vá até a proxima sala (X 609 / Y 68 / Z 9)"
+          "Vá até a proxima sala (X 630 / Y 111 / Z 9)"
         ]
+      },
+      {
+        "local": "Singer (X 1743 / Y 1026 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
       },
       "Hunter Village (X 1985 / Y 1375 / Z 4)"
     ]
