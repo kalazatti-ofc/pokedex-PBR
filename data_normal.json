@@ -11890,7 +11890,10 @@
       "spd": 22
     },
     "locations": [
-      "Pastoria <entre na montanha> (X 3904 / Y 2133 / Z 6)"
+      {
+        "local": "Pastoria (X 3904 / Y 2133 / Z 6)",
+        "nota": "📌 Entre na Montanha"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/564.png"
   },
@@ -11911,7 +11914,10 @@
       "spd": 32
     },
     "locations": [
-      "Pastoria <entre na montanha> (X 3904 / Y 2133 / Z 6)"
+      {
+        "local": "Pastoria (X 3904 / Y 2133 / Z 6)",
+        "nota": "📌 Entre na Montanha"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/565.png"
   },
@@ -11973,7 +11979,10 @@
       "spd": 65
     },
     "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
+      {
+        "local": "Veilstone (X 4286 / Y 2088 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/568.png"
   },
@@ -11993,7 +12002,10 @@
       "spd": 75
     },
     "locations": [
-      "Veilstone <entre na cachoeira> (X 4286 / Y 2088 / Z 7)"
+      {
+        "local": "Veilstone (X 4286 / Y 2088 / Z 7)",
+        "nota": "📌 Entre na Cachoeira"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/569.png"
   },
@@ -12033,7 +12045,10 @@
       "spd": 55
     },
     "locations": [
-      "Solaceon <entre no buraco> (X 3904 / Y 1864 / Z 7)"
+      {
+        "local": "Solaceon (X 3904 / Y 1864 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/575.png"
   },
@@ -12053,7 +12068,10 @@
       "spd": 65
     },
     "locations": [
-      "Solaceon (X 3918 / Y 1902 / Z 7)"
+      {
+        "local": "Solaceon (X 3918 / Y 1902 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/576.png"
   },
@@ -12346,7 +12364,10 @@
       "spd": 15
     },
     "locations": [
-      "Pastoria <buraco entre as arvores> (X 3966 / Y 2290 / Z 7)"
+      {
+        "local": "Pastoria (X 3966 / Y 2290 / Z 7)",
+        "nota": "📌 Entre no buraco entre as arvores."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/590.png"
   },
@@ -12367,7 +12388,10 @@
       "spd": 30
     },
     "locations": [
-      "Pastoria <buraco entre as arvores> (X 3966 / Y 2290 / Z 7)"
+      {
+        "local": "Pastoria (X 3966 / Y 2290 / Z 7)",
+        "nota": "📌 Entre no buraco entre as arvores."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/591.png"
   },
@@ -12423,7 +12447,10 @@
       "spd": 65
     },
     "locations": [
-      "Jublife <entre no redomoinho> (X 3739 / Y 2248 / Z 7)"
+      {
+        "local": "Jublife (X 3739 / Y 2248 / Z 7)",
+        "nota": "📌 Entre no Redomoinho"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/594.png"
   },
@@ -12647,7 +12674,10 @@
       "spd": 30
     },
     "locations": [
-      "Jublife <clique no globo> (X 3824 / Y 1807 / Z 7)"
+      {
+        "local": "Jublife (X 3824 / Y 1807 / Z 7)",
+        "nota": "📌 Clique no Globo"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/605.png"
   },
@@ -12667,7 +12697,10 @@
       "spd": 40
     },
     "locations": [
-      "Jublife <clique no globo> (X 3824 / Y 1807 / Z 7)"
+      {
+        "local": "Jublife (X 3824 / Y 1807 / Z 7)",
+        "nota": "📌 Clique no Globo"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/606.png"
   },
@@ -12688,7 +12721,10 @@
       "spd": 20
     },
     "locations": [
-      "Pastoria (X 3884 / Y 2146 / Z 7)"
+      {
+        "local": "Pastoria (X 3884 / Y 2146 / Z 7)",
+        "nota": "📌 Entre no buraco entre as arvores."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/607.png"
   },
@@ -12709,7 +12745,10 @@
       "spd": 55
     },
     "locations": [
-      "Pastoria (X 3884 / Y 2146 / Z 7)"
+      {
+        "local": "Pastoria (X 3884 / Y 2146 / Z 7)",
+        "nota": "📌 Entre no buraco entre as arvores."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/608.png"
   },
@@ -12730,7 +12769,10 @@
       "spd": 80
     },
     "locations": [
-      "Pastoria (X 3884 / Y 2146 / Z 7)"
+      {
+        "local": "Pastoria (X 3884 / Y 2146 / Z 7)",
+        "nota": "📌 Entre no buraco entre as arvores."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/609.png"
   },
@@ -13148,7 +13190,7 @@
       "spd": 65
     },
     "locations": [
-      "Canavale - > FLY (X 3348 / Y 1955 / Z 0)"
+      "Canavale (X 3348 / Y 1955 / Z 0)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/631.png"
   },
