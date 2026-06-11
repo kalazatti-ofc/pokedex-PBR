@@ -4025,6 +4025,7 @@
     },
     "locations": [
       "Sina (X 1235 / Y 591 / Z 5)",
+      "Sina (X 985 / Y 621 / Z 3)",
       "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/185.png"
@@ -5049,6 +5050,7 @@
     },
     "locations": [
       "Sunshine (X 1588 / Y 1853 / Z 6)",
+      "Sina (X 985 / Y 621 / Z 3)",
       "Cianwood (X 1000 / Y 276 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/232.png"
@@ -5385,6 +5387,7 @@
     },
     "locations": [
       "Sina (X 1226 / Y 610 / Z 5)",
+      "Sina (X 985 / Y 621 / Z 3)",
       "Hunter Village (X 1834 / Y 1413 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/248.png"
@@ -7805,7 +7808,7 @@
       "spd": 25
     },
     "locations": [
-      "sina (X 546 / Y 524 / Z 7)"
+      "Sina (X 546 / Y 524 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/363.png"
   },
@@ -7826,7 +7829,7 @@
       "spd": 45
     },
     "locations": [
-      "sina (X 546 / Y 524 / Z 7)"
+      "Sina (X 546 / Y 524 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/364.png"
   },
@@ -7847,7 +7850,7 @@
       "spd": 65
     },
     "locations": [
-      "sina (X 546 / Y 524 / Z 7)"
+      "Sina (X 546 / Y 524 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/365.png"
   },
