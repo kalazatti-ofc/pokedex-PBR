@@ -509,7 +509,9 @@
       "spd": 55
     },
     "locations": [
-      "Armia (X 1936 / Y 891 / Z 7)"
+      "Armia (X 1936 / Y 891 / Z 7)",
+      "Cerulean (X 944 / Y 941 / Z 7)",
+      "Singer (X 1621 / Y 922 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/23.png"
   },
@@ -529,7 +531,8 @@
       "spd": 80
     },
     "locations": [
-      "Armia (X 1936 / Y 891 / Z 7)"
+      "Armia (X 1936 / Y 891 / Z 7)",
+      "Singer (X 1621 / Y 922 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/24.png"
   },
@@ -1439,6 +1442,7 @@
       "spd": 35
     },
     "locations": [
+      "Cerulean (X 861 / Y 845 / Z 6)",
       {
         "local": "Singer (X 1679 / Y 975 / Z 7)",
         "nota": "📌  Entre no Buraco"
@@ -1616,6 +1620,7 @@
       "spd": 20
     },
     "locations": [
+      "Cerulean (X 861 / Y 845 / Z 6)",
       {
         "local": "Battle Point (X 1516 / Y 1040 / Z 7)",
         "nota": "📌  Entre na Caverna"
@@ -1952,7 +1957,8 @@
       "spd": 50
     },
     "locations": [
-      "Yorkshin (X 2233 / Y 1033 / Z 7)"
+      "Yorkshin (X 2233 / Y 1033 / Z 7)",
+      "Singer (X 1621 / Y 922 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/89.png"
   },
@@ -2384,7 +2390,8 @@
       "spd": 35
     },
     "locations": [
-      "Armia (X 1962 / Y 897 / Z 6)"
+      "Armia (X 1962 / Y 897 / Z 6)",
+      "Cerulean (X 944 / Y 941 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/109.png"
   },
@@ -2404,7 +2411,8 @@
       "spd": 60
     },
     "locations": [
-      "Armia (X 1962 / Y 897 / Z 6)"
+      "Armia (X 1962 / Y 897 / Z 6)",
+      "Singer (X 1621 / Y 922 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/110.png"
   },
