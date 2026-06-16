@@ -3962,6 +3962,7 @@
       "spd": 50
     },
     "locations": [
+      "Sina (X 607 - Y 590 - Z 7",
       "Phenac (X 2497 / Y 1446 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png"
@@ -4643,6 +4644,7 @@
       "spd": 5
     },
     "locations": [
+      "Banette Sandgem (X 3788 / Y 2330 / Z 7)",
       "Battle Point (X 1515 / Y 1042 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/213.png"
