@@ -1620,6 +1620,12 @@
       "spd": 20
     },
     "locations": [
+      {
+        "rota": "Cerulean (X 1214 / Y 819 / Z 7)",
+        "passos": [
+          "Quest Rock Stone (X 1198 / Y 836 / Z 8)"
+        ]
+      },
       "Cerulean (X 861 / Y 845 / Z 6)",
       {
         "local": "Battle Point (X 1516 / Y 1040 / Z 7)",
@@ -1646,6 +1652,12 @@
     },
     "locations": [
       {
+        "rota": "Cerulean (X 1214 / Y 819 / Z 7)",
+        "passos": [
+          "Quest Rock Stone (X 1198 / Y 836 / Z 8)"
+        ]
+      },
+      {
         "local": "Battle Point (X 1525 / Y 1106 / Z 7)",
         "nota": "📌  Entre no Buraco"
       }
@@ -1670,8 +1682,10 @@
     },
     "locations": [
       {
-        "local": "Battle Point(X 1516 / Y 1040 / Z 7)",
-        "nota": "📌   Entre na Caverna"
+        "rota": "Cerulean (X 1214 / Y 819 / Z 7)",
+        "passos": [
+          "Quest Rock Stone (X 1198 / Y 836 / Z 8)"
+        ]
       },
       {
         "local": "Battle Point(X 1516 / Y 1040 / Z 7)",
@@ -2454,6 +2468,12 @@
       "spd": 40
     },
     "locations": [
+      {
+        "rota": "Cerulean (X 1214 / Y 819 / Z 7)",
+        "passos": [
+          "Quest Rock Stone (X 1198 / Y 836 / Z 8)"
+        ]
+      },
       {
         "local": "Orre (X 2481 / Y 1363 / Z 7)",
         "nota": "📌 Entre no Buraco. (TM Dig)"
