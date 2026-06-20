@@ -53,5 +53,23 @@
       }
     ],
     "image": "Sprites/boss-scizor.png"
+  },
+  {
+    "id": "BOSS 24H - Gengar",
+    "category": "boss",
+    "name": "Gengar",
+    "types": [
+      "Normal"
+    ],
+    "generation": 1,
+    "guide": "É recomendado que seja acessado apenas após o level 450, pois após esse level o BOSS tem 50% menos vida.",
+    "loot": "1 Golden Coin.",
+    "locations": [
+      {
+        "local": "Trainer Center (X 948 - Y 2081 - Z 7)",
+        "nota": "📌 O Boss vem de forma RANDOM e pode ser feito apenas 1x por dia, caso não venha o que você deseja, pode sair do boss e retornar 2h depois novamente."
+      }
+    ],
+    "image": "Sprites/boss-gengar.png"
   }
 ]
