@@ -1,8 +1,8 @@
 // ==========================================
-// VARIÁVEIS GLOBAIS DE ESTADO
+// VARIÁVEIS GLOBAIS DE ESTADO E MAPA
 // ==========================================
 let pokemonData = [];
-let currentVisibleList = []; // Guarda a lista que está sendo exibida na tela (respeitando filtros)
+let currentVisibleList = []; // Guarda a lista que está sendo exibida na tela
 let currentModalIndex = 0;   // Guarda a posição do Pokémon aberto no modal
 
 let activeTypeFilter = 'all';
@@ -27,12 +27,29 @@ const typeModifiers = {
     Fairy: { Fighting: 0.5, Poison: 2, Bug: 0.5, Dragon: 0, Dark: 0.5, Steel: 2 }
 };
 
+// Configurações do Mapa
+const cityMaps = {
+    "kanto": { name: "Kanto", minZ: 0, maxZ: 9, defaultZ: 7, bounds: { minX: 529, minY: 635, maxX: 1367, maxY: 1801 } }
+};
+
+let currentCity = "kanto"; 
+let currentZ = cityMaps[currentCity].defaultZ;
+let mapTransform = { scale: 1, x: 0, y: 0 };
+let isDragging = false;
+let startDragX = 0;
+let startDragY = 0;
+
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     fetchData();
     renderTypeButtons();
     setupToggles();
     initOakModal();
+    initPanAndZoom(); 
     
+    // Modo Escuro
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         if (localStorage.getItem('pokedex-dark-mode') === 'true') {
@@ -65,38 +82,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Controle de Abas e Transição de Telas
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeCategory = btn.dataset.cat;
-            applyFilters();
+            
+            const gridContainer = document.getElementById('pokedex-grid');
+            const searchModule = document.getElementById('search-module-container');
+            const filtersModule = document.getElementById('filters-container');
+            const mapContainer = document.getElementById('map-viewer-container');
+            const mapSidebar = document.getElementById('map-sidebar-menu');
+            
+            if (activeCategory === 'mapas') {
+                gridContainer.style.display = 'none';
+                searchModule.style.display = 'none';
+                filtersModule.style.display = 'none';
+                if(mapSidebar) mapSidebar.style.display = 'block'; 
+                mapContainer.style.display = 'flex';
+                initMapViewer(); 
+            } else {
+                gridContainer.style.display = 'grid';
+                searchModule.style.display = 'block';
+                filtersModule.style.display = 'block';
+                if(mapSidebar) mapSidebar.style.display = 'none'; 
+                mapContainer.style.display = 'none';
+                applyFilters();
+            }
         });
     });
+
+    // Listeners Mapa Andares
+    document.getElementById('btn-z-up').addEventListener('click', () => changeZ('up'));
+    document.getElementById('btn-z-down').addEventListener('click', () => changeZ('down'));
 });
 
+// ==========================================
+// FUNÇÕES DE DADOS E FILTROS
+// ==========================================
 async function fetchData() {
     try {
-        // Puxa os três arquivos JSON ao mesmo tempo para não perder velocidade
         const [normalRes, darkRes, bossRes] = await Promise.all([
             fetch('data_normal.json?v=' + new Date().getTime()),
             fetch('data_dark.json?v=' + new Date().getTime()),
             fetch('data_boss.json?v=' + new Date().getTime())
         ]);
-
-        // Converte as respostas para JSON
         const normalData = await normalRes.json();
         const darkData = await darkRes.json();
         const bossData = await bossRes.json();
-
-        // Une todos os dados em uma única lista para a Pokédex
         pokemonData = [...normalData, ...darkData, ...bossData];
-        
-        // Define a lista atual como a lista completa no início
         currentVisibleList = [...pokemonData]; 
         renderPokemon(pokemonData);
     } catch (e) { 
-        console.error("Erro ao carregar os bancos de dados. Verifique se os nomes dos 3 arquivos JSON estão corretos.", e); 
+        console.error("Erro ao carregar os bancos de dados.", e); 
     }
 }
 
@@ -133,7 +172,7 @@ function setupToggles() {
     document.getElementById('toggle-catch').onclick = function() {
         const group = document.getElementById('group-catch');
         group.classList.toggle('hidden-filter');
-        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DE CAPTURA' : '▲ ESCONDER STATUS';
+        this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DA POKEDEX' : '▲ ESCONDER STATUS';
     };
 }
 
@@ -156,7 +195,6 @@ function applyFilters() {
         return mName && mGen && mType && mCatch;
     });
     
-    // Atualiza a lista atual visível para que o modal saiba quem navegar
     currentVisibleList = filtered;
     renderPokemon(filtered);
 }
@@ -164,7 +202,6 @@ function applyFilters() {
 window.toggleCatch = (event, id) => {
     event.stopPropagation();
     const idx = caughtPokemon.indexOf(id);
-    
     if(idx > -1) {
         caughtPokemon.splice(idx, 1);
         event.target.classList.remove('caught');
@@ -172,12 +209,8 @@ window.toggleCatch = (event, id) => {
         caughtPokemon.push(id);
         event.target.classList.add('caught');
     }
-    
     localStorage.setItem('pokedex-caught', JSON.stringify(caughtPokemon));
-
-    if (activeCatchFilter !== 'all') {
-        applyFilters();
-    }
+    if (activeCatchFilter !== 'all') { applyFilters(); }
 };
 
 function renderPokemon(list) {
@@ -185,7 +218,6 @@ function renderPokemon(list) {
     grid.innerHTML = list.map(p => {
         const isCaught = caughtPokemon.includes(p.id);
         const pCategory = p.category || 'normal';
-        
         return `
             <div class="pk-card" onclick="openModal('${p.id}')">
                 <div class="pk-card-inner">
@@ -193,9 +225,7 @@ function renderPokemon(list) {
                     <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, '${p.id}')" title="Marcar como Capturado"></div>
                     <img src="${p.image}" loading="lazy">
                     <h3 class="pk-name">${p.name}</h3>
-                    
                     <div class="pk-gen-bar">${pCategory === 'boss' ? 'BOSS 24H' : (pCategory === 'dark' ? 'DARK' : 'GEN ' + p.generation)}</div>
-                    
                     <div class="pk-types-mini">
                         ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
                     </div>
@@ -205,6 +235,230 @@ function renderPokemon(list) {
     }).join('');
 }
 
+// ==========================================
+// PAN (ARRASTAR) & ZOOM DO MAPA (COM CONTRA-ZOOM)
+// ==========================================
+function initPanAndZoom() {
+    const wrapper = document.getElementById('map-wrapper');
+    const content = document.getElementById('map-content');
+    
+    const applyTransform = () => {
+        content.style.transform = `translate(${mapTransform.x}px, ${mapTransform.y}px) scale(${mapTransform.scale})`;
+        wrapper.style.setProperty('--map-zoom', mapTransform.scale);
+    };
+
+    window.resetMapTransform = () => {
+        mapTransform = { scale: 1, x: 0, y: 0 };
+        applyTransform();
+    };
+
+    window.zoomMap = (direction) => {
+        const zoomStep = 0.3; 
+        const maxZoom = 4.0;  
+        const minZoom = 0.5;  
+
+        if (direction === 'in' && mapTransform.scale < maxZoom) mapTransform.scale += zoomStep;
+        if (direction === 'out' && mapTransform.scale > minZoom) mapTransform.scale -= zoomStep;
+        applyTransform();
+    };
+
+    wrapper.addEventListener('wheel', (e) => {
+        e.preventDefault(); 
+        if (e.deltaY < 0) zoomMap('in');   
+        else zoomMap('out');               
+    }, { passive: false });
+
+    wrapper.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startDragX = e.clientX - mapTransform.x;
+        startDragY = e.clientY - mapTransform.y;
+    });
+
+    wrapper.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        mapTransform.x = e.clientX - startDragX;
+        mapTransform.y = e.clientY - startDragY;
+        applyTransform();
+    });
+
+    wrapper.addEventListener('mouseup', () => isDragging = false);
+    wrapper.addEventListener('mouseleave', () => isDragging = false);
+
+    wrapper.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) { 
+            isDragging = true;
+            startDragX = e.touches[0].clientX - mapTransform.x;
+            startDragY = e.touches[0].clientY - mapTransform.y;
+        }
+    });
+
+    wrapper.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        e.preventDefault(); 
+        mapTransform.x = e.touches[0].clientX - startDragX;
+        mapTransform.y = e.touches[0].clientY - startDragY;
+        applyTransform();
+    }, { passive: false });
+
+    wrapper.addEventListener('touchend', () => isDragging = false);
+    wrapper.addEventListener('touchcancel', () => isDragging = false);
+
+    document.getElementById('btn-zoom-in').addEventListener('click', () => zoomMap('in'));
+    document.getElementById('btn-zoom-out').addEventListener('click', () => zoomMap('out'));
+    document.getElementById('btn-zoom-reset').addEventListener('click', window.resetMapTransform);
+}
+
+// ==========================================
+// LÓGICA DO GPS SETORIAL (MENU LATERAL)
+// ==========================================
+function initMapViewer() {
+    const listContainer = document.getElementById('map-list-container');
+    
+    // Só gera os cards se a lista estiver vazia para não duplicar
+    if (listContainer.innerHTML.trim() === '') {
+        Object.keys(cityMaps).forEach(key => {
+            const city = cityMaps[key];
+            const card = document.createElement('div');
+            card.className = `map-select-card ${currentCity === key ? 'active' : ''}`;
+            card.dataset.city = key;
+            
+            // Puxa a miniatura personalizada
+            const thumbSrc = `continentes/${key}-icone.png`;
+            
+            card.innerHTML = `
+                <img src="${thumbSrc}" class="map-card-thumb" onerror="this.src='https://via.placeholder.com/55x55/111/32cd32?text=MAP'">
+                <div class="map-card-info">
+                    <span class="map-card-name">${city.name.toUpperCase()}</span>
+                    <span class="map-card-desc">SINAL Z:${city.minZ}-${city.maxZ}</span>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.map-select-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                currentCity = key;
+                currentZ = cityMaps[currentCity].defaultZ;
+                updateMapDisplay();
+            });
+            
+            listContainer.appendChild(card);
+        });
+    }
+    
+    updateMapDisplay();
+}
+
+function changeZ(direction) {
+    const cityConfig = cityMaps[currentCity];
+    let newZ = currentZ;
+
+    if (direction === 'up') newZ = currentZ - 1; 
+    else if (direction === 'down') newZ = currentZ + 1; 
+
+    if (newZ >= cityConfig.minZ && newZ <= cityConfig.maxZ) {
+        currentZ = newZ;
+        updateMapDisplay();
+    }
+}
+
+function updateMapDisplay() {
+    const cityConfig = cityMaps[currentCity];
+    const mapImage = document.getElementById('map-image');
+    const zDisplay = document.getElementById('z-display');
+    const statusText = document.getElementById('map-status-text');
+    
+    const btnUp = document.getElementById('btn-z-up');
+    const btnDown = document.getElementById('btn-z-down');
+
+    // Imagem do mapa principal
+    mapImage.src = `continentes/${currentCity}-z${currentZ}.png`;
+    mapImage.alt = `Mapa de ${cityConfig.name} - Z:${currentZ}`;
+    zDisplay.textContent = currentZ;
+    statusText.textContent = `SINAL ESTABELECIDO: ${cityConfig.name.toUpperCase()} (Z:${currentZ})`;
+
+    mapImage.onerror = () => {
+        mapImage.src = ''; 
+        mapImage.alt = 'SINAL PERDIDO';
+        statusText.textContent = `⚠ ERRO DE SINAL EM Z:${currentZ} (IMAGEM NÃO ENCONTRADA)`;
+    };
+
+    btnUp.disabled = (currentZ <= cityConfig.minZ);
+    btnDown.disabled = (currentZ >= cityConfig.maxZ);
+    
+    btnUp.style.opacity = btnUp.disabled ? '0.5' : '1';
+    btnDown.style.opacity = btnDown.disabled ? '0.5' : '1';
+
+    if(window.resetMapTransform) window.resetMapTransform();
+
+    renderMapPins();
+}
+
+// ==========================================
+// RENDERIZAÇÃO DE PINS DE POKÉMON NO MAPA
+// ==========================================
+function renderMapPins() {
+    const container = document.getElementById('map-pins-container');
+    if (!container) return; 
+    
+    container.innerHTML = ''; 
+    const cityConfig = cityMaps[currentCity];
+
+    if (!cityConfig.bounds) return;
+
+    const { minX, maxX, minY, maxY } = cityConfig.bounds;
+    let pinsData = {}; 
+
+    pokemonData.forEach(p => {
+        if (!p.locations) return;
+        
+        p.locations.forEach(loc => {
+            let locString = typeof loc === 'string' ? loc : (loc.local || loc.rota || "");
+            let match = locString.match(/X\s*(\d+)\s*\/\s*Y\s*(\d+)\s*\/\s*Z\s*(\d+)/i);
+            
+            if (match) {
+                let x = parseInt(match[1]);
+                let y = parseInt(match[2]);
+                let z = parseInt(match[3]);
+
+                if (z === currentZ && x >= minX && x <= maxX && y >= minY && y <= maxY) {
+                    let key = `${x},${y}`; 
+                    
+                    if (!pinsData[key]) pinsData[key] = [];
+                    if (!pinsData[key].find(poke => poke.id === p.id)) {
+                        pinsData[key].push(p);
+                    }
+                }
+            }
+        });
+    });
+
+    for (let key in pinsData) {
+        let [x, y] = key.split(',').map(Number);
+        let pokemons = pinsData[key];
+
+        let percentX = ((x - minX) / (maxX - minX)) * 100;
+        let percentY = ((y - minY) / (maxY - minY)) * 100;
+
+        let pin = document.createElement('div');
+        pin.className = 'map-pin';
+        pin.style.left = `${percentX}%`;
+        pin.style.top = `${percentY}%`;
+
+        let tooltipHTML = pokemons.map(p => 
+            `<img src="${p.image}" class="pin-poke-img" title="${p.name}" onclick="openModal('${p.id}')">`
+        ).join('');
+        
+        pin.innerHTML = `<div class="pin-tooltip">${tooltipHTML}</div>`;
+
+        container.appendChild(pin);
+    }
+}
+
+// ==========================================
+// UTILITÁRIOS E MODAL
+// ==========================================
 window.toggleAccordion = (arrowEl, event) => {
     if(event) event.stopPropagation();
     const container = arrowEl.closest('.loc-accordion').querySelector('.loc-steps-container');
@@ -230,26 +484,14 @@ window.copyLoc = (text, el, event) => {
     }).catch(err => console.error('Erro ao copiar: ', err));
 };
 
-// ==========================================
-// FUNÇÃO DE NAVEGAÇÃO DE SETAS
-// ==========================================
 window.navigatePokemon = (direction, event) => {
     if(event) event.stopPropagation(); 
-    
-    // Se a lista estiver vazia, aborta
     if (currentVisibleList.length === 0) return;
 
-    // Atualiza o índice
     currentModalIndex += direction;
+    if (currentModalIndex < 0) currentModalIndex = currentVisibleList.length - 1; 
+    else if (currentModalIndex >= currentVisibleList.length) currentModalIndex = 0; 
 
-    // Lógica de loop infinito
-    if (currentModalIndex < 0) {
-        currentModalIndex = currentVisibleList.length - 1; 
-    } else if (currentModalIndex >= currentVisibleList.length) {
-        currentModalIndex = 0; 
-    }
-
-    // Pega o id do Pokémon alvo e chama a função de abrir o modal
     const targetPokemon = currentVisibleList[currentModalIndex];
     openModal(targetPokemon.id); 
 };
@@ -258,7 +500,6 @@ window.openModal = (id) => {
     const p = pokemonData.find(x => x.id.toString() === id.toString());
     if(!p) return;
     
-    // Atualiza o índice do Modal baseado no Pokémon clicado na lista filtrada
     currentModalIndex = currentVisibleList.findIndex(x => x.id.toString() === id.toString());
 
     const matchups = calculateMatchups(p.types);
@@ -322,6 +563,13 @@ window.openModal = (id) => {
     }).join('');
 
     let rightWingHTML = '';
+    const statsHTML = Object.entries(p.stats || {}).map(([name, val]) => `
+        <div class="stat-row">
+            <label>${name.toUpperCase()}</label>
+            <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
+            <span class="stat-num">${val}</span>
+        </div>
+    `).join('');
 
     if (pCategory === 'boss') {
         rightWingHTML = `
@@ -331,17 +579,14 @@ window.openModal = (id) => {
                     <p id="radar-label">RASTREANDO...</p>
                 </div>
             </div>
-
             <div class="boss-guide-module">
                 <h4 class="label-tech">MANUAL DE COMBATE</h4>
                 <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
             </div>
-
             <div class="boss-loot-module">
                 <h4 class="label-tech">RECOMPENSA DIÁRIA</h4>
                 <div class="loot-box">${p.loot || '???'}</div>
             </div>
-
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
                 <div class="eff-group">
@@ -355,14 +600,6 @@ window.openModal = (id) => {
             </div>
         `;
     } else if (pCategory === 'dark') {
-        const statsHTML = Object.entries(p.stats || {}).map(([name, val]) => `
-            <div class="stat-row">
-                <label>${name.toUpperCase()}</label>
-                <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
-                <span class="stat-num">${val}</span>
-            </div>
-        `).join('');
-
         let soulsHTML = '';
         if (p.souls) {
             const soulsNormal = p.souls.normal ? p.souls.normal : '???';
@@ -371,25 +608,14 @@ window.openModal = (id) => {
                 <div class="souls-module">
                     <h4 class="label-tech">CUSTO DE CONVERSÃO (SOULS)</h4>
                     <div class="souls-container">
-                        <div class="soul-box">
-                            <span class="soul-label">NORMAL</span>
-                            <span class="soul-value">${soulsNormal}</span>
-                        </div>
-                        <div class="soul-box eternizado">
-                            <span class="soul-label">ETERNIZADO</span>
-                            <span class="soul-value">${soulsEternizado}</span>
-                        </div>
+                        <div class="soul-box"><span class="soul-label">NORMAL</span><span class="soul-value">${soulsNormal}</span></div>
+                        <div class="soul-box eternizado"><span class="soul-label">ETERNIZADO</span><span class="soul-value">${soulsEternizado}</span></div>
                     </div>
                 </div>
             `;
         } else {
             const textoExclusivo = p.exclusive ? p.exclusive : 'CAPTURA EXCLUSIVA / EVENTO';
-            soulsHTML = `
-                <div class="souls-module">
-                    <h4 class="label-tech">MÉÉTODO DE OBTENÇÃO</h4>
-                    <span class="exclusive-badge">${textoExclusivo.toUpperCase()}</span>
-                </div>
-            `;
+            soulsHTML = `<div class="souls-module"><h4 class="label-tech">MÉTODO DE OBTENÇÃO</h4><span class="exclusive-badge">${textoExclusivo.toUpperCase()}</span></div>`;
         }
 
         rightWingHTML = `
@@ -399,14 +625,11 @@ window.openModal = (id) => {
                     <p id="radar-label">RASTREANDO...</p>
                 </div>
             </div>
-
             <div class="data-module">
                 <h4 class="label-tech">STATUS BASE</h4>
                 <div class="stats-list">${statsHTML}</div>
             </div>
-
             ${soulsHTML}
-
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
                 <div class="eff-group">
@@ -420,14 +643,6 @@ window.openModal = (id) => {
             </div>
         `;
     } else {
-        const statsHTML = Object.entries(p.stats || {}).map(([name, val]) => `
-            <div class="stat-row">
-                <label>${name.toUpperCase()}</label>
-                <div class="bar-container"><div class="bar-fill" style="width:${(val/255)*100}%"></div></div>
-                <span class="stat-num">${val}</span>
-            </div>
-        `).join('');
-
         rightWingHTML = `
             <div class="radar-module">
                 <div class="radar-display" id="radar-screen">
@@ -435,12 +650,10 @@ window.openModal = (id) => {
                     <p id="radar-label">RASTREANDO...</p>
                 </div>
             </div>
-
             <div class="data-module">
                 <h4 class="label-tech">STATUS BASE</h4>
                 <div class="stats-list">${statsHTML}</div>
             </div>
-
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
                 <div class="eff-group">
@@ -452,7 +665,6 @@ window.openModal = (id) => {
                     <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
                 </div>
             </div>
-
             <div class="evo-module">
                 <h4 class="label-tech">CADEIA EVOLUTIVA</h4>
                 <div class="evo-icons" id="evo-container">
@@ -465,12 +677,9 @@ window.openModal = (id) => {
     document.getElementById('modal-body').innerHTML = `
         <div class="modal-pokedex-view">
             <div class="modal-left-wing">
-                
                 <div class="screen-border" style="position: relative;">
-                    
                     <button class="nav-arrow prev-arrow" title="Anterior" onclick="navigatePokemon(-1, event)">&#10094;</button>
                     <button class="nav-arrow next-arrow" title="Próximo" onclick="navigatePokemon(1, event)">&#10095;</button>
-
                     <div class="main-screen ${pCategory !== 'normal' ? 'main-screen-stacked' : ''}">
                         ${pCategory !== 'normal' ? `
                             <div class="stacked-container">
@@ -493,13 +702,11 @@ window.openModal = (id) => {
                         `}
                     </div>
                 </div>
-                
                 <div class="location-module">
                     <h4 class="label-tech">${pCategory === 'boss' ? 'COORDENADA DO COVIL' : 'LOCALIZAÇÕES DETECTADAS'}</h4>
                     <div class="loc-list-scroll">${locationsHTML || '<p style="color:#aaa; font-family:monospace;">Nenhum registro encontrado.</p>'}</div>
                 </div>
             </div>
-
             <div class="modal-right-wing">
                 ${rightWingHTML}
             </div>
@@ -577,7 +784,7 @@ window.updateRadar = (name, el, event) => {
     
     const screen = document.getElementById('radar-screen');
     const nomeSeguro = name.replace(/\//g, '-');
-    const imagePath = `mapas/${nomeSeguro}.png`;
+    const imagePath = `mapas/${nomeSeguro}.png`; 
     
     let locName = name.toUpperCase();
     let coords = "SINAL GPS ESTABELECIDO";
@@ -625,6 +832,9 @@ window.showRadarFallback = (name) => {
     `;
 };
 
+// ==========================================
+// MENSAGENS INICIAIS DO PROFESSOR OAK
+// ==========================================
 const oakDialogues = [
     "Olá! Bem-vindo ao mundo de PokemonR - PBR!",
     "Esta Pokedex e uma pagina criada de fãs para fãs e NAO é um produto oficial do Servidor",
@@ -637,7 +847,7 @@ const oakDialogues = [
 let currentDialogIndex = 0;
 let currentCharIndex = 0;
 let isTyping = false;
-let typingSpeed = 40;
+let typingSpeed = 30;
 let typeInterval;
 
 function initOakModal() {
@@ -687,6 +897,98 @@ function startTyping() {
             clearInterval(typeInterval);
             isTyping = false;
             arrow.style.display = 'block';
+        }
+    }, typingSpeed);
+}
+
+// ==========================================
+// MENSAGENS DO CRIADOR (KALAZATTI)
+// ==========================================
+const supportDialogues = [
+    "E ai, Treinador! Beleza? Eu sou o Kalazatti.",
+    "Desenvolvi essa Pokedex com muito carinho para ajudar a nossa comunidade do Poketibia PBR.",
+    "Manter esse projeto no ar, sem propagandas chatas e com tudo atualizado, exige muito tempo e cafeina rsrs.",
+    "Se essa ferramenta tem ajudado na sua jornada e voce quiser me pagar um cafezinho para manter a pokedex atualizada...",
+    "E so clicar no botao abaixo! Qualquer ajuda e super bem-vinda e me motiva a trazer mais novidades e manter o projeto vivo.",
+    "Muito obrigado e boa caçada! Qualquer dúvida ou idéia para a pokedex, é só me chamar!"
+];
+
+let currentSupportIndex = 0;
+let currentSupportCharIndex = 0;
+let isSupportTyping = false;
+let supportTypeInterval;
+
+window.initSupportModal = (event) => {
+    if(event) event.preventDefault();
+    const modal = document.getElementById('support-modal');
+    const closeBtn = document.getElementById('close-support');
+    const dialogBox = document.getElementById('support-dialog-box');
+    const finalBtn = document.getElementById('final-support-btn');
+    
+    // Reseta os estados toda vez que abre
+    currentSupportIndex = 0;
+    finalBtn.classList.add('hidden');
+    modal.classList.remove('hidden');
+    
+    startSupportTyping();
+
+    closeBtn.onclick = () => { modal.classList.add('hidden'); };
+
+    dialogBox.onclick = (e) => {
+        // Impede que clicar no botão de doação avance o texto
+        if(e.target.id === 'final-support-btn') return;
+
+        const textContainer = document.getElementById('support-text');
+        const arrow = document.getElementById('support-arrow');
+
+        if (isSupportTyping) {
+            // Pula a animação se clicar enquanto digita
+            clearInterval(supportTypeInterval);
+            textContainer.innerHTML = supportDialogues[currentSupportIndex];
+            isSupportTyping = false;
+            
+            if (currentSupportIndex === supportDialogues.length - 1) {
+                arrow.style.display = 'none';
+                finalBtn.classList.remove('hidden');
+            } else {
+                arrow.style.display = 'block';
+            }
+        } else {
+            // Avança para a próxima frase
+            if (currentSupportIndex < supportDialogues.length - 1) {
+                currentSupportIndex++;
+                startSupportTyping();
+            }
+        }
+    };
+};
+
+function startSupportTyping() {
+    const textContainer = document.getElementById('support-text');
+    const arrow = document.getElementById('support-arrow');
+    const finalBtn = document.getElementById('final-support-btn');
+    
+    textContainer.innerHTML = '';
+    currentSupportCharIndex = 0;
+    isSupportTyping = true;
+    arrow.style.display = 'none';
+    finalBtn.classList.add('hidden');
+
+    clearInterval(supportTypeInterval);
+    supportTypeInterval = setInterval(() => {
+        textContainer.innerHTML += supportDialogues[currentSupportIndex].charAt(currentSupportCharIndex);
+        currentSupportCharIndex++;
+
+        if (currentSupportCharIndex >= supportDialogues[currentSupportIndex].length) {
+            clearInterval(supportTypeInterval);
+            isSupportTyping = false;
+            
+            if (currentSupportIndex === supportDialogues.length - 1) {
+                arrow.style.display = 'none';
+                finalBtn.classList.remove('hidden');
+            } else {
+                arrow.style.display = 'block';
+            }
         }
     }, typingSpeed);
 }
