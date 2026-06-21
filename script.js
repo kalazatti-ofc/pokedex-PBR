@@ -113,10 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // Listeners Mapa Andares
-    document.getElementById('btn-z-up').addEventListener('click', () => changeZ('up'));
-    document.getElementById('btn-z-down').addEventListener('click', () => changeZ('down'));
 });
 
 // ==========================================
@@ -367,29 +363,18 @@ function changeZ(direction) {
 function updateMapDisplay() {
     const cityConfig = cityMaps[currentCity];
     const mapImage = document.getElementById('map-image');
-    const zDisplay = document.getElementById('z-display');
     const statusText = document.getElementById('map-status-text');
-    
-    const btnUp = document.getElementById('btn-z-up');
-    const btnDown = document.getElementById('btn-z-down');
 
     // Imagem do mapa principal
     mapImage.src = `continentes/${currentCity}-z${currentZ}.png`;
-    mapImage.alt = `Mapa de ${cityConfig.name} - Z:${currentZ}`;
-    zDisplay.textContent = currentZ;
-    statusText.textContent = `SINAL ESTABELECIDO: ${cityConfig.name.toUpperCase()} (Z:${currentZ})`;
+    mapImage.alt = `Mapa de ${cityConfig.name}`;
+    statusText.textContent = `SINAL ESTABELECIDO: ${cityConfig.name.toUpperCase()}`;
 
     mapImage.onerror = () => {
         mapImage.src = ''; 
         mapImage.alt = 'SINAL PERDIDO';
-        statusText.textContent = `⚠ ERRO DE SINAL EM Z:${currentZ} (IMAGEM NÃO ENCONTRADA)`;
+        statusText.textContent = `⚠ ERRO DE SINAL (IMAGEM NÃO ENCONTRADA)`;
     };
-
-    btnUp.disabled = (currentZ <= cityConfig.minZ);
-    btnDown.disabled = (currentZ >= cityConfig.maxZ);
-    
-    btnUp.style.opacity = btnUp.disabled ? '0.5' : '1';
-    btnDown.style.opacity = btnDown.disabled ? '0.5' : '1';
 
     if(window.resetMapTransform) window.resetMapTransform();
 
@@ -410,7 +395,7 @@ function renderMapPins() {
 
     const { minX, maxX, minY, maxY } = cityConfig.bounds;
     let pinsData = {}; 
-    let totalPinsEncontrados = 0; // Para te ajudar a debugar
+    let totalPinsEncontrados = 0;
 
     pokemonData.forEach(p => {
         if (!p.locations) return;
