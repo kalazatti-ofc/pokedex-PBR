@@ -410,35 +410,55 @@ function renderMapPins() {
 
     const { minX, maxX, minY, maxY } = cityConfig.bounds;
     let pinsData = {}; 
+    let totalPinsEncontrados = 0; // Para te ajudar a debugar
 
     pokemonData.forEach(p => {
         if (!p.locations) return;
         
         p.locations.forEach(loc => {
-            let locString = typeof loc === 'string' ? loc : (loc.local || loc.rota || "");
+            // 1. Cria uma lista com TODOS os textos possíveis para procurar coordenadas
+            let stringsToCheck = [];
             
-            // O regex continua igual para encontrar os valores, mas vamos ignorar o Z
-            let match = locString.match(/X\s*(\d+)\s*\/\s*Y\s*(\d+)/i);
-            
-            if (match) {
-                let x = parseInt(match[1]);
-                let y = parseInt(match[2]);
-                // O Z (match[3]) foi completamente ignorado aqui!
-
-                // Verifica apenas se o X e Y estão dentro do continente atual
-                if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
-                    let key = `${x},${y}`; 
-                    
-                    if (!pinsData[key]) pinsData[key] = [];
-                    // Evita duplicar o mesmo Pokémon na mesma coordenada
-                    if (!pinsData[key].find(poke => poke.id === p.id)) {
-                        pinsData[key].push(p);
-                    }
+            if (typeof loc === 'string') {
+                stringsToCheck.push(loc);
+            } else if (typeof loc === 'object') {
+                if (loc.local) stringsToCheck.push(loc.local);
+                if (loc.rota) stringsToCheck.push(loc.rota);
+                // Se tiver passos (rotas complexas), adiciona todos eles na busca!
+                if (loc.passos && Array.isArray(loc.passos)) {
+                    stringsToCheck = stringsToCheck.concat(loc.passos);
                 }
             }
+
+            // 2. Analisa cada texto encontrado
+            stringsToCheck.forEach(locString => {
+                // Regex flexível: Procura o número depois do X e o número depois do Y, ignorando o Z ou qualquer outra palavra no meio.
+                let match = locString.match(/X\s*[:]?\s*(\d+)[^\d]*Y\s*[:]?\s*(\d+)/i);
+                
+                if (match) {
+                    let x = parseInt(match[1]);
+                    let y = parseInt(match[2]);
+
+                    // Verifica se a coordenada está dentro dos "bounds" do mapa atual
+                    if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
+                        let key = `${x},${y}`; 
+                        
+                        if (!pinsData[key]) pinsData[key] = [];
+                        
+                        // Evita duplicar o mesmo Pokémon exatamente no mesmo milímetro
+                        if (!pinsData[key].find(poke => poke.id === p.id)) {
+                            pinsData[key].push(p);
+                            totalPinsEncontrados++;
+                        }
+                    }
+                }
+            });
         });
     });
 
+    console.log(`[MAPA ${cityConfig.name.toUpperCase()}] Total de Pins válidos encontrados na área:`, totalPinsEncontrados);
+
+    // 3. Renderiza os pins na tela
     for (let key in pinsData) {
         let [x, y] = key.split(',').map(Number);
         let pokemons = pinsData[key];
