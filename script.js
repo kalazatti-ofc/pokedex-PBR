@@ -415,17 +415,21 @@ function renderMapPins() {
         
         p.locations.forEach(loc => {
             let locString = typeof loc === 'string' ? loc : (loc.local || loc.rota || "");
+            
+            // O regex continua igual para encontrar os valores, mas vamos ignorar o Z
             let match = locString.match(/X\s*(\d+)\s*\/\s*Y\s*(\d+)\s*\/\s*Z\s*(\d+)/i);
             
             if (match) {
                 let x = parseInt(match[1]);
                 let y = parseInt(match[2]);
-                let z = parseInt(match[3]);
+                // O Z (match[3]) foi completamente ignorado aqui!
 
-                if (z === currentZ && x >= minX && x <= maxX && y >= minY && y <= maxY) {
+                // Verifica apenas se o X e Y estão dentro do continente atual
+                if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
                     let key = `${x},${y}`; 
                     
                     if (!pinsData[key]) pinsData[key] = [];
+                    // Evita duplicar o mesmo Pokémon na mesma coordenada
                     if (!pinsData[key].find(poke => poke.id === p.id)) {
                         pinsData[key].push(p);
                     }
