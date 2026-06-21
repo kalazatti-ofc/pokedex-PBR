@@ -66,7 +66,7 @@
       "spd": 80
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7) ",
       "Vermilion (X 1047 / Y 1341 / Z 4)",
       {
         "rota": "Trainer Center",
@@ -151,7 +151,7 @@
       "spd": 100
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Cinnabar (X 702 / Y 1368 / Z 4)",
       "Quest Ancient Stone",
       "Vermilion (X 886 / Y 1566 / Z 4)",
@@ -235,7 +235,7 @@
       "spd": 78
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Vermilion (X 1279 / Y 1272 / Z 7)",
       {
         "rota": "Trainer Center",
@@ -1696,7 +1696,7 @@
       "spd": 100
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Vermilion (X 1279 / Y 1272 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/73.png"
@@ -2817,7 +2817,7 @@
       "spd": 105
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Singer (X 1664 / Y 1031 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png"
@@ -3364,7 +3364,7 @@
       "spd": 90
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Quest Shiny Stone",
       "Blessed Boost Stone"
     ],
@@ -3658,7 +3658,7 @@
       "spd": 78
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       {
         "rota": "Trainer Center",
         "passos": [
@@ -4798,7 +4798,7 @@
       "spd": 65
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Pewter (X 610 / Y 919 / Z 5)",
       "Sandgem (X 3334 / Y 2306 / Z 7)"
     ],
@@ -5709,7 +5709,7 @@
       "spd": 120
     },
     "locations": [
-      "TV Camêra (Orre)"
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/254.png"
   },
@@ -5771,7 +5771,7 @@
       "spd": 80
     },
     "locations": [
-      "TV Camêra (Orre)",
+      "TV Camêra (Orre) (X 2559 / 1350 / Z7)",
       "Yorkshin (X 2142 / Y 1257 / Z 4)",
       {
         "rota": "Trainer Center",
