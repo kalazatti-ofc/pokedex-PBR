@@ -5843,7 +5843,7 @@
     "locations": [
       "Singer (X 1795 / Y 1251 / Z 5)",
       "Yorkshin (X 2178 / Y 1204 / Z 7)",
-      "Pastoria (X 4043 / Y 2105 / Z 7)",
+      "Pastoria (X 4039 / Y 2098 / Z 7)",
       {
         "rota": "Trainer Center",
         "passos": [
@@ -9296,7 +9296,7 @@
     },
     "locations": [
       "Two Island (X 2755 / Y 938 / Z 6)",
-      "Pastoria (X 4043 / Y 2105 / Z 7)"
+      "Pastoria (X 4039 / Y 2098 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/423.png"
   },
@@ -10847,7 +10847,8 @@
       "spd": 45
     },
     "locations": [
-      "Sandgem (X 3573 / Y 2256 / Z 7)"
+      "Sandgem (X 3573 / Y 2256 / Z 7)",
+      "Pastoria (X 4039 / Y 2098 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/501.png"
   },
@@ -10867,7 +10868,7 @@
       "spd": 60
     },
     "locations": [
-      "Pastoria (X 4009 / Y 2127 / Z 7)"
+      "Pastoria (X 4039 / Y 2098 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/502.png"
   },
