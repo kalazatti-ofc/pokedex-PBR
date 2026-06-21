@@ -2859,7 +2859,8 @@
       "spd": 105
     },
     "locations": [
-      "Armia (X 2157 / Y 887 / Z 7)"
+      "Armia (X 2157 / Y 887 / Z 7)",
+      "Pastoria (X 3930 / Y 2295 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/125.png"
   },
@@ -10189,7 +10190,8 @@
       "spd": 95
     },
     "locations": [
-      "Phenac (X 2497 / Y 1547 / Z 4)"
+      "Phenac (X 2497 / Y 1547 / Z 4)",
+      "Pastoria (X 3930 / Y 2295 / Z 4)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/466.png"
   },
