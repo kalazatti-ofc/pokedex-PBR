@@ -29,7 +29,8 @@ const typeModifiers = {
 
 // Configurações do Mapa
 const cityMaps = {
-    "kanto": { name: "Kanto", minZ: 0, maxZ: 9, defaultZ: 7, bounds: { minX: 529, minY: 635, maxX: 1367, maxY: 1801 } }
+    "kanto": { name: "Kanto", minZ: 0, maxZ: 9, defaultZ: 7, bounds: { minX: 529, minY: 635, maxX: 1367, maxY: 1801 } },
+    "novocontinente": { name: "Novo Continente", minZ: 6, maxZ: 8, defaultZ: 7, bounds: { minX: 2344, minY: 1252, maxX: 3058, maxY: 1840 } }
 };
 
 let currentCity = "kanto"; 
