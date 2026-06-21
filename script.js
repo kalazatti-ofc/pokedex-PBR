@@ -418,7 +418,7 @@ function renderMapPins() {
             let locString = typeof loc === 'string' ? loc : (loc.local || loc.rota || "");
             
             // O regex continua igual para encontrar os valores, mas vamos ignorar o Z
-            let match = locString.match(/X\s*(\d+)\s*\/\s*Y\s*(\d+)\s*\/\s*Z\s*(\d+)/i);
+            let match = locString.match(/X\s*(\d+)\s*\/\s*Y\s*(\d+)/i);
             
             if (match) {
                 let x = parseInt(match[1]);
