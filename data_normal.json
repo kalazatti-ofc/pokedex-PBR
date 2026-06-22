@@ -2186,6 +2186,15 @@
       "Singer (X 1778 / Y 1309 / Z 7)",
       "Singer (X 1850 / Y 1330 / Z 7)",
       {
+        "rota": "Catacumbas",
+        "passos": [
+          "1. Fuchsia (X 1291 / Y 1664 / Z 4)",
+          "2. Desça a escada (X 1290 / Y 1583 / Z 8)"
+        ]
+      }
+    ]
+  },
+      {
         "rota": "Trainer Center",
         "passos": [
           "NPC Hunt no Trainer Center (X 868 / Y 2104 / Z 7)"
