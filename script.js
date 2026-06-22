@@ -596,6 +596,12 @@ window.openModal = (id) => {
             <div class="boss-loot-module">
                 <h4 class="label-tech">RECOMPENSA DIÁRIA</h4>
                 <div class="loot-box">${p.loot || '???'}</div>
+                
+                <div class="boss-bonus-container">
+                    <span class="bonus-badge shiny-bonus" title="Derrotar a versão Shiny garante o dobro de recompensas!">✨ SHINY: 2X LOOT</span>
+                    <span class="bonus-badge fds-bonus" title="Aos sábados e domingos, o loot padrão é dobrado!">📅 FDS: 2X LOOT</span>
+                </div>
+                
             </div>
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
