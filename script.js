@@ -1013,7 +1013,6 @@ function startSupportTyping() {
 // ALTERNAR IMAGEM SHINY NO MODAL DO BOSS
 // ==========================================
 window.toggleShinyModal = (badge, id, normalImg) => {
-    // Busca a imagem principal do modal (como os bosses usam o layout stacked, pegamos essa classe)
     const imgEl = document.querySelector('.poke-img-stacked');
     if (!imgEl) return;
 
@@ -1028,9 +1027,25 @@ window.toggleShinyModal = (badge, id, normalImg) => {
             imgEl.src = normalImg;
             badge.classList.remove('active-shiny');
             badge.innerHTML = '✨ SHINY: 2X LOOT';
+            // Limpa o tratamento de erro
+            imgEl.onerror = null; 
         } else {
-            // Muda para a URL do Shiny usando o padrão da PokeAPI
-            imgEl.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`;
+            // A MÁGICA ACONTECE AQUI:
+            // Pega a URL normal e insere a pasta "shiny/" logo antes do nome do arquivo
+            // Ex: ".../official-artwork/212.png" vira ".../official-artwork/shiny/212.png"
+            const parts = normalImg.split('/');
+            const filename = parts.pop();
+            const shinyUrl = parts.join('/') + '/shiny/' + filename;
+            
+            // Tratamento de segurança: se a imagem shiny não existir por algum motivo
+            imgEl.onerror = () => {
+                imgEl.src = normalImg; // Força voltar pra normal
+                badge.classList.remove('active-shiny');
+                badge.innerHTML = '⚠ SHINY INDISPONÍVEL';
+                imgEl.onerror = null; // Limpa para não entrar em loop
+            };
+
+            imgEl.src = shinyUrl;
             badge.classList.add('active-shiny');
             badge.innerHTML = '✨ VER NORMAL';
         }
