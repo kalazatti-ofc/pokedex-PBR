@@ -714,3 +714,30 @@ body.dark-mode .shiny-bonus {
     color: #ffcb05;
     border-color: #ffcb05;
 }
+
+/* Transição suave para a troca de imagem Shiny */
+.poke-img-stacked {
+    transition: opacity 0.15s ease-in-out;
+}
+
+/* Garante que o usuário saiba que a badge é clicável */
+.bonus-badge.shiny-bonus {
+    cursor: pointer;
+}
+
+/* Estilo de quando o modo Shiny está ativo (Acesa/Brilhando) */
+.shiny-bonus.active-shiny {
+    background: #d4af37; /* Fundo dourado */
+    color: #fff;
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 2px 2px 0 var(--dex-border);
+    transform: scale(1.05);
+}
+
+/* Modo escuro para a badge Shiny Ativa */
+body.dark-mode .shiny-bonus.active-shiny {
+    background: #ffcb05;
+    color: #111;
+    border-color: #ffcb05;
+    box-shadow: 0 0 15px rgba(255, 203, 5, 0.8), 2px 2px 0 #000;
+}
