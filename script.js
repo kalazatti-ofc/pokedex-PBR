@@ -1014,6 +1014,8 @@ function startSupportTyping() {
 // ==========================================
 window.toggleShinyModal = (badge, id, normalImg) => {
     const imgEl = document.querySelector('.poke-img-stacked');
+    const genBar = document.querySelector('.stacked-gen-bar'); // Pega a etiqueta "ALERTA DE BOSS"
+    
     if (!imgEl) return;
 
     const isShiny = badge.classList.contains('active-shiny');
@@ -1027,27 +1029,41 @@ window.toggleShinyModal = (badge, id, normalImg) => {
             imgEl.src = normalImg;
             badge.classList.remove('active-shiny');
             badge.innerHTML = '✨ SHINY: 2X LOOT';
-            // Limpa o tratamento de erro
             imgEl.onerror = null; 
+            
+            // Volta a etiqueta original
+            if(genBar) {
+                genBar.innerHTML = 'ALERTA DE BOSS';
+                genBar.classList.remove('shiny-buff-bar');
+            }
         } else {
-            // A MÁGICA ACONTECE AQUI:
-            // Pega a URL normal e insere a pasta "shiny/" logo antes do nome do arquivo
-            // Ex: ".../official-artwork/212.png" vira ".../official-artwork/shiny/212.png"
             const parts = normalImg.split('/');
             const filename = parts.pop();
             const shinyUrl = parts.join('/') + '/shiny/' + filename;
             
-            // Tratamento de segurança: se a imagem shiny não existir por algum motivo
             imgEl.onerror = () => {
-                imgEl.src = normalImg; // Força voltar pra normal
+                imgEl.src = normalImg; 
                 badge.classList.remove('active-shiny');
                 badge.innerHTML = '⚠ SHINY INDISPONÍVEL';
-                imgEl.onerror = null; // Limpa para não entrar em loop
+                imgEl.onerror = null; 
+                
+                // Se der erro, garante que a etiqueta não mude
+                if(genBar) {
+                    genBar.innerHTML = 'ALERTA DE BOSS';
+                    genBar.classList.remove('shiny-buff-bar');
+                }
             };
 
+            // Aplica a imagem Shiny
             imgEl.src = shinyUrl;
             badge.classList.add('active-shiny');
             badge.innerHTML = '✨ VER NORMAL';
+            
+            // Transforma a etiqueta em um alerta de BUFF
+            if(genBar) {
+                genBar.innerHTML = '✨ BOSS SHINY (+STATUS) ✨';
+                genBar.classList.add('shiny-buff-bar');
+            }
         }
         // Faz a imagem reaparecer
         imgEl.style.opacity = '1';
