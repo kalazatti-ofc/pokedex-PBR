@@ -598,7 +598,7 @@ window.openModal = (id) => {
                 <div class="loot-box">${p.loot || '???'}</div>
                 
                 <div class="boss-bonus-container">
-                    <span class="bonus-badge shiny-bonus" title="Derrotar a versão Shiny garante o dobro de recompensas!">✨ SHINY: 2X LOOT</span>
+                    <span class="bonus-badge shiny-bonus" title="Clique para ver a versão Shiny! (2X LOOT)" onclick="toggleShinyModal(this, '${p.id}', '${p.image}')">✨ SHINY: 2X LOOT</span>
                     <span class="bonus-badge fds-bonus" title="Aos sábados e domingos, o loot padrão é dobrado!">📅 FDS: 2X LOOT</span>
                 </div>
                 
@@ -1008,3 +1008,33 @@ function startSupportTyping() {
         }
     }, typingSpeed);
 }
+
+// ==========================================
+// ALTERNAR IMAGEM SHINY NO MODAL DO BOSS
+// ==========================================
+window.toggleShinyModal = (badge, id, normalImg) => {
+    // Busca a imagem principal do modal (como os bosses usam o layout stacked, pegamos essa classe)
+    const imgEl = document.querySelector('.poke-img-stacked');
+    if (!imgEl) return;
+
+    const isShiny = badge.classList.contains('active-shiny');
+    
+    // Efeito rápido de "piscar" sumindo a imagem
+    imgEl.style.opacity = '0';
+    
+    setTimeout(() => {
+        if (isShiny) {
+            // Volta ao normal
+            imgEl.src = normalImg;
+            badge.classList.remove('active-shiny');
+            badge.innerHTML = '✨ SHINY: 2X LOOT';
+        } else {
+            // Muda para a URL do Shiny usando o padrão da PokeAPI
+            imgEl.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`;
+            badge.classList.add('active-shiny');
+            badge.innerHTML = '✨ VER NORMAL';
+        }
+        // Faz a imagem reaparecer
+        imgEl.style.opacity = '1';
+    }, 150);
+};
