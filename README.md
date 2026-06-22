@@ -34,16 +34,31 @@ Ou de viajar o mapa inteiro e descobrir que o Pokemon precisava de uma *Quest* o
 Por isso, desenvolvi este banco de dados com a ajuda da comunidade, para facilitar a vida de novos e velhos jogadores.
 Espero que goste, faça bom use e divulge! ^^
 
-### 🌟 Funcionalidades Principais
 
-* 🗺️ **Radar de Coordenadas:** Localizações exatas (X, Y, Z) divididas por Região e Rota.
-* 📋 **Cópia Rápida (QoL):** Achou o respawn? Clique no ícone da prancheta (📋) ao lado da coordenada para copiá-la automaticamente e colar no chat do jogo ou Discord para seus amigos!
-* ✅ **Checklist de Captura (Local Save):** Marque os Pokemon já capturados clicando na Pokebola direto no card. Seu progresso fica salvo no seu navegador!
-* 🔍 **Filtro de Status Inteligente:** Use a gaveta "Status de Captura" para esconder quem você já pegou e focar apenas nos Pokemon que estão "Faltando".
-* 💬 **Notas de Campo e Restrições:** Avisos em balões visuais se um Pokemon precisa de Quests, itens de pesca ou acesso VIP.
-* 🌙 **Modo Noturno (Joystick Mode):** Cansou a vista? Aperte o botão de tema no canto superior direito para ativar o painel noturno neon.
-* 🧬 **Cadeia Evolutiva Dinâmica:** Sincronização de DNA puxando direto da PokeAPI para mostrar as evoluções diretas do Pokemon.
-* 📊 **Status e Fraquezas:** Cálculo automático de vantagem de tipos (Resistências e Fraquezas).
+### ⚙️ Funcionalidades Principais
+🗺️ Radar de Coordenadas: Localizações exatas (X, Y) extraídas diretamente do banco de dados, divididas por Região e Rota.
+
+🌍 GPS Global Interativo (Beta): Navegação visual imersiva por continentes com física fluida de Pan (arrastar) e Zoom. As coordenadas de todos os andares (Z) foram "achatadas" inteligentemente para exibir todos os respawns simultaneamente no mapa base. Passe o mouse sobre os pins para revelar quais Pokémon habitam a região!
+
+📋 Cópia Rápida (QoL): Achou o respawn? Clique no ícone da prancheta (📋) ao lado da coordenada para copiá-la automaticamente e colar no chat do jogo ou Discord para seus amigos!
+
+✅ Checklist de Captura (Local Save): Marque os Pokémon já capturados clicando na Pokébola direto no card. Seu progresso fica salvo no cache do seu navegador!
+
+🔍 Filtro de Status Inteligente: Use a gaveta "Status de Captura" para esconder quem você já pegou e focar apenas nos Pokémon que estão "Faltando".
+
+👹 Módulos Avançados (Boss 24H e Classe Dark): Abas dedicadas contendo informações táticas. Consulte Manuais de Combate, previsão de Loot para Bosses e o custo exato de conversão (Souls Normais/Eternizadas) para a classe Dark.
+
+✨ Visualizador Shiny e Bônus (Live API): Tags dinâmicas informam sobre bônus de fim de semana (📅 2X LOOT). Com um clique, o sistema consome a PokeAPI em tempo real para exibir a arte oficial da versão Shiny do Boss, alertando sobre os buffs de status!
+
+💬 Notas de Campo e Restrições: Avisos em balões visuais se um Pokémon precisa de Quests, itens de pesca ou acesso VIP.
+
+🎮 Imersão RPG (Diálogos Retrô): Modais de interação que simulam os clássicos diálogos de NPC do Game Boy Color (com efeito de máquina de escrever). Fale com o Professor Oak ao abrir o sistema ou descubra o easter egg do botão "Pagar um Café"!
+
+🌙 Modo Noturno (Joystick Mode): Cansou a vista? Aperte o botão de tema no canto superior direito para ativar o painel escuro com estética de terminal e luzes neon.
+
+🧬 Cadeia Evolutiva Dinâmica: Sincronização de DNA puxando direto da PokeAPI para mostrar as evoluções diretas do Pokémon.
+
+📊 Status e Fraquezas: Cálculo matemático automático de vantagem de tipos, gerando a lista exata de Resistências e Fraquezas baseada na tipagem dupla.
 
 ---
 
