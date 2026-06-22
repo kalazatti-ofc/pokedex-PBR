@@ -617,7 +617,6 @@ window.openModal = (id) => {
                 </div>
             </div>
         `;
-    }
     } else if (pCategory === 'dark') {
         let soulsHTML = '';
         if (p.souls) {
