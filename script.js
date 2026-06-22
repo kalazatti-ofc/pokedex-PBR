@@ -589,20 +589,22 @@ window.openModal = (id) => {
                     <p id="radar-label">RASTREANDO...</p>
                 </div>
             </div>
-            <div class="boss-guide-module">
-                <h4 class="label-tech">MANUAL DE COMBATE</h4>
-                <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
-            </div>
+            
             <div class="boss-loot-module">
                 <h4 class="label-tech">RECOMPENSA DIÁRIA</h4>
                 <div class="loot-box">${p.loot || '???'}</div>
                 
                 <div class="boss-bonus-container">
-                    <!-- Trocamos p.id por p.name aqui no onclick -->
                     <span class="bonus-badge shiny-bonus" title="Derrotar a versão Shiny garante o dobro de recompensas!" onclick="toggleShinyModal(this, '${p.name}', '${p.image}')">✨ SHINY: 2X LOOT</span>
                     <span class="bonus-badge fds-bonus" title="Aos sábados e domingos, o loot padrão é dobrado!">📅 FDS: 2X LOOT</span>
                 </div>
             </div>
+
+            <div class="boss-guide-module">
+                <h4 class="label-tech">MANUAL DE COMBATE</h4>
+                <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
+            </div>
+            
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
                 <div class="eff-group">
@@ -615,6 +617,7 @@ window.openModal = (id) => {
                 </div>
             </div>
         `;
+    }
     } else if (pCategory === 'dark') {
         let soulsHTML = '';
         if (p.souls) {
