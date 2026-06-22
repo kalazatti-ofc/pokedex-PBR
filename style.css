@@ -741,3 +741,26 @@ body.dark-mode .shiny-bonus.active-shiny {
     border-color: #ffcb05;
     box-shadow: 0 0 15px rgba(255, 203, 5, 0.8), 2px 2px 0 #000;
 }
+
+/* =========================================
+   ALERTA DE STATUS SHINY (BOSS)
+========================================= */
+.modal-gen-bar.shiny-buff-bar {
+    background: #d4af37; /* Dourado escuro */
+    color: #fff;
+    border: 2px dashed #ffcb05;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    animation: buffPulse 1.5s infinite;
+}
+
+@keyframes buffPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); box-shadow: 0 0 15px rgba(255, 203, 5, 0.9); }
+}
+
+/* Garante a leitura no modo escuro */
+body.dark-mode .modal-gen-bar.shiny-buff-bar {
+    background: #ffcb05;
+    color: #111;
+    border-color: #fff;
+}
