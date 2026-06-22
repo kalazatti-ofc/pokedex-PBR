@@ -669,3 +669,48 @@ body.dark-mode .beta-badge {
     box-shadow: 2px 2px 0 #000;
     border-color: #000;
 }
+
+/* =========================================
+   ETIQUETAS DE BÔNUS DO BOSS
+========================================= */
+.boss-bonus-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.bonus-badge {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    font-weight: bold;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 2px solid var(--dex-border);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+    cursor: help;
+    transition: transform 0.1s ease;
+}
+
+.bonus-badge:hover {
+    transform: scale(1.05);
+}
+
+.shiny-bonus {
+    background: #fff;
+    color: #d4af37; /* Dourado escuro */
+    border-color: #d4af37;
+}
+
+.fds-bonus {
+    background: #3498db; /* Azul chamativo */
+    color: #fff;
+}
+
+/* Modo escuro para o bônus shiny ficar legal */
+body.dark-mode .shiny-bonus {
+    background: #2a2a2c;
+    color: #ffcb05;
+    border-color: #ffcb05;
+}
