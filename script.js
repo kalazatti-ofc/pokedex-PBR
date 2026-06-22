@@ -598,10 +598,10 @@ window.openModal = (id) => {
                 <div class="loot-box">${p.loot || '???'}</div>
                 
                 <div class="boss-bonus-container">
-                    <span class="bonus-badge shiny-bonus" title="Clique para ver a versão Shiny! (2X LOOT)" onclick="toggleShinyModal(this, '${p.id}', '${p.image}')">✨ SHINY: 2X LOOT</span>
+                    <!-- Trocamos p.id por p.name aqui no onclick -->
+                    <span class="bonus-badge shiny-bonus" title="Derrotar a versão Shiny garante o dobro de recompensas!" onclick="toggleShinyModal(this, '${p.name}', '${p.image}')">✨ SHINY: 2X LOOT</span>
                     <span class="bonus-badge fds-bonus" title="Aos sábados e domingos, o loot padrão é dobrado!">📅 FDS: 2X LOOT</span>
                 </div>
-                
             </div>
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
@@ -1010,62 +1010,70 @@ function startSupportTyping() {
 }
 
 // ==========================================
-// ALTERNAR IMAGEM SHINY NO MODAL DO BOSS
+// ALTERNAR IMAGEM SHINY NO MODAL DO BOSS (BUSCA POR NOME)
 // ==========================================
-window.toggleShinyModal = (badge, id, normalImg) => {
+window.toggleShinyModal = async (badge, pokeName, normalImg) => {
     const imgEl = document.querySelector('.poke-img-stacked');
-    const genBar = document.querySelector('.stacked-gen-bar'); // Pega a etiqueta "ALERTA DE BOSS"
+    const genBar = document.querySelector('.stacked-gen-bar');
     
     if (!imgEl) return;
 
     const isShiny = badge.classList.contains('active-shiny');
     
-    // Efeito rápido de "piscar" sumindo a imagem
-    imgEl.style.opacity = '0';
-    
-    setTimeout(() => {
-        if (isShiny) {
-            // Volta ao normal
+    if (isShiny) {
+        // Volta ao estado normal instantaneamente
+        imgEl.style.opacity = '0';
+        setTimeout(() => {
             imgEl.src = normalImg;
             badge.classList.remove('active-shiny');
             badge.innerHTML = '✨ SHINY: 2X LOOT';
-            imgEl.onerror = null; 
-            
-            // Volta a etiqueta original
             if(genBar) {
                 genBar.innerHTML = 'ALERTA DE BOSS';
                 genBar.classList.remove('shiny-buff-bar');
             }
-        } else {
-            const parts = normalImg.split('/');
-            const filename = parts.pop();
-            const shinyUrl = parts.join('/') + '/shiny/' + filename;
-            
-            imgEl.onerror = () => {
-                imgEl.src = normalImg; 
-                badge.classList.remove('active-shiny');
-                badge.innerHTML = '⚠ SHINY INDISPONÍVEL';
-                imgEl.onerror = null; 
-                
-                // Se der erro, garante que a etiqueta não mude
-                if(genBar) {
-                    genBar.innerHTML = 'ALERTA DE BOSS';
-                    genBar.classList.remove('shiny-buff-bar');
-                }
-            };
+            imgEl.style.opacity = '1';
+        }, 150);
+        return;
+    }
 
-            // Aplica a imagem Shiny
+    // Se estiver carregando a versão Shiny
+    badge.innerHTML = '⏳ BUSCANDO...';
+    imgEl.style.opacity = '0.5'; // Deixa a imagem meio apagada enquanto baixa
+
+    try {
+        // Formata o nome para o padrão da PokeAPI (ex: "Mr. Mime" vira "mr-mime")
+        let apiName = pokeName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        if(apiName === 'mrmime') apiName = 'mr-mime';
+
+        // Pede para a PokeAPI os dados exatos deste Pokémon
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
+        if (!response.ok) throw new Error("Pokémon não encontrado na API");
+        
+        const data = await response.json();
+        
+        // Pega a arte oficial Shiny. Se não tiver, pega o sprite de GameBoy como plano B
+        const shinyUrl = data.sprites.other['official-artwork'].front_shiny || data.sprites.front_shiny;
+        
+        if (!shinyUrl) throw new Error("Imagem Shiny não existe");
+
+        // Aplica a imagem com transição
+        imgEl.style.opacity = '0';
+        setTimeout(() => {
             imgEl.src = shinyUrl;
             badge.classList.add('active-shiny');
             badge.innerHTML = '✨ VER NORMAL';
             
-            // Transforma a etiqueta em um alerta de BUFF
             if(genBar) {
                 genBar.innerHTML = '✨ BOSS SHINY (+STATUS) ✨';
                 genBar.classList.add('shiny-buff-bar');
             }
-        }
-        // Faz a imagem reaparecer
+            imgEl.style.opacity = '1';
+        }, 150);
+
+    } catch (error) {
+        // Se der qualquer erro de nome ou a internet falhar, ele avisa bonitinho e não quebra a tela
+        console.error("Erro ao buscar Shiny:", error);
+        badge.innerHTML = '⚠ SHINY INDISPONÍVEL';
         imgEl.style.opacity = '1';
-    }, 150);
+    }
 };
