@@ -1079,3 +1079,85 @@ window.toggleShinyModal = async (badge, pokeName, normalImg) => {
         imgEl.style.opacity = '1';
     }
 };
+
+// ==========================================
+// SISTEMA DE REPORT DE BUGS (DISCORD WEBHOOK)
+// ==========================================
+window.initReportModal = (event) => {
+    if(event) event.preventDefault();
+    document.getElementById('report-modal').classList.remove('hidden');
+    document.getElementById('report-status').innerText = '';
+};
+
+document.getElementById('close-report').onclick = () => {
+    document.getElementById('report-modal').classList.add('hidden');
+};
+
+document.getElementById('report-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const btn = document.getElementById('submit-report-btn');
+    const status = document.getElementById('report-status');
+    const nick = document.getElementById('report-nick').value.trim();
+    const type = document.getElementById('report-type').value;
+    const msg = document.getElementById('report-msg').value.trim();
+
+    // Verificação de Cooldown (Trava de 10 minutos)
+    const lastReport = localStorage.getItem('pokedex-last-report');
+    if (lastReport) {
+        const now = new Date().getTime();
+        const diff = now - parseInt(lastReport);
+        if (diff < 10 * 60 * 1000) { 
+            const faltam = Math.ceil((10 * 60 * 1000 - diff) / 60000);
+            status.innerText = `⏳ Aguarde ${faltam} min para enviar outro report.`;
+            status.style.color = '#ffcb05';
+            return;
+        }
+    }
+
+    btn.innerText = 'ENVIANDO...';
+    btn.disabled = true;
+
+    // COLOQUE O LINK DO SEU WEBHOOK EXATAMENTE AQUI DENTRO DAS ASPAS
+    const WEBHOOK_URL = 'https://discord.com/api/webhooks/1519072852513525831/grsC32dPzfIsb7g19z2lGykbyrejCLHL7yjaS4Sop5HsHnhwj3S6L1gZjloY4dhnpLW9';
+
+    // Construção do Card (Embed) para o Discord
+    const payload = {
+        username: "Pokedex PBR - Report",
+        avatar_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
+        embeds: [{
+            title: `🚨 NOVO RELATÓRIO: ${type}`,
+            color: type === 'BUG' ? 16711680 : (type === 'LOCAL' ? 16766720 : 3447003),
+            fields: [
+                { name: "👤 Nick no Jogo", value: nick, inline: true },
+                { name: "🏷️ Categoria", value: type, inline: true },
+                { name: "📝 Mensagem do Usuário", value: msg }
+            ],
+            timestamp: new Date().toISOString()
+        }]
+    };
+
+    try {
+        const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            status.innerText = '✅ Relatório enviado com sucesso! Obrigado.';
+            status.style.color = '#32cd32';
+            document.getElementById('report-form').reset();
+            localStorage.setItem('pokedex-last-report', new Date().getTime().toString());
+        } else {
+            throw new Error('Falha no envio da API');
+        }
+    } catch(err) {
+        status.innerText = '❌ Erro de conexão com o servidor.';
+        status.style.color = '#ff4b2b';
+        console.error("Erro Discord:", err);
+    }
+
+    btn.innerText = 'ENVIAR RELATÓRIO';
+    btn.disabled = false;
+});
