@@ -186,6 +186,39 @@
         </div>
     </div>
 
+    <!-- BOTÃO FLUTUANTE REPORT -->
+    <a href="#" onclick="initReportModal(event)" class="floating-report-btn" title="Reportar Bug">
+        <span class="report-icon">🐛</span>
+        <span class="report-text">REPORTAR BUG</span>
+    </a>
+
+    <!-- MODAL DE REPORT -->
+    <div id="report-modal" class="oak-overlay hidden">
+        <div class="oak-container report-container">
+            <button class="oak-close-btn" id="close-report">&times;</button>
+            <div class="oak-screen report-screen">
+                <h2 class="report-title">SISTEMA DE REPORT</h2>
+                <form id="report-form" class="report-form">
+                    <label>NICK NO JOGO (OBRIGATÓRIO):</label>
+                    <input type="text" id="report-nick" placeholder="Seu nick exato..." required minlength="3" maxlength="20">
+                    
+                    <label>QUAL É O PROBLEMA?</label>
+                    <select id="report-type" required>
+                        <option value="BUG">Erro/Bug no Site</option>
+                        <option value="LOCAL">Localização Errada/Faltando</option>
+                        <option value="SUGESTÃO">Sugestão de Melhoria</option>
+                    </select>
+
+                    <label>DESCREVA OS DETALHES:</label>
+                    <textarea id="report-msg" rows="4" placeholder="Ex: O respawn do Charizard sumiu na rota de Cinnabar..." required minlength="10"></textarea>
+
+                    <button type="submit" class="final-support-btn" id="submit-report-btn">ENVIAR RELATÓRIO</button>
+                    <p id="report-status" class="report-status"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
