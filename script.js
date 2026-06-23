@@ -1125,6 +1125,9 @@ document.getElementById('report-form').addEventListener('submit', async (e) => {
     const payload = {
         username: "Pokedex PBR - Report",
         avatar_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
+        
+        content: "<@743785451978227812> 🚨 Você tem um novo relatório de Bug!",
+        
         embeds: [{
             title: `🚨 NOVO RELATÓRIO: ${type}`,
             color: type === 'BUG' ? 16711680 : (type === 'LOCAL' ? 16766720 : 3447003),
