@@ -769,11 +769,12 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
    SISTEMA DE REPORT (BOTÃO E MODAL)
 ========================================= */
 
-/* 1. Botão Flutuante (Discreto no topo direito) */
+/* 1. Botão Flutuante (Alinhado abaixo do botão de Café) */
 .floating-report-btn {
     position: fixed; 
-    top: 25px; 
-    right: 25px; 
+    top: 85px; /* Empurrado para baixo para ficar sob o botão de Café */
+    left: 25px; /* Alinhado à esquerda */
+    right: auto; /* Remove o alinhamento antigo da direita */
     z-index: 9999;
     display: flex; 
     align-items: center; 
@@ -788,7 +789,7 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
     font-size: 0.85rem; 
     font-weight: 900;
     box-shadow: 4px 4px 0 rgba(0,0,0,0.8);
-    width: max-content; /* Impede o botão de esticar a tela inteira */
+    width: max-content; 
     height: max-content;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
 }
