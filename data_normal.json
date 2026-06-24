@@ -304,7 +304,7 @@
       "spd": 70
     },
     "locations": [
-      "Trost (X 1398 / Y 1353 / Z 7)"
+      "Trost (X 1438 / Y 1317 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png"
   },
@@ -435,6 +435,7 @@
     },
     "locations": [
       "Trost (X 1579 / Y 1205 / Z 5)",
+      "Trost (X 1438 / Y 1317 / Z 7)",
       "Vermilion (X 962 / Y 130 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/18.png"
@@ -531,7 +532,8 @@
       "spd": 100
     },
     "locations": [
-      "Saffron (X 1077 / Y 951 / Z 6)"
+      "Saffron (X 1077 / Y 951 / Z 6)",
+      "Trost (X 1438 / Y 1317 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/22.png"
   },
@@ -1654,7 +1656,7 @@
       "spd": 70
     },
     "locations": [
-      "Trost (X 1395 / Y 1352 / Z 7)"
+      "Trost (X 1438 / Y 1317 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/71.png"
   },
@@ -3299,7 +3301,7 @@
     },
     "locations": [
       "Hunter Village (X 1932 / Y 1763 / Z 7)",
-      "Trost (X 1395 / Y 1352 / Z 7)",
+      "Trost (X 1438 / Y 1317 / Z 7)",
       "Azalea (X 2141 / Y 664 / Z 7)",
       {
         "rota": "Trainer Center",
