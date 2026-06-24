@@ -5548,6 +5548,13 @@
       "spd": 41
     },
     "locations": [
+      {
+        "rota": "Montanhas Blackthorn",
+        "passos": [
+          "Blackthorn Andar 1 (X 1894 / Y 143 / Z 6)"
+        ]
+        "nota": "📌 Larvitar  fica no primeiro andar."
+      },
       "Cianwood (X 1027 / Y 302 / Z 6)",
       "Hunter Village (X 1834 / Y 1413 / Z 6)"
     ],
@@ -5570,6 +5577,14 @@
       "spd": 51
     },
     "locations": [
+      {
+        "rota": "Montanhas Blackthorn",
+        "passos": [
+          "Blackthorn Andar 1 (X 1894 / Y 143 / Z 6)",
+          "Blackthorn Andar 2 (X 1894 / Y 33 / Z 5)"
+        ]
+        "nota": "📌 Pupitar fica no segundo andar."
+      },
       "Sina (X 1235 / Y 591 / Z 5)",
       "Hunter Village (X 1602 / Y 1600 / Z 5)"
     ],
@@ -6824,7 +6839,16 @@
       "spd": 40
     },
     "locations": [
-      "Phenac (X 2780 / Y 1447 / Z 5)"
+      "Phenac (X 2780 / Y 1447 / Z 5)",
+      {
+        "rota": "Montanhas Blackthorn",
+        "passos": [
+          "Blackthorn Andar 1 (X 1894 / Y 143 / Z 6)",
+          "Blackthorn Andar 2 (X 1894 / Y 33 / Z 5)",
+          "Blackthorn Andar 3 (X 2074 / Y 118 / Z 4)"
+        ]
+        "nota": "📌 Lairon e Aggron ficam distribuidos entre os andares."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/305.png"
   },
@@ -6846,6 +6870,15 @@
     },
     "locations": [
       "Phenac (X 2780 / Y 1447 / Z 5)",
+      {
+        "rota": "Montanhas Blackthorn",
+        "passos": [
+          "Blackthorn Andar 1 (X 1894 / Y 143 / Z 6)",
+          "Blackthorn Andar 2 (X 1894 / Y 33 / Z 5)",
+          "Blackthorn Andar 3 (X 2074 / Y 118 / Z 4)"
+        ]
+        "nota": "📌 Lairon e Aggron ficam distribuidos entre os andares."
+      },
       {
         "rota": "Trainer Center",
         "passos": [
@@ -7717,7 +7750,16 @@
       "spd": 75
     },
     "locations": [
-      "Cianwood (X 1000 / Y 276 / Z 4)"
+      "Cianwood (X 1000 / Y 276 / Z 4)",
+      {
+        "rota": "Montanhas Blackthorn",
+        "passos": [
+          "Blackthorn Andar 1 (X 1894 / Y 143 / Z 6)",
+          "Blackthorn Andar 2 (X 1894 / Y 33 / Z 5)",
+          "Blackthorn Andar 3 (X 2074 / Y 118 / Z 4)"
+        ]
+        "nota": "📌 Armaldo e Anorith ficam no ultimo andar"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/347.png"
   },
@@ -7738,7 +7780,16 @@
       "spd": 45
     },
     "locations": [
-      "Cianwood (X 1000 / Y 276 / Z 4)"
+      "Cianwood (X 1000 / Y 276 / Z 4)",
+      {
+        "rota": "Montanhas Blackthorn",
+        "passos": [
+          "Blackthorn Andar 1 (X 1894 / Y 143 / Z 6)",
+          "Blackthorn Andar 2 (X 1894 / Y 33 / Z 5)",
+          "Blackthorn Andar 3 (X 2074 / Y 118 / Z 4)"
+        ]
+        "nota": "📌 Armaldo e Anorith ficam no ultimo andar"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/348.png"
   },
