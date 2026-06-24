@@ -265,13 +265,16 @@ function initPanAndZoom() {
         else zoomMap('out');               
     }, { passive: false });
 
+    // Início do Arraste
     wrapper.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // <-- CORREÇÃO 1: Bloqueia o navegador de tentar "salvar a imagem"
         isDragging = true;
         startDragX = e.clientX - mapTransform.x;
         startDragY = e.clientY - mapTransform.y;
     });
 
-    wrapper.addEventListener('mousemove', (e) => {
+    // CORREÇÃO 2: Ouvir o movimento na tela inteira (window) e não só no mapa
+    window.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         e.preventDefault();
         mapTransform.x = e.clientX - startDragX;
@@ -279,9 +282,10 @@ function initPanAndZoom() {
         applyTransform();
     });
 
-    wrapper.addEventListener('mouseup', () => isDragging = false);
-    wrapper.addEventListener('mouseleave', () => isDragging = false);
+    // CORREÇÃO 3: Ouvir o soltar do clique na tela inteira
+    window.addEventListener('mouseup', () => isDragging = false);
 
+    // O mesmo ajuste aplicado para o Touch (celular)
     wrapper.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) { 
             isDragging = true;
@@ -290,16 +294,15 @@ function initPanAndZoom() {
         }
     });
 
-    wrapper.addEventListener('touchmove', (e) => {
+    window.addEventListener('touchmove', (e) => {
         if (!isDragging || e.touches.length !== 1) return;
-        e.preventDefault(); 
         mapTransform.x = e.touches[0].clientX - startDragX;
         mapTransform.y = e.touches[0].clientY - startDragY;
         applyTransform();
     }, { passive: false });
 
-    wrapper.addEventListener('touchend', () => isDragging = false);
-    wrapper.addEventListener('touchcancel', () => isDragging = false);
+    window.addEventListener('touchend', () => isDragging = false);
+    window.addEventListener('touchcancel', () => isDragging = false);
 
     document.getElementById('btn-zoom-in').addEventListener('click', () => zoomMap('in'));
     document.getElementById('btn-zoom-out').addEventListener('click', () => zoomMap('out'));
