@@ -215,14 +215,22 @@ function renderPokemon(list) {
     grid.innerHTML = list.map(p => {
         const isCaught = caughtPokemon.includes(p.id);
         const pCategory = p.category || 'normal';
+        
+        // Tratamento inteligente da etiqueta da Geração / Forma Regional
+        let genText = '';
+        if (pCategory === 'boss') genText = 'BOSS 24H';
+        else if (pCategory === 'dark') genText = 'DARK';
+        else if (isNaN(p.generation)) genText = p.generation.toUpperCase(); // Ex: "HISUI", "ALOLA"
+        else genText = 'GEN ' + p.generation;
+
         return `
             <div class="pk-card" onclick="openModal('${p.id}')">
                 <div class="pk-card-inner">
-                    <span class="pk-id">#${p.id.toString().padStart(3, '0')}</span>
+                    <span class="pk-id">#${p.id.toString().split('-')[0].padStart(3, '0')}</span>
                     <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, '${p.id}')" title="Marcar como Capturado"></div>
                     <img src="${p.image}" loading="lazy">
                     <h3 class="pk-name">${p.name}</h3>
-                    <div class="pk-gen-bar">${pCategory === 'boss' ? 'BOSS 24H' : (pCategory === 'dark' ? 'DARK' : 'GEN ' + p.generation)}</div>
+                    <div class="pk-gen-bar">${genText}</div>
                     <div class="pk-types-mini">
                         ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
                     </div>
@@ -1167,3 +1175,22 @@ document.getElementById('report-form').addEventListener('submit', async (e) => {
     btn.innerText = 'ENVIAR RELATÓRIO';
     btn.disabled = false;
 });
+
+// ==========================================
+// ALTERNAR FORMAS REGIONAIS NO MODAL
+// ==========================================
+window.switchForm = (newId) => {
+    const modalContent = document.querySelector('.modal-pokedex-view');
+    // Efeito de "apagar" e diminuir levemente
+    modalContent.style.opacity = '0';
+    modalContent.style.transform = 'scale(0.95)';
+    modalContent.style.transition = 'all 0.2s ease';
+    
+    setTimeout(() => {
+        openModal(newId); // Carrega os dados do novo Pokémon
+        const newContent = document.querySelector('.modal-pokedex-view');
+        // Efeito de "acender" novamente
+        newContent.style.opacity = '1';
+        newContent.style.transform = 'scale(1)';
+    }, 200);
+};
