@@ -526,6 +526,32 @@ window.openModal = (id) => {
     const matchups = calculateMatchups(p.types);
     const pCategory = p.category || 'normal';
     
+    // --- NOVO: CAÇADOR DE FORMAS REGIONAIS ---
+    let baseId = p.id.toString();
+    if (/^\d+-/.test(baseId)) baseId = baseId.split('-')[0]; // Pega apenas o número se tiver hífen
+
+    // Procura no banco o original e as variantes
+    const relatives = pokemonData.filter(x => {
+        const xId = x.id.toString();
+        return xId === baseId || xId.startsWith(baseId + '-');
+    });
+    
+    // Tira o que já está na tela para deixar só os outros
+    const otherForms = relatives.filter(x => x.id.toString() !== p.id.toString());
+    
+    let formButtonsHTML = '';
+    if(otherForms.length > 0) {
+        formButtonsHTML = `<div class="form-btn-container">` + 
+            otherForms.map(f => {
+                let formName = f.id.toString().includes('-') ? f.id.toString().split('-')[1].toUpperCase() : 'NORMAL';
+                let icon = formName === 'ALOLA' ? '🌴' : (formName === 'GALAR' ? '⚔️' : (formName === 'HISUI' ? '🏔️' : '✨'));
+                if (formName === 'NORMAL') icon = '🌍';
+                return `<button class="form-toggle-btn" onclick="switchForm('${f.id}')">${icon} ${formName}</button>`;
+            }).join('') + 
+        `</div>`;
+    }
+    // -----------------------------------------
+
     const locationsHTML = (p.locations || []).map(loc => {
         if (typeof loc === 'string') {
             return `
