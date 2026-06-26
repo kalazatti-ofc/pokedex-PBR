@@ -5420,7 +5420,11 @@
       "spd": 83
     },
     "locations": [
-      "Yorkshin (X 2040 / Y 984 / Z 7)"
+      "Yorkshin (X 2040 / Y 984 / Z 7)",
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/240.png"
   },
@@ -10283,6 +10287,10 @@
         ],
         "nota": "📌 Necessário pagar HDs para poder farmar"
       },
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      },
       "Yorkshin (X 2040 / Y 984 / Z 7)",
       "One island (X 2513 / Y 1178 / Z 7)",
       "Azalea (X 1400 / Y 558 / Z 7)"
@@ -10852,7 +10860,11 @@
       "spd": 45
     },
     "locations": [
-      "Jublife (X 3294 / Y 1970 / Z 7)"
+      "Jublife (X 3294 / Y 1970 / Z 7)",
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/498.png"
   },
@@ -10873,7 +10885,11 @@
       "spd": 55
     },
     "locations": [
-      "Jublife (X 3338 / Y 1966 / Z 4)"
+      "Jublife (X 3338 / Y 1966 / Z 4)",
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/499.png"
   },
@@ -10894,7 +10910,11 @@
       "spd": 65
     },
     "locations": [
-      "Jublife (X 3338 / Y 1966 / Z 4)"
+      "Jublife (X 3338 / Y 1966 / Z 4)",
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/500.png"
   },
@@ -11156,7 +11176,11 @@
       "spd": 64
     },
     "locations": [
-      "Jublife (X 3294 / Y 1970 / Z 7)"
+      "Jublife (X 3294 / Y 1970 / Z 7)",
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/513.png"
   },
@@ -11176,7 +11200,11 @@
       "spd": 101
     },
     "locations": [
-      "Jublife (X 3338 / Y 1966 / Z 4)"
+      "Jublife (X 3338 / Y 1966 / Z 4)",
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/514.png"
   },
@@ -14035,7 +14063,12 @@
       "spdef": 50,
       "spd": 55
     },
-    "locations": [],
+    "locations": [
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10229.png"
   },
   {
@@ -14054,7 +14087,12 @@
       "spdef": 80,
       "spd": 90
     },
-    "locations": [],
+    "locations": [
+      {
+        "local": "Canavale (X 3336 / Y 1976 / Z 5)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
+    ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10230.png"
   },
   {
