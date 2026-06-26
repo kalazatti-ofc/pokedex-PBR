@@ -517,6 +517,9 @@ window.navigatePokemon = (direction, event) => {
     openModal(targetPokemon.id); 
 };
 
+// ==========================================
+// ABRIR MODAL DO POKÉMON (COM FORMAS REGIONAIS)
+// ==========================================
 window.openModal = (id) => {
     const p = pokemonData.find(x => x.id.toString() === id.toString());
     if(!p) return;
@@ -526,7 +529,9 @@ window.openModal = (id) => {
     const matchups = calculateMatchups(p.types);
     const pCategory = p.category || 'normal';
     
-    // --- NOVO: CAÇADOR DE FORMAS REGIONAIS ---
+    // ==========================================
+    // CAÇADOR DE FORMAS REGIONAIS
+    // ==========================================
     let baseId = p.id.toString();
     if (/^\d+-/.test(baseId)) baseId = baseId.split('-')[0]; // Pega apenas o número se tiver hífen
 
@@ -536,7 +541,7 @@ window.openModal = (id) => {
         return xId === baseId || xId.startsWith(baseId + '-');
     });
     
-    // Tira o que já está na tela para deixar só os outros
+    // Tira o que já está na tela para deixar só os botões das outras formas
     const otherForms = relatives.filter(x => x.id.toString() !== p.id.toString());
     
     let formButtonsHTML = '';
@@ -550,8 +555,8 @@ window.openModal = (id) => {
             }).join('') + 
         `</div>`;
     }
-    // -----------------------------------------
-
+    // ==========================================
+    
     const locationsHTML = (p.locations || []).map(loc => {
         if (typeof loc === 'string') {
             return `
@@ -609,7 +614,6 @@ window.openModal = (id) => {
         }
     }).join('');
 
-    let rightWingHTML = '';
     const statsHTML = Object.entries(p.stats || {}).map(([name, val]) => `
         <div class="stat-row">
             <label>${name.toUpperCase()}</label>
@@ -617,6 +621,8 @@ window.openModal = (id) => {
             <span class="stat-num">${val}</span>
         </div>
     `).join('');
+
+    let rightWingHTML = '';
 
     if (pCategory === 'boss') {
         rightWingHTML = `
@@ -744,15 +750,17 @@ window.openModal = (id) => {
                                 <div class="type-tags stacked-type-tags">
                                     ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
                                 </div>
+                                ${formButtonsHTML}
                             </div>
                         ` : `
                             <img src="${p.image}" class="poke-img-large">
                             <div class="screen-info">
                                 <h2>${p.name}</h2>
-                                <div class="modal-gen-bar">GERAÇÃO ${p.generation}</div>
+                                <div class="modal-gen-bar">${isNaN(p.generation) ? p.generation.toUpperCase() : 'GERAÇÃO ' + p.generation}</div>
                                 <div class="type-tags">
                                     ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
                                 </div>
+                                ${formButtonsHTML}
                             </div>
                         `}
                     </div>
