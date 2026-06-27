@@ -1279,7 +1279,8 @@
       "spd": 55
     },
     "locations": [
-      "Vermilion (X 1031 / Y 1497 / Z 7)"
+      "Vermilion (X 1031 / Y 1497 / Z 7)",
+      "Pastoria (X 3917 / Y 2203 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png"
   },
@@ -6132,6 +6133,7 @@
       "spd": 70
     },
     "locations": [
+      "Pastoria (X 3917 / Y 2203 / Z 7)",
       "Olivine (X 1406 / Y 378 / Z 6)",
       "Olivine (X 1192 / Y 303 / Z 6)"
     ],
@@ -9366,7 +9368,8 @@
     },
     "locations": [
       "Two Island (X 2755 / Y 938 / Z 6)",
-      "Pastoria (X 4039 / Y 2098 / Z 7)"
+      "Pastoria (X 4039 / Y 2098 / Z 7)",
+      "Pastoria (X 3917 / Y 2203 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/423.png"
   },
@@ -13496,6 +13499,47 @@
       "Jublife (X 3261 / Y 2184 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/625.png"
+  },
+  {
+    "id": 626,
+    "name": "Bouffalant",
+    "types": [
+      "Normal"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 95,
+      "atk": 110,
+      "def": 95,
+      "spatk": 40,
+      "spdef": 95,
+      "spd": 55
+    },
+    "locations": [
+      "Pastoria (X 3970 / Y 2031 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/626.png"
+  },
+  {
+    "id": 627,
+    "name": "Rufflet",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 70,
+      "atk": 83,
+      "def": 50,
+      "spatk": 37,
+      "spdef": 50,
+      "spd": 60
+    },
+    "locations": [
+      "Hearthome (X 3791 / Y 2084 / Z 6)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/627.png"
   },
   {
     "id": 628,
