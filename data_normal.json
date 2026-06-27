@@ -14368,6 +14368,31 @@
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10244.png"
   },
   {
+    "id": "628-hisui",
+    "name": "Braviary",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "generation": "Hisui",
+    "stats": {
+      "hp": 110,
+      "atk": 83,
+      "def": 70,
+      "spatk": 112,
+      "spdef": 70,
+      "spd": 65
+    },
+    "locations": [
+      {
+        "local": "Hearthome (X 3791 / Y 2084 / Z 6)",
+        "nota": "📌 Necessario acesso a Sinnoh"
+      }
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10240.png"
+  },
+  
+  {
     "id": "19-alola",
     "name": "Rattata",
     "types": [
