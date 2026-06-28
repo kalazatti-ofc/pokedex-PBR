@@ -4304,7 +4304,8 @@
       "spd": 110
     },
     "locations": [
-      "Cianwood (X 625 / Y 267 / Z 7)"
+      "Cianwood (X 625 / Y 267 / Z 7)",
+      "Cianwood (X 730 / Y 460 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/189.png"
   },
@@ -6198,7 +6199,8 @@
       "spd": 80
     },
     "locations": [
-      "Sina (X 697 / Y 458 / Z 7)"
+      "Sina (X 697 / Y 458 / Z 7)",
+      "Cianwood (X 760 / Y 460 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/275.png"
   },
@@ -12417,6 +12419,95 @@
       "Qualquer lugar do mapa, deve ter o oculos da quest Zorua"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/570.png"
+  },
+  {
+    "id": 571,
+    "name": "Zoroark",
+    "types": [
+      "Dark"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 60,
+      "atk": 105,
+      "def": 60,
+      "spatk": 120,
+      "spdef": 60,
+      "spd": 105
+    },
+    "locations": [
+      "Evoluindo Zorua"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/571.png"
+  },
+  {
+    "id": 572,
+    "name": "Minccino",
+    "types": [
+      "Normal"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 55,
+      "atk": 50,
+      "def": 40,
+      "spatk": 40,
+      "spdef": 40,
+      "spd": 75
+    },
+    "locations": [
+      {
+        "local": "Solaceon (X 3573 / Y 2118 / Z 7)",
+        "nota": "📌 Necessário acesso a Sinnoh"
+      }
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/572.png"
+  },
+  {
+    "id": 573,
+    "name": "Cinccino",
+    "types": [
+      "Normal"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 75,
+      "atk": 95,
+      "def": 60,
+      "spatk": 65,
+      "spdef": 60,
+      "spd": 115
+    },
+    "locations": [
+      {
+        "local": "Solaceon (X 3573 / Y 2118 / Z 7)",
+        "nota": "📌 Necessário acesso a Sinnoh"
+      }
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/573.png"
+  },
+  {
+    "id": 574,
+    "name": "Gotita",
+    "types": [
+      "Psychic"
+    ],
+    "generation": 5,
+    "stats": {
+      "hp": 45,
+      "atk": 30,
+      "def": 50,
+      "spatk": 55,
+      "spdef": 65,
+      "spd": 45
+    },
+    "locations": [
+      {
+        "local": "Solaceon (X 3904 / Y 1864 / Z 7)",
+        "nota": "📌 Entre no Buraco"
+      }
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/574.png"
   },
   {
     "id": 575,
