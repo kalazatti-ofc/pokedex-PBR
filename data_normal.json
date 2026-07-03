@@ -4285,7 +4285,18 @@
     },
     "locations": [
       "Violet (X 1764 / Y 475 / Z 6)",
-      "Azalea (X 1759 / Y 471 / Z 7)"
+      "Azalea (X 1759 / Y 471 / Z 7)",
+      {
+        "rota": "Rota Hunter Village",
+        "passos": [
+          "Hunter Village (X 1502 / Y 1667 / Z 7)",
+          "Hunter Village (X 1439 / Y 1650 / Z 7)",
+          "Hunter Village (X 1499 / Y 1636 / Z 7)",
+          "Hunter Village (X 1718 / Y 1726 / Z 7)",
+          "Hunter Village (X 1953 / Y 1757 / Z 6)"
+        ],
+        "nota": "📌 Único respawn low level."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/188.png"
   },
@@ -7042,7 +7053,15 @@
       "spd": 85
     },
     "locations": [
-      "Eucruteak (X 1465 / Y 201 / Z 7)"
+      "Eucruteak (X 1465 / Y 201 / Z 7)",
+      {
+        "local": "Olivine (X 1300 / Y 29 / Z 5)",
+        "nota": "📌 Safari de Johto"
+      },
+      {
+        "local": "Sinnoh (X 3587 / Y 1808 / Z 7)",
+        "nota": "📌 Nos arredores tem mais alguns."
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/313.png"
   },
