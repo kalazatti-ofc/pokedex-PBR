@@ -52,32 +52,52 @@
                 </div>
 
                 <div class="pokedex-filters" id="filters-container">
-                    <button class="filter-toggle" id="toggle-gen">▼ FILTRAR POR REGIÃO</button>
-                    <div class="filter-group hidden-filter" id="group-gen">
-                        <div class="pills-container" id="gen-filters">
-                            <button class="filter-pill" data-gen="1">KANTO</button>
-                            <button class="filter-pill" data-gen="2">JOHTO</button>
-                            <button class="filter-pill" data-gen="3">HOENN</button>
-                            <button class="filter-pill" data-gen="4">SINNOH</button>
-                            <button class="filter-pill active" data-gen="all">TODAS</button>
-                        </div>
-                    </div>
-
-                    <button class="filter-toggle" id="toggle-type">▼ FILTRAR POR TIPO</button>
-                    <div class="filter-group hidden-filter" id="group-type">
-                        <div class="pills-container" id="type-filters">
+                    <button class="filter-toggle master-toggle" id="toggle-all-filters">⚙️ MOSTRAR FILTROS AVANÇADOS</button>
+                    
+                    <div id="all-filters-wrapper" class="hidden-filter" style="margin-top: 10px;">
+                        
+                        <button class="filter-toggle" id="toggle-gen">▼ FILTRAR POR REGIÃO</button>
+                        <div class="filter-group hidden-filter" id="group-gen">
+                            <div class="pills-container" id="gen-filters">
+                                <button class="filter-pill" data-gen="1">KANTO</button>
+                                <button class="filter-pill" data-gen="2">JOHTO</button>
+                                <button class="filter-pill" data-gen="3">HOENN</button>
+                                <button class="filter-pill" data-gen="4">SINNOH</button>
+                                <button class="filter-pill" data-gen="5">UNOVA</button>
+                                <button class="filter-pill" data-gen="6">KALOS</button>
+                                <button class="filter-pill" data-gen="7">ALOLA</button>
+                                <button class="filter-pill" data-gen="alola" style="background:#3498db; color:#fff;">F. ALOLA</button>
+                                <button class="filter-pill" data-gen="hisui" style="background:#8a2be2; color:#fff;">F. HISUI</button>
+                                <button class="filter-pill active" data-gen="all">TODAS</button>
                             </div>
-                    </div>
-
-                    <button class="filter-toggle" id="toggle-catch">▼ STATUS DA POKEDEX</button>
-                    <div class="filter-group hidden-filter" id="group-catch">
-                        <div class="pills-container" id="catch-filters">
-                            <button class="filter-pill active" data-catch="all">TODOS</button>
-                            <button class="filter-pill" data-catch="caught" style="background:#32cd32; color:#111;">REGISTRADOS</button>
-                            <button class="filter-pill" data-catch="uncaught" style="background:#ff4b2b; color:#fff;">FALTANDO</button>
                         </div>
-                    </div>
-                </div>
+
+                        <button class="filter-toggle" id="toggle-type">▼ FILTRAR POR TIPO</button>
+                        <div class="filter-group hidden-filter" id="group-type">
+                            <div class="pills-container" id="type-filters">
+                            </div>
+                        </div>
+
+                        <button class="filter-toggle" id="toggle-catch">▼ STATUS DA POKEDEX</button>
+                        <div class="filter-group hidden-filter" id="group-catch">
+                            <div class="pills-container" id="catch-filters">
+                                <button class="filter-pill active" data-catch="all">TODOS</button>
+                                <button class="filter-pill" data-catch="caught" style="background:#32cd32; color:#111;">REGISTRADOS</button>
+                                <button class="filter-pill" data-catch="uncaught" style="background:#ff4b2b; color:#fff;">FALTANDO</button>
+                            </div>
+                        </div>
+
+                        <button class="filter-toggle" id="toggle-meta">▼ FILTROS META-GAMING</button>
+                        <div class="filter-group hidden-filter" id="group-meta">
+                            <div class="pills-container" id="meta-filters">
+                                <button class="filter-pill active" data-meta="all">NENHUM</button>
+                                <button class="filter-pill" data-meta="quest" style="background:#ffcb05; color:#111;">🎯 SÓ QUESTS</button>
+                                <button class="filter-pill" data-meta="buraco" style="background:#8a2be2; color:#fff;">🕳️ REQUER BURACO</button>
+                                <button class="filter-pill" data-meta="tank" style="background:#3498db; color:#fff;">🛡️ TANKERS</button>
+                            </div>
+                        </div>
+
+                    </div> </div>
 
                 <div id="map-sidebar-menu" class="map-sidebar" style="display: none;">
                     <span class="tech-label" style="display: block; margin-bottom: 8px;">SISTEMA GPS GLOBAL</span>
@@ -120,6 +140,7 @@
                             <div id="map-content" style="position: relative; display: inline-block;">
                                 <img id="map-image" src="" alt="Mapa" style="display: block; width: 100%; height: auto; z-index: 2; transform-origin: center center; will-change: transform;">
                                 <div id="map-pins-container"></div>
+                                <svg id="map-routes-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible;"></svg>
                                 <div class="map-overlay" style="position: absolute; inset: 0; z-index: 4; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);"></div>
                             </div>
                             
@@ -143,11 +164,11 @@
     </div>
 
     <div id="pokemon-modal" class="modal hidden">
-        <div class="modal-overlay"></div>
+        <div class="modal-overlay" onclick="document.getElementById('pokemon-modal').classList.add('hidden')"></div>
         <div class="modal-content">
-            <button class="close-btn">&times;</button>
+            <button class="close-btn" onclick="document.getElementById('pokemon-modal').classList.add('hidden')">&times;</button>
             <div id="modal-body">
-                </div>
+            </div>
         </div>
     </div>
 
