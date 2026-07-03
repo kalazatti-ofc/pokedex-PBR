@@ -114,7 +114,7 @@ body {
 }
 .cat-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
 
-/* Cores das abas (MANTENDO SUA ESTÉTICA ORIGINAL) */
+/* Cores das abas */
 .cat-btn[data-cat="normal"].active { background: #fff; color: var(--dex-border); }
 .cat-btn[data-cat="boss"].active { background: #ffcb05; color: var(--dex-border); }
 .cat-btn[data-cat="dark"].active { background: #8a2be2; color: #fff; }
@@ -243,7 +243,7 @@ body {
    TELA DO MAPA GIGANTE E VISUALIZADOR
 ========================================= */
 .map-screen { background: #2a2a2a !important; box-shadow: none !important; border: 4px solid #111; }
-.map-screen .map-overlay { box-shadow: none !important; } /* Sem emboss no mapa gigante */
+.map-screen .map-overlay { box-shadow: none !important; }
 
 .map-controls-vertical { 
     position: absolute; right: 15px; top: 50%; transform: translateY(-50%); 
@@ -362,12 +362,202 @@ body {
 
 .data-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; }
 .data-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
-.stats-list { display: flex; flex-direction: column; gap: 6px; }
-.stat-row { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 800;}
-.stat-row label { width: 55px; color: #555; transition: color 0.3s ease; }
-.bar-container { flex: 1; height: 10px; background: #bbb; border-radius: 5px; border: 2px solid var(--dex-border); overflow: hidden; }
-.bar-fill { height: 100%; background: #ff4b2b; }
-.stat-num { width: 30px; text-align: right; color: var(--dex-border); transition: color 0.3s ease;}
+
+/* ==========================================
+   NATURES RECOMENDADAS (MINIMALISTA)
+========================================== */
+.nature-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px; /* Reduzido o espaço abaixo */
+    padding-bottom: 8px; /* Reduzido o espaço interno */
+    border-bottom: 2px dashed rgba(0,0,0,0.1);
+}
+
+body.dark-mode .nature-container {
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.nature-title {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: #888;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+body.dark-mode .nature-title { 
+    color: #999; 
+}
+
+.nature-pills {
+    display: flex;
+    gap: 6px; /* Mais juntas */
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nature-pill {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--dex-border);
+    font-family: monospace;
+    font-size: 0.7rem; /* Texto um pouquinho maior para leitura */
+    padding: 3px 10px; /* Mais achatado e largo */
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: help; /* Cursor de ajuda para indicar que tem balão */
+}
+
+/* Deixa a nature em negrito (A Principal) com mais destaque */
+.nature-pill b {
+    color: var(--dex-red);
+}
+
+.nature-pill:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   BALÃO (TOOLTIP) ESPECÍFICO DAS NATURES
+========================================== */
+.nature-tooltip {
+    position: relative;
+}
+
+/* O Corpo do Balão */
+.nature-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px); /* Joga para baixo do botão */
+    left: 50%;
+    transform: translateX(-50%) translateY(5px); /* Centraliza e prepara animação */
+    background: #f0f4f8; /* Fundo claro combinando com o painel */
+    color: var(--dex-border); /* Texto escuro */
+    border: 2px solid var(--dex-border); /* Borda definida */
+    padding: 4px 8px; /* Mais compacto */
+    border-radius: 6px;
+    font-size: 0.6rem;
+    font-family: monospace;
+    font-weight: 900;
+    white-space: nowrap; /* Não quebra linha */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 100;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15); /* Sombra mais sutil */
+    pointer-events: none;
+}
+
+/* A Setinha do Balão (apontando pra cima) */
+.nature-tooltip::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent var(--dex-border) transparent; /* Seta pra cima */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Efeito ao passar o mouse */
+.nature-tooltip:hover::after,
+.nature-tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); /* Desliza suavemente pra cima */
+}
+
+/* Modo Escuro (Neon) para o Balãozinho */
+body.dark-mode .nature-tooltip::after {
+    background: #2a2a2c;
+    color: #fff;
+    border-color: #111;
+    box-shadow: 2px 2px 0 #000;
+}
+body.dark-mode .nature-tooltip::before {
+    border-color: transparent transparent #111 transparent;
+}
+
+body.dark-mode .nature-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ddd;
+}
+
+body.dark-mode .nature-pill b {
+    color: #ffcb05; /* Destaque amarelo no modo escuro */
+}
+
+body.dark-mode .nature-pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stats-list-animated {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-row { 
+    display: flex; align-items: center; gap: 10px; 
+    font-size: 0.75rem; font-weight: 800;
+}
+
+.stat-row label { 
+    width: 55px; color: #555; font-family: monospace; font-size: 0.8rem;
+}
+body.dark-mode .stat-row label { color: #aaa; }
+
+/* O Fundo da Barra */
+.bar-container { 
+    flex: 1; height: 12px; background: rgba(0,0,0,0.1); 
+    border-radius: 6px; border: 2px solid var(--dex-border); 
+    overflow: hidden; 
+}
+body.dark-mode .bar-container { background: rgba(255,255,255,0.05); border-color: #111; }
+
+/* A Barra Colorida que vai encher animada */
+.bar-fill { 
+    height: 100%; 
+    width: 0%; /* Inicia zerado para poder animar */
+    border-radius: 4px;
+    animation: fillStatBar 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform-origin: left;
+}
+
+@keyframes fillStatBar {
+    0% { width: 0%; }
+    100% { width: var(--target-width); } /* Pega o tamanho exato via JS */
+}
+
+.stat-num { 
+    width: 30px; text-align: right; color: var(--dex-border); 
+    font-family: monospace; font-size: 0.9rem; transition: 0.3s;
+}
+body.dark-mode .stat-num { color: #ddd; }
+
+/* Pulsação no Status Mais Alto */
+.stat-highest .stat-num {
+    color: var(--dex-red);
+    font-size: 1rem;
+    animation: pulseHighest 1.5s infinite;
+}
+body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
+
+@keyframes pulseHighest {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+}
+
 
 .eff-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin-bottom: 5px; transition: background 0.3s ease; }
 .eff-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
@@ -440,6 +630,21 @@ body {
     
     .map-sidebar { margin-top: 10px; }
     .map-list-scroll { max-height: 180px; }
+    /* =======================================
+       LIMITE DE LOCALIZAÇÕES NO MOBILE
+    ======================================= */
+    .location-module {
+        max-height: 170px; /* Segura o bloco todo para não empurrar os stats pra baixo */
+        margin-bottom: 10px;
+    }
+    
+    .loc-list-scroll {
+        max-height: 140px; /* Limita para aparecerem ~2 botões por vez */
+        overflow-y: auto;  /* Habilita o scroll nativo (deslizar o dedo) */
+        padding-bottom: 10px;
+        /* Efeito visual: Sombra interna embaixo para indicar que a lista continua */
+        box-shadow: inset 0 -15px 10px -15px rgba(0,0,0,0.5); 
+    }
     .map-controls-vertical { right: 10px; padding: 6px; gap: 6px; }
     .zoom-btn { width: 30px; height: 30px; font-size: 1rem; }
     .z-display-box { width: 30px; height: 30px; font-size: 0.8rem; }
@@ -467,8 +672,7 @@ body.dark-mode .pk-card { background: #2a2a2c; border-color: #111; box-shadow: 3
 body.dark-mode .pk-name { color: #f0f0f0; } 
 body.dark-mode .pk-id { color: #888; }
 body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-module, body.dark-mode .screen-border { background: #2a2a2c; border-color: #111; }
-body.dark-mode .stat-row label, body.dark-mode .eff-group label { color: #aaa; }
-body.dark-mode .stat-num { color: #ddd; }
+body.dark-mode .eff-group label { color: #aaa; }
 body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 10px #ffcb05; background: #111; border-color: #050505;}
 body.dark-mode .search-btn.red-btn { background: #9e1a00; border-color: #111; box-shadow: 2px 2px 0 #111; }
 body.dark-mode .filter-toggle { background: #2a2a2c; border-color: #111; box-shadow: 3px 3px 0 #111; color: #aaa;}
@@ -945,4 +1149,38 @@ body.dark-mode .form-toggle-btn:hover {
     background: rgba(255, 255, 255, 0.15); 
     color: #fff; 
     border-color: #fff;
+}
+
+/* ==========================================
+   AJUSTES ESPECÍFICOS DO FILTRO MESTRE E REGIÕES
+========================================== */
+
+/* Estilo de destaque para o Botão Mestre */
+.master-toggle {
+    background: var(--dex-red);
+    color: #fff;
+    text-align: center;
+    border-color: var(--dex-border);
+    font-size: 0.85rem;
+    padding: 12px 15px;
+}
+.master-toggle:hover {
+    background: var(--dex-dark-red);
+    color: #ffcb05;
+}
+body.dark-mode .master-toggle {
+    background: #111;
+    color: #ffcb05;
+}
+
+/* Quebra de linha forçada no Filtro de Regiões */
+#gen-filters .filter-pill[data-gen="alola"], 
+#gen-filters .filter-pill[data-gen="hisui"] {
+    flex-basis: calc(50% - 4px); /* Força a ocupar metade da tela menos o espaço do gap */
+    max-width: calc(50% - 4px);
+}
+
+#gen-filters .filter-pill[data-gen="all"] {
+    flex-basis: 100%; /* Força a ocupar a linha inteira sozinho */
+    max-width: 100%;
 }
