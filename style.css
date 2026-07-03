@@ -195,7 +195,14 @@ body {
 /* =========================================
    PAINEL DIREITO E CARDS INICIAIS
 ========================================= */
-.pokedex-right-panel { padding: 20px; display: flex; flex-direction: column; flex: 1; transition: background 0.3s ease; }
+.pokedex-right-panel { 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1; 
+    min-width: 0; /* CRÍTICO: Impede que o letreiro estique o painel para fora */
+    transition: background 0.3s ease; 
+}
 .pokedex-main-display {
     background: var(--screen-bg); border-radius: 15px; border: 6px solid var(--dex-border);
     box-shadow: inset 0 10px 20px rgba(0,0,0,0.1); padding: 15px;
@@ -281,7 +288,6 @@ body {
 .pin-poke-img { width: 26px; height: 26px; object-fit: contain; background: rgba(255,255,255,0.1); border-radius: 6px; border: 1px solid #333; cursor: pointer; transition: transform 0.1s, border-color 0.1s; }
 .pin-poke-img:hover { transform: scale(1.15); border-color: #ffcb05; }
 
-
 /* =========================================
    ESTRUTURA GERAL DO MODAL
 ========================================= */
@@ -365,13 +371,13 @@ body {
 
 /* ==========================================
    NATURES RECOMENDADAS (MINIMALISTA)
-========================================== */
+========================================= */
 .nature-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 8px; /* Reduzido o espaço abaixo */
-    padding-bottom: 8px; /* Reduzido o espaço interno */
+    margin-bottom: 8px; 
+    padding-bottom: 8px; 
     border-bottom: 2px dashed rgba(0,0,0,0.1);
 }
 
@@ -393,7 +399,7 @@ body.dark-mode .nature-title {
 
 .nature-pills {
     display: flex;
-    gap: 6px; /* Mais juntas */
+    gap: 6px; 
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -403,14 +409,13 @@ body.dark-mode .nature-title {
     border: 1px solid rgba(0, 0, 0, 0.15);
     color: var(--dex-border);
     font-family: monospace;
-    font-size: 0.7rem; /* Texto um pouquinho maior para leitura */
-    padding: 3px 10px; /* Mais achatado e largo */
+    font-size: 0.7rem; 
+    padding: 3px 10px; 
     border-radius: 6px;
     transition: all 0.2s ease;
-    cursor: help; /* Cursor de ajuda para indicar que tem balão */
+    cursor: help; 
 }
 
-/* Deixa a nature em negrito (A Principal) com mais destaque */
 .nature-pill b {
     color: var(--dex-red);
 }
@@ -420,38 +425,50 @@ body.dark-mode .nature-title {
     transform: translateY(-1px);
 }
 
+body.dark-mode .nature-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ddd;
+}
+
+body.dark-mode .nature-pill b {
+    color: #ffcb05; 
+}
+
+body.dark-mode .nature-pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 /* ==========================================
    BALÃO (TOOLTIP) ESPECÍFICO DAS NATURES
-========================================== */
+========================================= */
 .nature-tooltip {
     position: relative;
 }
 
-/* O Corpo do Balão */
 .nature-tooltip::after {
     content: attr(data-tooltip);
     position: absolute;
-    top: calc(100% + 8px); /* Joga para baixo do botão */
+    top: calc(100% + 8px); 
     left: 50%;
-    transform: translateX(-50%) translateY(5px); /* Centraliza e prepara animação */
-    background: #f0f4f8; /* Fundo claro combinando com o painel */
-    color: var(--dex-border); /* Texto escuro */
-    border: 2px solid var(--dex-border); /* Borda definida */
-    padding: 4px 8px; /* Mais compacto */
+    transform: translateX(-50%) translateY(5px); 
+    background: #f0f4f8; 
+    color: var(--dex-border); 
+    border: 2px solid var(--dex-border); 
+    padding: 4px 8px; 
     border-radius: 6px;
     font-size: 0.6rem;
     font-family: monospace;
     font-weight: 900;
-    white-space: nowrap; /* Não quebra linha */
+    white-space: nowrap; 
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
     z-index: 100;
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.15); /* Sombra mais sutil */
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15); 
     pointer-events: none;
 }
 
-/* A Setinha do Balão (apontando pra cima) */
 .nature-tooltip::before {
     content: '';
     position: absolute;
@@ -460,7 +477,7 @@ body.dark-mode .nature-title {
     transform: translateX(-50%) translateY(5px);
     border-width: 6px;
     border-style: solid;
-    border-color: transparent transparent var(--dex-border) transparent; /* Seta pra cima */
+    border-color: transparent transparent var(--dex-border) transparent; 
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
@@ -468,15 +485,13 @@ body.dark-mode .nature-title {
     z-index: 100;
 }
 
-/* Efeito ao passar o mouse */
 .nature-tooltip:hover::after,
 .nature-tooltip:hover::before {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0); /* Desliza suavemente pra cima */
+    transform: translateX(-50%) translateY(0); 
 }
 
-/* Modo Escuro (Neon) para o Balãozinho */
 body.dark-mode .nature-tooltip::after {
     background: #2a2a2c;
     color: #fff;
@@ -487,20 +502,9 @@ body.dark-mode .nature-tooltip::before {
     border-color: transparent transparent #111 transparent;
 }
 
-body.dark-mode .nature-pill {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: #ddd;
-}
-
-body.dark-mode .nature-pill b {
-    color: #ffcb05; /* Destaque amarelo no modo escuro */
-}
-
-body.dark-mode .nature-pill:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
+/* ==========================================
+   BARRAS DE STATUS ANIMADAS E DINÂMICAS
+========================================= */
 .stats-list-animated {
     display: flex;
     flex-direction: column;
@@ -517,7 +521,6 @@ body.dark-mode .nature-pill:hover {
 }
 body.dark-mode .stat-row label { color: #aaa; }
 
-/* O Fundo da Barra */
 .bar-container { 
     flex: 1; height: 12px; background: rgba(0,0,0,0.1); 
     border-radius: 6px; border: 2px solid var(--dex-border); 
@@ -525,10 +528,9 @@ body.dark-mode .stat-row label { color: #aaa; }
 }
 body.dark-mode .bar-container { background: rgba(255,255,255,0.05); border-color: #111; }
 
-/* A Barra Colorida que vai encher animada */
 .bar-fill { 
     height: 100%; 
-    width: 0%; /* Inicia zerado para poder animar */
+    width: 0%; 
     border-radius: 4px;
     animation: fillStatBar 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transform-origin: left;
@@ -536,7 +538,7 @@ body.dark-mode .bar-container { background: rgba(255,255,255,0.05); border-color
 
 @keyframes fillStatBar {
     0% { width: 0%; }
-    100% { width: var(--target-width); } /* Pega o tamanho exato via JS */
+    100% { width: var(--target-width); } 
 }
 
 .stat-num { 
@@ -545,7 +547,6 @@ body.dark-mode .bar-container { background: rgba(255,255,255,0.05); border-color
 }
 body.dark-mode .stat-num { color: #ddd; }
 
-/* Pulsação no Status Mais Alto */
 .stat-highest .stat-num {
     color: var(--dex-red);
     font-size: 1rem;
@@ -557,7 +558,6 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.25); }
 }
-
 
 .eff-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin-bottom: 5px; transition: background 0.3s ease; }
 .eff-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
@@ -599,7 +599,15 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
 ========================================= */
 @media (min-width: 850px) {
     .pokedex-body { flex-direction: row; height: 90vh; }
-    .pokedex-left-panel { width: 380px; border-bottom: none; border-right: 6px solid var(--dex-border); display: flex; flex-direction: column;}
+    .pokedex-left-panel { 
+        width: 380px; 
+        min-width: 380px; /* Garante o tamanho exato */
+        flex-shrink: 0;   /* CRÍTICO: Impede que o painel direito o esmague */
+        border-bottom: none; 
+        border-right: 6px solid var(--dex-border); 
+        display: flex; 
+        flex-direction: column;
+    }
     .pokedex-right-panel { flex: 1; background: #c22e28; }
     .pokedex-main-display { display: flex; flex-direction: column; height: 0; min-height: 100%;}
     .modal-pokedex-view { flex-direction: row; height: 85vh; max-width: 900px; }
@@ -630,25 +638,25 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
     
     .map-sidebar { margin-top: 10px; }
     .map-list-scroll { max-height: 180px; }
-    /* =======================================
-       LIMITE DE LOCALIZAÇÕES NO MOBILE
-    ======================================= */
-    .location-module {
-        max-height: 170px; /* Segura o bloco todo para não empurrar os stats pra baixo */
-        margin-bottom: 10px;
-    }
-    
-    .loc-list-scroll {
-        max-height: 140px; /* Limita para aparecerem ~2 botões por vez */
-        overflow-y: auto;  /* Habilita o scroll nativo (deslizar o dedo) */
-        padding-bottom: 10px;
-        /* Efeito visual: Sombra interna embaixo para indicar que a lista continua */
-        box-shadow: inset 0 -15px 10px -15px rgba(0,0,0,0.5); 
-    }
     .map-controls-vertical { right: 10px; padding: 6px; gap: 6px; }
     .zoom-btn { width: 30px; height: 30px; font-size: 1rem; }
     .z-display-box { width: 30px; height: 30px; font-size: 0.8rem; }
     .map-hud-floating { bottom: 10px; left: 10px; font-size: 0.45rem; padding: 6px 10px; }
+
+    /* =======================================
+       LIMITE DE LOCALIZAÇÕES NO MOBILE (SCROLL)
+    ======================================= */
+    .location-module {
+        max-height: 170px; 
+        margin-bottom: 10px;
+    }
+    
+    .loc-list-scroll {
+        max-height: 140px; 
+        overflow-y: auto;  
+        padding-bottom: 10px;
+        box-shadow: inset 0 -15px 10px -15px rgba(0,0,0,0.5); 
+    }
 }
 
 .oak-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); background: radial-gradient(circle, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.95) 100%); }
@@ -903,42 +911,37 @@ body.dark-mode .beta-badge {
 
 .shiny-bonus {
     background: #fff;
-    color: #d4af37; /* Dourado escuro */
+    color: #d4af37; 
     border-color: #d4af37;
 }
 
 .fds-bonus {
-    background: #3498db; /* Azul chamativo */
+    background: #3498db; 
     color: #fff;
 }
 
-/* Modo escuro para o bônus shiny ficar legal */
 body.dark-mode .shiny-bonus {
     background: #2a2a2c;
     color: #ffcb05;
     border-color: #ffcb05;
 }
 
-/* Transição suave para a troca de imagem Shiny */
 .poke-img-stacked {
     transition: opacity 0.15s ease-in-out;
 }
 
-/* Garante que o usuário saiba que a badge é clicável */
 .bonus-badge.shiny-bonus {
     cursor: pointer;
 }
 
-/* Estilo de quando o modo Shiny está ativo (Acesa/Brilhando) */
 .shiny-bonus.active-shiny {
-    background: #d4af37; /* Fundo dourado */
+    background: #d4af37; 
     color: #fff;
     border-color: #d4af37;
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 2px 2px 0 var(--dex-border);
     transform: scale(1.05);
 }
 
-/* Modo escuro para a badge Shiny Ativa */
 body.dark-mode .shiny-bonus.active-shiny {
     background: #ffcb05;
     color: #111;
@@ -950,7 +953,7 @@ body.dark-mode .shiny-bonus.active-shiny {
    ALERTA DE STATUS SHINY (BOSS)
 ========================================= */
 .modal-gen-bar.shiny-buff-bar {
-    background: #d4af37; /* Dourado escuro */
+    background: #d4af37; 
     color: #fff;
     border: 2px dashed #ffcb05;
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
@@ -962,7 +965,6 @@ body.dark-mode .shiny-bonus.active-shiny {
     50% { transform: scale(1.08); box-shadow: 0 0 15px rgba(255, 203, 5, 0.9); }
 }
 
-/* Garante a leitura no modo escuro */
 body.dark-mode .modal-gen-bar.shiny-buff-bar {
     background: #ffcb05;
     color: #111;
@@ -972,13 +974,11 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
 /* =========================================
    SISTEMA DE REPORT (BOTÃO E MODAL)
 ========================================= */
-
-/* 1. Botão Flutuante (Alinhado abaixo do botão de Café) */
 .floating-report-btn {
     position: fixed; 
-    top: 85px; /* Empurrado para baixo para ficar sob o botão de Café */
-    left: 25px; /* Alinhado à esquerda */
-    right: auto; /* Remove o alinhamento antigo da direita */
+    top: 85px; 
+    left: 25px; 
+    right: auto; 
     z-index: 9999;
     display: flex; 
     align-items: center; 
@@ -1007,10 +1007,9 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
     box-shadow: 0 0 0 transparent; 
 }
 
-/* 2. Tela do Modal de Report */
 .report-screen { 
     padding: 30px; 
-    align-items: stretch !important; /* Força os itens a ocuparem a largura total */
+    align-items: stretch !important; 
     text-align: left;
 }
 .report-title { 
@@ -1031,7 +1030,7 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
 .report-form label { 
     font-family: 'Press Start 2P', monospace; 
     font-size: 0.6rem; 
-    color: var(--dex-border); /* Força a cor preta no fundo branco */
+    color: var(--dex-border); 
     margin-bottom: -5px; 
     margin-top: 5px;
 }
@@ -1048,7 +1047,7 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
     font-weight: 700; 
     font-size: 1rem; 
     outline: none; 
-    box-sizing: border-box; /* Impede que vaze para os lados */
+    box-sizing: border-box; 
     box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
 }
 .report-form input:focus, 
@@ -1072,7 +1071,6 @@ body.dark-mode .modal-gen-bar.shiny-buff-bar {
     cursor: pointer;
 }
 
-/* 3. Modo Escuro (Neon) */
 body.dark-mode .floating-report-btn { box-shadow: 4px 4px 0 #000; }
 body.dark-mode .report-screen { background: #1a1a1a; border-color: #000; }
 body.dark-mode .report-title { color: #ffcb05; border-color: #333; }
@@ -1084,11 +1082,10 @@ body.dark-mode .report-form input:focus,
 body.dark-mode .report-form select:focus, 
 body.dark-mode .report-form textarea:focus { border-color: #ffcb05; }
 
-/* 4. Responsividade Mobile */
 @media (max-width: 850px) {
     .floating-report-btn { 
         top: auto; 
-        bottom: 25px; /* No celular ele vai para baixo para não poluir o topo */
+        bottom: 25px; 
         left: 25px; 
         right: auto; 
         padding: 14px; 
@@ -1112,15 +1109,15 @@ body.dark-mode .report-form textarea:focus { border-color: #ffcb05; }
 }
 
 .form-toggle-btn {
-    background: rgba(0, 0, 0, 0.05); /* Fundo sutil que pega a cor de trás */
-    border: 1px dashed rgba(0, 0, 0, 0.3); /* Borda pontilhada discreta */
+    background: rgba(0, 0, 0, 0.05); 
+    border: 1px dashed rgba(0, 0, 0, 0.3); 
     border-radius: 4px;
     padding: 4px 6px; 
     font-family: 'Press Start 2P', monospace; 
-    font-size: 0.5rem; /* Fonte um pouco menor */
-    color: #555; /* Texto mais apagado */
+    font-size: 0.5rem; 
+    color: #555; 
     cursor: pointer; 
-    box-shadow: none; /* Removemos a sombra pesada */
+    box-shadow: none; 
     transition: all 0.2s ease; 
     display: flex; 
     align-items: center; 
@@ -1130,7 +1127,7 @@ body.dark-mode .report-form textarea:focus { border-color: #ffcb05; }
 .form-toggle-btn:hover { 
     background: rgba(0, 0, 0, 0.15); 
     color: var(--dex-border); 
-    border: 1px solid var(--dex-border); /* Borda sólida ao focar */
+    border: 1px solid var(--dex-border); 
     transform: translateY(-1px);
 }
 
@@ -1138,7 +1135,6 @@ body.dark-mode .report-form textarea:focus { border-color: #ffcb05; }
     transform: translateY(1px); 
 }
 
-/* Regras para o Modo Escuro */
 body.dark-mode .form-toggle-btn { 
     background: rgba(255, 255, 255, 0.05); 
     color: #aaa; 
@@ -1154,33 +1150,274 @@ body.dark-mode .form-toggle-btn:hover {
 /* ==========================================
    AJUSTES ESPECÍFICOS DO FILTRO MESTRE E REGIÕES
 ========================================== */
-
-/* Estilo de destaque para o Botão Mestre */
 .master-toggle {
-    background: var(--dex-red);
-    color: #fff;
+    background: #444; /* Fundo grafite igual às abas de cima */
+    color: #aaa;      /* Texto acinzentado */
     text-align: center;
     border-color: var(--dex-border);
     font-size: 0.85rem;
     padding: 12px 15px;
 }
+
 .master-toggle:hover {
-    background: var(--dex-dark-red);
-    color: #ffcb05;
-}
-body.dark-mode .master-toggle {
-    background: #111;
-    color: #ffcb05;
+    background: #555; /* Clareia levemente ao passar o mouse */
+    color: #fff;      /* Texto fica branco para dar destaque */
 }
 
-/* Quebra de linha forçada no Filtro de Regiões */
+/* Comportamento no Modo Escuro */
+body.dark-mode .master-toggle {
+    background: #2a2a2c; /* Cor padrão dos botões inativos no Dark Mode */
+    color: #aaa;
+}
+
+body.dark-mode .master-toggle:hover {
+    background: #333;
+    color: #fff;
+}
+
 #gen-filters .filter-pill[data-gen="alola"], 
 #gen-filters .filter-pill[data-gen="hisui"] {
-    flex-basis: calc(50% - 4px); /* Força a ocupar metade da tela menos o espaço do gap */
+    flex-basis: calc(50% - 4px); 
     max-width: calc(50% - 4px);
 }
 
 #gen-filters .filter-pill[data-gen="all"] {
-    flex-basis: 100%; /* Força a ocupar a linha inteira sozinho */
+    flex-basis: 100%; 
     max-width: 100%;
+}
+
+/* ==========================================
+   VISOR DIGITAL VIP - VERSÃO MINIMALISTA (LCD)
+========================================== */
+.vip-marquee-container {
+    width: 100%; /* Trava na largura do painel */
+    box-sizing: border-box;
+    overflow: hidden; /* Corta qualquer coisa que tentar vazar */
+    background: rgba(0, 0, 0, 0.05);
+    padding: 3px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: none;
+}
+
+.vip-marquee-container:active {
+    transform: translateY(2px);
+}
+
+.vip-marquee-screen {
+    background: #ffffff; 
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 5px 10px 5px 42px; 
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.vip-marquee-screen::before {
+    content: 'VIP';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--dex-dark-red); 
+    color: #ffffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    z-index: 2;
+}
+
+.vip-marquee-text {
+    display: inline-block;
+    color: #444444; 
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.52rem; 
+    text-shadow: none; 
+    padding-left: 100%;
+    animation: marqueeScroll 28s linear infinite; 
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.vip-marquee-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 45%, rgba(255,255,255,0.4) 50%, transparent 55%);
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.4;
+}
+
+body.dark-mode .vip-marquee-container {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .vip-marquee-screen {
+    background: #0d0d0d; 
+    border-color: #050505;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .vip-marquee-screen::before {
+    background: #ffcb05; 
+    color: #0d0d0d;
+}
+
+body.dark-mode .vip-marquee-text {
+    color: #ffcb05; 
+    text-shadow: 0 0 3px rgba(255, 203, 5, 0.2); 
+}
+
+body.dark-mode .vip-marquee-screen::after {
+    background: linear-gradient(115deg, transparent 45%, rgba(255,255,255,0.15) 50%, transparent 55%);
+    opacity: 0.2;
+}
+
+/* Modal VIP - Seções e Grade */
+.vip-subtitle {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: var(--dex-border);
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.vip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.03);
+}
+
+.vip-name-badge {
+    background: #fff;
+    border: 2px solid var(--dex-border);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-weight: 900;
+    font-size: 0.8rem;
+    color: var(--dex-border);
+    box-shadow: 2px 2px 0 var(--dex-border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s;
+}
+
+.vip-name-badge:hover {
+    transform: scale(1.05);
+}
+
+.donator-badge { border-color: #f1c40f; }
+.donator-badge::before { content: '☕'; font-size: 0.85rem; }
+
+.contributor-badge { border-color: #3498db; }
+.contributor-badge::before { content: '🗺️'; font-size: 0.85rem; }
+
+body.dark-mode .vip-subtitle { color: #aaa; }
+body.dark-mode .vip-grid { background: rgba(0,0,0,0.2); }
+body.dark-mode .vip-name-badge { background: #2a2a2c; color: #fff; box-shadow: 2px 2px 0 #000; }
+body.dark-mode .donator-badge { border-color: #ffcb05; color: #ffcb05; }
+body.dark-mode .contributor-badge { border-color: #3498db; color: #3498db; }
+
+/* ==============================================================
+   OTIMIZAÇÃO EXTREMA: MOBILE HORIZONTAL (LANDSCAPE / APK)
+============================================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    
+    /* 1. Transforma o Modal numa visão Lado a Lado (Estilo PC) */
+    .modal-pokedex-view {
+        flex-direction: row; 
+        height: 95vh; /* Ocupa o máximo de altura possível */
+        width: 100%;
+        max-width: 95vw;
+    }
+
+    /* 2. Divide a tela 50/50 */
+    .modal-left-wing, .modal-right-wing {
+        width: 50%;
+        padding: 10px 15px; /* Reduz drasticamente as margens internas */
+        border-bottom: none;
+    }
+    
+    .modal-left-wing {
+        border-right: 4px solid var(--dex-border); /* Borda divisória */
+    }
+
+    /* 3. Compactação do Cabeçalho (Telinha Verde) */
+    .screen-border {
+        padding: 8px 15px; 
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+    .main-screen {
+        padding: 5px 10px;
+    }
+    
+    /* 4. Encolhe os Sprites e as Fontes para caberem sem vazar */
+    .poke-img-large, .poke-img-stacked {
+        width: 60px; 
+        height: 60px;
+    }
+    .screen-info h2, .poke-name-stacked {
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+    .modal-gen-bar {
+        font-size: 0.55rem;
+        padding: 2px 6px;
+        margin-bottom: 4px;
+    }
+    .tag {
+        font-size: 0.55rem;
+        padding: 2px 5px;
+    }
+
+    /* 5. Ajuste fino na lista de localizações e stats */
+    .location-module {
+        max-height: none; /* Remove o limite anterior */
+        flex: 1; /* Ocupa o resto do espaço disponível */
+    }
+    .loc-list-scroll {
+        max-height: 120px; /* Garante que cabe na telinha achatada */
+    }
+    
+    .stat-row {
+        gap: 5px;
+        font-size: 0.65rem;
+    }
+    .bar-container {
+        height: 8px; /* Barras mais finas */
+    }
+
+    /* 6. Oculta elementos que roubam espaço atoa no modo deitado */
+    .radar-module {
+        display: none !important; /* Tchau radar gigante! */
+    }
+
+    /* 7. Recolhe os botões flutuantes para não atrapalhar o toque na tela */
+    .floating-report-btn, .floating-support-btn {
+        transform: scale(0.65);
+        transform-origin: bottom;
+    }
+    .floating-report-btn { left: 5px; bottom: 5px; }
+    .floating-support-btn { right: 5px; bottom: 5px; left: auto; }
 }
