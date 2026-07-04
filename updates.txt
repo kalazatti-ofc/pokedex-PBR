@@ -1,0 +1,8 @@
+[SISTEMA ONLINE]
+
+• APK Pokédex PBR V1.2 lançado 04/06/26
+• Adicionado Pokemons de Alola
+• Adicionado Pokemons de Huisui
+• LocalStorage ativo
+
+[NOVIDADES EM BREVE]
