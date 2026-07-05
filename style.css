@@ -85,8 +85,30 @@ body {
 /* =========================================
    CONTROLES, BUSCA E ABAS (CATEGORIAS)
 ========================================= */
-.pokedex-controls { flex: 1; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; min-height: 0; }
-.search-module { width: 100%; margin-bottom: 20px; }
+/* =========================================
+   CONTROLES, BUSCA E ABAS (CATEGORIAS)
+========================================= */
+.pokedex-controls { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: stretch; 
+    justify-content: flex-start; 
+    min-height: 0; 
+    overflow-y: auto !important; /* Habilita a barra de rolagem */
+    padding-right: 5px; /* Evita que a barra fique em cima dos botões */
+}
+
+/* Estilo da barrinha lateral invisível/suave */
+.pokedex-controls::-webkit-scrollbar { width: 6px; }
+.pokedex-controls::-webkit-scrollbar-track { background: transparent; }
+.pokedex-controls::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
+body.dark-mode .pokedex-controls::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+.search-module { 
+    width: 100%; 
+    margin-bottom: 20px; 
+    flex-shrink: 0; 
+}
 .tech-label { font-family: monospace; font-size: 0.8rem; color: #ffcb05; font-weight: bold; text-shadow: 1px 1px 0 #000; margin-bottom: 5px; display: block; }
 .search-console { background: #ffffff; border: 4px solid var(--dex-border); border-radius: 12px; padding: 12px 15px; display: flex; align-items: center; box-shadow: inset 0 3px 8px rgba(0,0,0,0.15), 0 4px 0 rgba(255,255,255,0.3); }
 .search-console input { background: transparent; border: none; outline: none; width: 100%; color: var(--dex-border); font-family: monospace; font-size: 1.1rem; text-transform: uppercase; font-weight: 800; }
@@ -103,7 +125,12 @@ body {
 .search-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
 .search-btn.red-btn { background: var(--dex-red); color: #fff; }
 
-.category-module { display: flex; gap: 8px; margin-bottom: 20px; }
+.category-module { 
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 20px; 
+    flex-shrink: 0; 
+}
 .cat-btn {
     flex: 1; padding: 10px 5px; border-radius: 8px; font-family: monospace; font-size: 0.8rem;
     font-weight: 900; text-align: center; border: 3px solid var(--dex-border);
@@ -196,55 +223,61 @@ body {
    PAINEL DIREITO E CARDS INICIAIS
 ========================================= */
 .pokedex-right-panel { 
-    padding: 20px; 
+    padding: 25px; 
     display: flex; 
     flex-direction: column; 
     flex: 1; 
-    min-width: 0; /* CRÍTICO: Impede que o letreiro estique o painel para fora */
+    min-width: 0; 
     transition: background 0.3s ease; 
 }
+
 .pokedex-main-display {
     background: var(--screen-bg); border-radius: 15px; border: 6px solid var(--dex-border);
     box-shadow: inset 0 10px 20px rgba(0,0,0,0.1); padding: 15px;
-    height: 500px; overflow-y: auto; position: relative; flex: 1;
+    flex: 1; min-height: 0; height: auto; overflow-y: auto; position: relative;
     transition: background 0.3s ease;
 }
 .pokedex-main-display::-webkit-scrollbar { width: 14px; }
 .pokedex-main-display::-webkit-scrollbar-track { background: #d0d0d0; border-left: 3px solid var(--dex-border); border-radius: 0 10px 10px 0;}
 .pokedex-main-display::-webkit-scrollbar-thumb { background: #555; border: 3px solid var(--dex-border); border-radius: 10px; }
 
-.pokemon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 12px; }
-.pk-card {
+/* GRID GLOBAL (PC) - TAMANHO GRANDE DINÂMICO */
+.pokemon-grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); 
+    gap: 12px; 
+    width: 100%; 
+}
+    
+.pk-card { 
     background: #fff; border: 3px solid var(--dex-border); border-radius: 12px;
     cursor: pointer; box-shadow: 3px 3px 0 rgba(0,0,0,0.1); transition: 0.1s ease;
     overflow: hidden; position: relative; text-align: center; padding: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.pk-card:active { transform: translate(3px, 3px); box-shadow: 0 0 0 rgba(0,0,0,0); }
+    
+.pk-card img { width: 70px; height: 70px; object-fit: contain; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); z-index: 2; position: relative; margin: 0 auto; display: block; }
+    
+.pk-name { 
+    font-size: 0.8rem; font-weight: 800; color: var(--dex-border); text-transform: uppercase; z-index: 2; position: relative; margin: 4px 0; transition: color 0.3s ease; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+    
+body.dark-mode .pk-card { background: #2a2a2c; }
+body.dark-mode .pk-name { color: #f0f0f0; }
+
 .pk-id { position: absolute; top: 6px; left: 6px; font-family: monospace; font-size: 0.65rem; font-weight: bold; color: #888; z-index: 2; transition: color 0.3s ease;}
-
-.pk-card img { width: 70px; height: 70px; object-fit: contain; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); z-index: 2; position: relative; }
-.pk-name { font-size: 0.8rem; font-weight: 800; color: var(--dex-border); text-transform: uppercase; z-index: 2; position: relative; margin: 4px 0; transition: color 0.3s ease;}
-.pk-types-mini { display: flex; justify-content: center; gap: 4px; z-index: 2; position: relative;}
-.type-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--dex-border); }
-
-.pk-gen-bar {
-    font-family: monospace; font-size: 0.6rem; font-weight: 800; color: #666;
-    background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px; padding: 2px 8px; margin: 2px auto 6px auto;
-    display: inline-block; letter-spacing: 0.5px; transition: all 0.3s ease; z-index: 2; position: relative;
-}
-.modal-gen-bar { font-family: monospace; font-size: 0.7rem; font-weight: 800; color: var(--dex-border); background: rgba(0, 0, 0, 0.1); border: 1px dashed rgba(0, 0, 0, 0.3); padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block; }
-
-.catch-btn {
-    position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; border-radius: 50%;
-    border: 2px solid var(--dex-border); background: linear-gradient(to bottom, #ccc 45%, var(--dex-border) 45%, var(--dex-border) 55%, #f0f0f0 55%);
-    cursor: pointer; z-index: 10; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.1); opacity: 0.6;
-}
+    
+.catch-btn { position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--dex-border); background: linear-gradient(to bottom, #ccc 45%, var(--dex-border) 45%, var(--dex-border) 55%, #f0f0f0 55%); cursor: pointer; z-index: 10; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 2px 2px 0 rgba(0,0,0,0.1); opacity: 0.6; }
 .catch-btn::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background: #fff; border: 2px solid var(--dex-border); border-radius: 50%; }
 .catch-btn:hover { opacity: 1; transform: scale(1.15); }
 .catch-btn.caught { background: linear-gradient(to bottom, #ff3333 45%, var(--dex-border) 45%, var(--dex-border) 55%, #fff 55%); opacity: 1; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); animation: catchBounce 0.4s ease; }
 @keyframes catchBounce { 0% { transform: scale(1); } 50% { transform: scale(1.3) rotate(-15deg); } 100% { transform: scale(1) rotate(0deg); } }
+
+.pk-gen-bar { font-family: monospace; font-size: 0.6rem; font-weight: 800; color: #666; background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 2px 8px; margin: 2px auto 6px auto; display: inline-block; letter-spacing: 0.5px; transition: all 0.3s ease; z-index: 2; position: relative; }
+.modal-gen-bar { font-family: monospace; font-size: 0.7rem; font-weight: 800; color: var(--dex-border); background: rgba(0, 0, 0, 0.1); border: 1px dashed rgba(0, 0, 0, 0.3); padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block; }
+    
+.pk-types-mini { display: flex; justify-content: center; gap: 4px; z-index: 2; position: relative; width: 100%;}
+.type-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--dex-border); }
 
 /* =========================================
    TELA DO MAPA GIGANTE E VISUALIZADOR
@@ -594,6 +627,47 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
 .soul-value { font-size: 0.9rem; font-weight: 900; color: var(--dex-border); }
 .exclusive-badge { display: block; text-align: center; font-size: 0.8rem; font-weight: 900; color: var(--dex-red); background: #fff; border: 2px solid var(--dex-border); border-radius: 6px; padding: 6px; margin-top: 6px; }
 
+/* ==============================================================
+   TUTORIAL DO APP APK (IMAGENS E PASSOS)
+============================================================== */
+.hidden-step {
+    display: none !important;
+}
+
+.tutorial-step {
+    background: rgba(0, 0, 0, 0.04);
+    border: 2px dashed var(--dex-border);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .tutorial-step {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #444;
+}
+
+.tutorial-step p {
+    margin-bottom: 10px !important;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.apk-tutorial-img {
+    width: 100%;
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: 3px solid var(--dex-border);
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+body.dark-mode .apk-tutorial-img {
+    border-color: #000;
+    box-shadow: 4px 4px 0 #000;
+}
+
 /* =========================================
    RESPONSIVIDADE E ADAPTAÇÃO DE TELAS
 ========================================= */
@@ -609,7 +683,13 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
         flex-direction: column;
     }
     .pokedex-right-panel { flex: 1; background: #c22e28; }
-    .pokedex-main-display { display: flex; flex-direction: column; height: 0; min-height: 100%;}
+    .pokedex-main-display { 
+        display: flex; 
+        flex-direction: column; 
+        flex: 1; 
+        height: auto; 
+        min-height: 0;
+    }
     .modal-pokedex-view { flex-direction: row; height: 85vh; max-width: 900px; }
     .modal-left-wing { width: 50%; border-bottom: none; border-right: 6px solid var(--dex-border); }
     .modal-right-wing { width: 50%; }
@@ -619,10 +699,49 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
 @media (max-width: 768px) {
     .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
     .pokedex-main-display { flex: none; height: 350px; max-height: 350px; }
-    .pokemon-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 8px; }
-    .pk-card { padding: 8px; border-width: 2px; }
-    .pk-card img { width: 55px; height: 55px; }
-    .pk-name { font-size: 0.6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    /* =======================================
+       CORREÇÃO DEFINITIVA DA GRID MOBILE (EM PÉ) E MAPAS
+    ======================================= */
+    .pokemon-grid { 
+        display: grid; /* Sem o !important, assim o JS consegue esconder na aba Mapas! */
+        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)) !important; 
+        gap: 8px !important; 
+        width: 100%;
+    }
+    
+    .pk-card { 
+        padding: 6px !important; 
+        border: 2px solid var(--dex-border) !important; 
+        border-radius: 8px !important;
+        background: #fff !important; 
+        display: flex !important; 
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .pk-card img { width: 45px !important; height: 45px !important; margin: 0 auto; display: block; }
+    
+    .pk-name { 
+        font-size: 0.6rem !important; 
+        color: var(--dex-border); 
+        width: 100%;
+        text-align: center;
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        margin: 4px 0 !important;
+    }
+    
+    body.dark-mode .pk-card { background: #2a2a2c !important; }
+    body.dark-mode .pk-name { color: #f0f0f0 !important; }
+
+    .pk-id { font-size: 0.5rem !important; top: 4px !important; left: 4px !important; }
+    .catch-btn { width: 14px !important; height: 14px !important; top: 4px !important; right: 4px !important; }
+    .catch-btn::after { width: 4px !important; height: 4px !important; }
+    .pk-gen-bar { font-size: 0.5rem !important; padding: 1px 4px !important; margin: 2px auto !important; }
+    .pk-types-mini { display: flex !important; justify-content: center !important; gap: 4px !important; width: 100% !important; }
+    .type-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; border: 2px solid var(--dex-border) !important; }
     .screen-border { padding: 12px 22px; border-radius: 12px 12px 12px 25px; }
     .nav-arrow { width: 18px; height: 40px; font-size: 0.9rem; border-width: 2px; border-radius: 8px; }
     .prev-arrow { left: 3px; } .next-arrow { right: 3px; }
@@ -644,6 +763,42 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
     .map-hud-floating { bottom: 10px; left: 10px; font-size: 0.45rem; padding: 6px 10px; }
 
     /* =======================================
+       CORREÇÃO DE MODAIS PARA WEBVIEW (VERTICAL)
+    ======================================= */
+    /* 1. Trava a carcaça do modal em 85% da tela da WebView */
+    .oak-container, .modal-content {
+        max-height: 85vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* 2. Áreas de conteúdo ganham Scroll Interno (respeitando a carcaça) */
+    .report-screen, .app-modal-text {
+        max-height: 100% !important; 
+        overflow-y: auto !important;
+        padding: 20px 15px !important; /* Padding reduzido para economizar espaço */
+    }
+
+    /* 3. Botão X ancorado na carcaça (NUNCA vai rolar com o texto) */
+    .close-btn, .oak-close-btn { 
+        position: absolute !important;
+        top: -2px !important; /* Trazido para a zona segura visível */
+        right: -2px !important; 
+        width: 32px !important; 
+        height: 32px !important; 
+        font-size: 1.1rem !important; 
+        z-index: 50 !important;
+    }
+
+    /* 4. Miniaturização Elegante de Fontes e Formulários (Estética Retrô) */
+    .report-title { font-size: 0.8rem !important; margin-bottom: 12px !important; padding-bottom: 8px !important; }
+    .report-form { gap: 8px !important; }
+    .report-form label { font-size: 0.55rem !important; margin-top: 0 !important; }
+    .report-form input, .report-form select, .report-form textarea { padding: 8px !important; font-size: 0.8rem !important; }
+    #submit-report-btn { padding: 10px !important; font-size: 0.75rem !important; margin-top: 5px !important; }
+    .vip-sections { max-height: 60vh !important; }
+
+    /* =======================================
        LIMITE DE LOCALIZAÇÕES NO MOBILE (SCROLL)
     ======================================= */
     .location-module {
@@ -661,15 +816,65 @@ body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
 
 .oak-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); background: radial-gradient(circle, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.95) 100%); }
 .oak-overlay.hidden { display: none !important; }
-.oak-container { width: 90%; max-width: 500px; position: relative; animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: transparent; padding: 0; box-shadow: 0 0 0 15px white, 0 20px 40px rgba(0,0,0,0.6); }
+.oak-container { 
+    width: 90%; 
+    max-width: 500px; 
+    position: relative; 
+    animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    background: transparent; 
+    padding: 0; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8); /* Borda branca grossa removida! */
+}
 @keyframes slideDown { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 .oak-close-btn { position: absolute; top: -25px; right: -25px; width: 40px; height: 40px; background: #e3350d; border: 3px solid #111; border-radius: 50%; color: #fff; font-size: 1.5rem; font-weight: bold; cursor: pointer; box-shadow: 2px 2px 0 #111; z-index: 20; }
-.oak-screen { background: #f8f8f8; border: 6px solid #111; border-radius: 12px; padding: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; position: relative; overflow: visible; }
+.oak-screen { 
+    background: #f8f8f8; 
+    border: 6px solid #111; 
+    border-radius: 12px; 
+    padding: 20px; 
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    position: relative; 
+    overflow: visible !important; /* Impede que a cabeça do Oak seja cortada */
+}
+
+/* Scroll interno APENAS para modais longos (Report e App Download) */
+.report-screen {
+    max-height: 80vh;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+.report-screen::-webkit-scrollbar { width: 6px; }
+.report-screen::-webkit-scrollbar-thumb { background: var(--dex-red); border-radius: 4px; }
+
+.oak-screen::-webkit-scrollbar { width: 6px; }
+.oak-screen::-webkit-scrollbar-thumb { background: var(--dex-red); border-radius: 4px; }
 .oak-sprite-area { width: 120px; height: 160px; display: flex; align-items: flex-end; justify-content: center; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); z-index: 10; }
 .oak-sprite { width: 120px; height: auto; image-rendering: pixelated; animation: oakBob 2s infinite ease-in-out; }
 @keyframes oakBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-.oak-dialog-box { width: 100%; min-height: 100px; margin-top: 10px; background: #fff; border-radius: 8px; cursor: pointer; position: relative; padding: 15px 20px; border: 4px solid #111; box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 6px #111; z-index: 5; }
+/* A ROLAGEM SÓ ACONTECE NA CAIXA DE TEXTO */
+.oak-dialog-box { 
+    width: 100%; 
+    min-height: 100px; 
+    max-height: 180px; /* Trava a altura do texto */
+    overflow-y: auto;  /* Faz o scroll acontecer SÓ AQUI dentro */
+    margin-top: 10px; 
+    background: #fff; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    position: relative; 
+    padding: 15px 20px; 
+    border: 4px solid #111; 
+    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 6px #111; 
+    z-index: 5; 
+}
 .oak-dialog-box p { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #111; line-height: 1.8; text-transform: uppercase; margin: 0; padding-right: 15px; }
+
+/* Estilo da barrinha do texto */
+.oak-dialog-box::-webkit-scrollbar { width: 6px; }
+.oak-dialog-box::-webkit-scrollbar-thumb { background: #111; border-radius: 4px; }
 
 /* ==============================================================
    SISTEMA DE MODO ESCURO (DARK MODE)
@@ -1222,7 +1427,7 @@ body.dark-mode .master-toggle:hover {
 }
 
 .vip-marquee-screen::before {
-    content: 'VIP';
+    content: 'APOIADORES';
     position: absolute;
     left: 0; top: 0; bottom: 0;
     background: var(--dex-dark-red); 
@@ -1339,9 +1544,85 @@ body.dark-mode .donator-badge { border-color: #ffcb05; color: #ffcb05; }
 body.dark-mode .contributor-badge { border-color: #3498db; color: #3498db; }
 
 /* ==============================================================
+   BOTÃO DE CHAMADA DO APP (ESTILO POKÉDEX RETRÔ) E MODAL
+============================================================== */
+.app-download-trigger-btn {
+    width: 100%;
+    background: #ffcb05; /* Amarelo elétrico forte */
+    color: #111;
+    border: 3px solid var(--dex-border);
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 12px;
+    box-shadow: 4px 4px 0 var(--dex-border);
+    transition: transform 0.05s linear, box-shadow 0.05s linear;
+    outline: none;
+    will-change: transform;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.app-download-trigger-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 transparent;
+}
+
+/* Cores do texto no Modal - Modo Claro (Padrão) */
+.app-modal-text {
+    color: #333333;
+}
+.app-modal-text b {
+    color: #000000;
+}
+
+/* ==============================================================
+   ADAPTAÇÕES PARA O MODO ESCURO (DARK MODE)
+============================================================== */
+body.dark-mode .app-download-trigger-btn {
+    background: #e6b800; /* Tom de ouro mais denso */
+    box-shadow: 4px 4px 0 #000;
+    border-color: #000;
+}
+
+body.dark-mode .app-modal-text {
+    color: #dddddd;
+}
+body.dark-mode .app-modal-text b {
+    color: #ffffff;
+}
+
+body.dark-mode #download-app-modal .report-screen {
+    background: #1a1a1a;
+    border-color: #e3350d !important;
+}
+body.dark-mode #download-app-modal .report-title {
+    color: #e3350d;
+    border-color: #e3350d !important;
+}
+
+/* ==============================================================
    OTIMIZAÇÃO EXTREMA: MOBILE HORIZONTAL (LANDSCAPE / APK)
 ============================================================== */
 @media (max-height: 600px) and (orientation: landscape) {
+
+    /* Ajustes dos Modais Secundários para Modo Deitado */
+    .oak-container {
+        width: 95%; /* Fica mais largo na horizontal */
+        max-width: 700px;
+    }
+    .oak-screen {
+        padding: 15px;
+        max-height: 85vh;
+    }
+
+    .vip-grid {
+        max-height: 150px; /* Limita a grade de apoiadores para caber na tela */
+    }
     
     /* 1. Transforma o Modal numa visão Lado a Lado (Estilo PC) */
     .modal-pokedex-view {
@@ -1352,6 +1633,23 @@ body.dark-mode .contributor-badge { border-color: #3498db; color: #3498db; }
     }
 
     /* 2. Divide a tela 50/50 */
+
+    /* Traz os botões de fechar totalmente para dentro no modo deitado */
+    .close-btn {
+        top: 5px;
+        right: 5px;
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    .oak-close-btn {
+        top: 5px;
+        right: 5px;
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
     .modal-left-wing, .modal-right-wing {
         width: 50%;
         padding: 10px 15px; /* Reduz drasticamente as margens internas */
@@ -1433,4 +1731,114 @@ body.dark-mode .contributor-badge { border-color: #3498db; color: #3498db; }
         width: 24px;
         height: 24px;
     }
+
+    /* =======================================================
+       CORREÇÃO DE MODAIS PARA WEBVIEW (HORIZONTAL)
+    ======================================================= */
+    /* 1. Trava a altura extrema na horizontal */
+    .oak-container, .modal-content { 
+        max-height: 85vh !important; 
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* 2. Scroll interno para formulários e textos na tela deitada */
+    .report-screen, .app-modal-text {
+        max-height: 100% !important;
+        overflow-y: auto !important;
+        padding: 10px 15px !important; /* Super compacto */
+    }
+
+    /* 3. Botão X ancorado na zona super segura */
+    .close-btn, .oak-close-btn {
+        position: absolute !important;
+        top: 0px !important; 
+        right: 0px !important; 
+        width: 28px !important; 
+        height: 28px !important; 
+        font-size: 1rem !important;
+        z-index: 50 !important;
+    }
+
+    /* 4. Esmagamento Extremo do Formulário (Para não precisar rolar tanto) */
+    .report-title { font-size: 0.7rem !important; margin-bottom: 6px !important; padding-bottom: 6px !important; }
+    .report-form { gap: 6px !important; }
+    .report-form label { font-size: 0.5rem !important; }
+    .report-form input, .report-form select, .report-form textarea { padding: 6px !important; font-size: 0.75rem !important; }
+    #submit-report-btn { padding: 8px !important; font-size: 0.7rem !important; margin-top: 5px !important; }
+    .vip-sections { max-height: 60vh !important; }
+
+    #oak-modal .oak-screen, 
+    #support-modal .oak-screen { 
+        flex-direction: row; 
+        align-items: center; 
+        padding: 15px; 
+    }
+    
+    .oak-sprite-area { 
+        position: relative !important; 
+        top: 0 !important; 
+        left: 0 !important; 
+        transform: none !important; 
+        width: 70px; 
+        height: 100px; 
+        margin-right: 15px; 
+        display: flex !important;
+    }
+    .oak-sprite { width: 70px; height: auto; animation: none; }
+    
+    .oak-dialog-box { 
+        margin-top: 0; 
+        flex: 1; 
+        max-height: 110px; /* Deixa a caixa de texto menor na horizontal */
+    }
+    
+    /* Garante que a grid no modo deitado também obedeça as colunas */
+    .pokemon-grid { 
+        display: grid; /* <-- Removemos o !important daqui também */
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; 
+        gap: 8px !important; 
+    }
+    .pk-card { padding: 6px !important; border: 2px solid var(--dex-border) !important; display: block !important; }
+    .pk-card img { width: 45px !important; height: 45px !important; margin: 0 auto; display: block; }
+    .pk-name { font-size: 0.65rem !important; }
+    .pk-types-mini { display: flex !important; justify-content: center !important; gap: 4px !important; }
+    .type-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; border: 2px solid var(--dex-border) !important; }
+
+    /* =======================================================
+       COMPACTAÇÃO EXTREMA DO PAINEL ESQUERDO (HORIZONTAL)
+    ======================================================= */
+    
+    /* 1. Reduz o preenchimento da carcaça vermelha */
+    .pokedex-left-panel { padding: 8px 12px !important; }
+
+    /* 2. Miniaturiza a Lente Azul e as Luzes */
+    .main-lens-container { margin-bottom: 2px !important; }
+    .big-blue-lens { width: 36px !important; height: 36px !important; border-width: 3px !important; }
+    .big-blue-lens::after { width: 10px !important; height: 10px !important; top: 5px !important; left: 5px !important; }
+    .mini-lights { margin-top: 2px !important; gap: 5px !important; }
+    .light { width: 10px !important; height: 10px !important; border-width: 2px !important; }
+
+    /* 3. Achata o Título Principal e remove margens */
+    .pokedex-title { font-size: 1.25rem !important; margin: 0 0 8px 0 !important; }
+    .pokedex-title span { font-size: 0.65rem !important; margin-top: 2px !important; }
+
+    /* 4. Encolhe o botão da Lua e joga ele mais pro canto */
+    .joystick-theme-btn { width: 30px !important; height: 30px !important; font-size: 0.8rem !important; top: -2px !important; right: -2px !important; }
+
+    /* 5. Esmaga a Barra de Pesquisa */
+    .search-module { margin-bottom: 8px !important; }
+    .search-console { padding: 4px 10px !important; border-width: 3px !important; }
+    .search-console input { font-size: 0.8rem !important; }
+    .search-btn { width: 26px !important; height: 26px !important; font-size: 0.75rem !important; border-width: 2px !important; margin-left: 6px !important; }
+
+    /* 6. Diminui a altura das abas de Categorias */
+    .category-module { margin-bottom: 8px !important; gap: 6px !important; }
+    .cat-btn { padding: 6px 4px !important; font-size: 0.65rem !important; border-width: 2px !important; }
+
+    /* 7. Diminui o Botão de Download do APP (se existir) */
+    .app-download-trigger-btn { padding: 8px 10px !important; margin-bottom: 8px !important; font-size: 0.55rem !important; border-width: 2px !important; }
+    
+    .tech-label { font-size: 0.6rem !important; margin-bottom: 2px !important; }
+
 }
