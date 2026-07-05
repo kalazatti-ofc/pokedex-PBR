@@ -103,6 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const filtersModule = document.getElementById('filters-container');
             const mapContainer = document.getElementById('map-viewer-container');
             const mapSidebar = document.getElementById('map-sidebar-menu');
+            // Ativador de fechamento do Modal de Download do Aplicativo
+            const closeDownloadBtn = document.getElementById('close-download-app');
+            if (closeDownloadBtn) {
+                closeDownloadBtn.onclick = () => {
+                    document.getElementById('download-app-modal').classList.add('hidden');
+                };
+            }
             
             if (activeCategory === 'mapas') {
                 gridContainer.style.display = 'none';
@@ -1230,6 +1237,34 @@ window.initReportModal = (event) => {
     if(event) event.preventDefault();
     document.getElementById('report-modal').classList.remove('hidden');
     document.getElementById('report-status').innerText = '';
+};
+
+// ==========================================
+// MODAL DE DOWNLOAD DO APP (COM TUTORIAL)
+// ==========================================
+window.initDownloadAppModal = (event) => {
+    if(event) event.preventDefault();
+    document.getElementById('download-app-modal').classList.remove('hidden');
+    changeApkPage(1); // Garante que sempre abre na página de introdução
+};
+
+window.changeApkPage = (pageNumber) => {
+    const page1 = document.getElementById('apk-page-1');
+    const page2 = document.getElementById('apk-page-2');
+    const scrollContainer = document.querySelector('#download-app-modal .app-modal-text');
+
+    if (pageNumber === 1) {
+        page1.classList.remove('hidden-step');
+        page2.classList.add('hidden-step');
+    } else if (pageNumber === 2) {
+        page1.classList.add('hidden-step');
+        page2.classList.remove('hidden-step');
+    }
+    
+    // Joga o scroll do modal lá para cima ao trocar de página
+    if(scrollContainer) {
+        scrollContainer.scrollTop = 0;
+    }
 };
 
 document.getElementById('close-report').onclick = () => {
