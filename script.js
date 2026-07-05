@@ -1,1844 +1,1398 @@
-:root {
-    --dex-red: #e3350d;
-    --dex-dark-red: #9e1a00;
-    --dex-border: #1a1a1a;
-    --screen-bg: #f0f4f8;
-    --terminal-bg: #0a1410;
-    --radar-green: #32cd32;
-    --type-normal: #A8A878; --type-fire: #F08030; --type-water: #6890F0;
-    --type-electric: #F8D030; --type-grass: #78C850; --type-ice: #98D8D8;
-    --type-fighting: #C03028; --type-poison: #A040A0; --type-ground: #E0C068;
-    --type-flying: #A890F0; --type-psychic: #F85888; --type-bug: #A8B820;
-    --type-rock: #B8A038; --type-ghost: #705898; --type-dragon: #7038F8;
-    --type-dark: #705848; --type-steel: #B8B8D0; --type-fairy: #EE99AC;
-}
+// ==========================================
+// VARIÁVEIS GLOBAIS DE ESTADO E MAPA
+// ==========================================
+let pokemonData = [];
+let currentVisibleList = []; // Guarda a lista que está sendo exibida na tela
+let currentModalIndex = 0;   // Guarda a posição do Pokémon aberto no modal
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+let activeTypeFilter = 'all';
+let activeGenFilter = 'all';
+let activeCatchFilter = 'all';
+let activeCategory = 'normal'; // Controla a aba atual
+let activeMetaFilter = 'all';  // Filtro Meta-Gaming
 
-body { 
-    background-color: #2c3e50; 
-    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-    color: #fff; overflow-x: hidden; 
-    display: flex; justify-content: center; padding: 20px; min-height: 100vh;
-    transition: background-color 0.3s ease;
-}
+let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
 
-/* =========================================
-   CARCAÇA PRINCIPAL
-========================================= */
-.pokedex-body {
-    display: flex; flex-direction: column; width: 100%; max-width: 1200px;
-    background: var(--dex-red); border-radius: 20px;
-    border: 6px solid var(--dex-border);
-    box-shadow: inset -10px -10px 0px rgba(0,0,0,0.2), 
-                inset 10px 10px 0px rgba(255,255,255,0.2),
-                0 20px 40px rgba(0,0,0,0.6);
-    overflow: hidden; position: relative;
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
+const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 
-.pokedex-left-panel {
-    background: linear-gradient(135deg, #ff4b2b, var(--dex-red));
-    padding: 25px; border-bottom: 6px solid var(--dex-border);
-    display: flex; flex-direction: column;
-    transition: background 0.3s ease;
-}
+const typeModifiers = {
+    Normal: { Fighting: 2, Ghost: 0 }, Fire: { Fire: 0.5, Water: 2, Grass: 0.5, Ice: 0.5, Ground: 2, Bug: 0.5, Rock: 2, Steel: 0.5, Fairy: 0.5 },
+    Water: { Fire: 0.5, Water: 0.5, Electric: 2, Grass: 2, Ice: 0.5, Steel: 0.5 }, Electric: { Electric: 0.5, Ground: 2, Flying: 0.5, Steel: 0.5 },
+    Grass: { Fire: 2, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Poison: 2, Ground: 0.5, Flying: 2, Bug: 2 }, Ice: { Fire: 2, Ice: 0.5, Fighting: 2, Rock: 2, Steel: 2 },
+    Fighting: { Flying: 2, Psychic: 2, Bug: 0.5, Rock: 0.5, Dark: 0.5, Fairy: 2 }, Poison: { Grass: 0.5, Fighting: 0.5, Poison: 0.5, Ground: 2, Psychic: 2, Bug: 0.5, Fairy: 0.5 },
+    Ground: { Water: 2, Electric: 0, Grass: 2, Ice: 2, Poison: 0.5, Rock: 0.5 }, Flying: { Electric: 2, Grass: 0.5, Ice: 2, Fighting: 0.5, Ground: 0, Bug: 0.5 },
+    Psychic: { Fighting: 0.5, Psychic: 0.5, Bug: 2, Ghost: 2, Dark: 2 }, Bug: { Fire: 2, Grass: 0.5, Fighting: 0.5, Ground: 0.5, Flying: 2, Rock: 2 },
+    Rock: { Normal: 0.5, Fire: 0.5, Water: 2, Grass: 2, Fighting: 2, Poison: 0.5, Ground: 2, Flying: 0.5, Steel: 2 }, Ghost: { Normal: 0, Fighting: 0, Poison: 0.5, Bug: 0.5, Ghost: 2, Dark: 2 },
+    Dragon: { Fire: 0.5, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Dragon: 2, Fairy: 2 }, Dark: { Fighting: 2, Psychic: 0, Bug: 2, Ghost: 0.5, Dark: 0.5, Fairy: 2 },
+    Steel: { Normal: 0.5, Fire: 2, Grass: 0.5, Ice: 0.5, Fighting: 2, Poison: 0, Ground: 2, Flying: 0.5, Psychic: 0.5, Bug: 0.5, Rock: 0.5, Dragon: 0.5, Steel: 0.5, Fairy: 0.5 },
+    Fairy: { Fighting: 0.5, Poison: 2, Bug: 0.5, Dragon: 0, Dark: 0.5, Steel: 2 }
+};
 
-.pokedex-header { display: flex; flex-direction: column; align-items: stretch; position: relative; }
+// Configurações do Mapa
+const cityMaps = {
+    "kanto": { name: "Kanto", minZ: 0, maxZ: 9, defaultZ: 7, bounds: { minX: 529, minY: 635, maxX: 1367, maxY: 1801 } },
+    "novocontinente": { name: "Novo Continente", minZ: 6, maxZ: 8, defaultZ: 7, bounds: { minX: 2344, minY: 1252, maxX: 3058, maxY: 1840 } }
+};
 
-.main-lens-container { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 10px; }
-.big-blue-lens {
-    width: 75px; height: 75px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #aeeeee, #2980b9 60%, #1a5276);
-    border: 5px solid #e0e0e0; box-shadow: 0 0 0 5px var(--dex-border), inset 0 0 15px #000;
-    position: relative; transition: all 0.3s ease;
-}
-.big-blue-lens::after {
-    content: ''; position: absolute; top: 12px; left: 12px;
-    width: 20px; height: 20px; background: rgba(255,255,255,0.9); border-radius: 50%; filter: blur(1px);
-}
-.mini-lights { display: flex; gap: 8px; margin-top: 5px; align-items: center; }
-.light { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--dex-border); box-shadow: inset -2px -2px 0 rgba(0,0,0,0.3); transition: all 0.3s ease; }
-.light.red { background: #ff3333; } .light.yellow { background: #ffcb05; } .light.green { background: #32cd32; }
+let currentCity = "kanto"; 
+let currentZ = cityMaps[currentCity].defaultZ;
+let mapTransform = { scale: 1, x: 0, y: 0 };
+let isDragging = false;
+let startDragX = 0;
+let startDragY = 0;
 
-.joystick-theme-btn {
-    position: absolute; top: 0; right: 0; width: 45px; height: 45px;
-    background: #333; border: 4px solid var(--dex-border); border-radius: 50%;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem; color: #fff;
-    box-shadow: inset -3px -3px 5px rgba(0,0,0,0.6), inset 2px 2px 4px rgba(255,255,255,0.3), 3px 3px 0 var(--dex-border); 
-    transition: 0.1s ease-in-out; outline: none; z-index: 10;
-}
-.joystick-theme-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
-
-.pokedex-title { 
-    font-size: 2.8rem; font-weight: 900; text-transform: uppercase; color: #fff; 
-    text-shadow: 3px 3px 0 var(--dex-border), -2px -2px 0 var(--dex-dark-red); 
-    line-height: 1; text-align: center; margin: 15px 0 25px 0;
-    cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.pokedex-title span { color: #ffcb05; display: block; font-size: 1.5rem; transition: 0.3s; }
-.pokedex-title:hover { transform: scale(1.08) rotate(-2deg); text-shadow: 5px 5px 0 var(--dex-border), 0 0 20px rgba(255,203,5,0.6); color: #ffcb05; }
-
-/* =========================================
-   CONTROLES, BUSCA E ABAS (CATEGORIAS)
-========================================= */
-/* =========================================
-   CONTROLES, BUSCA E ABAS (CATEGORIAS)
-========================================= */
-.pokedex-controls { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: stretch; 
-    justify-content: flex-start; 
-    min-height: 0; 
-    overflow-y: auto !important; /* Habilita a barra de rolagem */
-    padding-right: 5px; /* Evita que a barra fique em cima dos botões */
-}
-
-/* Estilo da barrinha lateral invisível/suave */
-.pokedex-controls::-webkit-scrollbar { width: 6px; }
-.pokedex-controls::-webkit-scrollbar-track { background: transparent; }
-.pokedex-controls::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
-body.dark-mode .pokedex-controls::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
-.search-module { 
-    width: 100%; 
-    margin-bottom: 20px; 
-    flex-shrink: 0; 
-}
-.tech-label { font-family: monospace; font-size: 0.8rem; color: #ffcb05; font-weight: bold; text-shadow: 1px 1px 0 #000; margin-bottom: 5px; display: block; }
-.search-console { background: #ffffff; border: 4px solid var(--dex-border); border-radius: 12px; padding: 12px 15px; display: flex; align-items: center; box-shadow: inset 0 3px 8px rgba(0,0,0,0.15), 0 4px 0 rgba(255,255,255,0.3); }
-.search-console input { background: transparent; border: none; outline: none; width: 100%; color: var(--dex-border); font-family: monospace; font-size: 1.1rem; text-transform: uppercase; font-weight: 800; }
-.search-console input::placeholder { color: #999; font-weight: 600; }
-.cursor-blink { color: var(--dex-red); font-family: monospace; font-size: 1.2rem; font-weight: bold; animation: blink 1s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-
-.search-btn {
-    border: 3px solid var(--dex-border); border-radius: 8px; width: 35px; height: 35px;
-    margin-left: 10px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 1rem; flex-shrink: 0; box-shadow: 2px 2px 0 var(--dex-border); 
-    transition: transform 0.1s, box-shadow 0.1s; outline: none; will-change: transform;
-}
-.search-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
-.search-btn.red-btn { background: var(--dex-red); color: #fff; }
-
-.category-module { 
-    display: flex; 
-    gap: 8px; 
-    margin-bottom: 20px; 
-    flex-shrink: 0; 
-}
-.cat-btn {
-    flex: 1; padding: 10px 5px; border-radius: 8px; font-family: monospace; font-size: 0.8rem;
-    font-weight: 900; text-align: center; border: 3px solid var(--dex-border);
-    box-shadow: 3px 3px 0 var(--dex-border); cursor: pointer;
-    background: #444; color: #aaa;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s, color 0.2s;
-    will-change: transform;
-}
-.cat-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
-
-/* Cores das abas */
-.cat-btn[data-cat="normal"].active { background: #fff; color: var(--dex-border); }
-.cat-btn[data-cat="boss"].active { background: #ffcb05; color: var(--dex-border); }
-.cat-btn[data-cat="dark"].active { background: #8a2be2; color: #fff; }
-.cat-btn[data-cat="mapas"].active { background: #3498db; color: #fff; }
-
-/* FILTROS SECUNDÁRIOS EM GRAFITE ELEGANTE */
-.pokedex-filters { margin-bottom: 20px; }
-.filter-toggle { 
-    width: 100%; background: #444444; color: #ffffff; border: 3px solid var(--dex-border); 
-    padding: 10px 15px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; 
-    font-weight: 900; text-align: left; cursor: pointer; margin-bottom: 8px; 
-    box-shadow: 3px 3px 0 var(--dex-border); transition: transform 0.1s, box-shadow 0.1s; outline: none; 
-    will-change: transform;
-}
-.filter-toggle:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
-.hidden-filter { display: none !important; }
-
-.filter-group { background: rgba(0,0,0,0.15); padding: 12px; border-radius: 8px; border: 2px dashed rgba(0,0,0,0.3); margin-bottom: 12px; }
-.pills-container { display: flex; flex-wrap: wrap; gap: 6px; }
-.filter-pill { background: #444; border: 2px solid var(--dex-border); border-radius: 8px; padding: 6px 10px; color: #fff; font-weight: 800; font-size: 0.65rem; cursor: pointer; box-shadow: 0 3px 0 var(--dex-border); transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s, color 0.2s; text-transform: uppercase; flex-grow: 1; text-align: center; will-change: transform;}
-.filter-pill:active { transform: translateY(3px); box-shadow: 0 0 0 var(--dex-border); }
-.filter-pill.active { background: var(--chip-color, #ffcb05); color: var(--dex-border); }
-
-/* =========================================
-   LISTA LATERAL DOS MAPAS (GPS GLOBAL)
-========================================= */
-.map-sidebar { margin-top: 15px; display: flex; flex-direction: column; max-height: 280px; }
-.map-list-scroll { 
-    display: flex; flex-direction: column; gap: 10px; overflow-y: auto; 
-    padding: 5px 20px 20px 5px;
-    height: 100%; 
-}
-.map-list-scroll::-webkit-scrollbar { width: 8px; }
-.map-list-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
-.map-list-scroll::-webkit-scrollbar-thumb { background: var(--dex-border); border-radius: 4px; }
-
-.map-select-card {
-    background: #444444; color: #ffffff; border: 3px solid var(--dex-border); border-radius: 8px; 
-    padding: 6px; display: flex; align-items: center; gap: 10px; cursor: pointer; outline: none; flex-shrink: 0;
-    box-shadow: 3px 3px 0 var(--dex-border);
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s, border-color 0.2s;
-    will-change: transform;
-}
-.map-select-card:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
-.map-select-card.active { background: #111; border-color: var(--radar-green); }
-
-.map-card-thumb {
-    width: 32px; height: 32px; border-radius: 4px; object-fit: cover;
-    border: 2px solid var(--dex-border); filter: brightness(0.4) grayscale(0.8);
-    opacity: 0.7; transition: all 0.3s ease;
-}
-.map-select-card.active .map-card-thumb { filter: brightness(1) grayscale(0); opacity: 1; border-color: var(--radar-green); }
-
-.map-card-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-.map-card-name { font-family: monospace; font-size: 0.75rem; font-weight: 900; color: #fff; text-transform: uppercase; transition: 0.2s; }
-.map-select-card.active .map-card-name { color: var(--radar-green); }
-.map-card-desc { font-size: 0.6rem; color: #aaa; font-family: monospace; font-weight: bold; }
-
-/* =========================================
-   RODAPÉ E REDES SOCIAIS
-========================================= */
-.dex-footer { 
-    margin-top: auto; padding-top: 20px; text-align: center; opacity: 0.6; transition: 0.3s; 
-    display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0;
-}
-.dex-footer:hover { opacity: 1; }
-.footer-msg { font-size: 0.7rem; color: #fff; line-height: 1.4; text-shadow: 1px 1px 0 #000; margin: 0;}
-.footer-msg strong { color: #ffcb05; font-weight: 800; }
-.social-links { display: flex; gap: 12px; justify-content: center; }
-.social-btn { color: #e0e0e0; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; }
-.social-btn svg { filter: drop-shadow(2px 2px 0 var(--dex-border)); }
-.social-btn:hover { transform: scale(1.3) translateY(-2px); }
-.website-icon:hover { color: #3498db; } 
-.discord-icon:hover { color: #5865F2; }
-.whatsapp-icon:hover { color: #25D366; } 
-.instagram-icon:hover { color: #E1306C; }
-
-/* =========================================
-   PAINEL DIREITO E CARDS INICIAIS
-========================================= */
-.pokedex-right-panel { 
-    padding: 25px; 
-    display: flex; 
-    flex-direction: column; 
-    flex: 1; 
-    min-width: 0; 
-    transition: background 0.3s ease; 
-}
-
-.pokedex-main-display {
-    background: var(--screen-bg); border-radius: 15px; border: 6px solid var(--dex-border);
-    box-shadow: inset 0 10px 20px rgba(0,0,0,0.1); padding: 15px;
-    flex: 1; min-height: 0; height: auto; overflow-y: auto; position: relative;
-    transition: background 0.3s ease;
-}
-.pokedex-main-display::-webkit-scrollbar { width: 14px; }
-.pokedex-main-display::-webkit-scrollbar-track { background: #d0d0d0; border-left: 3px solid var(--dex-border); border-radius: 0 10px 10px 0;}
-.pokedex-main-display::-webkit-scrollbar-thumb { background: #555; border: 3px solid var(--dex-border); border-radius: 10px; }
-
-/* GRID GLOBAL (PC) - TAMANHO GRANDE DINÂMICO */
-.pokemon-grid { 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); 
-    gap: 12px; 
-    width: 100%; 
-}
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData();
+    renderTypeButtons();
+    setupToggles();
+    initOakModal();
+    initPanAndZoom(); 
+    initVipSystem(); // Inicializa Letreiro e Modal VIP
     
-.pk-card { 
-    background: #fff; border: 3px solid var(--dex-border); border-radius: 12px;
-    cursor: pointer; box-shadow: 3px 3px 0 rgba(0,0,0,0.1); transition: 0.1s ease;
-    overflow: hidden; position: relative; text-align: center; padding: 10px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-}
-    
-.pk-card img { width: 70px; height: 70px; object-fit: contain; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); z-index: 2; position: relative; margin: 0 auto; display: block; }
-    
-.pk-name { 
-    font-size: 0.8rem; font-weight: 800; color: var(--dex-border); text-transform: uppercase; z-index: 2; position: relative; margin: 4px 0; transition: color 0.3s ease; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-    
-body.dark-mode .pk-card { background: #2a2a2c; }
-body.dark-mode .pk-name { color: #f0f0f0; }
-
-.pk-id { position: absolute; top: 6px; left: 6px; font-family: monospace; font-size: 0.65rem; font-weight: bold; color: #888; z-index: 2; transition: color 0.3s ease;}
-    
-.catch-btn { position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--dex-border); background: linear-gradient(to bottom, #ccc 45%, var(--dex-border) 45%, var(--dex-border) 55%, #f0f0f0 55%); cursor: pointer; z-index: 10; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 2px 2px 0 rgba(0,0,0,0.1); opacity: 0.6; }
-.catch-btn::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background: #fff; border: 2px solid var(--dex-border); border-radius: 50%; }
-.catch-btn:hover { opacity: 1; transform: scale(1.15); }
-.catch-btn.caught { background: linear-gradient(to bottom, #ff3333 45%, var(--dex-border) 45%, var(--dex-border) 55%, #fff 55%); opacity: 1; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); animation: catchBounce 0.4s ease; }
-@keyframes catchBounce { 0% { transform: scale(1); } 50% { transform: scale(1.3) rotate(-15deg); } 100% { transform: scale(1) rotate(0deg); } }
-
-.pk-gen-bar { font-family: monospace; font-size: 0.6rem; font-weight: 800; color: #666; background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 2px 8px; margin: 2px auto 6px auto; display: inline-block; letter-spacing: 0.5px; transition: all 0.3s ease; z-index: 2; position: relative; }
-.modal-gen-bar { font-family: monospace; font-size: 0.7rem; font-weight: 800; color: var(--dex-border); background: rgba(0, 0, 0, 0.1); border: 1px dashed rgba(0, 0, 0, 0.3); padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block; }
-    
-.pk-types-mini { display: flex; justify-content: center; gap: 4px; z-index: 2; position: relative; width: 100%;}
-.type-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--dex-border); }
-
-/* =========================================
-   TELA DO MAPA GIGANTE E VISUALIZADOR
-========================================= */
-.map-screen { background: #2a2a2a !important; box-shadow: none !important; border: 4px solid #111; }
-.map-screen .map-overlay { box-shadow: none !important; }
-
-.map-controls-vertical { 
-    position: absolute; right: 15px; top: 50%; transform: translateY(-50%); 
-    display: flex; flex-direction: column; background: rgba(10, 20, 16, 0.85); 
-    border: 2px solid var(--dex-border); border-radius: 12px; padding: 8px; gap: 8px; 
-    z-index: 100; backdrop-filter: blur(4px); box-shadow: 3px 3px 0 rgba(0,0,0,0.6); 
-}
-.ctrl-divider { width: 100%; height: 2px; background: var(--dex-border); margin: 2px 0; }
-.z-display-box { background: #f0f4f8; color: var(--dex-red); font-family: 'Press Start 2P', monospace; font-size: 0.9rem; border: 2px solid var(--dex-border); border-radius: 8px; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
-.map-hud-floating { position: absolute; bottom: 15px; left: 15px; background: rgba(10, 20, 16, 0.85); border: 2px solid var(--dex-border); border-radius: 8px; padding: 8px 12px; color: #fff; display: flex; align-items: center; gap: 12px; z-index: 100; backdrop-filter: blur(4px); font-family: 'Press Start 2P', monospace; font-size: 0.55rem; box-shadow: 3px 3px 0 rgba(0,0,0,0.6); }
-
-.zoom-btn { width: 35px; height: 35px; border-radius: 8px; border: 2px solid var(--dex-border); background: #333; color: #fff; font-size: 1.2rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 2px 2px 0 var(--dex-border); transition: transform 0.1s, box-shadow 0.1s; outline: none; will-change: transform;}
-.zoom-btn:hover { background: #444; color: #ffcb05; }
-.zoom-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
-
-/* =========================================
-   PINS NO MAPA (CONTRA-ZOOM)
-========================================= */
-#map-pins-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
-
-.map-pin { 
-    position: absolute; width: 14px; height: 14px; background: var(--dex-red); border: 2px solid #fff; border-radius: 50%; 
-    transform: translate(-50%, -50%) scale(calc(1 / var(--map-zoom, 1))); 
-    pointer-events: auto; cursor: help; box-shadow: 0 2px 5px rgba(0,0,0,0.8); 
-    transition: transform 0.2s; animation: pinPulse 2s infinite; 
-}
-@keyframes pinPulse { 0% { box-shadow: 0 0 0 0 rgba(227, 53, 13, 0.7); } 70% { box-shadow: 0 0 0 8px rgba(227, 53, 13, 0); } 100% { box-shadow: 0 0 0 0 rgba(227, 53, 13, 0); } }
-.map-pin:hover { transform: translate(-50%, -50%) scale(calc(1.3 / var(--map-zoom, 1))); z-index: 20; }
-
-.pin-tooltip { position: absolute; bottom: 100%; margin-bottom: 12px; left: 50%; transform: translateX(-50%); background: #111; border: 2px solid var(--dex-border); border-radius: 8px; padding: 6px; display: flex; flex-wrap: wrap; gap: 4px; width: max-content; max-width: 180px; opacity: 0; visibility: hidden; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.8); pointer-events: none; z-index: 100; }
-.pin-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #111 transparent transparent transparent; }
-.pin-tooltip::before { content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 15px; background: transparent; }
-.map-pin:hover .pin-tooltip, .pin-tooltip:hover { opacity: 1; visibility: visible; pointer-events: auto; }
-
-.pin-poke-img { width: 26px; height: 26px; object-fit: contain; background: rgba(255,255,255,0.1); border-radius: 6px; border: 1px solid #333; cursor: pointer; transition: transform 0.1s, border-color 0.1s; }
-.pin-poke-img:hover { transform: scale(1.15); border-color: #ffcb05; }
-
-/* =========================================
-   ESTRUTURA GERAL DO MODAL
-========================================= */
-.modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 15px;}
-.modal.hidden { display: none; }
-.modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
-.modal-content { background: transparent; width: 100%; max-width: 900px; position: relative; z-index: 2; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-@keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-
-.close-btn { position: absolute; top: -15px; right: -15px; width: 45px; height: 45px; background: #fff; border: 4px solid var(--dex-border); border-radius: 50%; font-size: 1.5rem; font-weight: bold; color: var(--dex-border); cursor: pointer; box-shadow: 3px 3px 0 var(--dex-border); z-index: 20; transition: 0.1s; }
-.close-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 #000; }
-
-.modal-pokedex-view { display: flex; flex-direction: column; background: var(--dex-red); border: 6px solid var(--dex-border); border-radius: 20px; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2), 0 20px 50px rgba(0,0,0,0.8); overflow: hidden; max-height: 90vh; transition: background 0.3s ease; }
-.modal-left-wing { padding: 25px; background: #c22e28; border-bottom: 6px solid var(--dex-border); display: flex; flex-direction: column; transition: background 0.3s ease;}
-
-.screen-border { background: #e0e0e0; padding: 15px 38px; border-radius: 15px 15px 15px 40px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.3); margin-bottom: 20px; transition: background 0.3s ease; position: relative; }
-.main-screen { background: #8eedd1; border-radius: 10px; border: 4px solid var(--dex-border); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: inset 0 0 15px rgba(0,0,0,0.2); position: relative; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px); }
-.poke-img-large { width: 110px; height: 110px; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.3)); z-index: 2; }
-.screen-info { text-align: right; z-index: 2;}
-.screen-info h2 { color: var(--dex-border); font-size: 1.5rem; text-transform: uppercase; font-weight: 900; margin-bottom: 4px;}
-.type-tags { display: flex; gap: 5px; justify-content: flex-end;}
-.tag { padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; color: #fff; font-weight: 800; border: 2px solid var(--dex-border); box-shadow: 2px 2px 0 var(--dex-border); text-transform: uppercase;}
-
-.main-screen.main-screen-stacked { flex-direction: column; justify-content: center; align-items: center; padding: 20px 15px; min-height: 285px; text-align: center; }
-.stacked-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 10px; }
-.poke-img-stacked { width: 145px; height: 145px; object-fit: contain; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.3)); margin-bottom: 5px; animation: floatAnimation 3s ease-in-out infinite; }
-@keyframes floatAnimation { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-.poke-name-stacked { color: var(--dex-border); font-size: 1.55rem; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1.1; }
-.modal-gen-bar.stacked-gen-bar { margin-bottom: 2px; font-size: 0.65rem; padding: 2px 10px; }
-.stacked-type-tags { justify-content: center !important; width: 100%; }
-
-.location-module { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-.label-tech { font-family: monospace; font-size: 0.8rem; color: #ffcb05; text-shadow: 1px 1px 0 #000; margin-bottom: 8px; border-bottom: 2px dashed rgba(255,215,0,0.4); padding-bottom: 4px;}
-.loc-list-scroll { flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 8px; }
-.loc-list-scroll::-webkit-scrollbar { width: 8px; } .loc-list-scroll::-webkit-scrollbar-thumb { background: var(--dex-border); border-radius: 4px; }
-
-.loc-button { background: var(--terminal-bg); border: 3px solid var(--dex-border); border-radius: 8px; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; box-shadow: 3px 3px 0 rgba(0,0,0,0.3); transition: transform 0.1s, box-shadow 0.1s; will-change: transform; }
-.loc-button:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
-.loc-button.active { border-color: var(--radar-green); background: #0a1f10; }
-
-.loc-text { font-size: 0.8rem; font-weight: bold; color: #fff; font-family: monospace; flex: 1; word-break: break-word; }
-.loc-icon { opacity: 0.4; font-size: 1rem; transition: 0.2s; }
-.loc-button.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; }
-.copy-icon { cursor: pointer; position: relative; }
-.copy-icon:hover { transform: scale(1.2); filter: drop-shadow(0 0 5px #ffcb05); opacity: 1; }
-.loc-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-
-.info-tooltip { position: relative; cursor: help; }
-.info-tooltip:hover { opacity: 1; filter: drop-shadow(0 0 5px #ffcb05); }
-.info-tooltip::after { content: attr(data-tooltip); position: absolute; right: 140%; top: 50%; transform: translateY(-50%); background: #111; color: #ffcb05; border: 2px solid var(--dex-border); padding: 10px 12px; border-radius: 8px; font-size: 0.75rem; font-family: monospace; white-space: normal; width: max-content; max-width: 220px; text-align: left; line-height: 1.4; opacity: 0; visibility: hidden; transition: 0.2s; z-index: 9999; box-shadow: 0 5px 15px rgba(0,0,0,0.8); pointer-events: none; }
-.info-tooltip::before { content: ''; position: absolute; right: 100%; top: 50%; transform: translateY(-50%); border-width: 6px; border-style: solid; border-color: transparent transparent transparent #111; opacity: 0; visibility: hidden; transition: 0.2s; pointer-events: none; z-index: 9999; }
-.info-tooltip:hover::after, .info-tooltip:hover::before { opacity: 1; visibility: visible; }
-
-.loc-accordion { display: flex; flex-direction: column; gap: 5px; margin-bottom: 5px; }
-.accordion-toggle { background: var(--terminal-bg); border-color: var(--dex-border); }
-.expand-arrow { color: #ffcb05; font-size: 1.1rem; padding: 5px 5px; cursor: pointer; }
-.expand-arrow:hover { transform: scale(1.2); text-shadow: 0 0 8px rgba(255, 203, 5, 0.8); }
-.loc-button.active .expand-arrow { filter: drop-shadow(0 0 0 transparent); color: #ffcb05; }
-.loc-steps-container { display: flex; flex-direction: column; gap: 6px; padding-left: 15px; border-left: 2px dashed #ffcb05; margin-left: 10px; margin-bottom: 5px; transition: 0.3s; }
-.hidden-steps { display: none !important; }
-.loc-step { background: #1a1a1a; border: 2px solid var(--dex-border); border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; box-shadow: 2px 2px 0 rgba(0,0,0,0.3); transition: transform 0.1s, box-shadow 0.1s; will-change: transform; }
-.loc-step:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
-.loc-step.active { border-color: var(--radar-green); background: #0a1f10; }
-.loc-step.active .loc-icon { filter: drop-shadow(0 0 5px var(--radar-green)); opacity: 1; color: var(--radar-green); }
-
-.modal-right-wing { padding: 25px; background: var(--dex-red); display: flex; flex-direction: column; gap: 15px; overflow-y: auto; transition: background 0.3s ease;}
-.radar-module { background: #222; padding: 12px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: inset 0 0 10px #000; }
-.radar-display { width: 100%; height: 110px; background: #111; border: 4px solid var(--dex-border); border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); }
-.radar-grid { position: absolute; inset: 0; z-index: 1; background-image: linear-gradient(rgba(142, 237, 209, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(142, 237, 209, 0.1) 1px, transparent 1px); background-size: 15px 15px; }
-.radar-beam { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 2; pointer-events: none; background: conic-gradient(from 0deg, transparent 70%, rgba(142, 237, 209, 0.15) 100%); animation: spin 2s linear infinite; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
-.blink { animation: blinker 1.5s infinite; }
-@keyframes blinker { 50% { opacity: 0; } }
-.map-img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 3; filter: contrast(1.15) saturate(1.1); }
-.sat-hud { position: absolute; top: 6px; left: 6px; z-index: 5; display: flex; flex-direction: column; gap: 2px; pointer-events: none; }
-.sat-hud-line { background: rgba(0, 0, 0, 0.65); color: #8eedd1; font-family: monospace; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(142, 237, 209, 0.3); width: max-content; text-shadow: 0 0 3px rgba(142, 237, 209, 0.8); letter-spacing: 0.5px; font-weight: bold; }
-.sat-hud-line.rec { color: #ff4b2b; border-color: rgba(255, 75, 43, 0.3); text-shadow: 0 0 3px rgba(255, 75, 43, 0.8); animation: blinker 1.5s infinite; }
-
-.data-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; }
-.data-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
-
-/* ==========================================
-   NATURES RECOMENDADAS (MINIMALISTA)
-========================================= */
-.nature-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 8px; 
-    padding-bottom: 8px; 
-    border-bottom: 2px dashed rgba(0,0,0,0.1);
-}
-
-body.dark-mode .nature-container {
-    border-bottom-color: rgba(255,255,255,0.1);
-}
-
-.nature-title {
-    font-size: 0.6rem;
-    font-weight: 900;
-    color: #888;
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
-}
-
-body.dark-mode .nature-title { 
-    color: #999; 
-}
-
-.nature-pills {
-    display: flex;
-    gap: 6px; 
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.nature-pill {
-    background: rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: var(--dex-border);
-    font-family: monospace;
-    font-size: 0.7rem; 
-    padding: 3px 10px; 
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    cursor: help; 
-}
-
-.nature-pill b {
-    color: var(--dex-red);
-}
-
-.nature-pill:hover {
-    background: rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-}
-
-body.dark-mode .nature-pill {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: #ddd;
-}
-
-body.dark-mode .nature-pill b {
-    color: #ffcb05; 
-}
-
-body.dark-mode .nature-pill:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* ==========================================
-   BALÃO (TOOLTIP) ESPECÍFICO DAS NATURES
-========================================= */
-.nature-tooltip {
-    position: relative;
-}
-
-.nature-tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    top: calc(100% + 8px); 
-    left: 50%;
-    transform: translateX(-50%) translateY(5px); 
-    background: #f0f4f8; 
-    color: var(--dex-border); 
-    border: 2px solid var(--dex-border); 
-    padding: 4px 8px; 
-    border-radius: 6px;
-    font-size: 0.6rem;
-    font-family: monospace;
-    font-weight: 900;
-    white-space: nowrap; 
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 100;
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.15); 
-    pointer-events: none;
-}
-
-.nature-tooltip::before {
-    content: '';
-    position: absolute;
-    top: calc(100% + 2px);
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    border-width: 6px;
-    border-style: solid;
-    border-color: transparent transparent var(--dex-border) transparent; 
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none;
-    z-index: 100;
-}
-
-.nature-tooltip:hover::after,
-.nature-tooltip:hover::before {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0); 
-}
-
-body.dark-mode .nature-tooltip::after {
-    background: #2a2a2c;
-    color: #fff;
-    border-color: #111;
-    box-shadow: 2px 2px 0 #000;
-}
-body.dark-mode .nature-tooltip::before {
-    border-color: transparent transparent #111 transparent;
-}
-
-/* ==========================================
-   BARRAS DE STATUS ANIMADAS E DINÂMICAS
-========================================= */
-.stats-list-animated {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.stat-row { 
-    display: flex; align-items: center; gap: 10px; 
-    font-size: 0.75rem; font-weight: 800;
-}
-
-.stat-row label { 
-    width: 55px; color: #555; font-family: monospace; font-size: 0.8rem;
-}
-body.dark-mode .stat-row label { color: #aaa; }
-
-.bar-container { 
-    flex: 1; height: 12px; background: rgba(0,0,0,0.1); 
-    border-radius: 6px; border: 2px solid var(--dex-border); 
-    overflow: hidden; 
-}
-body.dark-mode .bar-container { background: rgba(255,255,255,0.05); border-color: #111; }
-
-.bar-fill { 
-    height: 100%; 
-    width: 0%; 
-    border-radius: 4px;
-    animation: fillStatBar 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    transform-origin: left;
-}
-
-@keyframes fillStatBar {
-    0% { width: 0%; }
-    100% { width: var(--target-width); } 
-}
-
-.stat-num { 
-    width: 30px; text-align: right; color: var(--dex-border); 
-    font-family: monospace; font-size: 0.9rem; transition: 0.3s;
-}
-body.dark-mode .stat-num { color: #ddd; }
-
-.stat-highest .stat-num {
-    color: var(--dex-red);
-    font-size: 1rem;
-    animation: pulseHighest 1.5s infinite;
-}
-body.dark-mode .stat-highest .stat-num { color: #ffcb05; }
-
-@keyframes pulseHighest {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.25); }
-}
-
-.eff-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin-bottom: 5px; transition: background 0.3s ease; }
-.eff-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
-.eff-group { margin-bottom: 8px; }
-.eff-group:last-child { margin-bottom: 0; }
-.eff-group label { display: block; font-size: 0.65rem; color: #666; margin-bottom: 4px; font-weight: 800; transition: color 0.3s ease; }
-.eff-icons { display: flex; gap: 6px; flex-wrap: wrap; }
-.eff-dot { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--dex-border); position: relative;}
-.eff-dot:hover::after { content: attr(title); position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); background: var(--dex-border); color: #fff; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; white-space: nowrap; z-index: 10;}
-
-.evo-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease;}
-.evo-module .label-tech { color: var(--dex-border); text-shadow: none; border-bottom: 2px dashed #999;}
-.evo-icons { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px;}
-.evo-sprite { width: 45px; height: 45px; cursor: pointer; transition: 0.2s; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.3)); border: 2px solid transparent; border-radius: 50%; }
-.evo-sprite:hover { transform: scale(1.15); background: rgba(0,0,0,0.1); border-color: var(--dex-border); }
-.evo-sprite.missing { filter: grayscale(1) opacity(0.5); cursor: not-allowed; }
-.evo-arrow { color: #888; font-size: 1.2rem; font-weight: bold; }
-
-.boss-guide-module { background: #e0e0e0; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; margin-bottom: 10px;}
-.boss-guide-module .label-tech { color: var(--dex-border); border-bottom: 2px dashed #999; }
-.boss-guide-text { font-size: 0.75rem; font-weight: 700; color: #444; line-height: 1.5; text-align: justify; margin-top: 8px;}
-
-.boss-loot-module { background: #ffcb05; padding: 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); text-align: center; margin-bottom: 10px;}
-.boss-loot-module .label-tech { color: var(--dex-border); border-bottom: 2px dashed rgba(0,0,0,0.2); text-shadow: none;}
-.loot-box { font-size: 1.1rem; font-weight: 900; color: var(--dex-red); text-transform: uppercase; margin-top: 10px; background: #fff; padding: 10px; border-radius: 8px; border: 3px solid var(--dex-border);}
-
-.souls-module { background: #e0e0e0; padding: 10px 15px; border-radius: 12px; border: 4px solid var(--dex-border); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); transition: background 0.3s ease; margin-bottom: 10px; }
-.souls-module .label-tech { color: var(--dex-border); border-bottom: 2px dashed #999; text-shadow: none; margin-bottom: 4px; }
-.souls-container { display: flex; gap: 8px; margin-top: 6px; }
-.soul-box { flex: 1; background: #fff; border: 2px solid var(--dex-border); border-radius: 6px; padding: 4px 8px; text-align: center; display: flex; justify-content: space-between; align-items: center; }
-.soul-box.eternizado { background: #e6e6fa; border-color: #8a2be2; }
-.soul-label { font-size: 0.6rem; font-weight: 900; color: #666; }
-.soul-box.eternizado .soul-label { color: #8a2be2; }
-.soul-value { font-size: 0.9rem; font-weight: 900; color: var(--dex-border); }
-.exclusive-badge { display: block; text-align: center; font-size: 0.8rem; font-weight: 900; color: var(--dex-red); background: #fff; border: 2px solid var(--dex-border); border-radius: 6px; padding: 6px; margin-top: 6px; }
-
-/* ==============================================================
-   TUTORIAL DO APP APK (IMAGENS E PASSOS)
-============================================================== */
-.hidden-step {
-    display: none !important;
-}
-
-.tutorial-step {
-    background: rgba(0, 0, 0, 0.04);
-    border: 2px dashed var(--dex-border);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 15px;
-}
-
-body.dark-mode .tutorial-step {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: #444;
-}
-
-.tutorial-step p {
-    margin-bottom: 10px !important;
-    font-size: 0.8rem;
-    line-height: 1.4;
-}
-
-.apk-tutorial-img {
-    width: 100%;
-    max-width: 250px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
-    border: 3px solid var(--dex-border);
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-}
-
-body.dark-mode .apk-tutorial-img {
-    border-color: #000;
-    box-shadow: 4px 4px 0 #000;
-}
-
-/* =========================================
-   RESPONSIVIDADE E ADAPTAÇÃO DE TELAS
-========================================= */
-@media (min-width: 850px) {
-    .pokedex-body { flex-direction: row; height: 90vh; }
-    .pokedex-left-panel { 
-        width: 380px; 
-        min-width: 380px; /* Garante o tamanho exato */
-        flex-shrink: 0;   /* CRÍTICO: Impede que o painel direito o esmague */
-        border-bottom: none; 
-        border-right: 6px solid var(--dex-border); 
-        display: flex; 
-        flex-direction: column;
-    }
-    .pokedex-right-panel { flex: 1; background: #c22e28; }
-    .pokedex-main-display { 
-        display: flex; 
-        flex-direction: column; 
-        flex: 1; 
-        height: auto; 
-        min-height: 0;
-    }
-    .modal-pokedex-view { flex-direction: row; height: 85vh; max-width: 900px; }
-    .modal-left-wing { width: 50%; border-bottom: none; border-right: 6px solid var(--dex-border); }
-    .modal-right-wing { width: 50%; }
-    .modal-pokedex-view::after { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 16px; background: linear-gradient(90deg, #8b0000, #ff4b2b, #8b0000); border-left: 4px solid var(--dex-border); border-right: 4px solid var(--dex-border); z-index: 10; transform: translateX(-50%); }
-}
-
-@media (max-width: 768px) {
-    .filter-pill { padding: 4px 8px; font-size: 0.6rem; }
-    .pokedex-main-display { flex: none; height: 350px; max-height: 350px; }
-    /* =======================================
-       CORREÇÃO DEFINITIVA DA GRID MOBILE (EM PÉ) E MAPAS
-    ======================================= */
-    .pokemon-grid { 
-        display: grid; /* Sem o !important, assim o JS consegue esconder na aba Mapas! */
-        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)) !important; 
-        gap: 8px !important; 
-        width: 100%;
+    // Modo Escuro
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+        if (localStorage.getItem('pokedex-dark-mode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('pokedex-dark-mode', document.body.classList.contains('dark-mode'));
+        });
     }
     
-    .pk-card { 
-        padding: 6px !important; 
-        border: 2px solid var(--dex-border) !important; 
-        border-radius: 8px !important;
-        background: #fff !important; 
-        display: flex !important; 
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') this.blur(); 
+    });
+    document.getElementById('search-btn').addEventListener('click', () => {
+        applyFilters();
+        document.getElementById('search-input').blur(); 
+    });
+
+    document.querySelectorAll('#catch-filters .filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            document.querySelectorAll('#catch-filters .filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            activeCatchFilter = pill.dataset.catch;
+            applyFilters();
+        });
+    });
+
+    document.querySelectorAll('#meta-filters .filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            document.querySelectorAll('#meta-filters .filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            activeMetaFilter = pill.dataset.meta;
+            applyFilters();
+        });
+    });
+
+    // Controle de Abas e Transição de Telas
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCategory = btn.dataset.cat;
+            
+            const gridContainer = document.getElementById('pokedex-grid');
+            const searchModule = document.getElementById('search-module-container');
+            const filtersModule = document.getElementById('filters-container');
+            const mapContainer = document.getElementById('map-viewer-container');
+            const mapSidebar = document.getElementById('map-sidebar-menu');
+            // Ativador de fechamento do Modal de Download do Aplicativo
+            const closeDownloadBtn = document.getElementById('close-download-app');
+            if (closeDownloadBtn) {
+                closeDownloadBtn.onclick = () => {
+                    document.getElementById('download-app-modal').classList.add('hidden');
+                };
+            }
+            
+            if (activeCategory === 'mapas') {
+                gridContainer.style.display = 'none';
+                searchModule.style.display = 'none';
+                filtersModule.style.display = 'none';
+                if(mapSidebar) mapSidebar.style.display = 'block'; 
+                mapContainer.style.display = 'flex';
+                initMapViewer(); 
+            } else {
+                gridContainer.style.display = 'grid';
+                searchModule.style.display = 'block';
+                filtersModule.style.display = 'block';
+                if(mapSidebar) mapSidebar.style.display = 'none'; 
+                mapContainer.style.display = 'none';
+                applyFilters();
+            }
+        });
+    });
+});
+
+// ==========================================
+// FUNÇÕES DE DADOS E FILTROS
+// ==========================================
+async function fetchData() {
+    try {
+        const [normalRes, darkRes, bossRes] = await Promise.all([
+            fetch('data_normal.json?v=' + new Date().getTime()),
+            fetch('data_dark.json?v=' + new Date().getTime()),
+            fetch('data_boss.json?v=' + new Date().getTime())
+        ]);
+        const normalData = await normalRes.json();
+        const darkData = await darkRes.json();
+        const bossData = await bossRes.json();
+        pokemonData = [...normalData, ...darkData, ...bossData];
+        currentVisibleList = [...pokemonData]; 
+        renderPokemon(pokemonData);
+    } catch (e) { 
+        console.error("Erro ao carregar os bancos de dados.", e); 
+    }
+}
+
+function renderTypeButtons() {
+    const container = document.getElementById('type-filters');
+    container.innerHTML = '<button class="filter-pill active" data-type="all">TODOS</button>';
+    types.forEach(t => {
+        container.innerHTML += `<button class="filter-pill" data-type="${t}" style="--chip-color: var(--type-${t.toLowerCase()})">${t.toUpperCase()}</button>`;
+    });
+
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            const group = pill.closest('.pills-container').id;
+            document.getElementById(group).querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            if(group === 'gen-filters') activeGenFilter = pill.dataset.gen;
+            if(group === 'type-filters') activeTypeFilter = pill.dataset.type;
+            applyFilters();
+        });
+    });
+}
+
+function setupToggles() {
+    // Botão Mestre de Otimização Mobile
+    const toggleAll = document.getElementById('toggle-all-filters');
+    if (toggleAll) {
+        toggleAll.onclick = function() {
+            const wrapper = document.getElementById('all-filters-wrapper');
+            wrapper.classList.toggle('hidden-filter');
+            this.innerText = wrapper.classList.contains('hidden-filter') 
+                ? '⚙️ MOSTRAR FILTROS AVANÇADOS' 
+                : '⚙️ ESCONDER FILTROS';
+        };
+    }
+
+    const toggleGen = document.getElementById('toggle-gen');
+    if (toggleGen) {
+        toggleGen.onclick = function() {
+            const group = document.getElementById('group-gen');
+            group.classList.toggle('hidden-filter');
+            this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTRAR POR REGIÃO' : '▲ ESCONDER REGIÕES';
+        };
+    }
+
+    const toggleType = document.getElementById('toggle-type');
+    if (toggleType) {
+        toggleType.onclick = function() {
+            const group = document.getElementById('group-type');
+            group.classList.toggle('hidden-filter');
+            this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTRAR POR TIPO' : '▲ ESCONDER TIPOS';
+        };
+    }
+
+    const toggleCatch = document.getElementById('toggle-catch');
+    if (toggleCatch) {
+        toggleCatch.onclick = function() {
+            const group = document.getElementById('group-catch');
+            group.classList.toggle('hidden-filter');
+            this.innerText = group.classList.contains('hidden-filter') ? '▼ STATUS DA POKEDEX' : '▲ ESCONDER STATUS';
+        };
+    }
+
+    const toggleMeta = document.getElementById('toggle-meta');
+    if (toggleMeta) {
+        toggleMeta.onclick = function() {
+            const group = document.getElementById('group-meta');
+            if (group) {
+                group.classList.toggle('hidden-filter');
+                this.innerText = group.classList.contains('hidden-filter') ? '▼ FILTROS META-GAMING' : '▲ ESCONDER META-GAMING';
+            }
+        };
+    }
+}
+
+function applyFilters() {
+    const search = document.getElementById('search-input').value.toLowerCase();
+    
+    let filtered = pokemonData.filter(p => {
+        const pCat = p.category || 'normal';
+        if (pCat !== activeCategory) return false;
+
+        const mName = p.name.toLowerCase().includes(search) || p.id.toString() === search;
+        const mGen = activeGenFilter === 'all' || (p.generation && p.generation.toString().toLowerCase() === activeGenFilter.toLowerCase());
+        const mType = activeTypeFilter === 'all' || p.types.includes(activeTypeFilter);
+        
+        const isCaught = caughtPokemon.includes(p.id);
+        let mCatch = true;
+        if (activeCatchFilter === 'caught') mCatch = isCaught;
+        if (activeCatchFilter === 'uncaught') mCatch = !isCaught;
+
+        // O mMeta agora fica sempre true para não esconder Pokémons, pois vamos apenas ordená-los abaixo
+        let mMeta = true; 
+
+        return mName && mGen && mType && mCatch && mMeta;
+    });
+    
+    // NOVO: SISTEMA DE ORDENAÇÃO DE STATUS (DO MAIOR PARA O MENOR)
+    if (activeMetaFilter !== 'all') {
+        filtered.sort((a, b) => {
+            const sA = a.stats || {};
+            const sB = b.stats || {};
+            
+            if (activeMetaFilter === 'atk') return (sB.atk || 0) - (sA.atk || 0);
+            if (activeMetaFilter === 'spatk') return (sB.spatk || 0) - (sA.spatk || 0);
+            if (activeMetaFilter === 'speed') return (sB.spd || 0) - (sA.spd || 0); // Nota: No JSON a velocidade está salva como "spd"
+            if (activeMetaFilter === 'tank') {
+                // Cálculo de Tank considerando a soma das defesas física e especial
+                const totalTankA = (sA.def || 0) + (sA.spdef || 0);
+                const totalTankB = (sB.def || 0) + (sB.spdef || 0);
+                return totalTankB - totalTankA;
+            }
+            return 0;
+        });
     }
     
-    .pk-card img { width: 45px !important; height: 45px !important; margin: 0 auto; display: block; }
+    currentVisibleList = filtered;
+    renderPokemon(filtered);
+}
+
+window.toggleCatch = (event, id) => {
+    event.stopPropagation();
+    const idx = caughtPokemon.indexOf(id);
+    if(idx > -1) {
+        caughtPokemon.splice(idx, 1);
+        event.target.classList.remove('caught');
+    } else {
+        caughtPokemon.push(id);
+        event.target.classList.add('caught');
+    }
+    localStorage.setItem('pokedex-caught', JSON.stringify(caughtPokemon));
+    if (activeCatchFilter !== 'all') { applyFilters(); }
+};
+
+function renderPokemon(list) {
+    const grid = document.getElementById('pokedex-grid');
+    grid.innerHTML = list.map(p => {
+        const isCaught = caughtPokemon.includes(p.id);
+        const pCategory = p.category || 'normal';
+        
+        let genText = '';
+        if (pCategory === 'boss') genText = 'BOSS 24H';
+        else if (pCategory === 'dark') genText = 'DARK';
+        else if (isNaN(p.generation)) genText = p.generation.toUpperCase(); 
+        else genText = 'GEN ' + p.generation;
+
+        return `
+            <div class="pk-card" onclick="openModal('${p.id}')">
+                <div class="pk-card-inner">
+                    <span class="pk-id">#${p.id.toString().split('-')[0].padStart(3, '0')}</span>
+                    <div class="catch-btn ${isCaught ? 'caught' : ''}" onclick="toggleCatch(event, '${p.id}')" title="Marcar como Capturado"></div>
+                    <img src="${p.image}" loading="lazy">
+                    <h3 class="pk-name">${p.name}</h3>
+                    <div class="pk-gen-bar">${genText}</div>
+                    <div class="pk-types-mini">
+                        ${p.types.map(t => `<span class="type-dot" style="background:var(--type-${t.toLowerCase()})"></span>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ==========================================
+// PAN (ARRASTAR) & ZOOM DO MAPA
+// ==========================================
+function initPanAndZoom() {
+    const wrapper = document.getElementById('map-wrapper');
+    const content = document.getElementById('map-content');
     
-    .pk-name { 
-        font-size: 0.6rem !important; 
-        color: var(--dex-border); 
-        width: 100%;
-        text-align: center;
-        white-space: nowrap; 
-        overflow: hidden; 
-        text-overflow: ellipsis; 
-        margin: 4px 0 !important;
-    }
+    const applyTransform = () => {
+        content.style.transform = `translate(${mapTransform.x}px, ${mapTransform.y}px) scale(${mapTransform.scale})`;
+        wrapper.style.setProperty('--map-zoom', mapTransform.scale);
+    };
+
+    window.resetMapTransform = () => {
+        mapTransform = { scale: 1, x: 0, y: 0 };
+        applyTransform();
+    };
+
+    window.zoomMap = (direction) => {
+        const zoomStep = 0.3; 
+        const maxZoom = 4.0;  
+        const minZoom = 0.5;  
+
+        if (direction === 'in' && mapTransform.scale < maxZoom) mapTransform.scale += zoomStep;
+        if (direction === 'out' && mapTransform.scale > minZoom) mapTransform.scale -= zoomStep;
+        applyTransform();
+    };
+
+    wrapper.addEventListener('wheel', (e) => {
+        e.preventDefault(); 
+        if (e.deltaY < 0) zoomMap('in');   
+        else zoomMap('out');               
+    }, { passive: false });
+
+    wrapper.addEventListener('mousedown', (e) => {
+        e.preventDefault(); 
+        isDragging = true;
+        startDragX = e.clientX - mapTransform.x;
+        startDragY = e.clientY - mapTransform.y;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        mapTransform.x = e.clientX - startDragX;
+        mapTransform.y = e.clientY - startDragY;
+        applyTransform();
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    wrapper.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) { 
+            isDragging = true;
+            startDragX = e.touches[0].clientX - mapTransform.x;
+            startDragY = e.touches[0].clientY - mapTransform.y;
+        }
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        mapTransform.x = e.touches[0].clientX - startDragX;
+        mapTransform.y = e.touches[0].clientY - startDragY;
+        applyTransform();
+    }, { passive: false });
+
+    window.addEventListener('touchend', () => isDragging = false);
+    window.addEventListener('touchcancel', () => isDragging = false);
+
+    document.getElementById('btn-zoom-in').addEventListener('click', () => zoomMap('in'));
+    document.getElementById('btn-zoom-out').addEventListener('click', () => zoomMap('out'));
+    document.getElementById('btn-zoom-reset').addEventListener('click', window.resetMapTransform);
+}
+
+// ==========================================
+// LÓGICA DO GPS SETORIAL (MENU LATERAL)
+// ==========================================
+function initMapViewer() {
+    const listContainer = document.getElementById('map-list-container');
     
-    body.dark-mode .pk-card { background: #2a2a2c !important; }
-    body.dark-mode .pk-name { color: #f0f0f0 !important; }
-
-    .pk-id { font-size: 0.5rem !important; top: 4px !important; left: 4px !important; }
-    .catch-btn { width: 14px !important; height: 14px !important; top: 4px !important; right: 4px !important; }
-    .catch-btn::after { width: 4px !important; height: 4px !important; }
-    .pk-gen-bar { font-size: 0.5rem !important; padding: 1px 4px !important; margin: 2px auto !important; }
-    .pk-types-mini { display: flex !important; justify-content: center !important; gap: 4px !important; width: 100% !important; }
-    .type-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; border: 2px solid var(--dex-border) !important; }
-    .screen-border { padding: 12px 22px; border-radius: 12px 12px 12px 25px; }
-    .nav-arrow { width: 18px; height: 40px; font-size: 0.9rem; border-width: 2px; border-radius: 8px; }
-    .prev-arrow { left: 3px; } .next-arrow { right: 3px; }
-    .main-screen { padding: 10px; gap: 8px; }
-    .poke-img-large { width: 75px; height: 75px; } 
-    .screen-info h2 { font-size: 1.15rem; margin-bottom: 2px; }
-    .modal-gen-bar { font-size: 0.6rem; padding: 2px 6px; margin-bottom: 4px; }
-    .type-tags { flex-wrap: wrap; justify-content: flex-end; }
-    .tag { padding: 3px 6px; font-size: 0.6rem; }
-    .poke-img-stacked { width: 110px; height: 110px; }
-    .poke-name-stacked { font-size: 1.3rem; }
-    .info-tooltip::after { max-width: 200px; font-size: 0.65rem; }
-    
-    .map-sidebar { margin-top: 10px; }
-    .map-list-scroll { max-height: 180px; }
-    .map-controls-vertical { right: 10px; padding: 6px; gap: 6px; }
-    .zoom-btn { width: 30px; height: 30px; font-size: 1rem; }
-    .z-display-box { width: 30px; height: 30px; font-size: 0.8rem; }
-    .map-hud-floating { bottom: 10px; left: 10px; font-size: 0.45rem; padding: 6px 10px; }
-
-    /* =======================================
-       CORREÇÃO DE MODAIS PARA WEBVIEW (VERTICAL)
-    ======================================= */
-    /* 1. Trava a carcaça do modal em 85% da tela da WebView */
-    .oak-container, .modal-content {
-        max-height: 85vh !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    /* 2. Áreas de conteúdo ganham Scroll Interno (respeitando a carcaça) */
-    .report-screen, .app-modal-text {
-        max-height: 100% !important; 
-        overflow-y: auto !important;
-        padding: 20px 15px !important; /* Padding reduzido para economizar espaço */
-    }
-
-    /* 3. Botão X ancorado na carcaça (NUNCA vai rolar com o texto) */
-    .close-btn, .oak-close-btn { 
-        position: absolute !important;
-        top: -2px !important; /* Trazido para a zona segura visível */
-        right: -2px !important; 
-        width: 32px !important; 
-        height: 32px !important; 
-        font-size: 1.1rem !important; 
-        z-index: 50 !important;
-    }
-
-    /* 4. Miniaturização Elegante de Fontes e Formulários (Estética Retrô) */
-    .report-title { font-size: 0.8rem !important; margin-bottom: 12px !important; padding-bottom: 8px !important; }
-    .report-form { gap: 8px !important; }
-    .report-form label { font-size: 0.55rem !important; margin-top: 0 !important; }
-    .report-form input, .report-form select, .report-form textarea { padding: 8px !important; font-size: 0.8rem !important; }
-    #submit-report-btn { padding: 10px !important; font-size: 0.75rem !important; margin-top: 5px !important; }
-    .vip-sections { max-height: 60vh !important; }
-
-    /* =======================================
-       LIMITE DE LOCALIZAÇÕES NO MOBILE (SCROLL)
-    ======================================= */
-    .location-module {
-        max-height: 170px; 
-        margin-bottom: 10px;
-    }
-    
-    .loc-list-scroll {
-        max-height: 140px; 
-        overflow-y: auto;  
-        padding-bottom: 10px;
-        box-shadow: inset 0 -15px 10px -15px rgba(0,0,0,0.5); 
-    }
-}
-
-.oak-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); background: radial-gradient(circle, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.95) 100%); }
-.oak-overlay.hidden { display: none !important; }
-.oak-container { 
-    width: 90%; 
-    max-width: 500px; 
-    position: relative; 
-    animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    background: transparent; 
-    padding: 0; 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.8); /* Borda branca grossa removida! */
-}
-@keyframes slideDown { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-.oak-close-btn { position: absolute; top: -25px; right: -25px; width: 40px; height: 40px; background: #e3350d; border: 3px solid #111; border-radius: 50%; color: #fff; font-size: 1.5rem; font-weight: bold; cursor: pointer; box-shadow: 2px 2px 0 #111; z-index: 20; }
-.oak-screen { 
-    background: #f8f8f8; 
-    border: 6px solid #111; 
-    border-radius: 12px; 
-    padding: 20px; 
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.1); 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    position: relative; 
-    overflow: visible !important; /* Impede que a cabeça do Oak seja cortada */
-}
-
-/* Scroll interno APENAS para modais longos (Report e App Download) */
-.report-screen {
-    max-height: 80vh;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
-.report-screen::-webkit-scrollbar { width: 6px; }
-.report-screen::-webkit-scrollbar-thumb { background: var(--dex-red); border-radius: 4px; }
-
-.oak-screen::-webkit-scrollbar { width: 6px; }
-.oak-screen::-webkit-scrollbar-thumb { background: var(--dex-red); border-radius: 4px; }
-.oak-sprite-area { width: 120px; height: 160px; display: flex; align-items: flex-end; justify-content: center; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); z-index: 10; }
-.oak-sprite { width: 120px; height: auto; image-rendering: pixelated; animation: oakBob 2s infinite ease-in-out; }
-@keyframes oakBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-/* A ROLAGEM SÓ ACONTECE NA CAIXA DE TEXTO */
-.oak-dialog-box { 
-    width: 100%; 
-    min-height: 100px; 
-    max-height: 180px; /* Trava a altura do texto */
-    overflow-y: auto;  /* Faz o scroll acontecer SÓ AQUI dentro */
-    margin-top: 10px; 
-    background: #fff; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    position: relative; 
-    padding: 15px 20px; 
-    border: 4px solid #111; 
-    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 6px #111; 
-    z-index: 5; 
-}
-.oak-dialog-box p { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: #111; line-height: 1.8; text-transform: uppercase; margin: 0; padding-right: 15px; }
-
-/* Estilo da barrinha do texto */
-.oak-dialog-box::-webkit-scrollbar { width: 6px; }
-.oak-dialog-box::-webkit-scrollbar-thumb { background: #111; border-radius: 4px; }
-
-/* ==============================================================
-   SISTEMA DE MODO ESCURO (DARK MODE)
-============================================================== */
-body.dark-mode { background-color: #080a0f; }
-body.dark-mode .pokedex-main-display { background: #0f141e; box-shadow: inset 0 10px 30px rgba(0,0,0,0.5); }
-body.dark-mode .pk-card { background: #2a2a2c; border-color: #111; box-shadow: 3px 3px 0 rgba(0,0,0,0.6); }
-body.dark-mode .pk-name { color: #f0f0f0; } 
-body.dark-mode .pk-id { color: #888; }
-body.dark-mode .data-module, body.dark-mode .eff-module, body.dark-mode .evo-module, body.dark-mode .screen-border { background: #2a2a2c; border-color: #111; }
-body.dark-mode .eff-group label { color: #aaa; }
-body.dark-mode .joystick-theme-btn { opacity: 1; filter: grayscale(0); color: #ffcb05; text-shadow: 0 0 10px #ffcb05; background: #111; border-color: #050505;}
-body.dark-mode .search-btn.red-btn { background: #9e1a00; border-color: #111; box-shadow: 2px 2px 0 #111; }
-body.dark-mode .filter-toggle { background: #2a2a2c; border-color: #111; box-shadow: 3px 3px 0 #111; color: #aaa;}
-body.dark-mode .catch-btn { border-color: #111; box-shadow: 2px 2px 0 rgba(0,0,0,0.8); }
-body.dark-mode .catch-btn::after { border-color: #111; }
-body.dark-mode .big-blue-lens { box-shadow: 0 0 25px 8px rgba(52, 152, 219, 0.6), inset 0 0 20px #fff; background: radial-gradient(circle at 35% 35%, #ffffff, #2980b9 50%, #002244); border-color: #85c1e9; }
-body.dark-mode .light.red { background: #ff3333; box-shadow: 0 0 15px 3px rgba(255, 51, 51, 0.8); border-color: #ff9999; }
-body.dark-mode .light.yellow { background: #ffcb05; box-shadow: 0 0 15px 3px rgba(255, 203, 5, 0.8); border-color: #ffee99; }
-body.dark-mode .light.green { background: #32cd32; box-shadow: 0 0 15px 3px rgba(50, 205, 50, 0.8); border-color: #99ff99; }
-body.dark-mode .pk-gen-bar { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); color: #aaa; }
-body.dark-mode .modal-gen-bar { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); color: #ddd; }
-
-body.dark-mode .cat-btn[data-cat="normal"].active { background: #ccc; color: #111; }
-body.dark-mode .cat-btn[data-cat="boss"].active { background: #e6b800; color: #111; }
-body.dark-mode .cat-btn[data-cat="dark"].active { background: #6a0dad; color: #fff; }
-body.dark-mode .cat-btn[data-cat="mapas"].active { background: #2980b9; color: #fff; }
-
-body.dark-mode .map-select-card.active { border-color: var(--radar-green); background: #111; }
-
-body.dark-mode .boss-guide-module { background: #2a2a2c; border-color: #111; }
-body.dark-mode .boss-guide-text { color: #ccc; }
-body.dark-mode .boss-loot-module { background: #e6b800; border-color: #111; }
-body.dark-mode .loot-box { background: #111; border-color: #111; color: #ffcb05; }
-body.dark-mode .souls-module { background: #2a2a2c; border-color: #111; }
-body.dark-mode .souls-module .label-tech { color: #aaa; border-bottom-color: #555; }
-body.dark-mode .soul-box { background: #111; border-color: #111; }
-body.dark-mode .soul-box.eternizado { background: #1a0f2e; border-color: #6a0dad; }
-body.dark-mode .soul-label { color: #888; }
-body.dark-mode .soul-box.eternizado .soul-label { color: #b388ff; }
-body.dark-mode .soul-value { color: #fff; }
-body.dark-mode .exclusive-badge { background: #111; color: #ff4b2b; }
-
-/* =========================================
-   SISTEMA DE SETAS EMBUTIDAS
-========================================= */
-.nav-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: #333; color: #fff; border: 3px solid var(--dex-border);
-    width: 26px; height: 55px; border-radius: 15px; 
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 1.2rem; font-weight: 900; z-index: 10;
-    box-shadow: inset 2px 2px 2px rgba(255,255,255,0.2), 2px 2px 0 rgba(0,0,0,0.15);
-    transition: all 0.1s ease; outline: none;
-}
-.prev-arrow { left: 6px; }
-.next-arrow { right: 6px; }
-.nav-arrow:hover { color: #ffcb05; background: #444; }
-.nav-arrow:active { background: #111; box-shadow: inset 2px 2px 6px rgba(0,0,0,0.6); }
-
-body.dark-mode .nav-arrow { 
-    background: #1a1a1a; color: #aaa; border-color: #000;
-    box-shadow: inset 2px 2px 2px rgba(255,255,255,0.05), 2px 2px 0 rgba(0,0,0,0.4);
-}
-body.dark-mode .nav-arrow:hover { color: #ffcb05; background: #2a2a2c; }
-body.dark-mode .nav-arrow:active { background: #000; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8); }
-
-/* =========================================
-   BOTÃO FLUTUANTE GLOBAL (APOIAR / CAFÉ)
-========================================= */
-.floating-support-btn {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #ffcb05;
-    color: var(--dex-border);
-    text-decoration: none;
-    padding: 10px 18px;
-    border: 3px solid var(--dex-border);
-    border-radius: 12px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 900;
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.8);
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background-color 0.2s ease;
-    animation: floatBtn 3s ease-in-out infinite;
-    will-change: transform;
-}
-
-@keyframes floatBtn {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-.floating-support-btn:hover {
-    background: #ffe066;
-    animation: none;
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 203, 5, 0.6), 5px 6px 0 rgba(0,0,0,0.8);
-}
-
-.floating-support-btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: 0 0 0 transparent;
-}
-
-body.dark-mode .floating-support-btn {
-    background: #e6b800;
-    box-shadow: 4px 4px 0 #000;
-}
-body.dark-mode .floating-support-btn:hover {
-    box-shadow: 0 0 15px rgba(230, 184, 0, 0.6), 5px 6px 0 #000;
-}
-
-@media (max-width: 850px) {
-    .floating-support-btn {
-        top: auto;
-        bottom: 25px;
-        right: 25px;
-        left: auto;
-        padding: 14px;
-        border-radius: 50%;
-        border-width: 4px;
-        gap: 0;
+    if (listContainer.innerHTML.trim() === '') {
+        Object.keys(cityMaps).forEach(key => {
+            const city = cityMaps[key];
+            const card = document.createElement('div');
+            card.className = `map-select-card ${currentCity === key ? 'active' : ''}`;
+            card.dataset.city = key;
+            
+            const thumbSrc = `continentes/${key}-icone.png`;
+            
+            card.innerHTML = `
+                <img src="${thumbSrc}" class="map-card-thumb" onerror="this.src='https://via.placeholder.com/55x55/111/32cd32?text=MAP'">
+                <div class="map-card-info">
+                    <span class="map-card-name">${city.name.toUpperCase()}</span>
+                    <span class="map-card-desc">SINAL Z:${city.minZ}-${city.maxZ}</span>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.map-select-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                currentCity = key;
+                currentZ = cityMaps[currentCity].defaultZ;
+                updateMapDisplay();
+            });
+            
+            listContainer.appendChild(card);
+        });
     }
     
-    .support-text {
-        display: none;
+    updateMapDisplay();
+}
+
+function changeZ(direction) {
+    const cityConfig = cityMaps[currentCity];
+    let newZ = currentZ;
+
+    if (direction === 'up') newZ = currentZ - 1; 
+    else if (direction === 'down') newZ = currentZ + 1; 
+
+    if (newZ >= cityConfig.minZ && newZ <= cityConfig.maxZ) {
+        currentZ = newZ;
+        updateMapDisplay();
+    }
+}
+
+function updateMapDisplay() {
+    const cityConfig = cityMaps[currentCity];
+    const mapImage = document.getElementById('map-image');
+    const statusText = document.getElementById('map-status-text');
+
+    mapImage.src = `continentes/${currentCity}-z${currentZ}.png`;
+    mapImage.alt = `Mapa de ${cityConfig.name}`;
+    statusText.textContent = `SINAL ESTABELECIDO: ${cityConfig.name.toUpperCase()}`;
+
+    mapImage.onerror = () => {
+        mapImage.src = ''; 
+        mapImage.alt = 'SINAL PERDIDO';
+        statusText.textContent = `⚠ ERRO DE SINAL (IMAGEM NÃO ENCONTRADA)`;
+    };
+
+    if(window.resetMapTransform) window.resetMapTransform();
+    renderMapPins();
+}
+
+// ==========================================
+// RENDERIZAÇÃO DE PINS DE POKÉMON NO MAPA
+// ==========================================
+function renderMapPins() {
+    const container = document.getElementById('map-pins-container');
+    if (!container) return; 
+    
+    container.innerHTML = ''; 
+    const cityConfig = cityMaps[currentCity];
+
+    if (!cityConfig.bounds) return;
+
+    const { minX, maxX, minY, maxY } = cityConfig.bounds;
+    let pinsData = {}; 
+    let totalPinsEncontrados = 0;
+
+    pokemonData.forEach(p => {
+        if (!p.locations) return;
+        
+        p.locations.forEach(loc => {
+            let stringsToCheck = [];
+            
+            if (typeof loc === 'string') {
+                stringsToCheck.push(loc);
+            } else if (typeof loc === 'object') {
+                if (loc.local) stringsToCheck.push(loc.local);
+                if (loc.rota) stringsToCheck.push(loc.rota);
+                if (loc.passos && Array.isArray(loc.passos)) {
+                    stringsToCheck = stringsToCheck.concat(loc.passos);
+                }
+            }
+
+            stringsToCheck.forEach(locString => {
+                let match = locString.match(/X\s*[:]?\s*(\d+)[^\d]*Y\s*[:]?\s*(\d+)/i);
+                if (match) {
+                    let x = parseInt(match[1]);
+                    let y = parseInt(match[2]);
+
+                    if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
+                        let key = `${x},${y}`; 
+                        if (!pinsData[key]) pinsData[key] = [];
+                        if (!pinsData[key].find(poke => poke.id === p.id)) {
+                            pinsData[key].push(p);
+                            totalPinsEncontrados++;
+                        }
+                    }
+                }
+            });
+        });
+    });
+
+    for (let key in pinsData) {
+        let [x, y] = key.split(',').map(Number);
+        let pokemons = pinsData[key];
+
+        let percentX = ((x - minX) / (maxX - minX)) * 100;
+        let percentY = ((y - minY) / (maxY - minY)) * 100;
+
+        let pin = document.createElement('div');
+        pin.className = 'map-pin';
+        pin.style.left = `${percentX}%`;
+        pin.style.top = `${percentY}%`;
+
+        let tooltipHTML = pokemons.map(p => 
+            `<img src="${p.image}" class="pin-poke-img" title="${p.name}" onclick="openModal('${p.id}')">`
+        ).join('');
+        
+        pin.innerHTML = `<div class="pin-tooltip">${tooltipHTML}</div>`;
+        container.appendChild(pin);
+    }
+}
+
+// ==========================================
+// UTILITÁRIOS E MODAL
+// ==========================================
+window.toggleAccordion = (arrowEl, event, passosEscapados) => {
+    if(event) event.stopPropagation();
+    const container = arrowEl.closest('.loc-accordion').querySelector('.loc-steps-container');
+    container.classList.toggle('hidden-steps');
+    arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
+
+    if (!container.classList.contains('hidden-steps') && passosEscapados) {
+        document.querySelector('.cat-btn[data-cat="mapas"]').click();
+        const arrayPassos = JSON.parse(decodeURIComponent(passosEscapados));
+        if(window.drawRouteOnMap) window.drawRouteOnMap(arrayPassos);
+    }
+};
+
+window.copyLoc = (text, el, event) => {
+    if(event) event.stopPropagation(); 
+    const msg = text;
+    navigator.clipboard.writeText(msg).then(() => {
+        const originalIcon = el.innerText;
+        el.innerText = '✅';
+        el.style.color = '#32cd32';
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1.2)';
+        setTimeout(() => { 
+            el.innerText = originalIcon; 
+            el.style.color = '';
+            el.style.opacity = '';
+            el.style.transform = '';
+        }, 1200);
+    }).catch(err => console.error('Erro ao copiar: ', err));
+};
+
+window.navigatePokemon = (direction, event) => {
+    if(event) event.stopPropagation(); 
+    if (currentVisibleList.length === 0) return;
+
+    currentModalIndex += direction;
+    if (currentModalIndex < 0) currentModalIndex = currentVisibleList.length - 1; 
+    else if (currentModalIndex >= currentVisibleList.length) currentModalIndex = 0; 
+
+    const targetPokemon = currentVisibleList[currentModalIndex];
+    openModal(targetPokemon.id); 
+};
+
+// ==========================================
+// ABRIR MODAL DO POKÉMON (COM FORMAS REGIONAIS)
+// ==========================================
+window.openModal = (id) => {
+    const p = pokemonData.find(x => x.id.toString() === id.toString());
+    if(!p) return;
+    
+    currentModalIndex = currentVisibleList.findIndex(x => x.id.toString() === id.toString());
+
+    const matchups = calculateMatchups(p.types);
+    const pCategory = p.category || 'normal';
+    
+    let baseId = p.id.toString();
+    if (/^\d+-/.test(baseId)) baseId = baseId.split('-')[0]; 
+
+    const relatives = pokemonData.filter(x => {
+        const xId = x.id.toString();
+        return xId === baseId || xId.startsWith(baseId + '-');
+    });
+    
+    const otherForms = relatives.filter(x => x.id.toString() !== p.id.toString());
+    
+    let formButtonsHTML = '';
+    if(otherForms.length > 0) {
+        formButtonsHTML = `<div class="form-btn-container">` + 
+            otherForms.map(f => {
+                let formName = f.id.toString().includes('-') ? f.id.toString().split('-')[1].toUpperCase() : 'NORMAL';
+                let icon = formName === 'ALOLA' ? '🌴' : (formName === 'GALAR' ? '⚔️' : (formName === 'HISUI' ? '🏔️' : '✨'));
+                if (formName === 'NORMAL') icon = '🌍';
+                return `<button class="form-toggle-btn" onclick="switchForm('${f.id}')">${icon} ${formName}</button>`;
+            }).join('') + 
+        `</div>`;
     }
     
-    .coffee-svg {
-        width: 24px;
-        height: 24px;
+    const locationsHTML = (p.locations || []).map(loc => {
+        if (typeof loc === 'string') {
+            return `
+                <div class="loc-button" onclick="updateRadar('${loc}', this)">
+                    <span class="loc-text">${loc}</span>
+                    <div class="loc-actions">
+                        <span class="loc-icon copy-icon" title="Copiar Coordenada" onclick="copyLoc('${loc}', this, event)">📋</span>
+                        <span class="loc-icon">🗺️</span>
+                    </div>
+                </div>
+            `;
+        } 
+        else if (typeof loc === 'object') {
+            const isRoute = loc.passos && loc.passos.length > 0;
+            const locName = loc.rota || loc.local || 'Local Desconhecido';
+            const noteHTML = loc.nota ? `<span class="info-tooltip loc-icon" data-tooltip="${loc.nota}">💬</span>` : '';
+
+            if (isRoute) {
+                const encodedPassos = encodeURIComponent(JSON.stringify(loc.passos));
+                const stepsHTML = loc.passos.map(passo => `
+                    <div class="loc-step" onclick="updateRadar('${passo}', this, event)">
+                        <span class="loc-text">${passo}</span>
+                        <div class="loc-actions">
+                            <span class="loc-icon copy-icon" title="Copiar Passo" onclick="copyLoc('${passo}', this, event)">📋</span>
+                            <span class="loc-icon">📍</span>
+                        </div>
+                    </div>
+                `).join('');
+
+                return `
+                    <div class="loc-accordion">
+                        <div class="loc-button accordion-toggle" onclick="toggleAccordion(this, event, '${encodedPassos}')">
+                            <span class="loc-text">${locName}</span>
+                            <div class="loc-actions">
+                                ${noteHTML}
+                                <span class="loc-icon copy-icon" title="Copiar Local" onclick="copyLoc('${locName}', this, event)">📋</span>
+                                <span class="loc-icon expand-arrow" title="Ver Rota no Mapa">▼</span>
+                            </div>
+                        </div>
+                        <div class="loc-steps-container hidden-steps">
+                            ${stepsHTML}
+                        </div>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="loc-button" onclick="updateRadar('${locName}', this)">
+                        <span class="loc-text">${locName}</span>
+                        <div class="loc-actions">
+                            ${noteHTML}
+                            <span class="loc-icon copy-icon" title="Copiar Coordenada" onclick="copyLoc('${locName}', this, event)">📋</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    }).join('');
+
+    // ==========================================
+    // LÓGICA DE STATUS E NATURES (COMPACTA E NEGRIFADA)
+    // ==========================================
+    const statColors = {
+        hp: '#32cd32', atk: '#e3350d', def: '#ff9800',
+        spatk: '#3498db', spdef: '#9c27b0', spd: '#f1c40f'
+    };
+
+    const baseAtk = p.stats?.atk || 0;
+    const baseSpAtk = p.stats?.spatk || 0;
+    const baseDef = p.stats?.def || 0;
+    const baseSpDef = p.stats?.spdef || 0;
+    
+    let recommendedNatures = [];
+
+    if (p.natures && Array.isArray(p.natures)) {
+        recommendedNatures = p.natures.map(n => ({ name: n, desc: 'Recomendada', bold: true }));
+    } else if (baseAtk > baseSpAtk) {
+        recommendedNatures = [
+            { name: "ADAMANT", desc: "+ATK / -SP.ATK", bold: true }, 
+            { name: "BRAVE", desc: "+ATK / -SPD", bold: false },     
+            { name: "JOLLY", desc: "+SPD / -SP.ATK", bold: false }   
+        ];
+    } else if (baseSpAtk > baseAtk) {
+        recommendedNatures = [
+            { name: "MODEST", desc: "+SP.ATK / -ATK", bold: true }, 
+            { name: "QUIET", desc: "+SP.ATK / -SPD", bold: false },  
+            { name: "TIMID", desc: "+SPD / -ATK", bold: false }      
+        ];
+    } else {
+        recommendedNatures = [
+            { name: "LONELY", desc: "+ATK / -DEF", bold: true },
+            { name: "MILD", desc: "+SP.ATK / -DEF", bold: false },
+            { name: "HASTY", desc: "+SPD / -DEF", bold: false }
+        ];
+    }
+
+    const totalDef = baseDef + baseSpDef;
+    if (totalDef >= 180 && !p.natures) {
+        if (baseDef >= baseSpDef && baseAtk > baseSpAtk) {
+            recommendedNatures[2] = { name: "IMPISH", desc: "+DEF / -SP.ATK", bold: false };
+        } else if (baseSpDef >= baseDef && baseSpAtk > baseAtk) {
+            recommendedNatures[2] = { name: "CALM", desc: "+SP.DEF / -ATK", bold: false };
+        }
+    }
+
+    const maxStatValue = Math.max(...Object.values(p.stats || {}));
+
+    const statsHTML = `
+        <div class="nature-container">
+            <span class="nature-title">NATURES RECOMENDADAS</span>
+            <div class="nature-pills">
+                ${recommendedNatures.map(n => 
+                    `<span class="nature-pill nature-tooltip" data-tooltip="${n.desc}">
+                        ${n.bold ? `<b>${n.name}</b>` : n.name}
+                    </span>`
+                ).join('')}
+            </div>
+        </div>
+        <div class="stats-list-animated">
+            ${Object.entries(p.stats || {}).map(([name, val]) => {
+                const isHighest = val === maxStatValue;
+                const cor = statColors[name.toLowerCase()] || '#ff4b2b';
+                
+                return `
+                <div class="stat-row ${isHighest ? 'stat-highest' : ''}">
+                    <label>${name.toUpperCase()}</label>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="--target-width:${(val/255)*100}%; background-color:${cor};"></div>
+                    </div>
+                    <span class="stat-num">${val}</span>
+                </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+
+    let rightWingHTML = '';
+
+    if (pCategory === 'boss') {
+        rightWingHTML = `
+            <div class="radar-module">
+                <div class="radar-display" id="radar-screen">
+                    <div class="radar-grid"></div><div class="radar-beam"></div>
+                    <p id="radar-label">RASTREANDO...</p>
+                </div>
+            </div>
+            
+            <div class="boss-loot-module">
+                <h4 class="label-tech">RECOMPENSA DIÁRIA</h4>
+                <div class="loot-box">${p.loot || '???'}</div>
+                
+                <div class="boss-bonus-container">
+                    <span class="bonus-badge shiny-bonus" title="Derrotar a versão Shiny garante o dobro de recompensas!" onclick="toggleShinyModal(this, '${p.name}', '${p.image}')">✨ SHINY: 2X LOOT</span>
+                    <span class="bonus-badge fds-bonus" title="Aos sábados e domingos, o loot padrão é dobrado!">📅 FDS: 2X LOOT</span>
+                </div>
+            </div>
+
+            <div class="boss-guide-module">
+                <h4 class="label-tech">MANUAL DE COMBATE</h4>
+                <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
+            </div>
+            
+            <div class="eff-module">
+                <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                <div class="eff-group">
+                    <label>FRAQUEZAS (Leva 2x Dano)</label>
+                    <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+                <div class="eff-group">
+                    <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                    <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+            </div>
+        `;
+    } else if (pCategory === 'dark') {
+        let soulsHTML = '';
+        if (p.souls) {
+            const soulsNormal = p.souls.normal ? p.souls.normal : '???';
+            const soulsEternizado = p.souls.eternizado ? p.souls.eternizado : '???';
+            soulsHTML = `
+                <div class="souls-module">
+                    <h4 class="label-tech">CUSTO DE CONVERSÃO (SOULS)</h4>
+                    <div class="souls-container">
+                        <div class="soul-box"><span class="soul-label">NORMAL</span><span class="soul-value">${soulsNormal}</span></div>
+                        <div class="soul-box eternizado"><span class="soul-label">ETERNIZADO</span><span class="soul-value">${soulsEternizado}</span></div>
+                    </div>
+                </div>
+            `;
+        } else {
+            const textoExclusivo = p.exclusive ? p.exclusive : 'CAPTURA EXCLUSIVA / EVENTO';
+            soulsHTML = `<div class="souls-module"><h4 class="label-tech">MÉTODO DE OBTENÇÃO</h4><span class="exclusive-badge">${textoExclusivo.toUpperCase()}</span></div>`;
+        }
+
+        rightWingHTML = `
+            <div class="radar-module">
+                <div class="radar-display" id="radar-screen">
+                    <div class="radar-grid"></div><div class="radar-beam"></div>
+                    <p id="radar-label">RASTREANDO...</p>
+                </div>
+            </div>
+            <div class="data-module">
+                <h4 class="label-tech">STATUS BASE</h4>
+                <div class="stats-list">${statsHTML}</div>
+            </div>
+            ${soulsHTML}
+            <div class="eff-module">
+                <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                <div class="eff-group">
+                    <label>FRAQUEZAS (Leva 2x Dano)</label>
+                    <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+                <div class="eff-group">
+                    <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                    <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+            </div>
+        `;
+    } else {
+        rightWingHTML = `
+            <div class="radar-module">
+                <div class="radar-display" id="radar-screen">
+                    <div class="radar-grid"></div><div class="radar-beam"></div>
+                    <p id="radar-label">RASTREANDO...</p>
+                </div>
+            </div>
+            <div class="data-module">
+                <h4 class="label-tech">STATUS BASE</h4>
+                <div class="stats-list">${statsHTML}</div>
+            </div>
+            <div class="eff-module">
+                <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
+                <div class="eff-group">
+                    <label>FRAQUEZAS (Leva 2x Dano)</label>
+                    <div class="eff-icons">${matchups.weak.length > 0 ? matchups.weak.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+                <div class="eff-group">
+                    <label>RESISTÊNCIAS (Leva 0.5x Dano)</label>
+                    <div class="eff-icons">${matchups.resist.length > 0 ? matchups.resist.map(t => `<div class="eff-dot" title="${t}" style="background:var(--type-${t.toLowerCase()})"></div>`).join('') : '<span style="color:#aaa; font-size:0.7rem;">Nenhuma</span>'}</div>
+                </div>
+            </div>
+            <div class="evo-module">
+                <h4 class="label-tech">CADEIA EVOLUTIVA</h4>
+                <div class="evo-icons" id="evo-container">
+                    <span class="blink" style="color: #ffcb05;">Sincronizando...</span>
+                </div>
+            </div>
+        `;
+    }
+
+    document.getElementById('modal-body').innerHTML = `
+        <div class="modal-pokedex-view">
+            <div class="modal-left-wing">
+                <div class="screen-border" style="position: relative;">
+                    <button class="nav-arrow prev-arrow" title="Anterior" onclick="navigatePokemon(-1, event)">&#10094;</button>
+                    <button class="nav-arrow next-arrow" title="Próximo" onclick="navigatePokemon(1, event)">&#10095;</button>
+                    <div class="main-screen ${pCategory !== 'normal' ? 'main-screen-stacked' : ''}">
+                        ${pCategory !== 'normal' ? `
+                            <div class="stacked-container">
+                                <img src="${p.image}" class="poke-img-stacked">
+                                <h2 class="poke-name-stacked">${p.name}</h2>
+                                <div class="modal-gen-bar stacked-gen-bar">${pCategory === 'boss' ? 'ALERTA DE BOSS' : 'CLASSE DARK'}</div>
+                                <div class="type-tags stacked-type-tags">
+                                    ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
+                                </div>
+                                ${formButtonsHTML}
+                            </div>
+                        ` : `
+                            <img src="${p.image}" class="poke-img-large">
+                            <div class="screen-info">
+                                <h2>${p.name}</h2>
+                                <div class="modal-gen-bar">${isNaN(p.generation) ? p.generation.toUpperCase() : 'GERAÇÃO ' + p.generation}</div>
+                                <div class="type-tags">
+                                    ${p.types.map(t => `<span class="tag" style="background:var(--type-${t.toLowerCase()})">${t}</span>`).join('')}
+                                </div>
+                                ${formButtonsHTML}
+                            </div>
+                        `}
+                    </div>
+                </div>
+                <div class="location-module">
+                    <h4 class="label-tech">${pCategory === 'boss' ? 'COORDENADA DO COVIL' : 'LOCALIZAÇÕES DETECTADAS'}</h4>
+                    <div class="loc-list-scroll">${locationsHTML || '<p style="color:#aaa; font-family:monospace;">Nenhum registro encontrado.</p>'}</div>
+                </div>
+            </div>
+            <div class="modal-right-wing">
+                ${rightWingHTML}
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('pokemon-modal').classList.remove('hidden');
+    
+    setTimeout(() => {
+        const firstLoc = document.querySelector('.loc-button');
+        if(firstLoc) firstLoc.click();
+    }, 100);
+
+    if (pCategory === 'normal') {
+        loadEvolutions(p.name);
+    }
+};
+
+async function loadEvolutions(pokemonName) {
+    const container = document.getElementById('evo-container');
+    if (!container) return; 
+    try {
+        let apiName = pokemonName.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/\s+/g, '-');
+        if(apiName === 'mrmime') apiName = 'mr-mime'; 
+
+        const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${apiName}`);
+        if(!speciesRes.ok) throw new Error();
+        const speciesData = await speciesRes.json();
+        
+        const evoRes = await fetch(speciesData.evolution_chain.url);
+        const evoData = await evoRes.json();
+        
+        let allEvos = [];
+        function extractEvo(node) {
+            const idMatch = node.species.url.match(/\/(\d+)\/$/);
+            if(idMatch) allEvos.push({ name: node.species.name, id: parseInt(idMatch[1]) });
+            node.evolves_to.forEach(child => extractEvo(child));
+        }
+        extractEvo(evoData.chain);
+        
+        container.innerHTML = allEvos.map(e => {
+            const inOurDex = pokemonData.find(p => p.id.toString() === e.id.toString() && (!p.category || p.category === 'normal'));
+            if(inOurDex) {
+                return `<img src="${inOurDex.image}" class="evo-sprite" title="${inOurDex.name}" onclick="openModal('${inOurDex.id}')">`;
+            } else {
+                return `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${e.id}.png" class="evo-sprite missing" title="${e.name} (Fora do DB)">`;
+            }
+        }).join('<span class="evo-arrow">❯</span>'); 
+
+    } catch(err) {
+        container.innerHTML = '<span style="color:#ff6b6b; font-size:0.7rem; font-family: monospace;">Sincronização Indisponível.</span>';
     }
 }
 
-/* =========================================
-   BOTÃO FINAL DO MODAL DE APOIO
-========================================= */
-.final-support-btn {
-    display: block;
-    margin-top: 15px;
-    background: #ffcb05;
-    color: #111;
-    text-align: center;
-    text-decoration: none;
-    padding: 12px;
-    border: 4px solid #111;
-    border-radius: 8px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    box-shadow: 4px 4px 0 #111;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
-    will-change: transform;
-}
-
-.final-support-btn:hover {
-    background: #ffe066;
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 #111;
-}
-
-.final-support-btn:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 transparent;
-}
-
-.final-support-btn.hidden {
-    display: none !important;
-}
-
-body.dark-mode .final-support-btn {
-    background: #e6b800;
-}
-
-/* =========================================
-   ETIQUETA BETA (BOTÃO MAPAS)
-========================================= */
-.beta-badge {
-    position: absolute;
-    top: -10px;
-    right: -8px;
-    background: #ffcb05;
-    color: #111;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.5rem;
-    padding: 3px 4px;
-    border: 2px solid var(--dex-border);
-    border-radius: 4px;
-    transform: rotate(6deg);
-    box-shadow: 2px 2px 0 var(--dex-border);
-    animation: betaPulse 2s infinite;
-    z-index: 10;
-    pointer-events: none;
-}
-
-@keyframes betaPulse {
-    0%, 100% { transform: rotate(6deg) scale(1); filter: brightness(1); }
-    50% { transform: rotate(6deg) scale(1.1); filter: brightness(1.1); }
-}
-
-body.dark-mode .beta-badge {
-    background: #e6b800;
-    box-shadow: 2px 2px 0 #000;
-    border-color: #000;
-}
-
-/* =========================================
-   ETIQUETAS DE BÔNUS DO BOSS
-========================================= */
-.boss-bonus-container {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 10px;
-    flex-wrap: wrap;
-}
-
-.bonus-badge {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.55rem;
-    font-weight: bold;
-    padding: 6px 8px;
-    border-radius: 6px;
-    border: 2px solid var(--dex-border);
-    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
-    cursor: help;
-    transition: transform 0.1s ease;
-}
-
-.bonus-badge:hover {
-    transform: scale(1.05);
-}
-
-.shiny-bonus {
-    background: #fff;
-    color: #d4af37; 
-    border-color: #d4af37;
-}
-
-.fds-bonus {
-    background: #3498db; 
-    color: #fff;
-}
-
-body.dark-mode .shiny-bonus {
-    background: #2a2a2c;
-    color: #ffcb05;
-    border-color: #ffcb05;
-}
-
-.poke-img-stacked {
-    transition: opacity 0.15s ease-in-out;
-}
-
-.bonus-badge.shiny-bonus {
-    cursor: pointer;
-}
-
-.shiny-bonus.active-shiny {
-    background: #d4af37; 
-    color: #fff;
-    border-color: #d4af37;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 2px 2px 0 var(--dex-border);
-    transform: scale(1.05);
-}
-
-body.dark-mode .shiny-bonus.active-shiny {
-    background: #ffcb05;
-    color: #111;
-    border-color: #ffcb05;
-    box-shadow: 0 0 15px rgba(255, 203, 5, 0.8), 2px 2px 0 #000;
-}
-
-/* =========================================
-   ALERTA DE STATUS SHINY (BOSS)
-========================================= */
-.modal-gen-bar.shiny-buff-bar {
-    background: #d4af37; 
-    color: #fff;
-    border: 2px dashed #ffcb05;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-    animation: buffPulse 1.5s infinite;
-}
-
-@keyframes buffPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); box-shadow: 0 0 15px rgba(255, 203, 5, 0.9); }
-}
-
-body.dark-mode .modal-gen-bar.shiny-buff-bar {
-    background: #ffcb05;
-    color: #111;
-    border-color: #fff;
-}
-
-/* =========================================
-   SISTEMA DE REPORT (BOTÃO E MODAL)
-========================================= */
-.floating-report-btn {
-    position: fixed; 
-    top: 85px; 
-    left: 25px; 
-    right: auto; 
-    z-index: 9999;
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-    background: #ff4b2b; 
-    color: #fff; 
-    text-decoration: none;
-    padding: 10px 18px; 
-    border: 3px solid var(--dex-border); 
-    border-radius: 12px;
-    font-family: 'Outfit', sans-serif; 
-    font-size: 0.85rem; 
-    font-weight: 900;
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.8);
-    width: max-content; 
-    height: max-content;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
-}
-.floating-report-btn:hover { 
-    background: #ff3333; 
-    transform: translateY(-2px) scale(1.05); 
-    box-shadow: 0 0 15px rgba(255, 75, 43, 0.6), 5px 6px 0 rgba(0,0,0,0.8); 
-}
-.floating-report-btn:active { 
-    transform: translate(3px, 3px); 
-    box-shadow: 0 0 0 transparent; 
-}
-
-.report-screen { 
-    padding: 30px; 
-    align-items: stretch !important; 
-    text-align: left;
-}
-.report-title { 
-    font-family: 'Press Start 2P', monospace; 
-    font-size: 1rem; 
-    color: var(--dex-border); 
-    margin-bottom: 20px; 
-    text-align: center; 
-    border-bottom: 4px dashed var(--dex-border); 
-    padding-bottom: 15px; 
-}
-.report-form { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-    width: 100%; 
-}
-.report-form label { 
-    font-family: 'Press Start 2P', monospace; 
-    font-size: 0.6rem; 
-    color: var(--dex-border); 
-    margin-bottom: -5px; 
-    margin-top: 5px;
-}
-.report-form input, 
-.report-form select, 
-.report-form textarea { 
-    width: 100%; 
-    padding: 12px; 
-    border: 4px solid var(--dex-border); 
-    border-radius: 8px; 
-    background: #fff; 
-    color: var(--dex-border);
-    font-family: 'Outfit', sans-serif; 
-    font-weight: 700; 
-    font-size: 1rem; 
-    outline: none; 
-    box-sizing: border-box; 
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-}
-.report-form input:focus, 
-.report-form select:focus, 
-.report-form textarea:focus { 
-    border-color: #ffcb05; 
-    background: #fffbe6;
-}
-.report-status { 
-    text-align: center; 
-    font-family: monospace; 
-    font-size: 0.85rem; 
-    font-weight: bold; 
-    margin-top: 5px; 
-    height: 15px; 
-}
-#submit-report-btn {
-    margin-top: 10px;
-    padding: 15px;
-    font-size: 0.85rem;
-    cursor: pointer;
-}
-
-body.dark-mode .floating-report-btn { box-shadow: 4px 4px 0 #000; }
-body.dark-mode .report-screen { background: #1a1a1a; border-color: #000; }
-body.dark-mode .report-title { color: #ffcb05; border-color: #333; }
-body.dark-mode .report-form label { color: #aaa; }
-body.dark-mode .report-form input, 
-body.dark-mode .report-form select, 
-body.dark-mode .report-form textarea { background: #2a2a2c; color: #fff; border-color: #000; }
-body.dark-mode .report-form input:focus, 
-body.dark-mode .report-form select:focus, 
-body.dark-mode .report-form textarea:focus { border-color: #ffcb05; }
-
-@media (max-width: 850px) {
-    .floating-report-btn { 
-        top: auto; 
-        bottom: 25px; 
-        left: 25px; 
-        right: auto; 
-        padding: 14px; 
-        border-radius: 50%; 
-        border-width: 4px;
-        gap: 0;
+function calculateMatchups(pTypes) {
+    let multipliers = {}; 
+    types.forEach(t => multipliers[t] = 1);
+    pTypes.forEach(pt => {
+        const mods = typeModifiers[pt] || {};
+        types.forEach(atk => { if(mods[atk] !== undefined) multipliers[atk] *= mods[atk]; });
+    });
+    let weak = [], resist = [];
+    for(const [t, m] of Object.entries(multipliers)) { 
+        if(m > 1) weak.push(t); 
+        if(m < 1) resist.push(t); 
     }
-    .report-text { display: none; }
-    .report-icon { font-size: 1.2rem; }
+    return { weak, resist };
 }
 
-/* =========================================
-   BOTÕES DE FORMAS REGIONAIS (DISCRETOS)
-========================================= */
-.form-btn-container { 
-    display: flex; gap: 6px; margin-top: 8px; 
-    justify-content: flex-end; flex-wrap: wrap; 
-}
-.main-screen-stacked .form-btn-container { 
-    justify-content: center; 
-}
+window.updateRadar = (name, el, event) => {
+    if(event) event.stopPropagation();
 
-.form-toggle-btn {
-    background: rgba(0, 0, 0, 0.05); 
-    border: 1px dashed rgba(0, 0, 0, 0.3); 
-    border-radius: 4px;
-    padding: 4px 6px; 
-    font-family: 'Press Start 2P', monospace; 
-    font-size: 0.5rem; 
-    color: #555; 
-    cursor: pointer; 
-    box-shadow: none; 
-    transition: all 0.2s ease; 
-    display: flex; 
-    align-items: center; 
-    gap: 4px;
-}
-
-.form-toggle-btn:hover { 
-    background: rgba(0, 0, 0, 0.15); 
-    color: var(--dex-border); 
-    border: 1px solid var(--dex-border); 
-    transform: translateY(-1px);
-}
-
-.form-toggle-btn:active { 
-    transform: translateY(1px); 
-}
-
-body.dark-mode .form-toggle-btn { 
-    background: rgba(255, 255, 255, 0.05); 
-    color: #aaa; 
-    border-color: rgba(255, 255, 255, 0.2); 
-    box-shadow: none;
-}
-body.dark-mode .form-toggle-btn:hover { 
-    background: rgba(255, 255, 255, 0.15); 
-    color: #fff; 
-    border-color: #fff;
-}
-
-/* ==========================================
-   AJUSTES ESPECÍFICOS DO FILTRO MESTRE E REGIÕES
-========================================== */
-.master-toggle {
-    background: #444; /* Fundo grafite igual às abas de cima */
-    color: #aaa;      /* Texto acinzentado */
-    text-align: center;
-    border-color: var(--dex-border);
-    font-size: 0.85rem;
-    padding: 12px 15px;
-}
-
-.master-toggle:hover {
-    background: #555; /* Clareia levemente ao passar o mouse */
-    color: #fff;      /* Texto fica branco para dar destaque */
-}
-
-/* Comportamento no Modo Escuro */
-body.dark-mode .master-toggle {
-    background: #2a2a2c; /* Cor padrão dos botões inativos no Dark Mode */
-    color: #aaa;
-}
-
-body.dark-mode .master-toggle:hover {
-    background: #333;
-    color: #fff;
-}
-
-#gen-filters .filter-pill[data-gen="alola"], 
-#gen-filters .filter-pill[data-gen="hisui"] {
-    flex-basis: calc(50% - 4px); 
-    max-width: calc(50% - 4px);
-}
-
-#gen-filters .filter-pill[data-gen="all"] {
-    flex-basis: 100%; 
-    max-width: 100%;
-}
-
-/* ==========================================
-   VISOR DIGITAL VIP - VERSÃO MINIMALISTA (LCD)
-========================================== */
-.vip-marquee-container {
-    width: 100%; /* Trava na largura do painel */
-    box-sizing: border-box;
-    overflow: hidden; /* Corta qualquer coisa que tentar vazar */
-    background: rgba(0, 0, 0, 0.05);
-    padding: 3px;
-    border-radius: 10px;
-    border: 2px solid rgba(0, 0, 0, 0.12);
-    margin-bottom: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-    box-shadow: none;
-}
-
-.vip-marquee-container:active {
-    transform: translateY(2px);
-}
-
-.vip-marquee-screen {
-    background: #ffffff; 
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    padding: 5px 10px 5px 42px; 
-    overflow: hidden;
-    position: relative;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.vip-marquee-screen::before {
-    content: 'APOIADORES';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    background: var(--dex-dark-red); 
-    color: #ffffff;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.5rem;
-    display: flex;
-    align-items: center;
-    padding: 0 6px;
-    z-index: 2;
-}
-
-.vip-marquee-text {
-    display: inline-block;
-    color: #444444; 
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.52rem; 
-    text-shadow: none; 
-    padding-left: 100%;
-    animation: marqueeScroll 28s linear infinite; 
-}
-
-@keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
-.vip-marquee-screen::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(115deg, transparent 45%, rgba(255,255,255,0.4) 50%, transparent 55%);
-    pointer-events: none;
-    z-index: 3;
-    opacity: 0.4;
-}
-
-body.dark-mode .vip-marquee-container {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-body.dark-mode .vip-marquee-screen {
-    background: #0d0d0d; 
-    border-color: #050505;
-    box-shadow: inset 0 1px 4px rgba(0,0,0,0.6);
-}
-
-body.dark-mode .vip-marquee-screen::before {
-    background: #ffcb05; 
-    color: #0d0d0d;
-}
-
-body.dark-mode .vip-marquee-text {
-    color: #ffcb05; 
-    text-shadow: 0 0 3px rgba(255, 203, 5, 0.2); 
-}
-
-body.dark-mode .vip-marquee-screen::after {
-    background: linear-gradient(115deg, transparent 45%, rgba(255,255,255,0.15) 50%, transparent 55%);
-    opacity: 0.2;
-}
-
-/* Modal VIP - Seções e Grade */
-.vip-subtitle {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.6rem;
-    color: var(--dex-border);
-    text-align: center;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-}
-
-.vip-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.03);
-}
-
-.vip-name-badge {
-    background: #fff;
-    border: 2px solid var(--dex-border);
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-family: monospace;
-    font-weight: 900;
-    font-size: 0.8rem;
-    color: var(--dex-border);
-    box-shadow: 2px 2px 0 var(--dex-border);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: transform 0.2s;
-}
-
-.vip-name-badge:hover {
-    transform: scale(1.05);
-}
-
-.donator-badge { border-color: #f1c40f; }
-.donator-badge::before { content: '☕'; font-size: 0.85rem; }
-
-.contributor-badge { border-color: #3498db; }
-.contributor-badge::before { content: '🗺️'; font-size: 0.85rem; }
-
-body.dark-mode .vip-subtitle { color: #aaa; }
-body.dark-mode .vip-grid { background: rgba(0,0,0,0.2); }
-body.dark-mode .vip-name-badge { background: #2a2a2c; color: #fff; box-shadow: 2px 2px 0 #000; }
-body.dark-mode .donator-badge { border-color: #ffcb05; color: #ffcb05; }
-body.dark-mode .contributor-badge { border-color: #3498db; color: #3498db; }
-
-/* ==============================================================
-   BOTÃO DE CHAMADA DO APP (ESTILO POKÉDEX RETRÔ) E MODAL
-============================================================== */
-.app-download-trigger-btn {
-    width: 100%;
-    background: #ffcb05; /* Amarelo elétrico forte */
-    color: #111;
-    border: 3px solid var(--dex-border);
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.65rem;
-    font-weight: 900;
-    text-align: center;
-    cursor: pointer;
-    margin-bottom: 12px;
-    box-shadow: 4px 4px 0 var(--dex-border);
-    transition: transform 0.05s linear, box-shadow 0.05s linear;
-    outline: none;
-    will-change: transform;
-    display: block;
-    letter-spacing: 0.5px;
-}
-
-.app-download-trigger-btn:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 transparent;
-}
-
-/* Cores do texto no Modal - Modo Claro (Padrão) */
-.app-modal-text {
-    color: #333333;
-}
-.app-modal-text b {
-    color: #000000;
-}
-
-/* ==============================================================
-   ADAPTAÇÕES PARA O MODO ESCURO (DARK MODE)
-============================================================== */
-body.dark-mode .app-download-trigger-btn {
-    background: #e6b800; /* Tom de ouro mais denso */
-    box-shadow: 4px 4px 0 #000;
-    border-color: #000;
-}
-
-body.dark-mode .app-modal-text {
-    color: #dddddd;
-}
-body.dark-mode .app-modal-text b {
-    color: #ffffff;
-}
-
-body.dark-mode #download-app-modal .report-screen {
-    background: #1a1a1a;
-    border-color: #e3350d !important;
-}
-body.dark-mode #download-app-modal .report-title {
-    color: #e3350d;
-    border-color: #e3350d !important;
-}
-
-/* ==============================================================
-   OTIMIZAÇÃO EXTREMA: MOBILE HORIZONTAL (LANDSCAPE / APK)
-============================================================== */
-@media (max-height: 600px) and (orientation: landscape) {
-
-    /* Ajustes dos Modais Secundários para Modo Deitado */
-    .oak-container {
-        width: 95%; /* Fica mais largo na horizontal */
-        max-width: 700px;
-    }
-    .oak-screen {
-        padding: 15px;
-        max-height: 85vh;
-    }
-
-    .vip-grid {
-        max-height: 150px; /* Limita a grade de apoiadores para caber na tela */
+    document.querySelectorAll('.loc-button, .loc-step').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    
+    const screen = document.getElementById('radar-screen');
+    const nomeSeguro = name.replace(/\//g, '-');
+    const imagePath = `mapas/${nomeSeguro}.png`; 
+    
+    let locName = name.toUpperCase();
+    let coords = "SINAL GPS ESTABELECIDO";
+    
+    const match = name.match(/^(.*?)\s*\((.*?)\)$/);
+    if(match) {
+        locName = match[1].toUpperCase();
+        coords = match[2].toUpperCase();
     }
     
-    /* 1. Transforma o Modal numa visão Lado a Lado (Estilo PC) */
-    .modal-pokedex-view {
-        flex-direction: row; 
-        height: 95vh; /* Ocupa o máximo de altura possível */
-        width: 100%;
-        max-width: 95vw;
+    screen.innerHTML = `
+        <img src="${imagePath}" class="map-img" onerror="this.style.display='none'; showRadarFallback('${name}')">
+        <div class="radar-grid"></div>
+        <div class="radar-beam"></div>
+        <div class="map-overlay"></div>
+        
+        <div class="sat-hud">
+            <div class="sat-hud-line rec">● REC</div>
+            <div class="sat-hud-line">LOC: ${locName}</div>
+            <div class="sat-hud-line" style="color:#ffd700;">${coords}</div>
+        </div>
+    `;
+};
+
+window.showRadarFallback = (name) => {
+    const screen = document.getElementById('radar-screen');
+    let locName = name.toUpperCase();
+    let coords = "BUSCANDO DADOS...";
+    const match = name.match(/^(.*?)\s*\((.*?)\)$/);
+    if(match) {
+        locName = match[1].toUpperCase();
+        coords = match[2].toUpperCase();
     }
 
-    /* 2. Divide a tela 50/50 */
+    screen.innerHTML = `
+        <div class="radar-grid"></div>
+        <div class="radar-beam"></div>
+        <div class="map-overlay"></div>
+        
+        <div class="sat-hud">
+            <div class="sat-hud-line" style="color:#ff4b2b;">⚠ SEM VISUAL</div>
+            <div class="sat-hud-line">LOC: ${locName}</div>
+            <div class="sat-hud-line blink" style="color:#ffd700;">${coords}</div>
+        </div>
+    `;
+};
 
-    /* Traz os botões de fechar totalmente para dentro no modo deitado */
-    .close-btn {
-        top: 5px;
-        right: 5px;
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
-    .oak-close-btn {
-        top: 5px;
-        right: 5px;
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
+// ==========================================
+// MENSAGENS INICIAIS DO PROFESSOR OAK
+// ==========================================
+const oakDialogues = [
+    "Olá! Bem-vindo ao mundo de PokemonR - PBR!",
+    "Esta Pokedex e uma pagina criada de fãs para fãs e NAO é um produto oficial do Servidor",
+    "Um agradecimento super especial a comunidade pelo apoio continuo!",
+    "Use a barra de pesquisa ou os filtros para rastrear os POKeMON. Boa caca!"
+];
 
-    .modal-left-wing, .modal-right-wing {
-        width: 50%;
-        padding: 10px 15px; /* Reduz drasticamente as margens internas */
-        border-bottom: none;
-    }
+let currentDialogIndex = 0;
+let currentCharIndex = 0;
+let isTyping = false;
+let typingSpeed = 30;
+let typeInterval;
+
+function initOakModal() {
+    const oakModal = document.getElementById('oak-modal');
+    const closeBtn = document.getElementById('close-oak');
+    const dialogBox = document.getElementById('oak-dialog-box');
     
-    .modal-left-wing {
-        border-right: 4px solid var(--dex-border); /* Borda divisória */
-    }
+    oakModal.classList.remove('hidden');
+    startTyping();
 
-    /* 3. Compactação do Cabeçalho (Telinha Verde) */
-    .screen-border {
-        padding: 8px 15px; 
-        border-radius: 12px;
-        margin-bottom: 8px;
-    }
-    .main-screen {
-        padding: 5px 10px;
-    }
-    
-    /* 4. Encolhe os Sprites e as Fontes para caberem sem vazar */
-    .poke-img-large, .poke-img-stacked {
-        width: 60px; 
-        height: 60px;
-    }
-    .screen-info h2, .poke-name-stacked {
-        font-size: 1rem;
-        margin-bottom: 2px;
-    }
-    .modal-gen-bar {
-        font-size: 0.55rem;
-        padding: 2px 6px;
-        margin-bottom: 4px;
-    }
-    .tag {
-        font-size: 0.55rem;
-        padding: 2px 5px;
-    }
+    closeBtn.addEventListener('click', () => { oakModal.classList.add('hidden'); });
 
-    /* 5. Ajuste fino na lista de localizações e stats */
-    .location-module {
-        max-height: none; /* Remove o limite anterior */
-        flex: 1; /* Ocupa o resto do espaço disponível */
-    }
-    .loc-list-scroll {
-        max-height: 120px; /* Garante que cabe na telinha achatada */
-    }
-    
-    .stat-row {
-        gap: 5px;
-        font-size: 0.65rem;
-    }
-    .bar-container {
-        height: 8px; /* Barras mais finas */
-    }
+    dialogBox.addEventListener('click', () => {
+        const textContainer = document.getElementById('oak-text');
+        const arrow = document.getElementById('oak-arrow');
 
-    /* 6. Oculta elementos que roubam espaço atoa no modo deitado */
-    .radar-module {
-        display: none !important; /* Tchau radar gigante! */
-    }
-
-    /* 7. Recolhe os botões flutuantes para não atrapalhar o toque na tela */
-    .floating-report-btn, .floating-support-btn {
-        transform: scale(0.65);
-        transform-origin: bottom;
-        top: auto;
-        padding: 14px;
-        border-radius: 50%;
-        gap: 0;
-    }
-    .floating-report-btn { left: 5px; bottom: 5px; }
-    .floating-support-btn { right: 5px; bottom: 5px; left: auto; }
-
-    /* Esconde o texto e mostra apenas o ícone no modo deitado */
-    .support-text, .report-text {
-        display: none;
-    }
-    .coffee-svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    /* =======================================================
-       CORREÇÃO DE MODAIS PARA WEBVIEW (HORIZONTAL)
-    ======================================================= */
-    /* 1. Trava a altura extrema na horizontal */
-    .oak-container, .modal-content { 
-        max-height: 85vh !important; 
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    /* 2. Scroll interno para formulários e textos na tela deitada */
-    .report-screen, .app-modal-text {
-        max-height: 100% !important;
-        overflow-y: auto !important;
-        padding: 10px 15px !important; /* Super compacto */
-    }
-
-    /* 3. Botão X ancorado na zona super segura */
-    .close-btn, .oak-close-btn {
-        position: absolute !important;
-        top: 0px !important; 
-        right: 0px !important; 
-        width: 28px !important; 
-        height: 28px !important; 
-        font-size: 1rem !important;
-        z-index: 50 !important;
-    }
-
-    /* 4. Esmagamento Extremo do Formulário (Para não precisar rolar tanto) */
-    .report-title { font-size: 0.7rem !important; margin-bottom: 6px !important; padding-bottom: 6px !important; }
-    .report-form { gap: 6px !important; }
-    .report-form label { font-size: 0.5rem !important; }
-    .report-form input, .report-form select, .report-form textarea { padding: 6px !important; font-size: 0.75rem !important; }
-    #submit-report-btn { padding: 8px !important; font-size: 0.7rem !important; margin-top: 5px !important; }
-    .vip-sections { max-height: 60vh !important; }
-
-    #oak-modal .oak-screen, 
-    #support-modal .oak-screen { 
-        flex-direction: row; 
-        align-items: center; 
-        padding: 15px; 
-    }
-    
-    .oak-sprite-area { 
-        position: relative !important; 
-        top: 0 !important; 
-        left: 0 !important; 
-        transform: none !important; 
-        width: 70px; 
-        height: 100px; 
-        margin-right: 15px; 
-        display: flex !important;
-    }
-    .oak-sprite { width: 70px; height: auto; animation: none; }
-    
-    .oak-dialog-box { 
-        margin-top: 0; 
-        flex: 1; 
-        max-height: 110px; /* Deixa a caixa de texto menor na horizontal */
-    }
-    
-    /* Garante que a grid no modo deitado também obedeça as colunas */
-    .pokemon-grid { 
-        display: grid; /* <-- Removemos o !important daqui também */
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; 
-        gap: 8px !important; 
-    }
-    .pk-card { padding: 6px !important; border: 2px solid var(--dex-border) !important; display: block !important; }
-    .pk-card img { width: 45px !important; height: 45px !important; margin: 0 auto; display: block; }
-    .pk-name { font-size: 0.65rem !important; }
-    .pk-types-mini { display: flex !important; justify-content: center !important; gap: 4px !important; }
-    .type-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; border: 2px solid var(--dex-border) !important; }
-
-    /* =======================================================
-       COMPACTAÇÃO EXTREMA DO PAINEL ESQUERDO (HORIZONTAL)
-    ======================================================= */
-    
-    /* 1. Reduz o preenchimento da carcaça vermelha */
-    .pokedex-left-panel { padding: 8px 12px !important; }
-
-    /* 2. Miniaturiza a Lente Azul e as Luzes */
-    .main-lens-container { margin-bottom: 2px !important; }
-    .big-blue-lens { width: 36px !important; height: 36px !important; border-width: 3px !important; }
-    .big-blue-lens::after { width: 10px !important; height: 10px !important; top: 5px !important; left: 5px !important; }
-    .mini-lights { margin-top: 2px !important; gap: 5px !important; }
-    .light { width: 10px !important; height: 10px !important; border-width: 2px !important; }
-
-    /* 3. Achata o Título Principal e remove margens */
-    .pokedex-title { font-size: 1.25rem !important; margin: 0 0 8px 0 !important; }
-    .pokedex-title span { font-size: 0.65rem !important; margin-top: 2px !important; }
-
-    /* 4. Encolhe o botão da Lua e joga ele mais pro canto */
-    .joystick-theme-btn { width: 30px !important; height: 30px !important; font-size: 0.8rem !important; top: -2px !important; right: -2px !important; }
-
-    /* 5. Esmaga a Barra de Pesquisa */
-    .search-module { margin-bottom: 8px !important; }
-    .search-console { padding: 4px 10px !important; border-width: 3px !important; }
-    .search-console input { font-size: 0.8rem !important; }
-    .search-btn { width: 26px !important; height: 26px !important; font-size: 0.75rem !important; border-width: 2px !important; margin-left: 6px !important; }
-
-    /* 6. Diminui a altura das abas de Categorias */
-    .category-module { margin-bottom: 8px !important; gap: 6px !important; }
-    .cat-btn { padding: 6px 4px !important; font-size: 0.65rem !important; border-width: 2px !important; }
-
-    /* 7. Diminui o Botão de Download do APP (se existir) */
-    .app-download-trigger-btn { padding: 8px 10px !important; margin-bottom: 8px !important; font-size: 0.55rem !important; border-width: 2px !important; }
-    
-    .tech-label { font-size: 0.6rem !important; margin-bottom: 2px !important; }
-
+        if (isTyping) {
+            clearInterval(typeInterval);
+            textContainer.innerHTML = oakDialogues[currentDialogIndex];
+            isTyping = false;
+            arrow.style.display = 'block';
+        } else {
+            currentDialogIndex++;
+            if (currentDialogIndex < oakDialogues.length) {
+                startTyping();
+            } else {
+                oakModal.classList.add('hidden');
+            }
+        }
+    });
 }
+
+function startTyping() {
+    const textContainer = document.getElementById('oak-text');
+    const arrow = document.getElementById('oak-arrow');
+    textContainer.innerHTML = '';
+    currentCharIndex = 0;
+    isTyping = true;
+    arrow.style.display = 'none';
+
+    clearInterval(typeInterval);
+    typeInterval = setInterval(() => {
+        textContainer.innerHTML += oakDialogues[currentDialogIndex].charAt(currentCharIndex);
+        currentCharIndex++;
+
+        if (currentCharIndex >= oakDialogues[currentDialogIndex].length) {
+            clearInterval(typeInterval);
+            isTyping = false;
+            arrow.style.display = 'block';
+        }
+    }, typingSpeed);
+}
+
+// ==========================================
+// MENSAGENS DO CRIADOR (KALAZATTI)
+// ==========================================
+const supportDialogues = [
+    "E ai, Treinador! Beleza? Eu sou o Kalazatti.",
+    "Desenvolvi essa Pokedex com muito carinho para ajudar a nossa comunidade do Poketibia PBR.",
+    "Manter esse projeto no ar, sem propagandas chatas e com tudo atualizado, exige muito tempo e cafeina rsrs.",
+    "Se essa ferramenta tem ajudado na sua jornada e voce quiser me pagar um cafezinho para manter a pokedex atualizada...",
+    "E so clicar no botao abaixo! Qualquer ajuda e super bem-vinda e me motiva a trazer mais novidades e manter o projeto vivo.",
+    "Muito obrigado e boa caçada! Qualquer dúvida ou idéia para a pokedex, é só me chamar!"
+];
+
+let currentSupportIndex = 0;
+let currentSupportCharIndex = 0;
+let isSupportTyping = false;
+let supportTypeInterval;
+
+window.initSupportModal = (event) => {
+    if(event) event.preventDefault();
+    const modal = document.getElementById('support-modal');
+    const closeBtn = document.getElementById('close-support');
+    const dialogBox = document.getElementById('support-dialog-box');
+    const finalBtn = document.getElementById('final-support-btn');
+    
+    currentSupportIndex = 0;
+    finalBtn.classList.add('hidden');
+    modal.classList.remove('hidden');
+    
+    startSupportTyping();
+
+    closeBtn.onclick = () => { modal.classList.add('hidden'); };
+
+    dialogBox.onclick = (e) => {
+        if(e.target.id === 'final-support-btn') return;
+
+        const textContainer = document.getElementById('support-text');
+        const arrow = document.getElementById('support-arrow');
+
+        if (isSupportTyping) {
+            clearInterval(supportTypeInterval);
+            textContainer.innerHTML = supportDialogues[currentSupportIndex];
+            isSupportTyping = false;
+            
+            if (currentSupportIndex === supportDialogues.length - 1) {
+                arrow.style.display = 'none';
+                finalBtn.classList.remove('hidden');
+            } else {
+                arrow.style.display = 'block';
+            }
+        } else {
+            if (currentSupportIndex < supportDialogues.length - 1) {
+                currentSupportIndex++;
+                startSupportTyping();
+            }
+        }
+    };
+};
+
+function startSupportTyping() {
+    const textContainer = document.getElementById('support-text');
+    const arrow = document.getElementById('support-arrow');
+    const finalBtn = document.getElementById('final-support-btn');
+    
+    textContainer.innerHTML = '';
+    currentSupportCharIndex = 0;
+    isSupportTyping = true;
+    arrow.style.display = 'none';
+    finalBtn.classList.add('hidden');
+
+    clearInterval(supportTypeInterval);
+    supportTypeInterval = setInterval(() => {
+        textContainer.innerHTML += supportDialogues[currentSupportIndex].charAt(currentSupportCharIndex);
+        currentSupportCharIndex++;
+
+        if (currentSupportCharIndex >= supportDialogues[currentSupportIndex].length) {
+            clearInterval(supportTypeInterval);
+            isSupportTyping = false;
+            
+            if (currentSupportIndex === supportDialogues.length - 1) {
+                arrow.style.display = 'none';
+                finalBtn.classList.remove('hidden');
+            } else {
+                arrow.style.display = 'block';
+            }
+        }
+    }, typingSpeed);
+}
+
+// ==========================================
+// ALTERNAR IMAGEM SHINY NO MODAL DO BOSS
+// ==========================================
+window.toggleShinyModal = async (badge, pokeName, normalImg) => {
+    const imgEl = document.querySelector('.poke-img-stacked');
+    const genBar = document.querySelector('.stacked-gen-bar');
+    
+    if (!imgEl) return;
+
+    const isShiny = badge.classList.contains('active-shiny');
+    
+    if (isShiny) {
+        imgEl.style.opacity = '0';
+        setTimeout(() => {
+            imgEl.src = normalImg;
+            badge.classList.remove('active-shiny');
+            badge.innerHTML = '✨ SHINY: 2X LOOT';
+            if(genBar) {
+                genBar.innerHTML = 'ALERTA DE BOSS';
+                genBar.classList.remove('shiny-buff-bar');
+            }
+            imgEl.style.opacity = '1';
+        }, 150);
+        return;
+    }
+
+    badge.innerHTML = '⏳ BUSCANDO...';
+    imgEl.style.opacity = '0.5'; 
+
+    try {
+        let apiName = pokeName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        if(apiName === 'mrmime') apiName = 'mr-mime';
+
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${apiName}`);
+        if (!response.ok) throw new Error("Pokémon não encontrado na API");
+        
+        const data = await response.json();
+        const shinyUrl = data.sprites.other['official-artwork'].front_shiny || data.sprites.front_shiny;
+        
+        if (!shinyUrl) throw new Error("Imagem Shiny não existe");
+
+        imgEl.style.opacity = '0';
+        setTimeout(() => {
+            imgEl.src = shinyUrl;
+            badge.classList.add('active-shiny');
+            badge.innerHTML = '✨ VER NORMAL';
+            
+            if(genBar) {
+                genBar.innerHTML = '✨ BOSS SHINY (+STATUS) ✨';
+                genBar.classList.add('shiny-buff-bar');
+            }
+            imgEl.style.opacity = '1';
+        }, 150);
+
+    } catch (error) {
+        console.error("Erro ao buscar Shiny:", error);
+        badge.innerHTML = '⚠ SHINY INDISPONÍVEL';
+        imgEl.style.opacity = '1';
+    }
+};
+
+// ==========================================
+// SISTEMA DE REPORT DE BUGS (DISCORD WEBHOOK)
+// ==========================================
+window.initReportModal = (event) => {
+    if(event) event.preventDefault();
+    document.getElementById('report-modal').classList.remove('hidden');
+    document.getElementById('report-status').innerText = '';
+};
+
+// ==========================================
+// MODAL DE DOWNLOAD DO APP (COM TUTORIAL)
+// ==========================================
+window.initDownloadAppModal = (event) => {
+    if(event) event.preventDefault();
+    document.getElementById('download-app-modal').classList.remove('hidden');
+    changeApkPage(1); // Garante que sempre abre na página de introdução
+};
+
+window.changeApkPage = (pageNumber) => {
+    const page1 = document.getElementById('apk-page-1');
+    const page2 = document.getElementById('apk-page-2');
+    const scrollContainer = document.querySelector('#download-app-modal .app-modal-text');
+
+    if (pageNumber === 1) {
+        page1.classList.remove('hidden-step');
+        page2.classList.add('hidden-step');
+    } else if (pageNumber === 2) {
+        page1.classList.add('hidden-step');
+        page2.classList.remove('hidden-step');
+    }
+    
+    // Joga o scroll do modal lá para cima ao trocar de página
+    if(scrollContainer) {
+        scrollContainer.scrollTop = 0;
+    }
+};
+
+document.getElementById('close-report').onclick = () => {
+    document.getElementById('report-modal').classList.add('hidden');
+};
+
+document.getElementById('report-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const btn = document.getElementById('submit-report-btn');
+    const status = document.getElementById('report-status');
+    const nick = document.getElementById('report-nick').value.trim();
+    const type = document.getElementById('report-type').value;
+    const msg = document.getElementById('report-msg').value.trim();
+
+    const lastReport = localStorage.getItem('pokedex-last-report');
+    if (lastReport) {
+        const now = new Date().getTime();
+        const diff = now - parseInt(lastReport);
+        if (diff < 10 * 60 * 1000) { 
+            const faltam = Math.ceil((10 * 60 * 1000 - diff) / 60000);
+            status.innerText = `⏳ Aguarde ${faltam} min para enviar outro report.`;
+            status.style.color = '#ffcb05';
+            return;
+        }
+    }
+
+    btn.innerText = 'ENVIANDO...';
+    btn.disabled = true;
+
+    const WEBHOOK_URL = 'https://discord.com/api/webhooks/1519072852513525831/grsC32dPzfIsb7g19z2lGykbyrejCLHL7yjaS4Sop5HsHnhwj3S6L1gZjloY4dhnpLW9';
+
+    const payload = {
+        username: "Pokedex PBR - Report",
+        avatar_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
+        content: "<@743785451978227812> 🚨 Você tem um novo relatório de Bug!",
+        embeds: [{
+            title: `🚨 NOVO RELATÓRIO: ${type}`,
+            color: type === 'BUG' ? 16711680 : (type === 'LOCAL' ? 16766720 : 3447003),
+            fields: [
+                { name: "👤 Nick no Jogo", value: nick, inline: true },
+                { name: "🏷️ Categoria", value: type, inline: true },
+                { name: "📝 Mensagem do Usuário", value: msg }
+            ],
+            timestamp: new Date().toISOString()
+        }]
+    };
+
+    try {
+        const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            status.innerText = '✅ Relatório enviado com sucesso! Obrigado.';
+            status.style.color = '#32cd32';
+            document.getElementById('report-form').reset();
+            localStorage.setItem('pokedex-last-report', new Date().getTime().toString());
+        } else {
+            throw new Error('Falha no envio da API');
+        }
+    } catch(err) {
+        status.innerText = '❌ Erro de conexão com o servidor.';
+        status.style.color = '#ff4b2b';
+        console.error("Erro Discord:", err);
+    }
+
+    btn.innerText = 'ENVIAR RELATÓRIO';
+    btn.disabled = false;
+});
+
+// ==========================================
+// ALTERNAR FORMAS REGIONAIS NO MODAL
+// ==========================================
+window.switchForm = (newId) => {
+    const modalContent = document.querySelector('.modal-pokedex-view');
+    modalContent.style.opacity = '0';
+    modalContent.style.transform = 'scale(0.95)';
+    modalContent.style.transition = 'all 0.2s ease';
+    
+    setTimeout(() => {
+        openModal(newId); 
+        const newContent = document.querySelector('.modal-pokedex-view');
+        newContent.style.opacity = '1';
+        newContent.style.transform = 'scale(1)';
+    }, 200);
+};
+
+// ==========================================
+// SISTEMA DE APOIADORES VIP (LETREIRO E MODAL)
+// ==========================================
+
+const vipData = {
+    donators: ["Jarubinha", "The DarkNess", "Avil"],
+    contributors: ["Paleguazv", "Marlin", "Leander Hastings", "Vincent", "Ricardobtj", "Bonacina", "Upzin"]
+};
+
+function initVipSystem() {
+    const marqueeText = document.getElementById('vip-marquee-text');
+    const donatorsGrid = document.getElementById('vip-donators-grid');
+    const contributorsGrid = document.getElementById('vip-contributors-grid');
+
+    if (marqueeText) {
+        const donatorsString = vipData.donators.map(n => `☕ ${n}`).join(' &nbsp; ★ &nbsp; ');
+        const contributorsString = vipData.contributors.map(n => `🗺️ ${n}`).join(' &nbsp; ★ &nbsp; ');
+        
+        marqueeText.innerHTML = `HALL DA FAMA: &nbsp;&nbsp; ★ &nbsp; ${donatorsString} &nbsp; ★ &nbsp; ${contributorsString} &nbsp; ★`;
+    }
+
+    if (donatorsGrid) {
+        donatorsGrid.innerHTML = vipData.donators.map(name => 
+            `<div class="vip-name-badge donator-badge">${name}</div>`
+        ).join('');
+    }
+
+    if (contributorsGrid) {
+        contributorsGrid.innerHTML = vipData.contributors.map(name => 
+            `<div class="vip-name-badge contributor-badge">${name}</div>`
+        ).join('');
+    }
+}
+
+window.openVipModal = () => {
+    document.getElementById('vip-modal').classList.remove('hidden');
+};
+
+window.closeVipModal = () => {
+    document.getElementById('vip-modal').classList.add('hidden');
+};
