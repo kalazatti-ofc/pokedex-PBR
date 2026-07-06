@@ -5,7 +5,7 @@
 [05/07/26] • Correção de Bugs Visuais e Scroll Interno
 [04/07/26] • Filtro Meta-Gaming (Ordenação de Status) 
 [04/07/26] • Correção do Radar e Novas Localizações 
-[29/06/26] • Sistema de Natures Recomendadas 
+[29/06/26] • Sistema de Natures Recomendadas
 [12/06/26] • Adição das Formas Regionais (Alola/Hisui)
 [30/05/26] • Otimização do LocalStorage (Anti-Spam)
 
