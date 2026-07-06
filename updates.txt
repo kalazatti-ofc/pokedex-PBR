@@ -1,8 +1,12 @@
-[SISTEMA ONLINE]
+[SISTEMA ONLINE - ATUALIZAÇÕES RECENTES]
 
-• APK Pokédex PBR V1.2 lançado 04/06/26
-• Adicionado Pokemons de Alola
-• Adicionado Pokemons de Huisui
-• LocalStorage ativo
+• Lançamento Oficial do APP (APK Android)    -05/07/26
+• Otimização Extrema de Layout Mobile        -05/07/26
+• Correção de Bugs Visuais e Scroll Interno  -05/07/26
+• Filtro Meta-Gaming (Ordenação de Status)   -04/07/26
+• Correção do Radar e Novas Localizações     -04/07/26
+• Sistema de Natures Recomendadas            -29/06/26
+• Adição das Formas Regionais (Alola/Hisui)  -12/06/26
+• Otimização do LocalStorage (Anti-Spam)     -30/05/26
 
 [NOVIDADES EM BREVE]
