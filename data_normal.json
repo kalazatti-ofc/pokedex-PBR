@@ -4681,7 +4681,15 @@
       "spd": 40
     },
     "locations": [
-      "Hunter Village (X 1792 / Y 1419 / Z 7)"
+      "Hunter Village (X 1792 / Y 1419 / Z 7)",
+      {
+        "rota": "Barco de Singer",
+        "passos": [
+          "Singer (X 1664 / Y 1031 / Z 7)",
+          "Teleport de Grama (X 1664 / Y 1031 / Z 7)",
+          "Entre na Caverna (X 2059 / Y 1304 / Z 15)"
+        ]
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/205.png"
   },
@@ -6733,8 +6741,12 @@
     },
     "locations": [
       {
-        "local": "Singer (X 1665 / Y 1030 / Z 7)",
-        "nota": "📌 Entre no teleport"
+        "rota": "Barco de Singer",
+        "passos": [
+          "Singer (X 1664 / Y 1031 / Z 7)",
+          "Teleport de Grama (X 1664 / Y 1031 / Z 7)",
+          "Entre na Caverna (X 2059 / Y 1304 / Z 15)"
+        ]
       }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/299.png"
@@ -9660,7 +9672,14 @@
       "spd": 23
     },
     "locations": [
-      "Singer (X 1664 / Y 1031 / Z 7)"
+      {
+        "rota": "Barco de Singer",
+        "passos": [
+          "Singer (X 1664 / Y 1031 / Z 7)",
+          "Teleport de Grama (X 1664 / Y 1031 / Z 7)",
+          "Entre na Caverna (X 2059 / Y 1304 / Z 15)"
+        ]
+      }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/436.png"
   },
@@ -10525,8 +10544,12 @@
     },
     "locations": [
       {
-        "local": "Singer (X 1665 / Y 1030 / Z 7)",
-        "nota": "📌 Entre no teleport"
+        "rota": "Barco de Singer",
+        "passos": [
+          "Singer (X 1664 / Y 1031 / Z 7)",
+          "Teleport de Grama (X 1664 / Y 1031 / Z 7)",
+          "Entre na Caverna (X 2059 / Y 1304 / Z 15)"
+        ]
       }
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/476.png"
