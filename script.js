@@ -2,16 +2,20 @@
 // VARIÁVEIS GLOBAIS DE ESTADO E MAPA
 // ==========================================
 let pokemonData = [];
+let itemData = [];
 let currentVisibleList = []; // Guarda a lista que está sendo exibida na tela
 let currentModalIndex = 0;   // Guarda a posição do Pokémon aberto no modal
+let currentModalItemIndex = 0; // Guarda a posição do Item aberto no modal
 
 let activeTypeFilter = 'all';
 let activeGenFilter = 'all';
 let activeCatchFilter = 'all';
 let activeCategory = 'normal'; // Controla a aba atual
 let activeMetaFilter = 'all';  // Filtro Meta-Gaming
+let searchMode = 'pokemon'; // Controla se estamos buscando por nome ou por loot
 
 let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
+caughtPokemon = caughtPokemon.map(String); // MÁGICA 1: Força todos os saves antigos a virarem texto!
 
 const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 
@@ -26,6 +30,29 @@ const typeModifiers = {
     Dragon: { Fire: 0.5, Water: 0.5, Electric: 0.5, Grass: 0.5, Ice: 2, Dragon: 2, Fairy: 2 }, Dark: { Fighting: 2, Psychic: 0, Bug: 2, Ghost: 0.5, Dark: 0.5, Fairy: 2 },
     Steel: { Normal: 0.5, Fire: 2, Grass: 0.5, Ice: 0.5, Fighting: 2, Poison: 0, Ground: 2, Flying: 0.5, Psychic: 0.5, Bug: 0.5, Rock: 0.5, Dragon: 0.5, Steel: 0.5, Fairy: 0.5 },
     Fairy: { Fighting: 0.5, Poison: 2, Bug: 0.5, Dragon: 0, Dark: 0.5, Steel: 2 }
+};
+
+// ==========================================
+// DICIONÁRIO DE TIPAGEM DOS TMS (LOOT VISUAL)
+// ==========================================
+const tmDictionary = {
+    "solar beam": "grass", "frenzy plant": "grass", "seed bomb": "grass", "power whip": "grass", "magical leaf": "grass", "petal blizzard": "grass", "grassy terrain": "grass",
+    "flamethrower": "fire", "fire blast": "fire", "mystical fire": "fire", "fire punch": "fire", "flame burst": "fire", "fire spin": "fire", "overheat": "fire", "blast burn": "fire",
+    "water gun": "water", "hydro pump": "water", "hydro cannon": "water", "surf": "water", "water pulse": "water", "bubble beam": "water", "waterfall": "water", "razor shell": "water", "rain dance": "water", "aqua ring": "water",
+    "thunder wave": "electric", "zap cannon": "electric", "charge beam": "electric", "thunder punch": "electric", "thunder": "electric", "thunder fang": "electric",
+    "ice beam": "ice", "frost breath": "ice", "blizzard": "ice", "ice punch": "ice",
+    "poison jab": "poison", "gunk shot": "poison", "toxic": "poison", "sludge bomb": "poison", "venoshock": "poison", "cross poison": "poison",
+    "mud slap": "ground", "sand tomb": "ground", "earth power": "ground", "bulldoze": "ground", "earthquake": "ground",
+    "roost": "flying", "whirlwind": "flying", "pluck": "flying", "air slash": "flying", "air cutter": "flying",
+    "psychic": "psychic", "amnesia": "psychic", "teleport": "psychic", "reflect": "psychic", "calm mind": "psychic", "dream eater": "psychic", "psybeam": "psychic", "rest": "psychic", "future sight": "psychic", "zen headbutt": "psychic",
+    "bug buzz": "bug", "fury cutter": "bug", "leech life": "bug", "infestation": "bug", "bug bite": "bug",
+    "sandstorm": "rock", "power gem": "rock", "stone edge": "rock", "rock slide": "rock", "rock tomb": "rock",
+    "shadow claw": "ghost", "night shade": "ghost", "confuse ray": "ghost",
+    "draco meteor": "dragon", "dragon tail": "dragon", "dragon dance": "dragon",
+    "dark pulse": "dark",
+    "metal claw": "steel", "metal sound": "steel", "flash cannon": "steel", "iron defense": "steel", "iron tail": "steel", "gyro ball": "steel",
+    "focus blast": "fighting", "drain punch": "fighting", "dynamic punch": "fighting", "brick break": "fighting", "wake-up slap": "fighting", "low sweep": "fighting", "power-up punch": "fighting", "focus punch": "fighting", "aura sphere": "fighting",
+    "skull bash": "normal", "swift": "normal", "body slam": "normal", "horn drill": "normal", "metronome": "normal", "roar": "normal", "tri-attack": "normal", "pay day": "normal", "screech": "normal", "rage": "normal", "take down": "normal", "protect": "normal", "mega kick": "normal", "mega punch": "normal", "mimic": "normal", "encore": "normal", "double-edge": "normal", "headbutt": "normal", "hyper beam": "normal", "echoed voice": "normal", "hidden power": "normal"
 };
 
 // Configurações do Mapa
@@ -94,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Controle de Abas e Transição de Telas
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
+            if (btn.classList.contains('active')) return; // Previne loops
+
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeCategory = btn.dataset.cat;
@@ -103,27 +132,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const filtersModule = document.getElementById('filters-container');
             const mapContainer = document.getElementById('map-viewer-container');
             const mapSidebar = document.getElementById('map-sidebar-menu');
-            // Ativador de fechamento do Modal de Download do Aplicativo
-            const closeDownloadBtn = document.getElementById('close-download-app');
-            if (closeDownloadBtn) {
-                closeDownloadBtn.onclick = () => {
-                    document.getElementById('download-app-modal').classList.add('hidden');
-                };
-            }
+            const tutModule = document.getElementById('tutorials-module');
             
+            // MÁGICA DE SINCRONIA: Abas DROPS/TMS <-> Pílula LOOT
+            const optPokemon = document.getElementById('mode-pokemon');
+            const optLoot = document.getElementById('mode-loot');
+            
+            if (activeCategory === 'drops' || activeCategory === 'tms') {
+                searchMode = 'loot';
+                if (optPokemon && optLoot) { optPokemon.classList.remove('active'); optLoot.classList.add('active'); }
+            } else if (activeCategory === 'normal' || activeCategory === 'dark' || activeCategory === 'boss') {
+                searchMode = 'pokemon';
+                if (optPokemon && optLoot) { optLoot.classList.remove('active'); optPokemon.classList.add('active'); }
+            }
+
             if (activeCategory === 'mapas') {
-                gridContainer.style.display = 'none';
-                searchModule.style.display = 'none';
-                filtersModule.style.display = 'none';
-                if(mapSidebar) mapSidebar.style.display = 'block'; 
-                mapContainer.style.display = 'flex';
-                initMapViewer(); 
+                gridContainer.style.display = 'none'; searchModule.style.display = 'none'; filtersModule.style.display = 'none';
+                if(tutModule) tutModule.style.display = 'none'; if(mapSidebar) mapSidebar.style.display = 'block'; 
+                mapContainer.style.display = 'flex'; initMapViewer(); 
+            } else if (activeCategory === 'guias') {
+                gridContainer.style.display = 'none'; searchModule.style.display = 'none'; filtersModule.style.display = 'none';
+                mapContainer.style.display = 'none'; if(mapSidebar) mapSidebar.style.display = 'none'; 
+                if(tutModule) { tutModule.style.display = 'block'; closeTutorial(); }
+            } else if (activeCategory === 'drops' || activeCategory === 'tms') {
+                gridContainer.style.display = 'grid'; searchModule.style.display = 'block';
+                filtersModule.style.display = 'none'; // Esconde os filtros de Tipos/Regiões para os Itens
+                if(mapSidebar) mapSidebar.style.display = 'none'; mapContainer.style.display = 'none'; if(tutModule) tutModule.style.display = 'none';
+                applyFilters(); 
             } else {
-                gridContainer.style.display = 'grid';
-                searchModule.style.display = 'block';
-                filtersModule.style.display = 'block';
-                if(mapSidebar) mapSidebar.style.display = 'none'; 
-                mapContainer.style.display = 'none';
+                gridContainer.style.display = 'grid'; searchModule.style.display = 'block'; filtersModule.style.display = 'block';
+                if(mapSidebar) mapSidebar.style.display = 'none'; mapContainer.style.display = 'none'; if(tutModule) tutModule.style.display = 'none';
                 applyFilters();
             }
         });
@@ -135,16 +173,20 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 async function fetchData() {
     try {
-        const [normalRes, darkRes, bossRes] = await Promise.all([
+        const [normalRes, darkRes, bossRes, itemRes] = await Promise.all([
             fetch('data_normal.json?v=' + new Date().getTime()),
             fetch('data_dark.json?v=' + new Date().getTime()),
-            fetch('data_boss.json?v=' + new Date().getTime())
+            fetch('data_boss.json?v=' + new Date().getTime()),
+            fetch('data_items.json?v=' + new Date().getTime()).catch(() => null) // Não quebra se o arquivo não existir
         ]);
         const normalData = await normalRes.json();
         const darkData = await darkRes.json();
         const bossData = await bossRes.json();
         pokemonData = [...normalData, ...darkData, ...bossData];
         currentVisibleList = [...pokemonData]; 
+        
+        if(itemRes && itemRes.ok) itemData = await itemRes.json();
+        
         renderPokemon(pokemonData);
     } catch (e) { 
         console.error("Erro ao carregar os bancos de dados.", e); 
@@ -223,25 +265,55 @@ function setupToggles() {
 }
 
 function applyFilters() {
-    const search = document.getElementById('search-input').value.toLowerCase();
+    const search = document.getElementById('search-input').value.toLowerCase().trim();
     
+    // INTERCEPTADOR: MODO ITENS/LOOT
+    if (activeCategory === 'drops' || activeCategory === 'tms' || searchMode === 'loot') {
+        let filteredItems = itemData || [];
+        
+        // Separa os TMs do resto dos drops
+        if (activeCategory === 'tms') {
+            filteredItems = filteredItems.filter(i => i.name.toUpperCase().startsWith("TM "));
+        } else if (activeCategory === 'drops') {
+            filteredItems = filteredItems.filter(i => !i.name.toUpperCase().startsWith("TM "));
+        }
+
+        if (search !== '') {
+            filteredItems = filteredItems.filter(i => i.name.toLowerCase().includes(search));
+        }
+        
+        renderItems(filteredItems);
+        return; // Interrompe a função aqui para não renderizar Pokémons!
+    }
+
     let filtered = pokemonData.filter(p => {
+        // ... (continua igual o resto da sua função applyFilters)
         const pCat = p.category || 'normal';
         if (pCat !== activeCategory) return false;
 
-        const mName = p.name.toLowerCase().includes(search) || p.id.toString() === search;
+        // NOVO: SISTEMA DE BUSCA DUPLA (NOME vs LOOT)
+        let mSearch = false;
+        if (search === '') {
+            mSearch = true;
+        } else if (searchMode === 'pokemon') {
+            mSearch = p.name.toLowerCase().includes(search) || p.id.toString() === search;
+        } else if (searchMode === 'loot') {
+            if (p.loot) {
+                mSearch = p.loot.toLowerCase().includes(search);
+            }
+        }
+
         const mGen = activeGenFilter === 'all' || (p.generation && p.generation.toString().toLowerCase() === activeGenFilter.toLowerCase());
         const mType = activeTypeFilter === 'all' || p.types.includes(activeTypeFilter);
         
-        const isCaught = caughtPokemon.includes(p.id);
+        const isCaught = caughtPokemon.includes(p.id.toString()); // MÁGICA 2
         let mCatch = true;
         if (activeCatchFilter === 'caught') mCatch = isCaught;
         if (activeCatchFilter === 'uncaught') mCatch = !isCaught;
 
-        // O mMeta agora fica sempre true para não esconder Pokémons, pois vamos apenas ordená-los abaixo
         let mMeta = true; 
 
-        return mName && mGen && mType && mCatch && mMeta;
+        return mSearch && mGen && mType && mCatch && mMeta;
     });
     
     // NOVO: SISTEMA DE ORDENAÇÃO DE STATUS (DO MAIOR PARA O MENOR)
@@ -264,17 +336,42 @@ function applyFilters() {
     }
     
     currentVisibleList = filtered;
-    renderPokemon(filtered);
+    
+    // DECISÃO DE RENDERIZAÇÃO: POKÉMON VS INVENTÁRIO
+    if (searchMode === 'loot' && itemData.length > 0) {
+        // Se estiver no modo Loot, filtramos o banco de Itens pelo nome
+        let filteredItems = itemData;
+        if (search !== '') {
+            filteredItems = itemData.filter(i => i.name.toLowerCase().includes(search));
+        }
+        renderItems(filteredItems);
+    } else {
+        renderPokemon(filtered);
+    }
+}
+
+// NOVA FUNÇÃO: DESENHAR A GRADE DE ITENS (INVENTÁRIO)
+function renderItems(list) {
+    const grid = document.getElementById('pokedex-grid');
+    grid.innerHTML = list.map(item => `
+        <div class="item-card" onclick="openItemModal('${item.name}')">
+            <img src="img/loots/${item.icon_name}.gif" alt="${item.name}" onerror="this.onerror=null; this.src='img/loots/${item.icon_name}.png'; this.onerror=function(){this.src='https://dummyimage.com/24x24/dcdde1/2c3e50.png&text=?';};">
+            <span class="item-card-name">${item.name}</span>
+            <span class="item-card-count">${item.droppedBy.length} DROP(S)</span>
+        </div>
+    `).join('');
 }
 
 window.toggleCatch = (event, id) => {
     event.stopPropagation();
-    const idx = caughtPokemon.indexOf(id);
+    const safeId = id.toString(); // MÁGICA 3: Converte o clique para texto
+    const idx = caughtPokemon.indexOf(safeId);
+    
     if(idx > -1) {
         caughtPokemon.splice(idx, 1);
         event.target.classList.remove('caught');
     } else {
-        caughtPokemon.push(id);
+        caughtPokemon.push(safeId);
         event.target.classList.add('caught');
     }
     localStorage.setItem('pokedex-caught', JSON.stringify(caughtPokemon));
@@ -284,7 +381,7 @@ window.toggleCatch = (event, id) => {
 function renderPokemon(list) {
     const grid = document.getElementById('pokedex-grid');
     grid.innerHTML = list.map(p => {
-        const isCaught = caughtPokemon.includes(p.id);
+        const isCaught = caughtPokemon.includes(p.id.toString()); // MÁGICA 4
         const pCategory = p.category || 'normal';
         
         let genText = '';
@@ -664,9 +761,6 @@ window.openModal = (id) => {
         }
     }).join('');
 
-    // ==========================================
-    // LÓGICA DE STATUS E NATURES (COMPACTA E NEGRIFADA)
-    // ==========================================
     const statColors = {
         hp: '#32cd32', atk: '#e3350d', def: '#ff9800',
         spatk: '#3498db', spdef: '#9c27b0', spd: '#f1c40f'
@@ -741,6 +835,31 @@ window.openModal = (id) => {
         </div>
     `;
 
+    // ======================= LÓGICA DO LOOT =======================
+    let lootHTML = '<span style="color:#888; font-size: 0.8rem; font-family: monospace;">Loot não registrado.</span>';
+    
+    if (p.loot && typeof p.loot === 'string' && p.loot.trim() !== '') {
+        const items = p.loot.split(',').map(item => item.trim());
+        
+        lootHTML = '<div class="loot-icons-container">' + items.map(item => {
+            let safeImgName = item.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            
+            if (item.toUpperCase().startsWith("TM ")) {
+                const moveName = item.substring(3).toLowerCase().trim();
+                const tmType = tmDictionary[moveName] || 'normal';
+                safeImgName = `tm-${tmType}`;
+            }
+            
+            const fallbackJS = `this.onerror=null; this.src='img/loots/${safeImgName}.png'; this.onerror=function(){this.src='https://dummyimage.com/24x24/dcdde1/2c3e50.png&text=?';};`;
+            
+            return `
+                <div class="loot-icon-item loot-tooltip" data-tooltip="${item}" onclick="searchByLoot(\`${item}\`, event)">
+                    <img src="img/loots/${safeImgName}.gif" alt="${item}" onerror="${fallbackJS}">
+                </div>
+            `;
+        }).join('') + '</div>';
+    }
+
     let rightWingHTML = '';
 
     if (pCategory === 'boss') {
@@ -752,19 +871,25 @@ window.openModal = (id) => {
                 </div>
             </div>
             
+            <div class="boss-guide-module">
+                <h4 class="label-tech">MANUAL DE COMBATE</h4>
+                <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
+            </div>
+            
             <div class="boss-loot-module">
-                <h4 class="label-tech">RECOMPENSA DIÁRIA</h4>
-                <div class="loot-box">${p.loot || '???'}</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed rgba(0,0,0,0.2); margin-bottom: 8px; padding-bottom: 4px;">
+                    <h4 class="label-tech" style="border: none; margin: 0; padding: 0; text-shadow: none;">RECOMPENSA DIÁRIA</h4>
+                    <button class="loot-report-btn loot-tooltip" style="color: #111;" data-tooltip="REPORTAR LOOT" onclick="reportLoot('${p.name}')">⚠️</button>
+                </div>
+                
+                <div class="loot-box" style="margin-top: 10px; background: #fff; padding: 10px; border-radius: 8px; border: 3px solid var(--dex-border); font-size: 1rem; color: var(--dex-red); font-weight: 900; text-transform: uppercase;">
+                    ${p.loot || '<span style="color:#888; font-size: 0.8rem;">Recompensa não registrada.</span>'}
+                </div>
                 
                 <div class="boss-bonus-container">
                     <span class="bonus-badge shiny-bonus" title="Derrotar a versão Shiny garante o dobro de recompensas!" onclick="toggleShinyModal(this, '${p.name}', '${p.image}')">✨ SHINY: 2X LOOT</span>
                     <span class="bonus-badge fds-bonus" title="Aos sábados e domingos, o loot padrão é dobrado!">📅 FDS: 2X LOOT</span>
                 </div>
-            </div>
-
-            <div class="boss-guide-module">
-                <h4 class="label-tech">MANUAL DE COMBATE</h4>
-                <p class="boss-guide-text">${p.guide || 'Nenhuma informação avançada detectada sobre este Boss.'}</p>
             </div>
             
             <div class="eff-module">
@@ -834,6 +959,15 @@ window.openModal = (id) => {
                 <h4 class="label-tech">STATUS BASE</h4>
                 <div class="stats-list">${statsHTML}</div>
             </div>
+            
+            <div class="data-module" style="margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #999; margin-bottom: 8px; padding-bottom: 4px;">
+                    <h4 class="label-tech" style="border: none; margin: 0; padding: 0;">TABELA DE DROP</h4>
+                    <button class="loot-report-btn loot-tooltip" data-tooltip="REPORTAR LOOT" onclick="reportLoot('${p.name}')">⚠️</button>
+                </div>
+                ${lootHTML}
+            </div>
+
             <div class="eff-module">
                 <h4 class="label-tech">EFETIVIDADE DE TIPO</h4>
                 <div class="eff-group">
@@ -1395,4 +1529,204 @@ window.openVipModal = () => {
 
 window.closeVipModal = () => {
     document.getElementById('vip-modal').classList.add('hidden');
+};
+
+// ==========================================
+// SISTEMA DE TUTORIAIS E GUIAS (WIKI)
+// ==========================================
+window.openTutorial = (articleId) => {
+    document.getElementById('tutorials-grid').style.display = 'none';
+    document.getElementById('tutorial-article-view').style.display = 'block';
+    
+    // Esconde todos os textos e mostra só o que foi clicado
+    document.querySelectorAll('.article-content-block').forEach(el => el.style.display = 'none');
+    
+    const targetArticle = document.getElementById('article-' + articleId);
+    if(targetArticle) targetArticle.style.display = 'block';
+    
+    // Joga o scroll do painel principal para cima
+    document.getElementById('tutorials-module').scrollTop = 0;
+};
+
+window.closeTutorial = () => {
+    document.getElementById('tutorials-grid').style.display = 'grid';
+    document.getElementById('tutorial-article-view').style.display = 'none';
+};
+
+window.reportLoot = (pokeName) => {
+    // Esconde o modal do pokemon
+    document.getElementById('pokemon-modal').classList.add('hidden');
+    
+    // Abre o modal de report
+    document.getElementById('report-modal').classList.remove('hidden');
+    document.getElementById('report-status').innerText = '';
+    
+    // Preenche os campos automaticamente
+    document.getElementById('report-type').value = 'SUGESTÃO';
+    document.getElementById('report-msg').value = `LOOT DO ${pokeName.toUpperCase()}:\n- \n- \n- `;
+    
+    // Foca na caixa de texto
+    document.getElementById('report-msg').focus();
+};
+
+// ==========================================
+// SISTEMA DE PESQUISA AVANÇADA (NOME / LOOT)
+// ==========================================
+
+// Configura o clique no novo interruptor (Pílula)
+document.addEventListener('DOMContentLoaded', () => {
+    const searchModeToggle = document.getElementById('search-mode-toggle');
+    const optPokemon = document.getElementById('mode-pokemon');
+    const optLoot = document.getElementById('mode-loot');
+
+    if(searchModeToggle) {
+        searchModeToggle.addEventListener('click', () => {
+            if (searchMode === 'pokemon') {
+                const itemBtn = document.querySelector('.cat-btn[data-cat="drops"]');
+                if(itemBtn) itemBtn.click();
+            } else {
+                const normBtn = document.querySelector('.cat-btn[data-cat="normal"]');
+                if(normBtn) normBtn.click();
+            }
+        });
+    }
+});
+
+// O Gatilho de Engenharia Reversa (Ao clicar no Loot no Modal)
+window.searchByLoot = (lootName, event) => {
+    // LÓGICA DO MOBILE (TOQUE DE SELEÇÃO / TOQUE DUPLO)
+    // Se o aparelho for touch (não suporta hover de mouse)...
+    if (event && window.matchMedia("(hover: none)").matches) {
+        const el = event.currentTarget;
+        // Se ainda não estiver selecionado, seleciona e para por aqui (1º toque)
+        if (!el.classList.contains('mobile-selected')) {
+            document.querySelectorAll('.loot-icon-item').forEach(i => i.classList.remove('mobile-selected'));
+            el.classList.add('mobile-selected');
+            return; 
+        }
+        // Se já estiver selecionado, passa reto e executa a busca! (2º toque)
+    }
+
+    // 1. Fecha o modal do Pokémon
+    document.getElementById('pokemon-modal').classList.add('hidden');
+    
+    // 2. Garante que estamos na aba NORMAL (Onde ficam os drops)
+    if (activeCategory !== 'normal') {
+        document.querySelector('.cat-btn[data-cat="normal"]').click();
+    }
+    
+    // 3. Muda a pílula para o modo "LOOT"
+    searchMode = 'loot';
+    const optPokemon = document.getElementById('mode-pokemon');
+    const optLoot = document.getElementById('mode-loot');
+    if (optPokemon && optLoot) {
+        optPokemon.classList.remove('active');
+        optLoot.classList.add('active');
+    }
+    
+    // 4. Preenche o campo de texto com o nome do item
+    document.getElementById('search-input').value = lootName;
+    
+    // 5. Executa a pesquisa e leva o jogador para o topo da tela
+    applyFilters();
+    
+    const displayElement = document.querySelector('.pokedex-main-display');
+    if(displayElement) displayElement.scrollTop = 0;
+};
+
+// ==========================================
+// POKÉDEX VERTICAL (MODAL DE ITENS) E CONEXÕES
+// ==========================================
+
+// Substitui a função searchByLoot antiga (Agora ela abre o Modal Vertical direto!)
+window.searchByLoot = (lootName, event) => {
+    if (event) event.stopPropagation();
+    
+    // Fecha o modal do Pokémon
+    document.getElementById('pokemon-modal').classList.add('hidden');
+    
+    // Abre a Pokédex Vertical do Item
+    openItemModal(lootName);
+};
+
+// ==========================================
+// POKÉDEX VERTICAL (MODAL DE ITENS COM NAVEGAÇÃO)
+// ==========================================
+
+window.searchByLoot = (lootName, event) => {
+    if (event) event.stopPropagation();
+    document.getElementById('pokemon-modal').classList.add('hidden');
+    openItemModal(lootName);
+};
+
+// Navegação Pelas Setas no Modal do Item
+window.navigateItem = (direction, event) => {
+    if (event) event.stopPropagation();
+    if (itemData.length === 0) return;
+
+    currentModalItemIndex += direction;
+    if (currentModalItemIndex < 0) currentModalItemIndex = itemData.length - 1;
+    else if (currentModalItemIndex >= itemData.length) currentModalItemIndex = 0;
+
+    renderItemModal();
+};
+
+window.openItemModal = (itemName) => {
+    const index = itemData.findIndex(i => i.name === itemName);
+    if (index === -1) return;
+    
+    currentModalItemIndex = index;
+    renderItemModal();
+    document.getElementById('item-modal').classList.remove('hidden');
+};
+
+function renderItemModal() {
+    const item = itemData[currentModalItemIndex];
+    if (!item) return;
+
+    const fallbackJS = `this.onerror=null; this.src='img/loots/${item.icon_name}.png'; this.onerror=function(){this.src='https://dummyimage.com/64x64/dcdde1/2c3e50.png&text=?';};`;
+
+    const droppersHTML = item.droppedBy.map(p => `
+        <div class="mini-dropper-card" onclick="swapToPokemonModal('${p.id}')">
+            <img src="${p.image}" loading="lazy">
+            <span>${p.name}</span>
+        </div>
+    `).join('');
+
+    // Injeta o HTML usando as MESMAS classes visuais do Modal de Pokémon (Carcaça Vermelha)
+    document.getElementById('item-modal-body').innerHTML = `
+        <div class="modal-pokedex-view item-vertical-view">
+            <div class="modal-left-wing item-vertical-wing">
+                
+                <div class="screen-border" style="position: relative; margin-bottom: 0;">
+                    <button class="nav-arrow prev-arrow" title="Anterior" onclick="navigateItem(-1, event)">&#10094;</button>
+                    <button class="nav-arrow next-arrow" title="Próximo" onclick="navigateItem(1, event)">&#10095;</button>
+                    
+                    <div class="main-screen main-screen-stacked">
+                        <div class="stacked-container">
+                            <img src="img/loots/${item.icon_name}.gif" class="poke-img-stacked" style="image-rendering: pixelated; margin-bottom: -5px;" onerror="${fallbackJS}">
+                            <h2 class="poke-name-stacked" style="font-size: 1.15rem; margin-top: 5px;">${item.name}</h2>
+                            <div class="modal-gen-bar stacked-gen-bar">${item.droppedBy.length} POKÉMON(S) DROPAM</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- A parte de baixo da dobradiça -->
+            <div class="item-bottom-area">
+                <h4 class="label-tech">DROPA DE:</h4>
+                <div class="droppers-grid">
+                    ${droppersHTML}
+                </div>
+            </div>
+
+        </div>
+    `;
+}
+
+// Quando o jogador clica num rosto de Pokémon dentro do Item
+window.swapToPokemonModal = (pokeId) => {
+    document.getElementById('item-modal').classList.add('hidden');
+    openModal(pokeId);
 };
