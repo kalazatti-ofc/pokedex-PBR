@@ -44,6 +44,7 @@ body {
     padding: 25px; border-bottom: 6px solid var(--dex-border);
     display: flex; flex-direction: column;
     transition: background 0.3s ease;
+    overflow: visible; /* DEIXA AS ETIQUETAS RESPIRAREM! */
 }
 
 .pokedex-header { display: flex; flex-direction: column; align-items: stretch; position: relative; }
@@ -85,9 +86,6 @@ body {
 /* =========================================
    CONTROLES, BUSCA E ABAS (CATEGORIAS)
 ========================================= */
-/* =========================================
-   CONTROLES, BUSCA E ABAS (CATEGORIAS)
-========================================= */
 .pokedex-controls { 
     flex: 1; 
     display: flex; 
@@ -104,11 +102,9 @@ body {
 .pokedex-controls::-webkit-scrollbar-track { background: transparent; }
 .pokedex-controls::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
 body.dark-mode .pokedex-controls::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
-.search-module { 
-    width: 100%; 
-    margin-bottom: 20px; 
-    flex-shrink: 0; 
-}
+.search-module { width: 100%; margin-bottom: 15px; flex-shrink: 0; }
+.search-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 12px; gap: 8px; }
+.search-header .tech-label { margin-bottom: 0; font-size: 0.9rem; }
 .tech-label { font-family: monospace; font-size: 0.8rem; color: #ffcb05; font-weight: bold; text-shadow: 1px 1px 0 #000; margin-bottom: 5px; display: block; }
 .search-console { background: #ffffff; border: 4px solid var(--dex-border); border-radius: 12px; padding: 12px 15px; display: flex; align-items: center; box-shadow: inset 0 3px 8px rgba(0,0,0,0.15), 0 4px 0 rgba(255,255,255,0.3); }
 .search-console input { background: transparent; border: none; outline: none; width: 100%; color: var(--dex-border); font-family: monospace; font-size: 1.1rem; text-transform: uppercase; font-weight: 800; }
@@ -125,27 +121,48 @@ body.dark-mode .pokedex-controls::-webkit-scrollbar-thumb { background: rgba(255
 .search-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 transparent; }
 .search-btn.red-btn { background: var(--dex-red); color: #fff; }
 
+/* ESTRUTURA DOS CARTUCHOS EM 3 LINHAS */
 .category-module { 
-    display: flex; 
-    gap: 8px; 
-    margin-bottom: 20px; 
-    flex-shrink: 0; 
+    display: flex; flex-direction: column; gap: 8px; 
+    margin-top: 10px; padding-right: 10px; margin-bottom: 20px; flex-shrink: 0; 
 }
+.cat-row-1 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cat-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.cat-row-3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+/* VISUAL DOS BOTÕES INATIVOS (PADRÃO GRAFITE) */
 .cat-btn {
-    flex: 1; padding: 10px 5px; border-radius: 8px; font-family: monospace; font-size: 0.8rem;
+    padding: 10px 5px; border-radius: 8px; font-family: monospace; font-size: 0.75rem;
     font-weight: 900; text-align: center; border: 3px solid var(--dex-border);
     box-shadow: 3px 3px 0 var(--dex-border); cursor: pointer;
-    background: #444; color: #aaa;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s, color 0.2s;
-    will-change: transform;
+    background: #444; color: #aaa; transition: 0.1s; will-change: transform;
 }
 .cat-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 transparent; }
 
-/* Cores das abas */
+/* CORES DOS BOTÕES APENAS QUANDO ATIVOS */
 .cat-btn[data-cat="normal"].active { background: #fff; color: var(--dex-border); }
 .cat-btn[data-cat="boss"].active { background: #ffcb05; color: var(--dex-border); }
 .cat-btn[data-cat="dark"].active { background: #8a2be2; color: #fff; }
 .cat-btn[data-cat="mapas"].active { background: #3498db; color: #fff; }
+.cat-btn[data-cat="guias"].active { background: #27ae60; color: #fff; }
+.cat-btn[data-cat="drops"].active, .cat-btn[data-cat="tms"].active { background: #e67e22; color: #fff; border-color: #fff; }
+
+/* RESPONSIVIDADE DO MOBILE (Ocultando Mapa) */
+@media (max-width: 768px) {
+    /* Esconde o botão de mapas do mobile */
+    #btn-mapas { display: none !important; }
+    
+    /* Faz a linha de Ferramentas virar coluna única para esticar o Guias */
+    .cat-row-3 { grid-template-columns: 1fr; }
+    
+    /* Reduz levemente a fonte da Linha 1 para os 3 botões não vazarem na tela pequena */
+    .cat-row-1 .cat-btn { font-size: 0.65rem; padding: 10px 2px; }
+}
+
+/* Evita quebras no modo deitado (Landscape) */
+@media (max-height: 600px) and (orientation: landscape) {
+    .cat-row-1 { grid-template-columns: repeat(3, 1fr); } 
+}
 
 /* FILTROS SECUNDÁRIOS EM GRAFITE ELEGANTE */
 .pokedex-filters { margin-bottom: 20px; }
@@ -164,6 +181,54 @@ body.dark-mode .pokedex-controls::-webkit-scrollbar-thumb { background: rgba(255
 .filter-pill { background: #444; border: 2px solid var(--dex-border); border-radius: 8px; padding: 6px 10px; color: #fff; font-weight: 800; font-size: 0.65rem; cursor: pointer; box-shadow: 0 3px 0 var(--dex-border); transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s, color 0.2s; text-transform: uppercase; flex-grow: 1; text-align: center; will-change: transform;}
 .filter-pill:active { transform: translateY(3px); box-shadow: 0 0 0 var(--dex-border); }
 .filter-pill.active { background: var(--chip-color, #ffcb05); color: var(--dex-border); }
+
+/* =========================================
+   NOVO INTERRUPTOR DE BUSCA (PÍLULA)
+========================================= */
+.search-toggle-pill {
+    display: flex;
+    border: 3px solid var(--dex-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 2px 2px 0 var(--dex-border);
+    cursor: pointer;
+}
+.pill-option {
+    padding: 5px 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.45rem;
+    background: #444;
+    color: #aaa;
+    transition: 0.2s ease;
+}
+.pill-option.active#mode-pokemon { background: #ffcb05; color: #111; }
+.pill-option.active#mode-loot { background: #3498db; color: #fff; }
+
+body.dark-mode .search-toggle-pill { border-color: #111; box-shadow: 2px 2px 0 #000; }
+
+/* Transforma a mãozinha na caixinha de Loot indicando que é um botão */
+.loot-icon-item { cursor: pointer !important; }
+
+/* =========================================
+   BALÃO DE LOOT NO MOBILE (TOQUE DE SELEÇÃO)
+========================================= */
+@media (hover: none) {
+    /* No mobile, o hover natural do CSS é desativado para evitar bugs de tela presa */
+    .loot-tooltip:hover::after, .loot-tooltip:hover::before { opacity: 0; visibility: hidden; }
+    
+    /* O balão e a borda só aparecem quando o item ganha a classe 'mobile-selected' via JS */
+    .loot-tooltip.mobile-selected::after, .loot-tooltip.mobile-selected::before {
+        opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    }
+    .loot-icon-item.mobile-selected {
+        border-color: var(--dex-red);
+        background: #fff;
+        transform: scale(1.15);
+    }
+    body.dark-mode .loot-icon-item.mobile-selected {
+        background: #111; border-color: #ffcb05;
+    }
+}
 
 /* =========================================
    LISTA LATERAL DOS MAPAS (GPS GLOBAL)
@@ -667,6 +732,152 @@ body.dark-mode .apk-tutorial-img {
     border-color: #000;
     box-shadow: 4px 4px 0 #000;
 }
+
+/* =========================================
+   MÓDULO DE TUTORIAIS E GUIAS (BLOG)
+========================================= */
+#tutorials-module { overflow-y: auto; padding-right: 5px; }
+
+.tut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    padding-top: 10px; /* ESPAÇO PARA O CARD PULAR SEM BATER NO TETO */
+}
+
+.tut-card {
+    background: #fff; border: 3px solid var(--dex-border); border-radius: 12px;
+    padding: 12px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+
+.tut-card:hover { transform: translateY(-4px); box-shadow: 4px 8px 0 rgba(0,0,0,0.2); border-color: var(--dex-red); }
+
+.tut-thumb {
+    width: 100%; height: 110px; object-fit: cover; border-radius: 6px;
+    border: 2px solid var(--dex-border); margin-bottom: 10px;
+}
+
+.tut-title { font-family: 'Press Start 2P', monospace; font-size: 0.75rem; color: var(--dex-border); margin-bottom: 8px; line-height: 1.4; }
+.tut-desc { font-size: 0.8rem; color: #555; line-height: 1.4; font-weight: 700; }
+
+.article-body {
+    background: #fff; border: 4px solid var(--dex-border); border-radius: 12px;
+    padding: 25px; color: #333; line-height: 1.6; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.article-body h2 {
+    font-family: 'Press Start 2P', monospace; font-size: 1rem; color: var(--dex-red);
+    margin-bottom: 20px; text-align: center; border-bottom: 4px dashed var(--dex-border); padding-bottom: 15px;
+}
+
+.article-body h3 { font-family: 'Press Start 2P', monospace; font-size: 0.8rem; color: var(--dex-border); margin: 20px 0 10px 0; }
+.article-body p { font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; text-align: justify; }
+.article-body ul { margin: 10px 0 20px 20px; font-size: 0.9rem; font-weight: 700; }
+.article-body li { margin-bottom: 8px; }
+.article-body b { color: var(--dex-red); }
+
+/* MODO ESCURO DOS GUIAS */
+body.dark-mode .tut-card { background: #2a2a2c; border-color: #111; box-shadow: 4px 4px 0 rgba(0,0,0,0.6); }
+body.dark-mode .tut-card:hover { border-color: #ffcb05; }
+body.dark-mode .tut-thumb { border-color: #111; filter: brightness(0.85); }
+body.dark-mode .tut-title { color: #ffcb05; }
+body.dark-mode .tut-desc { color: #aaa; }
+body.dark-mode .article-body { background: #1a1a1a; border-color: #111; color: #ddd; }
+body.dark-mode .article-body h2 { color: #ffcb05; border-bottom-color: #333; }
+body.dark-mode .article-body h3 { color: #fff; }
+body.dark-mode .article-body b { color: #ffcb05; }
+
+/* =========================================
+   ESTILIZAÇÃO DOS GUIAS (CAIXAS E DESTAQUES)
+========================================= */
+.guide-main-title {
+    font-family: 'Press Start 2P', monospace; 
+    font-size: 1.1rem; 
+    color: var(--dex-red);
+    text-shadow: 2px 2px 0 var(--dex-border); /* Sombra 3D */
+    margin-bottom: 25px; 
+    text-align: center; 
+    border-bottom: 4px dashed var(--dex-border); 
+    padding-bottom: 15px;
+}
+
+.guide-sub-title {
+    font-family: 'Press Start 2P', monospace; 
+    font-size: 0.8rem; 
+    color: var(--dex-border);
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15); /* Destaque sutil */
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.guide-section-box {
+    background: #f8f9fa;
+    border: 3px solid var(--dex-border);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #333 !important; /* Força o texto base a ser escuro */
+}
+
+/* Força a cor escura nos parágrafos e listas dentro das caixas */
+.guide-section-box p, 
+.guide-section-box ul, 
+.guide-section-box li {
+    color: #333 !important;
+}
+
+/* Destaca o texto em negrito com a cor vermelha da Pokedex */
+.guide-section-box b {
+    color: var(--dex-red) !important;
+}
+
+.guide-section-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0 rgba(0,0,0,0.15);
+}
+
+.intro-box { background: #eaf2f8; border-color: #3498db; }
+.alert-box { background: #fdf2e9; border-color: #e67e22; border-left: 6px solid #e67e22; }
+.alert-box .guide-sub-title { color: #d35400; }
+
+/* Layout para Vitaminas */
+.vitamin-images {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin-top: 15px; padding-top: 15px; border-top: 2px dashed rgba(0,0,0,0.1);
+}
+
+.vit-item {
+    display: flex; flex-direction: column; align-items: center;
+    background: #fff; border: 2px solid var(--dex-border); border-radius: 8px;
+    padding: 6px; min-width: 55px; box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+.vit-item img { width: 32px; height: 32px; image-rendering: pixelated; margin-bottom: 4px; }
+.vit-item span { font-family: monospace; font-size: 0.6rem; font-weight: 900; color: var(--dex-border); }
+.multi-vit { border-color: #e84393; background: #ffeaf3; }
+
+/* DARK MODE PARA AS CAIXAS */
+body.dark-mode .guide-main-title { color: #ffcb05; text-shadow: 2px 2px 0 #000; }
+body.dark-mode .guide-sub-title { color: #fff; text-shadow: 1px 1px 0 #000; border-bottom-color: rgba(255,255,255,0.1); }
+body.dark-mode .guide-section-box { background: #2a2a2c; border-color: #111; box-shadow: 4px 4px 0 #000; color: #ddd !important; }
+
+/* Inverte as cores dos textos no modo escuro */
+body.dark-mode .guide-section-box p, 
+body.dark-mode .guide-section-box ul, 
+body.dark-mode .guide-section-box li { color: #ddd !important; }
+body.dark-mode .guide-section-box b { color: #ffcb05 !important; }
+
+body.dark-mode .intro-box { background: #1a242f; border-color: #2980b9; }
+body.dark-mode .alert-box { background: #3e2723; border-color: #d35400; }
+body.dark-mode .alert-box .guide-sub-title { color: #e67e22; }
+body.dark-mode .vit-item { background: #111; border-color: #000; box-shadow: 2px 2px 0 #000; }
+body.dark-mode .vit-item span { color: #ccc; }
+body.dark-mode .multi-vit { background: #2d0014; border-color: #e84393; }
 
 /* =========================================
    RESPONSIVIDADE E ADAPTAÇÃO DE TELAS
@@ -1805,7 +2016,7 @@ body.dark-mode #download-app-modal .report-title {
     .pk-types-mini { display: flex !important; justify-content: center !important; gap: 4px !important; }
     .type-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; border: 2px solid var(--dex-border) !important; }
 
-    /* =======================================================
+    /* ======================================================
        COMPACTAÇÃO EXTREMA DO PAINEL ESQUERDO (HORIZONTAL)
     ======================================================= */
     
@@ -1842,3 +2053,231 @@ body.dark-mode #download-app-modal .report-title {
     .tech-label { font-size: 0.6rem !important; margin-bottom: 2px !important; }
 
 }
+
+/* ==========================================
+   SISTEMA DE LOOT VISUAL (ÍCONES E BOTÃO)
+========================================== */
+.loot-icons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.loot-icon-item {
+    width: 38px;
+    height: 38px;
+    background: rgba(0,0,0,0.05);
+    border: 2px solid var(--dex-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    cursor: help;
+}
+
+.loot-icon-item:hover {
+    transform: scale(1.15);
+    border-color: var(--dex-red);
+    background: #fff;
+}
+
+.loot-icon-item img {
+    max-width: 24px;
+    max-height: 24px;
+    image-rendering: pixelated; /* Deixa o sprite do item nítido */
+}
+
+.loot-report-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.5;
+    transition: opacity 0.2s, transform 0.2s;
+    outline: none;
+}
+
+.loot-report-btn:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+body.dark-mode .loot-icon-item {
+    background: rgba(255,255,255,0.05);
+}
+
+body.dark-mode .loot-icon-item:hover {
+    background: #111;
+    border-color: #ffcb05;
+}
+
+/* ==========================================
+   BALÃO (TOOLTIP) ESPECÍFICO DOS LOOTS
+========================================== */
+.loot-tooltip {
+    position: relative;
+}
+
+.loot-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px); 
+    left: 50%;
+    transform: translateX(-50%) translateY(5px); 
+    background: #f0f4f8; 
+    color: var(--dex-border); 
+    border: 2px solid var(--dex-border); 
+    padding: 4px 8px; /* Espaçamento idêntico ao das Natures */
+    border-radius: 6px;
+    font-size: 0.6rem; /* Tamanho reduzido */
+    font-family: monospace; /* Fonte limpa igual a das Natures */
+    font-weight: 900; /* Deixa a letra gordinha e legível */
+    text-transform: uppercase;
+    white-space: nowrap; 
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15); /* Sombra mais sutil */
+    pointer-events: none;
+}
+
+.loot-tooltip::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent var(--dex-border) transparent; 
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.loot-tooltip:hover::after,
+.loot-tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); 
+}
+
+body.dark-mode .loot-tooltip::after {
+    background: #2a2a2c;
+    color: #ffcb05;
+    border-color: #111;
+    box-shadow: 3px 3px 0 #000;
+}
+body.dark-mode .loot-tooltip::before {
+    border-color: transparent transparent #111 transparent;
+}
+
+/* =========================================
+   GRADE DE ITENS (INVENTÁRIO)
+========================================= */
+.item-card {
+    background: #fff; border: 3px solid var(--dex-border); border-radius: 12px;
+    cursor: pointer; box-shadow: 3px 3px 0 rgba(0,0,0,0.1); transition: 0.1s ease;
+    padding: 15px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.item-card img { 
+    width: 40px; height: 40px; object-fit: contain; image-rendering: pixelated; 
+    margin-bottom: 8px; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.15)); transition: transform 0.2s; 
+}
+.item-card:hover img { transform: scale(1.2); }
+.item-card-name { font-size: 0.7rem; font-weight: 900; color: var(--dex-border); text-transform: uppercase; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-card-count { font-family: monospace; font-size: 0.6rem; color: #888; margin-top: 4px; font-weight: bold; }
+
+body.dark-mode .item-card { background: #2a2a2c; }
+body.dark-mode .item-card-name { color: #f0f0f0; }
+
+/* =========================================
+   AJUSTE DE TEXTO DOS ITENS NO MOBILE
+========================================= */
+@media (max-width: 768px) {
+    .item-card {
+        padding: 8px 6px; /* Diminui o espaço interno do card */
+        border-radius: 8px; /* Cantos um pouco menos redondos para combinar com o tamanho menor */
+    }
+    .item-card img {
+        width: 30px; /* Ícone levemente menor */
+        height: 30px;
+        margin-bottom: 4px;
+    }
+    .item-card-name { 
+        font-size: 0.5rem; /* <-- AQUI ESTÁ A MÁGICA: Reduz a fonte do nome do item */
+        white-space: normal; /* Permite que o nome quebre para a linha de baixo se for muito grande */
+        word-break: break-word; /* Força a quebra de palavras muito longas */
+        line-height: 1.2; /* Ajusta a altura da linha para não colar as palavras */
+        max-height: 1.2rem; /* Limita a altura para não empurrar os cards muito pra baixo */
+    }
+    .item-card-count {
+        font-size: 0.5rem; /* Diminui a fonte do "X DROP(S)" */
+        margin-top: 2px;
+    }
+}
+
+/* =========================================
+   MODAL DE ITENS (ESTRUTURA VERTICAL VERMELHA E DOBRADIÇA)
+========================================= */
+.item-modal-content { max-width: 400px; margin: 0 auto; width: 100%; }
+
+/* Ajusta o painel para coluna única e aplica o fundo escuro na parte de baixo */
+.item-vertical-view { flex-direction: column !important; height: auto !important; max-height: 85vh; width: 100% !important; background: #a31e08 !important; }
+.item-vertical-view::after { display: none; } /* Remove sombra central */
+
+/* Mantém o topo vermelho claro padrão */
+.item-vertical-wing { width: 100% !important; border: none !important; padding: 20px 20px 10px 20px !important; border-radius: 14px 14px 0 0; }
+
+/* Impede que o item grande estique (Ajuste da Maçã) */
+.item-vertical-wing .poke-img-stacked { 
+    width: 70px !important; 
+    height: 70px !important; 
+    object-fit: contain !important; /* <--- O segredo da maçã não amassar */
+}
+
+/* Área Inferior (Dobradiça + Scroll de Pokémons) */
+.item-bottom-area { 
+    padding: 15px 20px; 
+    border-top: 4px solid var(--dex-border); /* A linha da dobradiça */
+    box-shadow: inset 0 10px 10px rgba(0,0,0,0.2); 
+    max-height: 280px; 
+    overflow-y: auto; 
+    border-radius: 0 0 14px 14px;
+}
+.item-bottom-area::-webkit-scrollbar { width: 8px; }
+.item-bottom-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.4); border-radius: 4px; }
+.item-bottom-area .label-tech { color: #ffcb05; text-shadow: 1px 1px 0 #000; border-bottom: 2px dashed rgba(255,215,0,0.4) !important; }
+
+/* Grid dos Mini Pokémons no Item Modal */
+.droppers-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); 
+    gap: 10px; 
+    padding-top: 5px; 
+    padding-bottom: 15px; /* Espaço para o botão não cortar */
+}
+
+/* Botões Brancos dos Pokémons */
+.mini-dropper-card { 
+    background: #fff; border: 2px solid var(--dex-border); border-radius: 8px; padding: 8px 4px; 
+    display: flex; flex-direction: column; align-items: center; cursor: pointer;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15); transition: transform 0.1s, box-shadow 0.1s, border-color 0.2s;
+}
+.mini-dropper-card:hover { border-color: var(--dex-red); transform: translateY(-2px); box-shadow: 2px 4px 0 rgba(0,0,0,0.2); }
+.mini-dropper-card:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+.mini-dropper-card img { width: 35px; height: 35px; object-fit: contain; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.15)); margin-bottom: 4px; }
+.mini-dropper-card span { font-size: 0.55rem; font-weight: 900; color: var(--dex-border); text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: center; }
+
+/* Modo Escuro */
+body.dark-mode .item-vertical-view { background: #1a1a1c !important; }
+body.dark-mode .item-bottom-area { border-top-color: #000; box-shadow: inset 0 10px 10px rgba(0,0,0,0.5); }
+body.dark-mode .item-bottom-area .label-tech { color: #aaa; text-shadow: none; border-bottom-color: #555 !important; }
+body.dark-mode .mini-dropper-card { background: #1a1a1a; border-color: #111; box-shadow: 2px 2px 0 #000; }
+body.dark-mode .mini-dropper-card:hover { border-color: #ffcb05; }
+body.dark-mode .mini-dropper-card span { color: #fff; }
