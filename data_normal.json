@@ -739,7 +739,8 @@
     },
     "locations": [
       "Trost (X 1516 / Y 1168 / Z 7)",
-      "Trost (X 1438 / Y 1317 / Z 7)"
+      "Trost (X 1438 / Y 1317 / Z 7)",
+      "Sandgem (X 3493 / Y 2198 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/31.png"
   },
@@ -2514,7 +2515,8 @@
       "spd": 30
     },
     "locations": [
-      "Trost (X 1528 / Y 1206 / Z 7)"
+      "Trost (X 1528 / Y 1206 / Z 7)",
+      "Sandgem (X 3493 / Y 2198 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/108.png"
   },
@@ -2555,6 +2557,7 @@
       "spd": 60
     },
     "locations": [
+      "Canavale (X 3264 / Y 2039 / Z 7)",
       "Armia (X 1962 / Y 897 / Z 6)",
       "Singer (X 1621 / Y 922 / Z 7)"
     ],
@@ -3305,6 +3308,7 @@
       "Hunter Village (X 1932 / Y 1763 / Z 7)",
       "Trost (X 1438 / Y 1317 / Z 7)",
       "Azalea (X 2141 / Y 664 / Z 7)",
+      "Sandgem (X 34437 / Y 2247 / Z 7)",
       {
         "rota": "Trainer Center",
         "passos": [
@@ -3765,7 +3769,8 @@
       "spd": 70
     },
     "locations": [
-      "Three island (X 2727 / Y 599 / Z 6)"
+      "Three island (X 2727 / Y 599 / Z 6)",
+      "Sandgem (X 3466 / Y 2277 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/164.png"
   },
@@ -4221,6 +4226,7 @@
       "spd": 30
     },
     "locations": [
+      "Canavale (X 3367 / Y 2134 / Z 7)",
       "Sina (X 1235 / Y 591 / Z 5)",
       "Sina (X 985 / Y 621 / Z 3)",
       "Singer (X 1664 / Y 1031 / Z 7)"
@@ -4408,7 +4414,8 @@
     },
     "locations": [
       "Trost (X 1545 / Y 1222 / Z 7)",
-      "Cianwood (X 618 / Y 146 / Z 7)"
+      "Cianwood (X 618 / Y 146 / Z 7)",
+      "Sandgem (X 3466 / Y 2277 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/193.png"
   },
@@ -4944,6 +4951,7 @@
       "spd": 55
     },
     "locations": [
+      "Canavale (X 3367 / Y 2134 / Z 7)",
       "Hunter Village (X 1834 / Y 1413 / Z 6)",
       "Sina (X 1310 / Y 685 / Z 6)"
     ],
@@ -5468,7 +5476,7 @@
       "spd": 100
     },
     "locations": [
-      "Canavale (X 3327 / Y 2136 / Z 7)",
+      "Canavale (X 3367 / Y 2134 / Z 7)",
       "Sina (X 1352 / Y 652 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/241.png"
@@ -7155,7 +7163,8 @@
       "spd": 55
     },
     "locations": [
-      "Olivine (X 1215 / Y 107 / Z 7)"
+      "Olivine (X 1215 / Y 107 / Z 7)",
+      "Canavale (X 3264 / Y 2039 / Z 7)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/317.png"
   },
@@ -9551,7 +9560,9 @@
       "spd": 71
     },
     "locations": [
-      "Jublife (X 3324 / Y 2198 / Z 6)"
+      "Canavale (X 3367 / Y 2134 / Z 7)",
+      "Canavale (X 3315 / Y 2217 / Z 7)",
+      "Canavale (X 3261 / Y 2184 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/430.png"
   },
@@ -13610,8 +13621,9 @@
       "spd": 60
     },
     "locations": [
-      "Jublife (X 3315 / Y 2217 / Z 7)",
-      "Jublife (X 3261 / Y 2184 / Z 6)"
+      "Canavale (X 3367 / Y 2134 / Z 7)",
+      "Canavale (X 3315 / Y 2217 / Z 7)",
+      "Canavale (X 3261 / Y 2184 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/624.png"
   },
@@ -14206,6 +14218,27 @@
       "Canavale (X 3263 / Y 2212 / Z 6)"
     ],
     "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/724.png"
+  },
+  {
+    "id": 901,
+    "name": "Ursaluna",
+    "types": [
+      "Ground",
+      "Normal"
+    ],
+    "generation": 8,
+    "stats": {
+      "hp": 130,
+      "atk": 140,
+      "def": 105,
+      "spatk": 45,
+      "spdef": 80,
+      "spd": 50
+    },
+    "locations": [
+      "Canavale (X 3367 / Y 2134 / Z 7)"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/902.png"
   },
   {
     "id": 902,
