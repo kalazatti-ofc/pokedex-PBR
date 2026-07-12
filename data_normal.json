@@ -6400,7 +6400,7 @@
             "spd": 50
         },
         "locations": [
-            "Olivine (X 1406 / Y 378 / Z 6)",
+            "Olivine (X 1425 / Y 386 / Z 5)",
             "Olivine (X 1192 / Y 303 / Z 6)"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/271.png",
@@ -6743,7 +6743,7 @@
             "spd": 70
         },
         "locations": [
-            "Breloom (X 1425 / Y 386 / Z 5)"
+            "Olivine (X 1425 / Y 386 / Z 5)"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/286.png",
         "loot": "Leaf Stone, Bag of Pollen, Seed, TM Focus Punch"
