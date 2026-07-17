@@ -151,6 +151,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (optPokemon && optLoot) { optLoot.classList.remove('active'); optPokemon.classList.add('active'); }
             }
 
+            // 👇 CORREÇÃO: Controle GLOBAL do Dashboard de TMs (agora desliga em todas as outras abas)
+            const tmDash = document.getElementById('tm-dashboard');
+            if (activeCategory === 'tms') {
+                if(tmDash) tmDash.style.display = 'flex';
+                if(window.updateTMProgress) window.updateTMProgress();
+            } else {
+                if(tmDash) tmDash.style.display = 'none';
+                if(isEditingTMs && window.toggleTMEditMode) window.toggleTMEditMode();
+            }
+
+            // Oculta/Mostra elementos baseado na aba clicada
             if (activeCategory === 'mapas') {
                 gridContainer.style.display = 'none'; searchModule.style.display = 'none'; filtersModule.style.display = 'none';
                 if(tutModule) tutModule.style.display = 'none'; if(mapSidebar) mapSidebar.style.display = 'block'; 
@@ -160,20 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 mapContainer.style.display = 'none'; if(mapSidebar) mapSidebar.style.display = 'none'; 
                 if(tutModule) { tutModule.style.display = 'block'; closeTutorial(); }
             } else if (activeCategory === 'drops' || activeCategory === 'tms') {
-                gridContainer.style.display = 'grid'; searchModule.style.display = 'block';
-                filtersModule.style.display = 'none';
+                gridContainer.style.display = 'grid'; searchModule.style.display = 'block'; filtersModule.style.display = 'none';
                 if(mapSidebar) mapSidebar.style.display = 'none'; mapContainer.style.display = 'none'; if(tutModule) tutModule.style.display = 'none';
-                
-                // MÁGICA DO ÁLBUM: Mostra o Dashboard só nos TMs
-                const tmDash = document.getElementById('tm-dashboard');
-                if (activeCategory === 'tms') {
-                    if(tmDash) tmDash.style.display = 'flex';
-                    if(window.updateTMProgress) window.updateTMProgress();
-                } else {
-                    if(tmDash) tmDash.style.display = 'none';
-                    if(isEditingTMs && window.toggleTMEditMode) window.toggleTMEditMode();
-                }
-                
                 applyFilters(); 
             } else {
                 gridContainer.style.display = 'grid'; searchModule.style.display = 'block'; filtersModule.style.display = 'block';
