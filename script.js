@@ -801,10 +801,15 @@ window.toggleAccordion = (buttonEl, event, passosEscapados) => {
         arrowIcon.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
     }
 
-    // 5. Lógica de desenhar no mapa (mantida igual à sua)
+    // Lógica de desenhar no mapa (Corrigida para Mobile)
     if (!container.classList.contains('hidden-steps') && passosEscapados) {
-        document.querySelector('.cat-btn[data-cat="mapas"]').click();
         const arrayPassos = JSON.parse(decodeURIComponent(passosEscapados));
+        
+        // Só muda de aba automaticamente se a tela for maior que 768px (Computador)
+        if (window.innerWidth > 768) {
+            document.querySelector('.cat-btn[data-cat="mapas"]').click();
+        }
+        
         if(window.drawRouteOnMap) window.drawRouteOnMap(arrayPassos);
     }
 };
@@ -1907,4 +1912,23 @@ function renderItemModal() {
 window.swapToPokemonModal = (pokeId) => {
     document.getElementById('item-modal').classList.add('hidden');
     openModal(pokeId);
+};
+
+// ==========================================
+// SANFONA DO HALL DA FAMA (COMO PARTICIPAR)
+// ==========================================
+window.toggleVipAccordion = (btn) => {
+    const content = document.getElementById('vip-join-content');
+    
+    // Liga ou desliga a classe que esconde o conteúdo
+    content.classList.toggle('hidden-steps');
+    
+    // Troca o texto e a seta do botão dependendo do estado
+    if (content.classList.contains('hidden-steps')) {
+        btn.innerText = 'COMO SE TORNAR UM APOIADOR? ▼';
+        btn.style.color = '#ffcb05'; // Volta pro amarelo
+    } else {
+        btn.innerText = 'OCULTAR INFORMAÇÕES ▲';
+        btn.style.color = '#fff'; // Fica branco quando aberto
+    }
 };
