@@ -161,7 +161,73 @@
 
             <div class="pokedex-main-display">
                 
+                <!-- PAINEL DE CONTROLE DE TMs (ÁLBUM) -->
+                <div class="pokedex-main-display">
+                
+                <div id="tm-dashboard" class="tm-dashboard" style="display: none;">
+                    <div class="tm-info">
+                        <span class="tm-album-title">💿 ÁLBUM DE TMs</span>
+                        <p class="tm-desc">Marque os TMs que você já possui para rastrear sua coleção.</p>
+                        <div class="tm-progress-bar"><div id="tm-progress-fill"></div></div>
+                    </div>
+                    <div class="tm-controls">
+                        <button onclick="toggleTMEditMode()" id="edit-tm-btn" class="tm-action-btn edit-btn">✏️ EDITAR COLEÇÃO</button>
+                        <div class="tm-filter-wrapper">
+                            <button onclick="toggleTMFilterMenu(event)" id="tm-filter-btn" class="tm-action-btn filter-btn">🎛️ FILTRO: TODOS ▼</button>
+                            <div id="tm-filter-dropdown" class="tm-dropdown hidden">
+                                <div onclick="selectTMFilter('all', 'TODOS', this)" class="tm-drop-item active">Mostrar Todos</div>
+                                <div onclick="selectTMFilter('owned', 'OBTIDOS', this)" class="tm-drop-item">Apenas Obtidos</div>
+                                <div onclick="selectTMFilter('missing', 'FALTAM', this)" class="tm-drop-item">Apenas Faltam</div>
+                            </div>
+                        </div>
+                        <button onclick="requestReset()" class="tm-action-btn reset-action-btn">🗑️ RESETAR</button>
+                    </div>
+                </div>
+
                 <div class="pokemon-grid" id="pokedex-grid"></div>
+
+                <div id="map-viewer-container" style="display: none; height: 100%; width: 100%;">
+                    <div class="map-screen" style="height: 100%; width: 100%; position: relative; border: 4px solid var(--dex-border); border-radius: 12px; background: #2a2a2a; overflow: hidden; display: flex; flex-direction: column;">
+                        <div id="map-wrapper" style="width: 100%; height: 100%; cursor: grab; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: transparent;">
+                            <div id="map-content" style="position: relative; display: inline-block;">
+                                <img id="map-image" src="" alt="Mapa" style="display: block; width: 100%; height: auto; z-index: 2; transform-origin: center center; will-change: transform;">
+                                <div id="map-pins-container"></div>
+                                <svg id="map-routes-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible;"></svg>
+                                <div class="map-overlay" style="position: absolute; inset: 0; z-index: 4; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);"></div>
+                            </div>
+                            <div class="map-controls-vertical">
+                                <button id="btn-zoom-in" class="zoom-btn" title="Aumentar Zoom">＋</button>
+                                <button id="btn-zoom-reset" class="zoom-btn" title="Resetar Visão">🎯</button>
+                                <button id="btn-zoom-out" class="zoom-btn" title="Diminuir Zoom">－</button>
+                            </div>
+                            <div class="map-hud-floating">
+                                <span class="blink" style="color:var(--dex-red);">● REC</span>
+                                <span id="map-status-text">AGUARDANDO SINAL...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+                <div id="tutorials-module" style="display: none; height: 100%; width: 100%; overflow-y: auto;">
+                    <div id="tutorials-grid" class="tut-grid"></div>
+                    <div id="tutorial-article-view" style="display: none; height: 100%;">
+                        <button onclick="closeTutorial()" class="final-support-btn" style="width: max-content; margin: 0 0 15px 0; padding: 10px 15px; display: inline-block;">❮ VOLTAR AOS GUIAS</button>
+                        <div id="tutorial-articles-container"></div>
+                    </div>
+                </div>
+
+            </div> </div> </div> <div id="reset-confirm-modal" class="oak-overlay hidden">
+        <div class="oak-container">
+            <div class="oak-screen" style="border-color: #e3350d; align-items: center;">
+                <h2 class="report-title" style="color:#e3350d; border-color:#e3350d;">RESETAR COLEÇÃO?</h2>
+                <p class="reset-modal-text">Tem certeza? Isso apagará todo o seu progresso de TMs marcados e não pode ser desfeito!</p>
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    <button onclick="resetTMCollection()" class="final-support-btn" style="background:#e3350d; color:#fff; flex:1;">SIM, APAGAR</button>
+                    <button onclick="document.getElementById('reset-confirm-modal').classList.add('hidden')" class="final-support-btn" style="background:#444; color:#fff; flex:1;">NÃO, CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
                 <div id="map-viewer-container" style="display: none; height: 100%; width: 100%;">
                     <div class="map-screen" style="height: 100%; width: 100%; position: relative; border: 4px solid var(--dex-border); border-radius: 12px; background: #2a2a2a; overflow: hidden; display: flex; flex-direction: column;">
@@ -185,100 +251,20 @@
                             </div>
                         </div>
                     </div>
-                </div> <div id="tutorials-module" style="display: none; height: 100%; width: 100%; overflow-y: auto;">
+                </div> 
+                <div id="tutorials-module" style="display: none; height: 100%; width: 100%; overflow-y: auto;">
                     
-                    <div id="tutorials-grid" class="tut-grid">
-                        <div class="tut-card" onclick="openTutorial('evs')">
-                            <img src="img/capa-evs.png" alt="Guia de EVs" class="tut-thumb">
-                            <h3 class="tut-title">Como Upar EVs Rápido!</h3>
-                            <p class="tut-desc">Tudo sobre EVs! Como funciona o UP e muito mais.</p>
-                        </div>
-                    </div>
+                    <!-- A grade de capas dos guias será gerada aqui pelo JS -->
+                    <div id="tutorials-grid" class="tut-grid"></div>
 
+                    <!-- A tela de leitura do guia será gerada aqui pelo JS -->
                     <div id="tutorial-article-view" style="display: none; height: 100%;">
                         <button onclick="closeTutorial()" class="final-support-btn" style="width: max-content; margin: 0 0 15px 0; padding: 10px 15px; display: inline-block;">❮ VOLTAR AOS GUIAS</button>
                         
-                        <div class="article-content-block" id="article-evs" style="display: block;">
-                                <h2 class="guide-main-title">COMO UPAR EVs CORRETAMENTE</h2>
-                                
-                                <div class="guide-section-box intro-box" style="display: flex; align-items: center; gap: 15px;">
-                                    <img src="img/mr-hyper.png" alt="Mr. Hyper" style="width: 64px; height: auto; image-rendering: pixelated; flex-shrink: 0; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="this.src='https://dummyimage.com/64x64/3498db/fff.png&text=NPC'">
-                                    <p style="margin-bottom: 0;">Os EVs (Effort Values) são pontos extras que você distribui nos status do seu Pokemon para deixá-lo mais forte. No PBR, upar EVs exige falar com o NPC <b>Mr. Hyper</b> e realizar ações específicas para upar cada tipo de atributo.</p>
-                                </div>
-                                
-                                <div class="guide-section-box alert-box">
-                                    <h3 class="guide-sub-title">⚠ REGRAS DE OURO DOS EVS</h3>
-                                    <ul style="margin-bottom: 0;">
-                                        <li><b>Limite Total:</b> Um Pokemon pode ter no máximo <b>700 EVs</b> somando todos os atributos.</li>
-                                        <li><b>Limite por Status:</b> Você só pode colocar até <b>200 EVs</b> em um único status (ex: máximo de 200 em ATK).</li>
-                                        <li><b>Teto do Pokemon:</b> A soma do <i>Status Base + EV</i> não pode passar de <b>250</b>. Se a Base for 165, você só poderá colocar 85 EVs ali.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="guide-section-box">
-                                    <h3 class="guide-sub-title">❤️ COMO UPAR HP (VIDA)</h3>
-                                    <p>O treino de HP é feito de forma passiva dentro das Houses.</p>
-                                    <ul style="margin-bottom: 0;">
-                                        <li>Fale com o Mr. Hyper e escolha treinar HP.</li>
-                                        <li>Alimente o Pokemon (ex: usando <b>qualquer comida</b>) até ele ficar "Muito Feliz".</li>
-                                        <li>Coloque-o no <b>Depot/Expositor</b> da sua House. Ele upará sozinho com o tempo.</li>
-                                        <li><b>Atenção:</b> A felicidade vai caindo com o tempo. Se ele ficar triste, o treino para. Tire-o do Depot, dê mais comida e guarde-o novamente.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="guide-section-box">
-                                    <h3 class="guide-sub-title">⚔️ COMO UPAR ATK E SP. ATK</h3>
-                                    <p>Para ataque, seu Pokemon precisa "bater" em outro, mas o dano precisa ser <b>Inefetivo / low / very low</b>.</p>
-                                    <ul style="margin-bottom: 0;">
-                                        <li>Fale com o Mr. Hyper e escolha ATK ou SP. ATK.</li>
-                                        <li>Olhe as tipagens dos ataques do seu Pokemon na Pokedex e encontre um Pokemon selvagem que tenha <b>Resistência (Tome dano inefetivo)</b> contra esses ataques.</li>
-                                        <li><b>ATK (Físico):</b> Deixe no seu Pokemon APENAS ataques <i>Físicos</i> e ataque o alvo resistente.</li>
-                                        <li><b>SP. ATK (Especial):</b> Deixe APENAS ataques <i>Especiais</i> e ataque o alvo resistente.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="guide-section-box">
-                                    <h3 class="guide-sub-title">🛡️ COMO UPAR DEF E SP. DEF</h3>
-                                    <p>Para defesa, seu Pokemon precisa "apanhar" e levar dano <b>Super Efetivo</b>.</p>
-                                    <ul style="margin-bottom: 0;">
-                                        <li>Fale com o Mr. Hyper e escolha DEF ou SP. DEF.</li>
-                                        <li>Olhe as fraquezas do seu Pokemon na Pokedex e encontre um selvagem dessa tipagem para te bater.</li>
-                                        <li><b>DEF (Física):</b> O Pokemon selvagem deve usar ataques <i>Físicos</i> super efetivos contra você (ex: Hitmonchan batendo).</li>
-                                        <li><b>SP. DEF (Especial):</b> O Pokemon selvagem deve usar ataques <i>Especiais</i> super efetivos contra você (ex: Gengar batendo).</li>
-                                    </ul>
-                                </div>
-
-                                <div class="guide-section-box">
-                                    <h3 class="guide-sub-title">⚡ COMO UPAR SPEED (VELOCIDADE)</h3>
-                                    <p>A velocidade é upada participando de minigames do servidor!</p>
-                                    <ul style="margin-bottom: 0;">
-                                        <li>Fale com o Mr. Hyper e escolha SPEED.</li>
-                                        <li>Você precisará ganhar ou participar de eventos como o <b>Pokekart, Bomberman</b> ou torneios especiais para os pontos subirem.</li>
-                                    </ul>
-                                </div>
-
-                                <div class="guide-section-box">
-                                    <h3 class="guide-sub-title">💊 ACELERANDO COM VITAMINAS</h3>
-                                    <p>O treino demora e custa mais caro de acordo com o Status Base do Pokemon. Para acelerar:</p>
-                                    <ul style="margin-bottom: 0;">
-                                        <li>Você pode comprar Vitaminas no <b>NPC Tomas</b> (Trainer Center). Limite de <b>5 usos</b> por nível de EV.</li>
-                                        <li>A <b>Multivitamin</b> (VIP Shop) é a mais poderosa, podendo ser usada até <b>10 vezes</b> para turbinar qualquer atributo!</li>
-                                    </ul>
-                                    
-                                    <div class="vitamin-images">
-                                        <div class="vit-item"><img src="img/vit-hp.png" alt="HP" onerror="this.src='https://dummyimage.com/32x32/ff6b6b/fff.png&text=HP'"><span>HP</span></div>
-                                        <div class="vit-item"><img src="img/vit-atk.png" alt="ATK" onerror="this.src='https://dummyimage.com/32x32/f39c12/fff.png&text=ATK'"><span>ATK</span></div>
-                                        <div class="vit-item"><img src="img/vit-def.png" alt="DEF" onerror="this.src='https://dummyimage.com/32x32/f1c40f/fff.png&text=DEF'"><span>DEF</span></div>
-                                        <div class="vit-item"><img src="img/vit-spatk.png" alt="SP.ATK" onerror="this.src='https://dummyimage.com/32x32/3498db/fff.png&text=SPA'"><span>SP.A</span></div>
-                                        <div class="vit-item"><img src="img/vit-spdef.png" alt="SP.DEF" onerror="this.src='https://dummyimage.com/32x32/9b59b6/fff.png&text=SPD'"><span>SP.D</span></div>
-                                        <div class="vit-item"><img src="img/vit-speed.png" alt="SPEED" onerror="this.src='https://dummyimage.com/32x32/2ecc71/fff.png&text=SPE'"><span>SPE</span></div>
-                                        <div class="vit-item multi-vit"><img src="img/vit-multi.png" alt="MULTI" onerror="this.src='https://dummyimage.com/32x32/e84393/fff.png&text=MULT'"><span>MULTI</span></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Os artigos serão injetados aqui -->
+                        <div id="tutorial-articles-container"></div>
                     </div>
                 </div>
-
             </div>
         </div>
 
