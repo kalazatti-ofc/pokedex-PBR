@@ -3,6 +3,7 @@
 // ==========================================
 let pokemonData = [];
 let itemData = [];
+let guiasData = [];
 let currentVisibleList = []; // Guarda a lista que está sendo exibida na tela
 let currentModalIndex = 0;   // Guarda a posição do Pokémon aberto no modal
 let currentModalItemIndex = 0; // Guarda a posição do Item aberto no modal
@@ -16,6 +17,10 @@ let searchMode = 'pokemon'; // Controla se estamos buscando por nome ou por loot
 
 let caughtPokemon = JSON.parse(localStorage.getItem('pokedex-caught')) || [];
 caughtPokemon = caughtPokemon.map(String); // MÁGICA 1: Força todos os saves antigos a virarem texto!
+
+let caughtTMs = JSON.parse(localStorage.getItem('pokedex-tms')) || [];
+let isEditingTMs = false; // Controla se estamos no "modo álbum"
+let currentTmFilter = 'all'; // Filtro do Dashboard
 
 const types = ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 
@@ -156,8 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(tutModule) { tutModule.style.display = 'block'; closeTutorial(); }
             } else if (activeCategory === 'drops' || activeCategory === 'tms') {
                 gridContainer.style.display = 'grid'; searchModule.style.display = 'block';
-                filtersModule.style.display = 'none'; // Esconde os filtros de Tipos/Regiões para os Itens
+                filtersModule.style.display = 'none';
                 if(mapSidebar) mapSidebar.style.display = 'none'; mapContainer.style.display = 'none'; if(tutModule) tutModule.style.display = 'none';
+                
+                // MÁGICA DO ÁLBUM: Mostra o Dashboard só nos TMs
+                const tmDash = document.getElementById('tm-dashboard');
+                if (activeCategory === 'tms') {
+                    if(tmDash) tmDash.style.display = 'flex';
+                    if(window.updateTMProgress) window.updateTMProgress();
+                } else {
+                    if(tmDash) tmDash.style.display = 'none';
+                    if(isEditingTMs && window.toggleTMEditMode) window.toggleTMEditMode();
+                }
+                
                 applyFilters(); 
             } else {
                 gridContainer.style.display = 'grid'; searchModule.style.display = 'block'; filtersModule.style.display = 'block';
@@ -173,12 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 async function fetchData() {
     try {
-        const [normalRes, darkRes, bossRes, itemRes] = await Promise.all([
+        const [normalRes, darkRes, bossRes, itemRes, guiasRes] = await Promise.all([
             fetch('data_normal.json?v=' + new Date().getTime()),
             fetch('data_dark.json?v=' + new Date().getTime()),
             fetch('data_boss.json?v=' + new Date().getTime()),
-            fetch('data_items.json?v=' + new Date().getTime()).catch(() => null) // Não quebra se o arquivo não existir
+            fetch('data_items.json?v=' + new Date().getTime()).catch(() => null),
+            fetch('data_guias.json?v=' + new Date().getTime()).catch(() => null)
         ]);
+        
         const normalData = await normalRes.json();
         const darkData = await darkRes.json();
         const bossData = await bossRes.json();
@@ -187,10 +205,39 @@ async function fetchData() {
         
         if(itemRes && itemRes.ok) itemData = await itemRes.json();
         
+        if(guiasRes && guiasRes.ok) {
+            guiasData = await guiasRes.json();
+            renderGuias(guiasData);
+        }
+        
         renderPokemon(pokemonData);
     } catch (e) { 
         console.error("Erro ao carregar os bancos de dados.", e); 
     }
+}
+
+// NOVA FUNÇÃO: DESENHAR OS GUIAS (WIKI)
+function renderGuias(guias) {
+    const grid = document.getElementById('tutorials-grid');
+    const articleContainer = document.getElementById('tutorial-articles-container');
+
+    if (!grid || !articleContainer) return;
+
+    // Renderiza os cartões (Grid inicial)
+    grid.innerHTML = guias.map(g => `
+        <div class="tut-card" onclick="openTutorial('${g.id}')">
+            <img src="${g.thumb}" alt="${g.title}" class="tut-thumb" onerror="this.src='https://dummyimage.com/200x110/3498db/fff.png&text=Guia'">
+            <h3 class="tut-title">${g.title}</h3>
+            <p class="tut-desc">${g.desc}</p>
+        </div>
+    `).join('');
+
+    // Renderiza o corpo dos artigos completos de forma oculta
+    articleContainer.innerHTML = guias.map(g => `
+        <div class="article-content-block" id="article-${g.id}" style="display: none;">
+            ${g.content.join('\n')}
+        </div>
+    `).join('');
 }
 
 function renderTypeButtons() {
@@ -299,7 +346,10 @@ function applyFilters() {
             mSearch = p.name.toLowerCase().includes(search) || p.id.toString() === search;
         } else if (searchMode === 'loot') {
             if (p.loot) {
-                mSearch = p.loot.toLowerCase().includes(search);
+                // NOVA LÓGICA: Verifica se é Array. Se sim, busca nos itens. Se não, busca como texto normal.
+                mSearch = Array.isArray(p.loot) 
+                    ? p.loot.some(item => item.toLowerCase().includes(search)) 
+                    : p.loot.toLowerCase().includes(search);
             }
         }
 
@@ -350,17 +400,125 @@ function applyFilters() {
     }
 }
 
-// NOVA FUNÇÃO: DESENHAR A GRADE DE ITENS (INVENTÁRIO)
+// NOVA FUNÇÃO: DESENHAR A GRADE DE ITENS E APLICAR FILTROS DO ÁLBUM
 function renderItems(list) {
     const grid = document.getElementById('pokedex-grid');
-    grid.innerHTML = list.map(item => `
-        <div class="item-card" onclick="openItemModal('${item.name}')">
-            <img src="img/loots/${item.icon_name}.gif" alt="${item.name}" onerror="this.onerror=null; this.src='img/loots/${item.icon_name}.png'; this.onerror=function(){this.src='https://dummyimage.com/24x24/dcdde1/2c3e50.png&text=?';};">
-            <span class="item-card-name">${item.name}</span>
-            <span class="item-card-count">${item.droppedBy.length} DROP(S)</span>
-        </div>
-    `).join('');
+    
+    // Filtro do Álbum de TMs
+    let displayList = list;
+    if (activeCategory === 'tms') {
+        if (currentTmFilter === 'owned') displayList = list.filter(i => caughtTMs.includes(i.name));
+        if (currentTmFilter === 'missing') displayList = list.filter(i => !caughtTMs.includes(i.name));
+    }
+
+    grid.innerHTML = displayList.map(item => {
+        const isTM = item.name.toUpperCase().startsWith("TM ");
+        const isOwned = isTM && caughtTMs.includes(item.name);
+        const ownedClass = isOwned ? 'tm-owned' : '';
+
+        return `
+            <div class="item-card ${ownedClass}" onclick="handleItemClick('${item.name}', event, ${isTM})">
+                <img src="img/loots/${item.icon_name}.gif" alt="${item.name}" onerror="this.onerror=null; this.src='img/loots/${item.icon_name}.png'; this.onerror=function(){this.src='https://dummyimage.com/24x24/dcdde1/2c3e50.png&text=?';};">
+                <span class="item-card-name">${item.name}</span>
+                <span class="item-card-count">${item.droppedBy.length} DROP(S)</span>
+            </div>
+        `;
+    }).join('');
 }
+
+// LÓGICA DO ÁLBUM DE TMs
+window.handleItemClick = (itemName, event, isTM) => {
+    if (event) event.stopPropagation();
+    
+    if (isEditingTMs && isTM) {
+        const idx = caughtTMs.indexOf(itemName);
+        if (idx > -1) { caughtTMs.splice(idx, 1); } 
+        else { caughtTMs.push(itemName); }
+        
+        localStorage.setItem('pokedex-tms', JSON.stringify(caughtTMs));
+        event.currentTarget.classList.toggle('tm-owned');
+        updateTMProgress();
+    } else {
+        openItemModal(itemName);
+    }
+};
+
+window.toggleTMEditMode = () => {
+    const grid = document.getElementById('pokedex-grid');
+    const btn = document.getElementById('edit-tm-btn');
+    const flash = document.getElementById('screen-flash');
+    
+    isEditingTMs = !isEditingTMs;
+    
+    if(flash) {
+        flash.classList.add('flash-active');
+        setTimeout(() => flash.classList.remove('flash-active'), 150);
+    }
+
+    if (isEditingTMs) {
+        grid.classList.add('tm-edit-mode');
+        btn.innerHTML = '💾 SALVAR';
+        btn.classList.add('editing');
+    } else {
+        grid.classList.remove('tm-edit-mode');
+        btn.innerHTML = '✏️ EDITAR';
+        btn.classList.remove('editing');
+        applyFilters(); 
+    }
+};
+
+// LÓGICA DO MENU FLUTUANTE (DROPDOWN) DE FILTRO
+window.toggleTMFilterMenu = (event) => {
+    if(event) event.stopPropagation();
+    const dropdown = document.getElementById('tm-filter-dropdown');
+    if(dropdown) dropdown.classList.toggle('hidden');
+};
+
+window.selectTMFilter = (type, label, itemElement) => {
+    currentTmFilter = type;
+    
+    // Atualiza o texto do botão principal com o que foi escolhido
+    const btn = document.getElementById('tm-filter-btn');
+    if(btn) btn.innerHTML = `🎛️ FILTRO: ${label} ▼`;
+    
+    // Atualiza a marcação azul de quem foi clicado na lista
+    document.querySelectorAll('.tm-drop-item').forEach(el => el.classList.remove('active'));
+    if(itemElement) itemElement.classList.add('active');
+    
+    // Esconde o menuzinho
+    const dropdown = document.getElementById('tm-filter-dropdown');
+    if(dropdown) dropdown.classList.add('hidden');
+    
+    applyFilters();
+};
+
+// Esconde o submenu de filtros se o cara clicar em qualquer outro lugar da tela
+document.addEventListener('click', (event) => {
+    const dropdown = document.getElementById('tm-filter-dropdown');
+    const filterBtn = document.getElementById('tm-filter-btn');
+    if (dropdown && !dropdown.classList.contains('hidden') && event.target !== filterBtn) {
+        dropdown.classList.add('hidden');
+    }
+});
+
+window.updateTMProgress = () => {
+    const totalTMs = itemData.filter(i => i.name.toUpperCase().startsWith("TM ")).length;
+    if(totalTMs === 0) return;
+    const pct = (caughtTMs.length / totalTMs) * 100;
+    const bar = document.getElementById('tm-progress-fill');
+    if(bar) bar.style.width = pct + '%';
+};
+
+window.requestReset = () => { document.getElementById('reset-confirm-modal').classList.remove('hidden'); };
+
+window.resetTMCollection = () => {
+    caughtTMs = [];
+    localStorage.removeItem('pokedex-tms');
+    document.getElementById('reset-confirm-modal').classList.add('hidden');
+    if(isEditingTMs) toggleTMEditMode();
+    applyFilters();
+    updateTMProgress();
+};
 
 window.toggleCatch = (event, id) => {
     event.stopPropagation();
@@ -626,12 +784,25 @@ function renderMapPins() {
 // ==========================================
 // UTILITÁRIOS E MODAL
 // ==========================================
-window.toggleAccordion = (arrowEl, event, passosEscapados) => {
+window.toggleAccordion = (buttonEl, event, passosEscapados) => {
     if(event) event.stopPropagation();
-    const container = arrowEl.closest('.loc-accordion').querySelector('.loc-steps-container');
+    
+    // 1. Encontra os containers corretos
+    const accordion = buttonEl.closest('.loc-accordion');
+    const container = accordion.querySelector('.loc-steps-container');
+    
+    // 2. Encontra APENAS o elemento da setinha dentro do botão
+    const arrowIcon = buttonEl.querySelector('.expand-arrow'); 
+    
+    // 3. Abre ou fecha a sanfona
     container.classList.toggle('hidden-steps');
-    arrowEl.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
 
+    // 4. Muda apenas o texto da setinha, sem apagar o nome da rota!
+    if (arrowIcon) {
+        arrowIcon.innerText = container.classList.contains('hidden-steps') ? '▼' : '▲';
+    }
+
+    // 5. Lógica de desenhar no mapa (mantida igual à sua)
     if (!container.classList.contains('hidden-steps') && passosEscapados) {
         document.querySelector('.cat-btn[data-cat="mapas"]').click();
         const arrayPassos = JSON.parse(decodeURIComponent(passosEscapados));
@@ -838,9 +1009,16 @@ window.openModal = (id) => {
     // ======================= LÓGICA DO LOOT =======================
     let lootHTML = '<span style="color:#888; font-size: 0.8rem; font-family: monospace;">Loot não registrado.</span>';
     
-    if (p.loot && typeof p.loot === 'string' && p.loot.trim() !== '') {
-        const items = p.loot.split(',').map(item => item.trim());
-        
+    let items = [];
+    if (p.loot) {
+        if (Array.isArray(p.loot)) {
+            items = p.loot; // Se já for o Array novo, usa direto
+        } else if (typeof p.loot === 'string' && p.loot.trim() !== '') {
+            items = p.loot.split(',').map(item => item.trim()); // Se for o texto antigo, faz o split
+        }
+    }
+
+    if (items.length > 0) {
         lootHTML = '<div class="loot-icons-container">' + items.map(item => {
             let safeImgName = item.toLowerCase().replace(/[^a-z0-9]/g, '-');
             
@@ -883,7 +1061,7 @@ window.openModal = (id) => {
                 </div>
                 
                 <div class="loot-box" style="margin-top: 10px; background: #fff; padding: 10px; border-radius: 8px; border: 3px solid var(--dex-border); font-size: 1rem; color: var(--dex-red); font-weight: 900; text-transform: uppercase;">
-                    ${p.loot || '<span style="color:#888; font-size: 0.8rem;">Recompensa não registrada.</span>'}
+                    ${(Array.isArray(p.loot) ? p.loot.join(', ') : p.loot) || '<span style="color:#888; font-size: 0.8rem;">Recompensa não registrada.</span>'}
                 </div>
                 
                 <div class="boss-bonus-container">
@@ -1494,7 +1672,7 @@ window.switchForm = (newId) => {
 // ==========================================
 
 const vipData = {
-    donators: ["Jarubinha", "The DarkNess", "Avil"],
+    donators: ["Jarubinha", "The DarkNess", "Avil", "Player level One"],
     contributors: ["Paleguazv", "Marlin", "Leander Hastings", "Vincent", "Ricardobtj", "Bonacina", "Upzin"]
 };
 
@@ -1578,6 +1756,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchModeToggle = document.getElementById('search-mode-toggle');
     const optPokemon = document.getElementById('mode-pokemon');
     const optLoot = document.getElementById('mode-loot');
+    
 
     if(searchModeToggle) {
         searchModeToggle.addEventListener('click', () => {
