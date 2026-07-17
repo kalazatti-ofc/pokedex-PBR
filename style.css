@@ -2510,13 +2510,21 @@ body.dark-mode .item-card.tm-owned { border-color: #ffcb05; box-shadow: inset 0 
 ========================================== */
 @media (max-width: 600px) {
     .guide-main-title {
-        font-size: 1.1rem !important;
-        line-height: 1.4;
+        font-size: 0.8rem !important; /* Diminuído de 1.1rem para 0.8rem */
+        line-height: 1.6;
         text-align: center;
+        word-wrap: break-word; /* Força palavras longas a quebrarem */
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
+    
     .guide-sub-title {
-        font-size: 0.9rem !important;
+        font-size: 0.7rem !important; /* Diminuído de 0.9rem para 0.7rem */
+        line-height: 1.5;
+        word-wrap: break-word;
     }
+    
+    /* Restante do código mantido igual... */
     .guide-section-box {
         padding: 12px;
     }
@@ -2525,7 +2533,6 @@ body.dark-mode .item-card.tm-owned { border-color: #ffcb05; box-shadow: inset 0 
         font-size: 0.8rem;
         line-height: 1.4;
     }
-    /* Botão de "Voltar aos Guias" menor */
     #tutorial-article-view .final-support-btn {
         font-size: 0.7rem !important;
         padding: 8px 12px !important;
