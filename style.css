@@ -2402,3 +2402,133 @@ body.dark-mode .item-card.tm-owned { border-color: #ffcb05; box-shadow: inset 0 
         transform: translateX(-50%); 
     }
 }
+
+/* ==========================================
+   BANNERS HORIZONTAIS - HALL DA FAMA (COMPACTO)
+========================================== */
+.vip-join-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+}
+
+/* Estado Fechado */
+.vip-join-content.hidden-steps {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0 !important;
+}
+
+/* Estado Aberto */
+.vip-join-content:not(.hidden-steps) {
+    max-height: 400px; /* Espaço suficiente para abrir os banners */
+    opacity: 1;
+}
+
+.vip-horizontal-banner {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 15px;
+    gap: 15px;
+}
+
+.vip-horizontal-banner .banner-icon {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.vip-horizontal-banner .banner-text {
+    flex: 1; /* Faz o texto empurrar o botão lá pro canto direito */
+    text-align: left;
+}
+
+.vip-horizontal-banner .banner-text h4 {
+    margin: 0 0 4px 0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.vip-horizontal-banner .banner-text p {
+    margin: 0;
+    color: #bcc2cd;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Adaptação perfeita para Celular */
+@media (max-width: 500px) {
+    .vip-horizontal-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    .vip-horizontal-banner .banner-text {
+        text-align: center;
+    }
+    .vip-horizontal-banner .final-support-btn {
+        width: 100% !important; /* Estica o botão no celular */
+    }
+}
+
+/* ==========================================
+   OTIMIZAÇÃO MOBILE: DASHBOARD DE TMS
+========================================== */
+@media (max-width: 600px) {
+    .tm-dashboard {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    .tm-album-title {
+        font-size: 1.1rem;
+    }
+    .tm-desc {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+    }
+    .tm-controls {
+        flex-direction: column; /* Empilha os botões no celular */
+        gap: 8px;
+    }
+    .tm-action-btn {
+        width: 100%;
+        font-size: 0.75rem;
+        padding: 10px;
+    }
+    .tm-filter-wrapper {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   OTIMIZAÇÃO MOBILE: GUIAS E TUTORIAIS
+========================================== */
+@media (max-width: 600px) {
+    .guide-main-title {
+        font-size: 1.1rem !important;
+        line-height: 1.4;
+        text-align: center;
+    }
+    .guide-sub-title {
+        font-size: 0.9rem !important;
+    }
+    .guide-section-box {
+        padding: 12px;
+    }
+    .guide-section-box p, 
+    .guide-section-box li {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    /* Botão de "Voltar aos Guias" menor */
+    #tutorial-article-view .final-support-btn {
+        font-size: 0.7rem !important;
+        padding: 8px 12px !important;
+        margin-bottom: 10px !important;
+    }
+}
