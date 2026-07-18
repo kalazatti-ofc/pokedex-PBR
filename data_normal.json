@@ -3031,7 +3031,8 @@
             "spd": 55
         },
         "locations": [
-            "Vermilion (X 920 / Y 1296 / Z 6)"
+            "Vermilion (X 920 / Y 1296 / Z 6)",
+            "Violet (X 1857 / Y 473 / Z 5)"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/103.png",
         "loot": [
