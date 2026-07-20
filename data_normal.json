@@ -6223,7 +6223,7 @@
             "spd": 20
         },
         "locations": [
-            "Trost (X 1435 / Y 1195 / Z 6)"
+            "Trost (X 1441 / Y 1208 / Z 6)"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/218.png",
         "loot": [
@@ -6497,6 +6497,7 @@
             "spd": 65
         },
         "locations": [
+            "Trost (X 1441 / Y 1208 / Z 6)",
             "Vermilion (X 842 / Y 1598 / Z 6)"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/228.png",
@@ -6523,6 +6524,7 @@
             "spd": 95
         },
         "locations": [
+            "Trost (X 1441 / Y 1208 / Z 6)",
             "Vermilion (X 842 / Y 1598 / Z 6)"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/229.png",
