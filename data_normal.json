@@ -1965,11 +1965,11 @@
             "spd": 45
         },
         "locations": [
+            "Cherrygrove (X 1128 / Y 511 / Z 6)",
             {
                 "local": "Singer (X 1679 / Y 975 / Z )",
                 "nota": "📌  Entre no Buraco"
-            },
-            "Cherrygrove (X 1128 / Y 511 / Z 6)"
+            }
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png",
         "loot": [
@@ -4906,7 +4906,7 @@
         },
         "locations": [
             "Violet (X 1769 / Y 230 / Z 7)",
-            "Pesca"
+            "Pescaria"
         ],
         "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/170.png",
         "loot": [
